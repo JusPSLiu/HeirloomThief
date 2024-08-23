@@ -1,0 +1,592 @@
+[gd_scene load_steps=26 format=3 uid="uid://lf75pcv3t3aa"]
+
+[ext_resource type="Script" path="res://Scripts/godotSplashscreen.gd" id="1_e35uj"]
+[ext_resource type="Texture2D" uid="uid://crvlyc56ube3e" path="res://Art/Splashscreen/godot_eyeless.png" id="2_enp27"]
+[ext_resource type="Texture2D" uid="uid://dksvm4317h2tq" path="res://Art/Splashscreen/godot_eye.png" id="3_60jve"]
+[ext_resource type="Texture2D" uid="uid://17sobjbifave" path="res://Art/Splashscreen/explosion.png" id="4_78bbg"]
+[ext_resource type="Texture2D" uid="uid://deevikistsqsh" path="res://Art/Splashscreen/exploglow.png" id="5_6u78o"]
+[ext_resource type="Texture2D" uid="uid://chqqnvqwr42n6" path="res://Art/Splashscreen/evil.png" id="6_s4a8x"]
+[ext_resource type="Texture2D" uid="uid://b1rblm74gdc47" path="res://Art/Splashscreen/evil_burn.png" id="7_e4rqn"]
+[ext_resource type="Texture2D" uid="uid://c57nsqchu70tx" path="res://Art/Splashscreen/lasereyes.png" id="8_qslv7"]
+[ext_resource type="AudioStream" uid="uid://c2e20okw31pv1" path="res://Sounds/hitgroundfromhigh.ogg" id="9_fxh1d"]
+[ext_resource type="AudioStream" uid="uid://dv03rmk6fil17" path="res://Sounds/Splashscreen/lasers.mp3" id="10_fi0ng"]
+[ext_resource type="AudioStream" uid="uid://djfnfrufnaplt" path="res://Sounds/Splashscreen/godotAppear.ogg" id="11_ofjkq"]
+[ext_resource type="AudioStream" uid="uid://cncmyb6xedicr" path="res://Sounds/hitsomething.ogg" id="12_kycju"]
+[ext_resource type="AudioStream" uid="uid://c12wndeeim7ev" path="res://Sounds/Splashscreen/explosion.ogg" id="13_ntvq6"]
+[ext_resource type="AudioStream" uid="uid://wbk1fd68dwru" path="res://Sounds/UI/pressbutton.ogg" id="14_s6udk"]
+[ext_resource type="AudioStream" uid="uid://cvynfsapbynty" path="res://Sounds/Music/coffeecover.mp3" id="15_agvkj"]
+
+[sub_resource type="Gradient" id="Gradient_7q664"]
+offsets = PackedFloat32Array(0, 0.24, 0.549091, 0.778182, 1)
+colors = PackedColorArray(1, 0, 0, 0.431373, 1, 0.117647, 0.0627451, 1, 1, 0.435294, 0.227451, 1, 1, 0.219608, 0.113725, 1, 1, 0, 0, 0.466667)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5gwt"]
+gradient = SubResource("Gradient_7q664")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Animation" id="Animation_wrr36"]
+resource_name = "GodotSplashscreen"
+length = 7.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 0.65, 0.75),
+"transitions": PackedFloat32Array(0.482968, 1.62451, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.75, 1.95, 2.15),
+"transitions": PackedFloat32Array(1.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(640, 368), Vector2(566.5, 368), Vector2(493, 368)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("eyeL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.35, 1.45, 1.7, 2.25, 4.4, 4.55, 4.7),
+"transitions": PackedFloat32Array(1.5, 1, 1, 1, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(155, 62), Vector2(157, 57), Vector2(157, 57), Vector2(160, 61), Vector2(160, 61), Vector2(157.5, 61.5), Vector2(155, 62)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("eyeR:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.35, 1.45, 1.7, 2.25, 4.4, 4.55, 4.7),
+"transitions": PackedFloat32Array(1.5, 1, 1, 1, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(95, 62), Vector2(95, 58), Vector2(95, 58), Vector2(97, 61), Vector2(97, 61), Vector2(96, 61.5), Vector2(95, 62)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../Evil:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.05, 2.3, 2.45, 2.6),
+"transitions": PackedFloat32Array(1.41421, 0.378929, 1.86607, 1),
+"update": 0,
+"values": [Vector2(781, -151), Vector2(781, 268), Vector2(781, 200), Vector2(781, 268)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../Evil:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.25, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../Boom:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3.45, 3.7, 7),
+"transitions": PackedFloat32Array(0.633364, 0.4, 0.2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.6382, 0.6382), Vector2(1.8, 1.8)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../../Boom:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(3.45),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../../Boom:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4.85, 5.75, 6.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.462745, 0.462745, 0.462745, 1), Color(0.345098, 0.345098, 0.345098, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../../Lasers:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2.7, 2.75, 2.8, 3.55, 3.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(4, 2, 2, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("eyeL:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(2.6, 2.7, 3.6, 3.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4, 0.392157, 0.392157, 1), Color(4, 0.392157, 0.392157, 1), Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("eyeR:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(2.6, 2.7, 3.6, 3.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(4, 0.39, 0.39, 1), Color(4, 0.39, 0.39, 1), Color(1, 1, 1, 1)]
+}
+tracks/12/type = "audio"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../../Sounds")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_fxh1d")
+}, {
+"end_offset": 0.30323,
+"start_offset": 0.0,
+"stream": ExtResource("10_fi0ng")
+}],
+"times": PackedFloat32Array(2.3, 2.75)
+}
+tracks/12/use_blend = true
+tracks/13/type = "audio"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../../Sounds/MoreSounds")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_ofjkq")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_kycju")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("13_ntvq6")
+}],
+"times": PackedFloat32Array(0.5, 2.6, 3.5)
+}
+tracks/13/use_blend = true
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../../Lasers/Lasereyes:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(3.5, 3.65),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../../Boom/BoomGlow:modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(4.25, 6.05),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../../redderUnity:modulate:a")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(2.85, 3.25, 3.6, 3.65)
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("../../CPUParticles2D:emitting")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(3.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "animation"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../../Fader")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"clips": PackedStringArray("FadeOut"),
+"times": PackedFloat32Array(6.65)
+}
+
+[sub_resource type="Animation" id="Animation_6oxbs"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../redderUnity:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlwmu"]
+_data = {
+"GodotSplashscreen": SubResource("Animation_wrr36"),
+"RESET": SubResource("Animation_6oxbs")
+}
+
+[sub_resource type="Animation" id="Animation_5k3gu"]
+resource_name = "skipAppear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sq7ib"]
+resource_name = "skipDisappear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pckcx"]
+_data = {
+"skipAppear": SubResource("Animation_5k3gu"),
+"skipDisappear": SubResource("Animation_sq7ib")
+}
+
+[sub_resource type="Animation" id="Animation_w7kdj"]
+resource_name = "FadeOut"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fader/LeftRect:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(737, 0), Vector2(737, 1280)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fader/LeftRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fader/LeftRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(640, 736), Vector2(0, 736)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s6c26"]
+_data = {
+"FadeOut": SubResource("Animation_w7kdj")
+}
+
+[node name="godotSplashscreen" type="Control" node_paths=PackedStringArray("transitionToBlack", "buttonSound", "SkipButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e35uj")
+transitionToBlack = NodePath("Fader")
+buttonSound = NodePath("FadeSound")
+SkipButton = NodePath("DoubleClick/MakeSkipAppear")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="GodotController" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 640.0
+offset_top = 368.0
+offset_right = 680.0
+offset_bottom = 408.0
+scale = Vector2(1e-05, 1e-05)
+
+[node name="Godot" type="TextureRect" parent="GodotController"]
+layout_mode = 0
+offset_left = -134.0
+offset_top = -143.0
+offset_right = 134.0
+offset_bottom = 143.0
+texture = ExtResource("2_enp27")
+expand_mode = 4
+
+[node name="eyeL" type="TextureRect" parent="GodotController/Godot"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 62.0
+offset_right = 173.0
+offset_bottom = 80.0006
+texture = ExtResource("3_60jve")
+stretch_mode = 2
+
+[node name="eyeR" type="TextureRect" parent="GodotController/Godot"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 62.0
+offset_right = 113.0
+offset_bottom = 80.0004
+texture = ExtResource("3_60jve")
+stretch_mode = 2
+
+[node name="Boom" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 879.0
+offset_top = 425.0
+offset_right = 1282.0
+offset_bottom = 760.0
+scale = Vector2(1e-05, 1e-05)
+
+[node name="Boom2" type="TextureRect" parent="Boom"]
+layout_mode = 0
+offset_left = -201.0
+offset_top = -335.0
+offset_right = 605.0
+offset_bottom = 335.0
+scale = Vector2(0.500001, 0.500001)
+texture = ExtResource("4_78bbg")
+expand_mode = 3
+
+[node name="BoomGlow" type="TextureRect" parent="Boom"]
+layout_mode = 0
+offset_left = -446.667
+offset_top = -468.195
+offset_right = 1340.0
+offset_bottom = 731.805
+scale = Vector2(0.500001, 0.500001)
+texture = ExtResource("5_6u78o")
+expand_mode = 3
+
+[node name="Evil" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 781.0
+offset_top = -151.0
+offset_right = 924.0
+offset_bottom = -4.99899
+texture = ExtResource("6_s4a8x")
+stretch_mode = 2
+
+[node name="redderUnity" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 781.0
+offset_top = 268.0
+offset_right = 924.0
+offset_bottom = 414.0
+pivot_offset = Vector2(71, 73)
+texture = ExtResource("7_e4rqn")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(863, 340)
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(35, 35)
+direction = Vector2(0, -50)
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 800.0
+scale_amount_min = 8.0
+scale_amount_max = 15.0
+color = Color(1, 0.662745, 0.301961, 1)
+
+[node name="explodeablePolygon(delet)" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 781.0
+offset_top = 268.0
+offset_right = 781.0
+offset_bottom = 268.0
+texture = ExtResource("7_e4rqn")
+
+[node name="Lasers" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 0
+offset_left = 529.0
+offset_top = 291.0
+offset_right = 569.0
+offset_bottom = 331.0
+
+[node name="laser" type="TextureRect" parent="Lasers"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+rotation = 0.0602445
+scale = Vector2(5.45494, 0.155578)
+texture = SubResource("GradientTexture2D_a5gwt")
+
+[node name="laser2" type="TextureRect" parent="Lasers"]
+layout_mode = 0
+offset_left = -64.9999
+offset_top = -6.10352e-05
+offset_right = -0.999939
+offset_bottom = 63.9999
+rotation = 0.109119
+scale = Vector2(6.20875, 0.155578)
+texture = SubResource("GradientTexture2D_a5gwt")
+
+[node name="Lasereyes" type="Sprite2D" parent="Lasers"]
+position = Vector2(128, 16)
+texture = ExtResource("8_qslv7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../GodotController/Godot")
+libraries = {
+"": SubResource("AnimationLibrary_dlwmu")
+}
+autoplay = "GodotSplashscreen"
+
+[node name="DoubleClick" type="Label" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 622.0
+offset_right = 1204.0
+offset_bottom = 680.0
+theme_override_font_sizes/font_size = 40
+text = "Double Click to Skip"
+
+[node name="MakeSkipAppear" type="AnimationPlayer" parent="DoubleClick"]
+libraries = {
+"": SubResource("AnimationLibrary_pckcx")
+}
+
+[node name="Fader" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s6c26")
+}
+
+[node name="LeftRect" type="ColorRect" parent="Fader"]
+offset_left = 640.0
+offset_top = 736.0
+offset_right = 1377.0
+offset_bottom = 736.0
+rotation = 4.71239
+color = Color(0, 0, 0, 1)
+
+[node name="RightRect" type="ColorRect" parent="Fader"]
+visible = false
+offset_left = 1280.0
+offset_right = 2017.0
+rotation = 1.5708
+color = Color(0, 0, 0, 1)
+
+[node name="FadeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_s6udk")
+
+[node name="Sounds" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
+
+[node name="MoreSounds" type="AudioStreamPlayer" parent="Sounds"]
+volume_db = -8.0
+
+[node name="musicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_agvkj")
+autoplay = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

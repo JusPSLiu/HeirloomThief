@@ -1,0 +1,154 @@
+[gd_scene load_steps=15 format=3 uid="uid://cqx28sd66x8xf"]
+
+[ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
+[ext_resource type="FontFile" uid="uid://d2esgt82wfu1x" path="res://Art/Fonts/hasting-dee-quickest.regular.otf" id="2_ekbix"]
+[ext_resource type="AudioStream" uid="uid://bbnuuffgrhd2f" path="res://Sounds/UI/button1.wav" id="2_pkwwa"]
+[ext_resource type="Texture2D" uid="uid://c16ifbt2sew8s" path="res://Art/UI/Pause/slidBar.png" id="3_852t1"]
+[ext_resource type="Texture2D" uid="uid://bsum68urq58do" path="res://Art/UI/Pause/pause.png" id="3_jw14r"]
+[ext_resource type="Texture2D" uid="uid://dur4w8yp42dfc" path="res://Art/UI/Pause/return.png" id="3_o3frg"]
+[ext_resource type="Texture2D" uid="uid://c50avb80vh75g" path="res://Art/UI/Pause/pauseClic.png" id="4_5lqq2"]
+[ext_resource type="Texture2D" uid="uid://corc1vr4d8kbc" path="res://Art/UI/Pause/returnClic.png" id="4_13aop"]
+[ext_resource type="Texture2D" uid="uid://cu1x6hvu0mh3x" path="res://Art/UI/Pause/slidBarClic.png" id="4_dfe2y"]
+[ext_resource type="Texture2D" uid="uid://cpglmvdqga5gc" path="res://Art/UI/Pause/returnHov.png" id="5_kg5lt"]
+[ext_resource type="Texture2D" uid="uid://df6010laaqqnk" path="res://Art/UI/Pause/pauseHov.png" id="5_sbso7"]
+[ext_resource type="Texture2D" uid="uid://bkvw3u2o0ptrr" path="res://Art/UI/Pause/play.png" id="6_k6ail"]
+[ext_resource type="Texture2D" uid="uid://7pr8c0sntenf" path="res://Art/UI/Pause/playClic.png" id="7_tir6r"]
+[ext_resource type="Texture2D" uid="uid://c6r4w8isaslit" path="res://Art/UI/Pause/playHov.png" id="8_1cls6"]
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("buttonSoundPlayer", "menu", "ResumeButton", "soundSlider", "musicSlider", "skipper")]
+process_mode = 3
+script = ExtResource("1_6x0n8")
+buttonSoundPlayer = NodePath("ButtonSound")
+menu = NodePath("ColorRect")
+ResumeButton = NodePath("PauseButton/ResumeButton")
+soundSlider = NodePath("ColorRect/VBoxContainer/SoundSlider")
+musicSlider = NodePath("ColorRect/VBoxContainer/MusicSlider")
+skipper = NodePath("ColorRect/VBoxContainer/TextSkip")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_top = 97.0
+offset_right = 1280.0
+offset_bottom = 262.0
+theme_override_fonts/font = ExtResource("2_ekbix")
+theme_override_font_sizes/font_size = 120
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 367.2
+offset_top = 262.0
+offset_right = -230.8
+offset_bottom = 118.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+theme_override_constants/separation = 20
+
+[node name="MusicLabel" type="Label" parent="ColorRect/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ekbix")
+theme_override_font_sizes/font_size = 27
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_icons/grabber = ExtResource("3_852t1")
+theme_override_icons/grabber_highlight = ExtResource("4_dfe2y")
+max_value = 1.0
+step = 0.05
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/VBoxContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/VBoxContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="SoundLabel" type="Label" parent="ColorRect/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ekbix")
+theme_override_font_sizes/font_size = 27
+text = "Sound Volume"
+horizontal_alignment = 1
+
+[node name="SoundSlider" type="HSlider" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_icons/grabber = ExtResource("3_852t1")
+theme_override_icons/grabber_highlight = ExtResource("4_dfe2y")
+max_value = 1.0
+step = 0.05
+
+[node name="HSeparator3" type="HSeparator" parent="ColorRect/VBoxContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="ColorRect/VBoxContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="Exit" type="TextureButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+texture_normal = ExtResource("3_o3frg")
+texture_pressed = ExtResource("4_13aop")
+texture_hover = ExtResource("5_kg5lt")
+
+[node name="TextSkip" type="CheckButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "                                                                            Enable Text Skip (possibly slightly buggy)"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pkwwa")
+bus = &"Sound"
+
+[node name="PauseButton" type="TextureButton" parent="."]
+offset_left = 1164.0
+offset_top = 20.0
+offset_right = 1260.0
+offset_bottom = 116.0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("3_jw14r")
+texture_pressed = ExtResource("4_5lqq2")
+texture_hover = ExtResource("5_sbso7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ResumeButton" type="TextureButton" parent="PauseButton"]
+visible = false
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("6_k6ail")
+texture_pressed = ExtResource("7_tir6r")
+texture_hover = ExtResource("8_1cls6")
+
+[connection signal="value_changed" from="ColorRect/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="toggled" from="ColorRect/VBoxContainer/TextSkip" to="." method="_on_texkip_button_toggled"]
+[connection signal="pressed" from="PauseButton" to="." method="togglePauseFall"]
+[connection signal="pressed" from="PauseButton/ResumeButton" to="." method="togglePauseFall"]
