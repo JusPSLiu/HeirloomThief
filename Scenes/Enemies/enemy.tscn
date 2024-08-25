@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://buvkmren4hvjd"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy.gd" id="1_er7bl"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_er7bl")
+max_health = 2
+max_speed = 20000.0
+gravity = 800.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

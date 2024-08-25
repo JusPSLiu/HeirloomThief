@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceguw3gquhbxa"]
+
+[ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="1_l3ui8"]
+[ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="2_2l064"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]
+size = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o77ii"]
+radius = 4.0
+
+[node name="EnemyTesting" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(128, 608)
+scale = Vector2(1024, 32)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="Ground"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_et5ws")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(160, 128)
+rotation = 1.5708
+scale = Vector2(512, 32)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Wall"]
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="Wall"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_et5ws")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(1152, 128)
+rotation = 1.5708
+scale = Vector2(512, 32)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Wall2"]
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_et5ws")
+
+[node name="GaurdGun" parent="." instance=ExtResource("1_l3ui8")]
+position = Vector2(520, 592)
+scale = Vector2(6, 6)
+
+[node name="TestPlayer" type="CharacterBody2D" parent="." groups=["Player"]]
+position = Vector2(1024, 520)
+scale = Vector2(6, 6)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestPlayer"]
+shape = SubResource("CircleShape2D_o77ii")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestPlayer"]
+texture = ExtResource("2_2l064")
