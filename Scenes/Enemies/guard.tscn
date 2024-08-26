@@ -8,6 +8,7 @@
 size = Vector2(8, 13)
 
 [node name="Guard" instance=ExtResource("1_k15v2")]
+texture_filter = 1
 script = ExtResource("2_qtomr")
 
 [node name="Collider" parent="." index="0"]
