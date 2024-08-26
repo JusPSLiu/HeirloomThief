@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc4cxekb8ebn5"]
+
+[ext_resource type="Script" path="res://Scripts/UI/save_file_button.gd" id="1_04tt0"]
+
+[node name="game1" type="Button"]
+custom_minimum_size = Vector2(876, 50)
+theme_override_font_sizes/font_size = 38
+text = "New Game"
+script = ExtResource("1_04tt0")
+
+[connection signal="pressed" from="." to="." method="pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsj2v5fckydp0"
-path="res://.godot/imported/SelectHov.png-b4f4e9b2476adcac52071d5f1b0523e8.ctex"
+uid="uid://cb6q07ei0ttfw"
+path="res://.godot/imported/titlerain.png-06f24e9fd003fcedfb5049422462d155.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/SelectHov.png"
-dest_files=["res://.godot/imported/SelectHov.png-b4f4e9b2476adcac52071d5f1b0523e8.ctex"]
+source_file="res://Art/Backgrounds/titlerain.png"
+dest_files=["res://.godot/imported/titlerain.png-06f24e9fd003fcedfb5049422462d155.ctex"]
 
 [params]
 

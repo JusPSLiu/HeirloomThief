@@ -1,33 +1,110 @@
-[gd_scene load_steps=32 format=3 uid="uid://bawhbhakk6q0"]
+[gd_scene load_steps=33 format=3 uid="uid://bawhbhakk6q0"]
 
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="1_6rpfu"]
+[ext_resource type="Script" path="res://Scripts/UI/TitleScreen.gd" id="1_68eqn"]
 [ext_resource type="Texture2D" uid="uid://d4cpbx2vv5obg" path="res://Art/Backgrounds/TitleBackground.png" id="1_euucd"]
-[ext_resource type="Script" path="res://Scripts/TitleScreen.gd" id="1_l204n"]
+[ext_resource type="Shader" path="res://Scripts/shaders/scrolling.gdshader" id="2_mm0s2"]
+[ext_resource type="Texture2D" uid="uid://cb6q07ei0ttfw" path="res://Art/Backgrounds/titlerain.png" id="3_pj6gq"]
 [ext_resource type="Texture2D" uid="uid://bk3ht0545kbbp" path="res://Art/UI/Title.png" id="3_qu7fl"]
-[ext_resource type="AudioStream" uid="uid://c3qnylp1hrjyv" path="res://Sounds/Music/TitleTheme.ogg" id="4_lbyen"]
 [ext_resource type="Texture2D" uid="uid://h51717e4n5i" path="res://Art/UI/Play.png" id="5_qdvgj"]
 [ext_resource type="Texture2D" uid="uid://ckdsdu8f71hrp" path="res://Art/UI/PlayClick.png" id="6_6mgjc"]
 [ext_resource type="Texture2D" uid="uid://doua04qcaxxcr" path="res://Art/UI/PlayHover.png" id="7_50pjy"]
-[ext_resource type="AudioStream" uid="uid://bbnuuffgrhd2f" path="res://Sounds/UI/button1.wav" id="8_q2wdo"]
-[ext_resource type="Texture2D" uid="uid://v0gboadike1r" path="res://Art/UI/Select.png" id="9_7kvel"]
-[ext_resource type="Texture2D" uid="uid://bnm2ttgn32mdp" path="res://Art/UI/SelectClic.png" id="10_7llqk"]
-[ext_resource type="Texture2D" uid="uid://bsj2v5fckydp0" path="res://Art/UI/SelectHov.png" id="11_hx0bq"]
-[ext_resource type="FontFile" uid="uid://d2esgt82wfu1x" path="res://Art/Fonts/hasting-dee-quickest.regular.otf" id="13_clkk6"]
-[ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="13_pilj7"]
-[ext_resource type="Texture2D" uid="uid://c16ifbt2sew8s" path="res://Art/UI/Pause/slidBar.png" id="15_oij1a"]
-[ext_resource type="Texture2D" uid="uid://cu1x6hvu0mh3x" path="res://Art/UI/Pause/slidBarClic.png" id="16_g40ql"]
+[ext_resource type="AudioStream" uid="uid://b550nam8j715c" path="res://Sounds/Music/title.mp3" id="11_uqgl8"]
+[ext_resource type="Texture2D" uid="uid://b0lqi6ac7e4j7" path="res://Art/UI/Pause/Return.png" id="12_n2kjl"]
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="15_mudgg"]
+[ext_resource type="Texture2D" path="res://Art/UI/Pause/slidBar.png" id="15_oij1a"]
+[ext_resource type="Texture2D" path="res://Art/UI/Pause/slidBarClic.png" id="16_g40ql"]
 [ext_resource type="Texture2D" uid="uid://bfa3ila75qrsc" path="res://Art/UI/Pause/gear.png" id="18_jmguy"]
 [ext_resource type="Texture2D" uid="uid://bkimf272sdcmv" path="res://Art/UI/Pause/gearClic.png" id="19_h633f"]
 [ext_resource type="Texture2D" uid="uid://bmmiiqigag568" path="res://Art/UI/Pause/gearHov.png" id="20_xte7y"]
-[ext_resource type="Texture2D" uid="uid://dtafyefesc7ef" path="res://Art/coinGot.png" id="21_v6h6q"]
 [ext_resource type="Texture2D" uid="uid://bkvw3u2o0ptrr" path="res://Art/UI/Pause/play.png" id="21_wa2vu"]
-[ext_resource type="Script" path="res://Scripts/CoinDisplayScript.gd" id="22_e118r"]
 [ext_resource type="Texture2D" uid="uid://7pr8c0sntenf" path="res://Art/UI/Pause/playClic.png" id="22_o5d6v"]
 [ext_resource type="Texture2D" uid="uid://c6r4w8isaslit" path="res://Art/UI/Pause/playHov.png" id="23_oraf8"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxu18"]
+shader = ExtResource("2_mm0s2")
+shader_parameter/direction = Vector2(0, -1)
+shader_parameter/transparency = Vector4(1, 1, 1, 0.6)
+shader_parameter/skewAmt = 0.0
+
+[sub_resource type="Animation" id="Animation_v6q5r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SettingsMenu/PauseButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(592, 700)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SettingsMenu/PauseButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -133.333)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FileMenu:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("maintitle:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FileMenu:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_caa3g"]
 resource_name = "ShowTitle"
-length = 2.8
+length = 2.0
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -36,10 +113,10 @@ tracks/0/path = NodePath("Background:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 2.8),
-"transitions": PackedFloat32Array(0.4, 1),
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2560, 1472), Vector2(1280, 736)]
+"values": [Vector2(1280, 736)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -48,15 +125,15 @@ tracks/1/path = NodePath("Background:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 2.8),
-"transitions": PackedFloat32Array(0.4, 1),
+"times": PackedFloat32Array(0.5, 1, 2),
+"transitions": PackedFloat32Array(2.3, 0.4, 1),
 "update": 0,
-"values": [Vector2(-640, 300), Vector2(0, 0)]
+"values": [Vector2(0, -200), Vector2(0, -133.333), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Title:position")
+tracks/2/path = NodePath("maintitle/Title:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -68,199 +145,111 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("darkenerRect:size")
+tracks/3/path = NodePath("MusicPlayer:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1.7, 2.1, 2.5),
-"transitions": PackedFloat32Array(2, 0.5, 1),
-"update": 0,
-"values": [Vector2(0, 736), Vector2(310, 736), Vector2(620, 736)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("darkenerRect:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(1.7, 2.1, 2.5),
-"transitions": PackedFloat32Array(2, 0.5, 1),
-"update": 0,
-"values": [Vector2(640, 0), Vector2(485, 0), Vector2(330, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MusicPlayer:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("PlayButton:size")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(2.1, 2.4, 2.7, 2.75),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("maintitle/PlayButton:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.2, 1.5, 1.8, 1.85),
 "transitions": PackedFloat32Array(3, 0.25, 1, 1),
 "update": 0,
 "values": [Vector2(213, 0), Vector2(213, 68.5), Vector2(213, 133), Vector2(213, 137)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("PlayButton:disabled")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 2.8),
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("maintitle/PlayButton:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("ColorRect:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(2.1, 2.4, 2.7),
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("maintitle/ColorRect:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.2, 1.5, 1.8),
 "transitions": PackedFloat32Array(3, 0.25, 1),
 "update": 0,
 "values": [Vector2(533, 400), Vector2(533, 468), Vector2(533, 533)]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("ColorRect:size")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(1.95, 2.1),
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("maintitle/ColorRect:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.05, 1.2),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
 "values": [Vector2(213, 0), Vector2(213, 4)]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("ColorRect:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 1.95, 2.8),
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("maintitle/ColorRect:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.05, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("ChapterSelectButton:disabled")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 2.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ChapterSelectButton:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(2.4, 2.75),
-"transitions": PackedFloat32Array(0.4, 1),
-"update": 0,
-"values": [Vector2(471, 737), Vector2(471, 564)]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("SettingsMenu/PauseButton:position")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(2.4, 2.75),
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SettingsMenu/PauseButton:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.5, 1.9),
 "transitions": PackedFloat32Array(0.3, 1),
 "update": 0,
-"values": [Vector2(1164, -128), Vector2(1164, 20)]
+"values": [Vector2(592, 740), Vector2(592, 600)]
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("SettingsMenu/PauseButton:disabled")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0.55, 2.75),
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SettingsMenu/PauseButton:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.55, 1.85),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_j6p33"]
-resource_name = "deselect"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ChapterLayer/ChapterMenu:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ChapterLayer/ChapterMenu:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 736)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ChapterLayer/ChapterMenu:process_mode")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_uayom"]
 resource_name = "select"
-length = 0.5
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ChapterLayer/ChapterMenu:visible")
+tracks/0/path = NodePath("FileMenu:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -268,34 +257,135 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ChapterLayer/ChapterMenu:position")
+tracks/1/path = NodePath("FileMenu:process_mode")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector2(0, 736), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ChapterLayer/ChapterMenu:process_mode")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [4, 0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FileMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SettingsMenu/PauseButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("maintitle:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u3itk"]
+resource_name = "deselect"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FileMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FileMenu:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FileMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.49012e-08, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SettingsMenu/PauseButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("maintitle:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wcorq"]
 _data = {
+"RESET": SubResource("Animation_v6q5r"),
 "ShowTitle": SubResource("Animation_caa3g"),
-"deselect": SubResource("Animation_j6p33"),
+"deselect": SubResource("Animation_u3itk"),
 "select": SubResource("Animation_uayom")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqhov"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir3w2"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utrmd"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(44, 0, 22, 22)
 
 [sub_resource type="Animation" id="Animation_ovdyv"]
 resource_name = "fadeMusicOut"
@@ -335,32 +425,59 @@ _data = {
 "musicIn": SubResource("Animation_3xdeg")
 }
 
-[node name="TitleScene" type="ColorRect" node_paths=PackedStringArray("background", "musicFader", "Fader", "TitleAnimator", "buttonSound", "ChapterButtons", "BackToTitle")]
+[node name="TitleScene" type="ColorRect" node_paths=PackedStringArray("musicFader", "Fader", "TitleAnimator", "buttonSound", "filename", "saveListContainer")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.701961, 0.886275, 1)
-script = ExtResource("1_l204n")
-background = NodePath("Background")
+color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+script = ExtResource("1_68eqn")
 musicFader = NodePath("MusicPlayer/MusicController")
 Fader = NodePath("Fader")
 TitleAnimator = NodePath("TitleAnimator")
-buttonSound = NodePath("PlayButton/ButtonSound")
-ChapterButtons = [NodePath("ChapterLayer/ChapterMenu/VBoxContainer/Chapter0"), NodePath("ChapterLayer/ChapterMenu/VBoxContainer/Chapter1"), NodePath("ChapterLayer/ChapterMenu/VBoxContainer/Chapter2"), NodePath("ChapterLayer/ChapterMenu/VBoxContainer/Chapter3"), NodePath("ChapterLayer/ChapterMenu/VBoxContainer/Chapter4")]
-BackToTitle = NodePath("ChapterLayer/ChapterMenu/Return")
+buttonSound = NodePath("maintitle/PlayButton/ButtonSound")
+filename = NodePath("nameFile/LineEdit")
+saveListContainer = NodePath("FileMenu/ScrollContainer/VBoxContainer")
+
+[node name="Fader" parent="." instance=ExtResource("1_6rpfu")]
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -640.0
-offset_top = 300.0
-offset_right = 1920.0
-offset_bottom = 1772.0
+offset_top = -133.333
+offset_right = 1280.0
+offset_bottom = 602.667
 texture = ExtResource("1_euucd")
+stretch_mode = 2
 
-[node name="Fader" parent="." instance=ExtResource("1_6rpfu")]
+[node name="smallererbackrain" type="TextureRect" parent="Background"]
+modulate = Color(1, 1, 1, 0.4)
+material = SubResource("ShaderMaterial_jxu18")
+layout_mode = 0
+offset_right = 6400.0
+offset_bottom = 4610.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_pj6gq")
+stretch_mode = 1
+
+[node name="smallerbackrain" type="TextureRect" parent="Background"]
+modulate = Color(1, 1, 1, 0.6)
+material = SubResource("ShaderMaterial_jxu18")
+layout_mode = 0
+offset_right = 3200.0
+offset_bottom = 2400.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_pj6gq")
+stretch_mode = 1
+
+[node name="backrain" type="TextureRect" parent="Background"]
+material = SubResource("ShaderMaterial_jxu18")
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 922.0
+texture = ExtResource("3_pj6gq")
+stretch_mode = 1
 
 [node name="TitleAnimator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -368,43 +485,39 @@ libraries = {
 }
 autoplay = "ShowTitle"
 
-[node name="darkenerRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 640.0
-offset_right = 640.0
-offset_bottom = 736.0
-color = Color(0, 0, 0, 0.313726)
+[node name="maintitle" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Title" type="TextureRect" parent="."]
+[node name="Title" type="TextureRect" parent="maintitle"]
 texture_filter = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -329.0
-offset_top = -500.0
-offset_right = 333.0
-offset_bottom = -327.0
+offset_left = 291.0
+offset_top = 99.9999
+offset_right = 953.0
+offset_bottom = 273.0
 grow_horizontal = 2
 texture = ExtResource("3_qu7fl")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="maintitle"]
 visible = false
 layout_mode = 0
 offset_left = 533.0
-offset_top = 400.0
+offset_top = 533.0
 offset_right = 746.0
-offset_bottom = 400.0
+offset_bottom = 537.0
 color = Color(0, 0.4, 0.341176, 1)
 
-[node name="PlayButton" type="TextureButton" parent="."]
+[node name="PlayButton" type="TextureButton" parent="maintitle"]
 layout_mode = 0
 offset_left = 533.0
 offset_top = 400.0
 offset_right = 746.0
-offset_bottom = 400.0
-focus_mode = 0
-disabled = true
+offset_bottom = 537.0
 texture_normal = ExtResource("5_qdvgj")
 texture_pressed = ExtResource("6_6mgjc")
 texture_hover = ExtResource("7_50pjy")
@@ -412,27 +525,113 @@ texture_disabled = ExtResource("5_qdvgj")
 ignore_texture_size = true
 stretch_mode = 1
 
-[node name="ButtonSound" type="AudioStreamPlayer" parent="PlayButton"]
-stream = ExtResource("8_q2wdo")
-bus = &"Sound"
+[node name="ButtonSound" type="AudioStreamPlayer" parent="maintitle/PlayButton"]
 
-[node name="ChapterSelectButton" type="TextureButton" parent="."]
+[node name="FileMenu" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="FileMenu"]
 layout_mode = 0
-offset_left = 471.0
-offset_top = 737.0
-offset_right = 808.0
-offset_bottom = 829.0
-focus_neighbor_top = NodePath("../PlayButton")
-focus_mode = 0
-disabled = true
-texture_normal = ExtResource("9_7kvel")
-texture_pressed = ExtResource("10_7llqk")
-texture_hover = ExtResource("11_hx0bq")
+offset_left = 350.0
+offset_top = 29.0
+offset_right = 922.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.884574, 0.174938, 0.727943, 0.592157)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 150
+text = "File Select"
+
+[node name="game1" type="Button" parent="FileMenu"]
+custom_minimum_size = Vector2(876, 50)
+layout_mode = 2
+offset_left = 198.0
+offset_top = 198.0
+offset_right = 1074.0
+offset_bottom = 259.0
+theme_override_font_sizes/font_size = 38
+text = "New Game"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileMenu"]
+clip_contents = false
+layout_mode = 0
+offset_left = 198.0
+offset_top = 270.0
+offset_right = 1082.0
+offset_bottom = 612.0
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileMenu/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Return" type="TextureButton" parent="FileMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -112.0
+offset_right = 46.0
+offset_bottom = -90.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_uqhov")
+texture_pressed = SubResource("AtlasTexture_ir3w2")
+texture_hover = SubResource("AtlasTexture_utrmd")
+
+[node name="nameFile" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="nameFile"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 30.0
+offset_right = 1179.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(0.884574, 0.174938, 0.727943, 0.592157)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 150
+text = "Name Your Save File"
+
+[node name="LineEdit" type="LineEdit" parent="nameFile"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 221.0
+offset_right = 967.0
+offset_bottom = 301.0
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 64
+text = "Skibidi Game"
+max_length = 40
+
+[node name="confirmation_button" type="Button" parent="nameFile"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 0
+offset_left = 440.0
+offset_top = 338.0
+offset_right = 840.0
+offset_bottom = 399.0
+theme_override_font_sizes/font_size = 38
+text = "Conform"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_lbyen")
+stream = ExtResource("11_uqgl8")
 volume_db = -80.0
-bus = &"Music"
 
 [node name="MusicController" type="AnimationPlayer" parent="MusicPlayer"]
 libraries = {
@@ -440,19 +639,11 @@ libraries = {
 }
 autoplay = "musicIn"
 
-[node name="SettingsMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("buttonSoundPlayer", "menu", "ResumeButton", "soundSlider", "musicSlider", "Fader", "skipper")]
+[node name="SettingsMenu" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("13_pilj7")
-buttonSoundPlayer = NodePath("ButtonSound")
-menu = NodePath("ColorRect")
-ResumeButton = NodePath("PauseButton/ResumeButton")
-soundSlider = NodePath("ColorRect/VBoxContainer/SoundSlider")
-musicSlider = NodePath("ColorRect/VBoxContainer/MusicSlider")
-Fader = NodePath("../Fader")
-skipper = NodePath("ColorRect/VBoxContainer/TextSkip")
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="SettingsMenu"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -466,7 +657,6 @@ layout_mode = 0
 offset_top = 97.0
 offset_right = 1280.0
 offset_bottom = 262.0
-theme_override_fonts/font = ExtResource("13_clkk6")
 theme_override_font_sizes/font_size = 120
 text = "Settings"
 horizontal_alignment = 1
@@ -485,7 +675,6 @@ theme_override_constants/separation = 20
 
 [node name="MusicLabel" type="Label" parent="SettingsMenu/ColorRect/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
 theme_override_font_sizes/font_size = 27
 text = "Music Volume"
 horizontal_alignment = 1
@@ -508,7 +697,6 @@ layout_mode = 2
 
 [node name="SoundLabel" type="Label" parent="SettingsMenu/ColorRect/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
 theme_override_font_sizes/font_size = 27
 text = "Sound Volume"
 horizontal_alignment = 1
@@ -527,17 +715,14 @@ focus_mode = 0
 text = "                                                                            Enable Text Skip (possibly slightly buggy)"
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="SettingsMenu"]
-stream = ExtResource("8_q2wdo")
-bus = &"Sound"
 
 [node name="PauseButton" type="TextureButton" parent="SettingsMenu"]
-offset_left = 1164.0
-offset_top = -128.0
-offset_right = 1260.0
-offset_bottom = -32.0
+offset_left = 592.0
+offset_top = 700.0
+offset_right = 712.0
+offset_bottom = 820.0
 scale = Vector2(0.8, 0.8)
 focus_mode = 0
-disabled = true
 toggle_mode = true
 texture_normal = ExtResource("18_jmguy")
 texture_pressed = ExtResource("19_h633f")
@@ -555,218 +740,9 @@ texture_pressed = ExtResource("22_o5d6v")
 texture_hover = ExtResource("23_oraf8")
 flip_h = true
 
-[node name="ChapterLayer" type="CanvasLayer" parent="."]
-
-[node name="ChapterMenu" type="ColorRect" parent="ChapterLayer"]
-process_mode = 4
-z_index = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 736.0
-offset_bottom = 736.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.596078, 0.286275, 0, 1)
-
-[node name="Label" type="Label" parent="ChapterLayer/ChapterMenu"]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 55.0
-offset_right = 1208.0
-offset_bottom = 205.0
-theme_override_colors/font_color = Color(0.780392, 0.478431, 0.196078, 1)
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 150
-text = "Chapter Select"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ChapterLayer/ChapterMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -506.0
-offset_top = -220.0
-offset_right = 378.0
-offset_bottom = 220.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Chapter0" type="Button" parent="ChapterLayer/ChapterMenu/VBoxContainer"]
-custom_minimum_size = Vector2(660, 80)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 50
-text = "Chapter 0; The Invitation"
-
-[node name="Chapter1" type="Button" parent="ChapterLayer/ChapterMenu/VBoxContainer"]
-custom_minimum_size = Vector2(660, 80)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 50
-text = "Chapter 1; Off the Cartesian Plane"
-
-[node name="CoinBackground" type="ColorRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter1"]
-layout_mode = 0
-offset_left = 896.0
-offset_top = 9.0
-offset_right = 1025.0
-offset_bottom = 70.0
-color = Color(0.243137, 0.137255, 0, 0.815686)
-
-[node name="Coindisplay0" type="TextureRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter1/CoinBackground"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 11.0
-offset_right = 54.0
-offset_bottom = 51.0
-texture = ExtResource("21_v6h6q")
-script = ExtResource("22_e118r")
-
-[node name="Coindisplay1" type="TextureRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter1/CoinBackground"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 11.0
-offset_right = 114.0
-offset_bottom = 51.0
-texture = ExtResource("21_v6h6q")
-script = ExtResource("22_e118r")
-id = 1
-
-[node name="Chapter2" type="Button" parent="ChapterLayer/ChapterMenu/VBoxContainer"]
-custom_minimum_size = Vector2(660, 80)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 50
-text = "Chapter 2; The Intrusion"
-
-[node name="CoinBackground2" type="ColorRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter2"]
-layout_mode = 0
-offset_left = 896.0
-offset_top = 9.0
-offset_right = 1025.0
-offset_bottom = 70.0
-color = Color(0.243137, 0.137255, 0, 0.815686)
-
-[node name="Coindisplay2" type="TextureRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter2/CoinBackground2"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 11.0
-offset_right = 54.0
-offset_bottom = 51.0
-texture = ExtResource("21_v6h6q")
-script = ExtResource("22_e118r")
-id = 2
-
-[node name="Coindisplay3" type="TextureRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter2/CoinBackground2"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 11.0
-offset_right = 114.0
-offset_bottom = 51.0
-texture = ExtResource("21_v6h6q")
-script = ExtResource("22_e118r")
-id = 3
-
-[node name="Chapter3" type="Button" parent="ChapterLayer/ChapterMenu/VBoxContainer"]
-custom_minimum_size = Vector2(660, 80)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 50
-text = "Chapter 3; Aberrated"
-
-[node name="CoinBackground3" type="ColorRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter3"]
-layout_mode = 0
-offset_left = 896.0
-offset_top = 9.0
-offset_right = 1025.0
-offset_bottom = 70.0
-color = Color(0.243137, 0.137255, 0, 0.815686)
-
-[node name="Coindisplay4" type="TextureRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter3/CoinBackground3"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 11.0
-offset_right = 54.0
-offset_bottom = 51.0
-texture = ExtResource("21_v6h6q")
-script = ExtResource("22_e118r")
-id = 4
-
-[node name="Coindisplay5" type="TextureRect" parent="ChapterLayer/ChapterMenu/VBoxContainer/Chapter3/CoinBackground3"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 11.0
-offset_right = 114.0
-offset_bottom = 51.0
-texture = ExtResource("21_v6h6q")
-script = ExtResource("22_e118r")
-id = 5
-
-[node name="Chapter4" type="Button" parent="ChapterLayer/ChapterMenu/VBoxContainer"]
-custom_minimum_size = Vector2(660, 80)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 50
-text = "Chapter 4; The Destructor"
-
-[node name="SkipLevels" type="CheckButton" parent="ChapterLayer/ChapterMenu"]
-layout_mode = 0
-offset_left = 914.0
-offset_top = 638.0
-offset_right = 958.0
-offset_bottom = 662.0
-focus_mode = 0
-
-[node name="Label" type="Label" parent="ChapterLayer/ChapterMenu/SkipLevels"]
-layout_mode = 0
-offset_left = -134.0
-offset_top = 4.0
-offset_right = 378.0
-offset_bottom = 53.0
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 19
-text = "Show All Levels"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="ChapterLayer/ChapterMenu/SkipLevels"]
-layout_mode = 0
-offset_left = -144.0
-offset_top = 26.0
-offset_right = 368.0
-offset_bottom = 38.0
-theme_override_fonts/font = ExtResource("13_clkk6")
-theme_override_font_sizes/font_size = 11
-text = "(in case somebody doesn't allow cookie save data)"
-horizontal_alignment = 1
-
-[node name="Return" type="Button" parent="ChapterLayer/ChapterMenu"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -97.0
-offset_right = 326.0
-offset_bottom = -20.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 50
-text = "Back to Title"
-
-[connection signal="pressed" from="PlayButton" to="." method="playButtonPressed"]
-[connection signal="pressed" from="ChapterSelectButton" to="." method="_on_chapter_select_button_pressed"]
+[connection signal="pressed" from="maintitle/PlayButton" to="." method="playButtonPressed"]
+[connection signal="pressed" from="FileMenu/Return" to="." method="_on_files_return_pressed"]
 [connection signal="value_changed" from="SettingsMenu/ColorRect/VBoxContainer/MusicSlider" to="SettingsMenu" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/ColorRect/VBoxContainer/SoundSlider" to="SettingsMenu" method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="SettingsMenu/PauseButton" to="SettingsMenu" method="togglePauseFall"]
 [connection signal="pressed" from="SettingsMenu/PauseButton/ResumeButton" to="SettingsMenu" method="togglePauseFall"]
-[connection signal="pressed" from="ChapterLayer/ChapterMenu/VBoxContainer/Chapter0" to="." method="_on_chapter_pressed" binds= [1]]
-[connection signal="pressed" from="ChapterLayer/ChapterMenu/VBoxContainer/Chapter1" to="." method="_on_chapter_pressed" binds= [2]]
-[connection signal="pressed" from="ChapterLayer/ChapterMenu/VBoxContainer/Chapter2" to="." method="_on_chapter_pressed" binds= [3]]
-[connection signal="pressed" from="ChapterLayer/ChapterMenu/VBoxContainer/Chapter3" to="." method="_on_chapter_pressed" binds= [4]]
-[connection signal="pressed" from="ChapterLayer/ChapterMenu/VBoxContainer/Chapter4" to="." method="_on_chapter_pressed" binds= [5]]
-[connection signal="toggled" from="ChapterLayer/ChapterMenu/SkipLevels" to="." method="_on_skip_levels_toggled"]
-[connection signal="pressed" from="ChapterLayer/ChapterMenu/Return" to="." method="_on_chapter_return_pressed"]

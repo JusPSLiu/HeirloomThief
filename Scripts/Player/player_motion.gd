@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+@export var audioPlayer : AudioStreamPlayer
+
+
 const SPEED = 600.0 # player movement speed
-const BOOST_SPEED = 1200.0 # player dash speed
-const BOOST_COOLDOWN = 0.3 # player dash cooldown rate (in seconds)
+const BOOST_SPEED = 2400.0 # player dash speed
+const BOOST_COOLDOWN = 0.5 # player dash cooldown rate (in seconds)
 const JUMP_VELOCITY = -1000.0 # player jump velocity
 const COYOTE_MAX = 0.14 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
@@ -28,18 +31,21 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	move_and_slide()
 	# Add the gravity.
 	if is_on_floor():
+		if (coyoteTime <= 0):
+			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 		coyoteTime = COYOTE_MAX
 	else:
 		if (velocity.y < 0):
-			if Input.is_action_pressed("ui_up"):
+			if Input.is_action_pressed("Jump"):
 				velocity += get_gravity() * delta * 2.5
 			else:
 				velocity += get_gravity() * delta * 6
 		else:
 			# if cape ability, and up pressed, slow down
-			if currentAbilities[ability.cape] and Input.is_action_pressed("ui_up"):
+			if currentAbilities[ability.cape] and Input.is_action_pressed("Jump") and boostimer <= 0:
 				velocity.y = expDecay(velocity.y, get_gravity().y * 0.3, LERP_DECAY_RATE, delta)
 			else:
 				velocity += get_gravity() * delta * 3.2
@@ -53,7 +59,6 @@ func _physics_process(delta: float) -> void:
 		currentDirection = (direction > 0)
 	else:
 		velocity.x = expDecay(velocity.x, 0, LERP_DECAY_RATE, delta)
-	move_and_slide()
 	
 	# the dash cooldown
 	if (boostimer >= 0):
@@ -65,13 +70,38 @@ func expDecay(a, b, decay, dt):
 
 # using an interrupt for controls other than run because polling is dumb
 func _input(event: InputEvent) -> void:
-	# if keyboard event
-	if (event is InputEventKey):
+	# if mouse event
+	if (event is InputEventMouse):
+		# basic meelee attack
+		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
+			$playerattacks.play("swing")
+			$attackbox.look_at(get_global_mouse_position())
+	# if keyboard / button event
+	else:
 		# Handle jump.
-		if event.is_action_pressed("ui_up") and coyoteTime > 0:
+		if event.is_action_pressed("Jump") and coyoteTime > 0:
 			velocity.y = JUMP_VELOCITY
+			coyoteTime = 0
 		# dash / boost
-		if event.is_action_pressed("ui_down"):
+		if event.is_action_pressed("Dash"):
 			if currentAbilities[ability.cape] and boostimer < 0:
+				Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 				velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
 				boostimer = BOOST_COOLDOWN
+		# basic meelee attack
+		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
+			$playerattacks.play("swing")
+			$attackbox.rotation = getSwingAngle()
+
+
+func getSwingAngle():
+	var joystickInput = Vector2(
+		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
+		Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+	)
+	if (joystickInput.x < 0.1 and joystickInput.y < 0.1):
+		joystickInput = Vector2(
+			Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
+			Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
+		)
+	return joystickInput.angle()
