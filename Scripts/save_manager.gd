@@ -26,11 +26,12 @@ func load_game(file):
 		currsavename = data['savename']
 
 func menu_load_file_details() -> Array[Dictionary]:
-	var deer = DirAccess.open("res://saves/")
+	var deer = DirAccess.open("user://saves/")
 	var saveList : Array[Dictionary] = []
 	if deer:
 		deer.list_dir_begin()
-		var file_name = deer.get_next()
+		var file_name = deer.list_dir_begin()
+		file_name = deer.get_next()
 		
 		# loop through every file in the directory
 		while file_name != "":
@@ -52,4 +53,33 @@ func menu_load_file_details() -> Array[Dictionary]:
 						'health' : healthy,
 						'progress' : progress
 					})
+			file_name = deer.get_next()
 	return saveList
+
+func make_new_file(name):
+	# assign name
+	currsavename = name
+	# reset to default valuess
+	current_health  = 4
+	max_health = 4
+	current_room = 0
+	powerstatus = [false, false, false, false]
+	# make new file name so you dont overwrite a previous file
+	currfile = "HeirloomSave-"
+	var number = 0
+	while (FileAccess.file_exists("user://saves/"+currfile+str(number)+".save")):
+		number += 1
+	currfile += str(number)+".save"
+	
+	# make sure the saves folder exists
+	if (!DirAccess.open("user://saves")):
+		DirAccess.open("user://").make_dir("saves")
+	
+	save_game()
+
+
+func delete_file(deleteName):
+	if (FileAccess.file_exists("user://saves/"+deleteName)):
+		DirAccess.remove_absolute("user://saves/"+deleteName)
+		return true
+	return false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bawhbhakk6q0"]
+[gd_scene load_steps=37 format=3 uid="uid://bawhbhakk6q0"]
 
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="1_6rpfu"]
 [ext_resource type="Script" path="res://Scripts/UI/TitleScreen.gd" id="1_68eqn"]
@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://ckdsdu8f71hrp" path="res://Art/UI/PlayClick.png" id="6_6mgjc"]
 [ext_resource type="Texture2D" uid="uid://doua04qcaxxcr" path="res://Art/UI/PlayHover.png" id="7_50pjy"]
 [ext_resource type="AudioStream" uid="uid://b550nam8j715c" path="res://Sounds/Music/title.mp3" id="11_uqgl8"]
-[ext_resource type="Texture2D" uid="uid://b0lqi6ac7e4j7" path="res://Art/UI/Pause/Return.png" id="12_n2kjl"]
+[ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/Return.png" id="12_n2kjl"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="15_mudgg"]
-[ext_resource type="Texture2D" path="res://Art/UI/Pause/slidBar.png" id="15_oij1a"]
-[ext_resource type="Texture2D" path="res://Art/UI/Pause/slidBarClic.png" id="16_g40ql"]
+[ext_resource type="Texture2D" uid="uid://c16ifbt2sew8s" path="res://Art/UI/Pause/slidBar.png" id="15_oij1a"]
+[ext_resource type="Texture2D" uid="uid://cu1x6hvu0mh3x" path="res://Art/UI/Pause/slidBarClic.png" id="16_g40ql"]
 [ext_resource type="Texture2D" uid="uid://bfa3ila75qrsc" path="res://Art/UI/Pause/gear.png" id="18_jmguy"]
 [ext_resource type="Texture2D" uid="uid://bkimf272sdcmv" path="res://Art/UI/Pause/gearClic.png" id="19_h633f"]
 [ext_resource type="Texture2D" uid="uid://bmmiiqigag568" path="res://Art/UI/Pause/gearHov.png" id="20_xte7y"]
@@ -100,6 +100,66 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("nameFile:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("nameFile:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DeletionConfirmation:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("DeletionConfirmation:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("DeletionConfirmation/ColorRect:color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.643)]
 }
 
 [sub_resource type="Animation" id="Animation_caa3g"]
@@ -367,12 +427,211 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ylvqx"]
+resource_name = "makenewfile"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FileMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FileMenu:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FileMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.49012e-08, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("nameFile:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("nameFile:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_kc4yn"]
+resource_name = "unmakenewfile"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FileMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FileMenu:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FileMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("nameFile:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("nameFile:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_h3mb4"]
+resource_name = "are_you_sure"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeletionConfirmation:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeletionConfirmation:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DeletionConfirmation/ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.433333, 0.633333, 0.833333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.643), Color(0.5, 0, 0, 0.643), Color(0, 0, 0, 0.643), Color(0.5, 0, 0, 0.643), Color(0, 0, 0, 0.643)]
+}
+
+[sub_resource type="Animation" id="Animation_ely0r"]
+resource_name = "unsure"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeletionConfirmation:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeletionConfirmation:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wcorq"]
 _data = {
 "RESET": SubResource("Animation_v6q5r"),
 "ShowTitle": SubResource("Animation_caa3g"),
+"are_you_sure": SubResource("Animation_h3mb4"),
 "deselect": SubResource("Animation_u3itk"),
-"select": SubResource("Animation_uayom")
+"makenewfile": SubResource("Animation_ylvqx"),
+"select": SubResource("Animation_uayom"),
+"unmakenewfile": SubResource("Animation_kc4yn"),
+"unsure": SubResource("Animation_ely0r")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqhov"]
@@ -425,7 +684,7 @@ _data = {
 "musicIn": SubResource("Animation_3xdeg")
 }
 
-[node name="TitleScene" type="ColorRect" node_paths=PackedStringArray("musicFader", "Fader", "TitleAnimator", "buttonSound", "filename", "saveListContainer")]
+[node name="TitleScene" type="ColorRect" node_paths=PackedStringArray("musicFader", "Fader", "TitleAnimator", "buttonSound", "filename", "saveListContainer", "confirmDeleteFilename")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -440,6 +699,7 @@ TitleAnimator = NodePath("TitleAnimator")
 buttonSound = NodePath("maintitle/PlayButton/ButtonSound")
 filename = NodePath("nameFile/LineEdit")
 saveListContainer = NodePath("FileMenu/ScrollContainer/VBoxContainer")
+confirmDeleteFilename = NodePath("DeletionConfirmation/fileName")
 
 [node name="Fader" parent="." instance=ExtResource("1_6rpfu")]
 
@@ -497,9 +757,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 291.0
-offset_top = 99.9999
+offset_top = -500.0
 offset_right = 953.0
-offset_bottom = 273.0
+offset_bottom = -327.0
 grow_horizontal = 2
 texture = ExtResource("3_qu7fl")
 
@@ -507,9 +767,9 @@ texture = ExtResource("3_qu7fl")
 visible = false
 layout_mode = 0
 offset_left = 533.0
-offset_top = 533.0
+offset_top = 400.0
 offset_right = 746.0
-offset_bottom = 537.0
+offset_bottom = 400.0
 color = Color(0, 0.4, 0.341176, 1)
 
 [node name="PlayButton" type="TextureButton" parent="maintitle"]
@@ -517,7 +777,8 @@ layout_mode = 0
 offset_left = 533.0
 offset_top = 400.0
 offset_right = 746.0
-offset_bottom = 537.0
+offset_bottom = 400.0
+disabled = true
 texture_normal = ExtResource("5_qdvgj")
 texture_pressed = ExtResource("6_6mgjc")
 texture_hover = ExtResource("7_50pjy")
@@ -589,6 +850,82 @@ texture_normal = SubResource("AtlasTexture_uqhov")
 texture_pressed = SubResource("AtlasTexture_ir3w2")
 texture_hover = SubResource("AtlasTexture_utrmd")
 
+[node name="DeletionConfirmation" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="DeletionConfirmation"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.643)
+
+[node name="Title" type="Label" parent="DeletionConfirmation"]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 29.0
+offset_right = 987.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.522445, 0.320774, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 150
+text = "ARE YOU SURE"
+
+[node name="Want" type="Label" parent="DeletionConfirmation"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 157.0
+offset_right = 1064.0
+offset_bottom = 253.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 85
+text = "you want to delete save file"
+
+[node name="fileName" type="Label" parent="DeletionConfirmation"]
+layout_mode = 0
+offset_top = 238.0
+offset_right = 1280.0
+offset_bottom = 334.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 85
+text = "?"
+horizontal_alignment = 1
+
+[node name="confirmdelete" type="Button" parent="DeletionConfirmation"]
+layout_mode = 0
+offset_left = 814.0
+offset_top = 380.0
+offset_right = 970.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 81
+text = "Yes"
+
+[node name="goback" type="Button" parent="DeletionConfirmation"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 380.0
+offset_right = 485.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 81
+text = "No"
+
 [node name="nameFile" type="Control" parent="."]
 visible = false
 anchors_preset = 0
@@ -616,7 +953,6 @@ offset_right = 967.0
 offset_bottom = 301.0
 theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 64
-text = "Skibidi Game"
 max_length = 40
 
 [node name="confirmation_button" type="Button" parent="nameFile"]
@@ -628,6 +964,22 @@ offset_right = 840.0
 offset_bottom = 399.0
 theme_override_font_sizes/font_size = 38
 text = "Conform"
+
+[node name="Return" type="TextureButton" parent="nameFile"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 568.0
+offset_right = 46.0
+offset_bottom = 590.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_uqhov")
+texture_pressed = SubResource("AtlasTexture_ir3w2")
+texture_hover = SubResource("AtlasTexture_utrmd")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_uqgl8")
@@ -641,9 +993,9 @@ autoplay = "musicIn"
 
 [node name="SettingsMenu" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="SettingsMenu"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -723,6 +1075,7 @@ offset_right = 712.0
 offset_bottom = 820.0
 scale = Vector2(0.8, 0.8)
 focus_mode = 0
+disabled = true
 toggle_mode = true
 texture_normal = ExtResource("18_jmguy")
 texture_pressed = ExtResource("19_h633f")
@@ -741,7 +1094,12 @@ texture_hover = ExtResource("23_oraf8")
 flip_h = true
 
 [connection signal="pressed" from="maintitle/PlayButton" to="." method="playButtonPressed"]
+[connection signal="pressed" from="FileMenu/game1" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="FileMenu/Return" to="." method="_on_files_return_pressed"]
+[connection signal="pressed" from="DeletionConfirmation/confirmdelete" to="." method="YES_delete_file"]
+[connection signal="pressed" from="DeletionConfirmation/goback" to="." method="dont_delete_file"]
+[connection signal="pressed" from="nameFile/confirmation_button" to="." method="make_new_file"]
+[connection signal="pressed" from="nameFile/Return" to="." method="_on_newgame_return_pressed"]
 [connection signal="value_changed" from="SettingsMenu/ColorRect/VBoxContainer/MusicSlider" to="SettingsMenu" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/ColorRect/VBoxContainer/SoundSlider" to="SettingsMenu" method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="SettingsMenu/PauseButton" to="SettingsMenu" method="togglePauseFall"]
