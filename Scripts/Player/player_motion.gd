@@ -3,17 +3,21 @@ extends CharacterBody2D
 @export var audioPlayer : AudioStreamPlayer
 
 
-const SPEED = 600.0 # player movement speed
+const SPEED = 500.0 # player movement speed
 const BOOST_SPEED = 2400.0 # player dash speed
 const BOOST_COOLDOWN = 0.5 # player dash cooldown rate (in seconds)
 const JUMP_VELOCITY = -1000.0 # player jump velocity
 const COYOTE_MAX = 0.14 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
+const jumpsound = preload("res://Sounds/player/jump.wav")
+const slashsound = preload("res://Sounds/Splashscreen/chip.ogg")
 
 
 var coyoteTime = 0.14
 var boostimer = 0.3
 var currentDirection = false # false == left, true == right, used for dash
+var doublejumped = false
+var soundEffects : AudioStreamPlaybackPolyphonic
 
 # Abilities
 var currentAbilities : Array[bool] = [false, false, false]
@@ -28,6 +32,9 @@ func _ready() -> void:
 	#currentAbilities[ability.ring] = true
 	#currentAbilities[ability.cape] = true
 	#currentAbilities[ability.boot] = true
+	$playerSounds.stream = AudioStreamPolyphonic.new()
+	$playerSounds.play()
+	soundEffects = $playerSounds.get_stream_playback()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -36,10 +43,11 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if (coyoteTime <= 0):
 			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
+			doublejumped = false
 		coyoteTime = COYOTE_MAX
 	else:
 		if (velocity.y < 0):
-			if Input.is_action_pressed("Jump"):
+			if Input.is_action_pressed("Jump") or doublejumped:
 				velocity += get_gravity() * delta * 2.5
 			else:
 				velocity += get_gravity() * delta * 6
@@ -56,9 +64,24 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
-		currentDirection = (direction > 0)
+		if (direction > 0):
+			currentDirection = true
+			if (is_on_floor()):
+				$playerSprite.play('runR')
+			else:
+				$playerSprite.play('jumpR')
+		else:
+			currentDirection = false
+			if (is_on_floor()):
+				$playerSprite.play('runL')
+			else:
+				$playerSprite.play('jumpL')
+			
 	else:
 		velocity.x = expDecay(velocity.x, 0, LERP_DECAY_RATE, delta)
+		if (is_on_floor()):
+			if (currentDirection): $playerSprite.play('defaultR')
+			else: $playerSprite.play("defaultL")
 	
 	# the dash cooldown
 	if (boostimer >= 0):
@@ -76,13 +99,22 @@ func _input(event: InputEvent) -> void:
 		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
 			$playerattacks.play("swing")
 			$attackbox.look_at(get_global_mouse_position())
-			velocity.y = JUMP_VELOCITY #added by Jimmy, the double jump
+			soundEffects.play_stream(slashsound) #slashsound
+			
+			# the double jump
+			if ((get_global_mouse_position()-position).normalized().dot(Vector2(0, 1)) > 0):
+				velocity.y = JUMP_VELOCITY*0.4
+				doublejumped = true
 	# if keyboard / button event
 	else:
 		# Handle jump.
 		if event.is_action_pressed("Jump") and coyoteTime > 0:
 			velocity.y = JUMP_VELOCITY
 			coyoteTime = 0
+			if (currentDirection): $playerSprite.play('jumpR')
+			else: $playerSprite.play('jumpL')
+			soundEffects.play_stream(jumpsound) #jumpsound
+			doublejumped = false
 		# dash / boost
 		if event.is_action_pressed("Dash"):
 			if currentAbilities[ability.cape] and boostimer < 0:

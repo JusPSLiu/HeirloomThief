@@ -42,18 +42,38 @@ func menu_load_file_details() -> Array[Dictionary]:
 					var data = save_file.get_var()
 					
 					# get data for title screen menu
-					var save_name = data['savename']
-					var healthy = data['max_health']
-					var progress = data["powerstatus"]
+					var save_name = data.savename
+					var healthy = data.max_health
+					var progress = data.powerstatus
 					
-					# reformat it like this. because i said so.
-					saveList.push_back({
+					# search for where to put it
+					var time = FileAccess.get_modified_time("user://saves/"+file_name)
+					# using BINARY INSERTION SORT
+					var a = 0
+					var b = saveList.size()-1
+					var m = a+((b-a)>>1)
+					while (a <= b):
+						if (time > saveList[m].time):
+							b = m-1
+							m = a+((b-a)>>1)
+						elif (time < saveList[m].time):
+							a = m+1
+							m = a+((b-a)>>1)
+						else: break
+					m += 1 # make sure its inserted JUST AFTER that index 
+					# reformat save data like this. because i said so.
+					var newdict = {
 						'file_name' : file_name,
 						'save_name' : save_name,
 						'health' : healthy,
-						'progress' : progress
-					})
-			file_name = deer.get_next()
+						'progress' : progress,
+						'time' : time
+					}
+					# insert if in middle, otherwise push_back
+					if m >= saveList.size():
+						saveList.push_back(newdict)
+					else: saveList.insert(m, newdict)
+			file_name = deer.get_next() # get next file name in the deerectory
 	return saveList
 
 func make_new_file(name):

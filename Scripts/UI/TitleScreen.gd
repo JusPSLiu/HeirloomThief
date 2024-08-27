@@ -52,6 +52,7 @@ func _on_files_pressed(arg):
 		musicFader.play("fadeMusicOut")
 		Fader.play("FadeOut")
 		await Fader.animation_finished
+		SaveManager.load_game(arg)
 		get_tree().change_scene_to_file("res://Scenes/Levels/level_template.tscn")
 
 func resumeGame():
