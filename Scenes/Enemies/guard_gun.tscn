@@ -1,0 +1,165 @@
+[gd_scene load_steps=17 format=3 uid="uid://b3xs8f4mje4g0"]
+
+[ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_f6ea4"]
+[ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/guard_gun.gd" id="2_gcgvk"]
+[ext_resource type="Texture2D" uid="uid://bmrl4lprm61j2" path="res://Art/Enemies/temp_enemy.png" id="2_xclt2"]
+[ext_resource type="Script" path="res://Scripts/Enemies/state_manager.gd" id="4_ld8hp"]
+[ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/idle.gd" id="5_2e3xp"]
+[ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/pace.gd" id="6_k38xw"]
+[ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/alert.gd" id="7_82502"]
+[ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/attack.gd" id="8_ob78m"]
+
+[sub_resource type="Animation" id="Animation_ct5yb"]
+resource_name = "Alert"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_88j35"]
+resource_name = "Attack"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_2u18m"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_t0aql"]
+resource_name = "Pace"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_px8ip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fifks"]
+_data = {
+"Alert": SubResource("Animation_ct5yb"),
+"Attack": SubResource("Animation_88j35"),
+"Idle": SubResource("Animation_2u18m"),
+"Pace": SubResource("Animation_t0aql"),
+"RESET": SubResource("Animation_px8ip")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frvum"]
+size = Vector2(10, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e62nn"]
+size = Vector2(56, 24)
+
+[node name="GuardGun" instance=ExtResource("1_f6ea4")]
+script = ExtResource("2_gcgvk")
+fire_rate = 0.2
+number_of_shots = 3
+max_speed = 10000.0
+
+[node name="Animator" type="AnimationPlayer" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_fifks")
+}
+
+[node name="Collider" parent="." index="1"]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_frvum")
+
+[node name="Sprite" parent="." index="2"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("2_xclt2")
+hframes = 2
+vframes = 2
+
+[node name="Spawn" type="Node2D" parent="." index="3"]
+position = Vector2(-10, -6)
+
+[node name="Range" type="Area2D" parent="." index="4"]
+
+[node name="Collider" type="CollisionShape2D" parent="Range" index="0"]
+position = Vector2(-28, -12)
+shape = SubResource("RectangleShape2D_e62nn")
+
+[node name="VisibleOnScreenEnabler2D" parent="." index="5"]
+position = Vector2(1.19209e-07, -6.5)
+scale = Vector2(0.5, 0.65)
+
+[node name="StateManager" type="Node2D" parent="." index="6" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_ld8hp")
+initial_state = NodePath("Idle")
+print_states = true
+
+[node name="Idle" type="Node2D" parent="StateManager" index="0"]
+script = ExtResource("5_2e3xp")
+auto_animate = true
+
+[node name="Pace" type="Node2D" parent="StateManager" index="1"]
+script = ExtResource("6_k38xw")
+auto_animate = true
+
+[node name="Alert" type="Node2D" parent="StateManager" index="2"]
+script = ExtResource("7_82502")
+auto_animate = true
+
+[node name="Attack" type="Node2D" parent="StateManager" index="3"]
+script = ExtResource("8_ob78m")
+auto_animate = true
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

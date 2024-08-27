@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3ja36gfppnja"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/projectile.gd" id="1_2feex"]
+[ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="1_mgbhn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wsnlq"]
+radius = 3.0
+
+[node name="Projectile" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_2feex")
+speed = 500.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wsnlq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_mgbhn")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(0.3, 0.3)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
