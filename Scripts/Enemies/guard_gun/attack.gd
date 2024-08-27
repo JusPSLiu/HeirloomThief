@@ -8,7 +8,12 @@ func enter() -> void:
 		entity.shoot(3)
 
 func physics_update(delta : float):
-	entity.velocity.x = entity.max_speed * entity.movement_direction * delta
+	super.physics_update(delta)
+	
+	if abs(entity.player.global_position.x - entity.global_position.x) > 50:
+		entity.velocity.x = entity.max_speed * entity.movement_direction * delta
+	else:
+		entity.velocity.x = 0
 	
 	if entity.player == null:
 		return entity.idle
