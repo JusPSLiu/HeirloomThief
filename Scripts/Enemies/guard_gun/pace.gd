@@ -16,6 +16,8 @@ func enter() -> void:
 	done = true
 
 func physics_update(delta : float):
+	super.physics_update(delta)
+	
 	entity.velocity.x = entity.max_speed * entity.movement_direction * delta
 	
 	# change state to alert if player enters range

@@ -8,22 +8,18 @@ func enter() -> void:
 	
 	# create timer and wait for it to timeout
 	done = false
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.75).timeout
 	# set variable to keep track of timer
 	done = true
 
 func physics_update(delta : float):
 	super.physics_update(delta)
-	
 	entity.velocity.x = 0
+	entity.velocity.y = 0
 	
 	# When timer ends
 	if done:
-		# Check to see if player is still in range and change state accordingly
-		if entity.player:
-			return entity.attack
-		else:
-			return entity.pace
+		return entity.dive
 
 func exit() -> void:
 	super.exit()

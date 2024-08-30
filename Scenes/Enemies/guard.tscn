@@ -16,6 +16,7 @@ position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_h28r3")
 
 [node name="Sprite" parent="." index="1"]
+texture_filter = 1
 position = Vector2(0, -8)
 texture = ExtResource("3_eydcd")
 hframes = 2
