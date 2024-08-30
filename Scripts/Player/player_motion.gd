@@ -88,7 +88,11 @@ func _physics_process(delta: float) -> void:
 	if (boostimer >= 0):
 		boostimer -= delta
 	
-	$camera_carrot_on_stick.position.x = velocity.x*.6
+	if (velocity.x > 50 || velocity.x < -50):
+		#$camera_carrot_on_stick.position.x = 250 if currentDirection else -250
+		$camera_carrot_on_stick.position.x = velocity.x * 0.6
+	else:
+		$camera_carrot_on_stick.position.x = expDecay($camera_carrot_on_stick.position.x, 0, 2, delta)
 
 # i saw a yt video by freya holmer abt this being a better exponential lerp
 func expDecay(a, b, decay, dt):
