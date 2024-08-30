@@ -4,14 +4,14 @@ extends Area2D
 @export var speed : float
 
 # Functional variables
-var movement_direction
+var movement_direction : Vector2
 
 func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
 	# move horizontally each frame
-	position.x += speed * movement_direction * delta
+	position += speed * movement_direction * delta
 
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:

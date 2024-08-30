@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=20 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2pqq"]
-radius = 16.0
+radius = 15.0
 height = 48.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dsjt"]
@@ -149,7 +149,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:rotation")
+tracks/2/path = NodePath("rotator/ColorRect:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -161,7 +161,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:scale")
+tracks/3/path = NodePath("rotator/ColorRect:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -173,7 +173,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Polygon2D:polygon")
+tracks/4/path = NodePath("rotator/Polygon2D:polygon")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -182,6 +182,22 @@ tracks/4/keys = {
 "update": 0,
 "values": [PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rotator:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m7rku"]
+resource_name = "shoot"
+step = 0.01
 
 [sub_resource type="Animation" id="Animation_phhkb"]
 resource_name = "swing"
@@ -214,7 +230,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:rotation")
+tracks/2/path = NodePath("rotator/ColorRect:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -226,7 +242,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:scale")
+tracks/3/path = NodePath("rotator/ColorRect:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -238,7 +254,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Polygon2D:polygon")
+tracks/4/path = NodePath("rotator/Polygon2D:polygon")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -247,21 +263,35 @@ tracks/4/keys = {
 "update": 0,
 "values": [PackedVector2Array(1, 0, 83, -40), PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32), PackedVector2Array(1, 0, 85, 32)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rotator:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.523599, 0.523599]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m0gdd"]
 _data = {
 "RESET": SubResource("Animation_r2vo8"),
+"shoot": SubResource("Animation_m7rku"),
 "swing": SubResource("Animation_phhkb")
 }
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_grhsv"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("audioPlayer")]
 position = Vector2(498, 498)
 script = ExtResource("1_cvqb3")
+audioPlayer = NodePath("playerSounds")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 6)
+position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_f2pqq")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
@@ -280,16 +310,19 @@ libraries = {
 [node name="attackbox" type="Area2D" parent="."]
 visible = false
 position = Vector2(1, 12)
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackbox"]
 position = Vector2(0, -9)
 polygon = PackedVector2Array(2, -17, 91, -42, 113, -1, 95, 54, 1, 24)
 
-[node name="Polygon2D" type="Polygon2D" parent="attackbox"]
+[node name="rotator" type="Node2D" parent="attackbox"]
+
+[node name="Polygon2D" type="Polygon2D" parent="attackbox/rotator"]
 color = Color(0.724627, 0.000887531, 0.805243, 1)
 polygon = PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32)
 
-[node name="ColorRect" type="ColorRect" parent="attackbox"]
+[node name="ColorRect" type="ColorRect" parent="attackbox/rotator"]
 offset_left = 1.0
 offset_top = -1.0
 offset_right = 92.0
@@ -297,10 +330,14 @@ offset_bottom = 3.0
 rotation = 0.338671
 color = Color(0.867444, 0.00133418, 0.963343, 1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera_carrot_on_stick" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="camera_carrot_on_stick"]
 zoom = Vector2(0.8, 0.8)
 limit_top = -720
 limit_bottom = 720
+position_smoothing_enabled = true
+position_smoothing_speed = 2.1
 
 [node name="playerSounds" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamPolyphonic_grhsv")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="1_waon5"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_ufaod"]
-[ext_resource type="AudioStream" uid="uid://ba5ajgqe04tu4" path="res://Sounds/Music/enemylevel.mp3" id="4_6ytkx"]
+[ext_resource type="AudioStream" uid="uid://co7miyrk8qljr" path="res://Sounds/Music/thirdlevel.mp3" id="3_7bxi8"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="5_ih8hu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3nooy"]
@@ -29,7 +29,7 @@ tile_set = SubResource("TileSet_xxwjy")
 [node name="Player" parent="." instance=ExtResource("2_ufaod")]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_6ytkx")
+stream = ExtResource("3_7bxi8")
 volume_db = -7.0
 autoplay = true
 bus = &"Music"

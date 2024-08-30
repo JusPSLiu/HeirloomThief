@@ -76,9 +76,9 @@ func menu_load_file_details() -> Array[Dictionary]:
 			file_name = deer.get_next() # get next file name in the deerectory
 	return saveList
 
-func make_new_file(name):
+func make_new_file(newname):
 	# assign name
-	currsavename = name
+	currsavename = newname
 	# reset to default valuess
 	current_health  = 4
 	max_health = 4

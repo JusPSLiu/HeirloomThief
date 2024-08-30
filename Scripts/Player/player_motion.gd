@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var audioPlayer : AudioStreamPlayer
+@export var audioPlayer : AudioStreamPlayer2D
 
 
 const SPEED = 500.0 # player movement speed
@@ -10,8 +10,9 @@ const JUMP_VELOCITY = -1000.0 # player jump velocity
 const COYOTE_MAX = 0.14 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
 const jumpsound = preload("res://Sounds/player/jump.wav")
-const slashsound = preload("res://Sounds/Splashscreen/chip.ogg")
-
+const slashsound = preload("res://Sounds/player/slice.wav")
+const shoot = preload("res://Sounds/player/shoot.wav")
+const projectile = preload("res://Scenes/Enemies/projectile.tscn")
 
 var coyoteTime = 0.14
 var boostimer = 0.3
@@ -29,13 +30,13 @@ enum ability {
 
 # when spawn in, activate proper abilities
 func _ready() -> void:
-	#currentAbilities[ability.ring] = true
+	currentAbilities[ability.ring] = true
 	#currentAbilities[ability.cape] = true
 	#currentAbilities[ability.boot] = true
-	$playerSounds.stream = AudioStreamPolyphonic.new()
-	$playerSounds.play()
-	soundEffects = $playerSounds.get_stream_playback()
-	pass
+	audioPlayer.stream = AudioStreamPolyphonic.new()
+	audioPlayer.play()
+	soundEffects = audioPlayer.get_stream_playback()
+
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
@@ -86,6 +87,8 @@ func _physics_process(delta: float) -> void:
 	# the dash cooldown
 	if (boostimer >= 0):
 		boostimer -= delta
+	
+	$camera_carrot_on_stick.position.x = velocity.x*.6
 
 # i saw a yt video by freya holmer abt this being a better exponential lerp
 func expDecay(a, b, decay, dt):
@@ -101,10 +104,27 @@ func _input(event: InputEvent) -> void:
 			$attackbox.look_at(get_global_mouse_position())
 			soundEffects.play_stream(slashsound) #slashsound
 			
-			# the double jump
-			if ((get_global_mouse_position()-position).normalized().dot(Vector2(0, 1)) > 0):
-				velocity.y = JUMP_VELOCITY*0.4
+			# slight double jump for bat attack
+			if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+				velocity.y = JUMP_VELOCITY*0.2
 				doublejumped = true
+		
+		elif (event.is_action_pressed("Shoot") and !$playerattacks.is_playing()):
+			if (currentAbilities[ability.ring]):
+				soundEffects.play_stream(shoot) #slashsound
+				$playerattacks.play("shoot")
+				#make the projectile; possibly replace with special player projectile later
+				var newprojectile = projectile.instantiate()
+				newprojectile.position = position
+				newprojectile.apply_scale(Vector2(4, 4))
+				newprojectile.movement_direction = (get_global_mouse_position()-position).normalized()
+				newprojectile.speed = 1000
+				add_sibling(newprojectile)
+				
+				# the double jump for laser
+				if ((get_global_mouse_position()-position).dot(Vector2(0, 1)) > 0):
+					velocity.y = JUMP_VELOCITY
+					doublejumped = true
 	# if keyboard / button event
 	else:
 		# Handle jump.
