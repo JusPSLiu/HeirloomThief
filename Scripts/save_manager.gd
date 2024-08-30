@@ -1,7 +1,7 @@
 extends Node
 
-var current_health  = 4
-var max_health = 4
+var current_health  = 3
+var max_health = 8
 var current_room = 0
 var currfile = "" # the default name given to the file in the system
 var currsavename = "" # the custom name by the user, less restrictive than windows

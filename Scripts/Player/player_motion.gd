@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var audioPlayer : AudioStreamPlayer2D
-
+@export var GUI : Control
 
 const SPEED = 500.0 # player movement speed
 const BOOST_SPEED = 2400.0 # player dash speed
@@ -31,7 +31,7 @@ enum ability {
 # when spawn in, activate proper abilities
 func _ready() -> void:
 	currentAbilities[ability.ring] = true
-	#currentAbilities[ability.cape] = true
+	currentAbilities[ability.cape] = true
 	#currentAbilities[ability.boot] = true
 	audioPlayer.stream = AudioStreamPolyphonic.new()
 	audioPlayer.play()
@@ -111,7 +111,7 @@ func _input(event: InputEvent) -> void:
 		
 		elif (event.is_action_pressed("Shoot") and !$playerattacks.is_playing()):
 			if (currentAbilities[ability.ring]):
-				soundEffects.play_stream(shoot) #slashsound
+				soundEffects.play_stream(shoot) #shootsound
 				$playerattacks.play("shoot")
 				#make the projectile; possibly replace with special player projectile later
 				var newprojectile = projectile.instantiate()
@@ -145,6 +145,19 @@ func _input(event: InputEvent) -> void:
 		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
 			$playerattacks.play("swing")
 			$attackbox.rotation = getSwingAngle()
+			soundEffects.play_stream(slashsound) #slashsound
+			# slight double jump for bat attack
+			if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+				velocity.y = JUMP_VELOCITY*0.2
+				doublejumped = true
+		if (event.is_action_pressed("keyboardslice") and !$playerattacks.is_playing()):
+			$playerattacks.play("swing")
+			$attackbox.rotation = 0 if currentDirection else PI
+			soundEffects.play_stream(slashsound) #slashsound
+			# slight double jump for bat attack
+			if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+				velocity.y = JUMP_VELOCITY*0.2
+				doublejumped = true
 
 
 func getSwingAngle():
@@ -158,3 +171,12 @@ func getSwingAngle():
 			Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 		)
 	return joystickInput.angle()
+
+
+# INJURY CONTROL
+func get_hit(dmg : int) -> void:
+	if !$player_fx.is_playing():
+		$player_fx.play("player_injured")
+		SaveManager.current_health -= dmg
+		if (GUI):
+			GUI.show_curr_hp()

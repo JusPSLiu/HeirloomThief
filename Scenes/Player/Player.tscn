@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=23 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
@@ -39,13 +39,13 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("2_lmbdo")
 region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1gjym"]
-atlas = ExtResource("2_lmbdo")
-region = Rect2(16, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul5ev"]
 atlas = ExtResource("2_lmbdo")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gjym"]
+atlas = ExtResource("2_lmbdo")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ind5g"]
 animations = [{
@@ -106,19 +106,57 @@ animations = [{
 }],
 "loop": true,
 "name": &"runL",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1gjym")
+"texture": SubResource("AtlasTexture_ul5ev")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ul5ev")
+"texture": SubResource("AtlasTexture_1gjym")
 }],
 "loop": true,
 "name": &"runR",
-"speed": 8.0
+"speed": 12.0
 }]
+
+[sub_resource type="Animation" id="Animation_qg8hs"]
+resource_name = "player_injured"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tjupa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tb5uq"]
+_data = {
+"RESET": SubResource("Animation_tjupa"),
+"player_injured": SubResource("Animation_qg8hs")
+}
 
 [sub_resource type="Animation" id="Animation_r2vo8"]
 length = 0.001
@@ -298,8 +336,13 @@ shape = SubResource("CapsuleShape2D_f2pqq")
 position = Vector2(0, -2)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ind5g")
-animation = &"jumpL"
+animation = &"runL"
 autoplay = "defaultR"
+
+[node name="player_fx" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tb5uq")
+}
 
 [node name="playerattacks" type="AnimationPlayer" parent="."]
 root_node = NodePath("../attackbox")
@@ -333,11 +376,10 @@ color = Color(0.867444, 0.00133418, 0.963343, 1)
 [node name="camera_carrot_on_stick" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="camera_carrot_on_stick"]
-zoom = Vector2(0.8, 0.8)
 limit_top = -720
 limit_bottom = 720
 position_smoothing_enabled = true
-position_smoothing_speed = 2.1
+position_smoothing_speed = 2.2
 
 [node name="playerSounds" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamPolyphonic_grhsv")
