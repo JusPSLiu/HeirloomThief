@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/return.png-7cf58d0423ddabd6d2fe6c3047900b90.ctex"
+uid="uid://bory1qvcyjpbu"
+path="res://.godot/imported/Batdemon.png-3ae7988183b78a82af455eb8bbc256b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/return.png"
-dest_files=["res://.godot/imported/return.png-7cf58d0423ddabd6d2fe6c3047900b90.ctex"]
+source_file="res://Art/Enemies/Batdemon.png"
+dest_files=["res://.godot/imported/Batdemon.png-3ae7988183b78a82af455eb8bbc256b1.ctex"]
 
 [params]
 

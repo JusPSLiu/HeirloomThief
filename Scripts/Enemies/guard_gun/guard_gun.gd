@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	$Sprite.scale.x = -movement_direction
 	$Range.scale.x = -movement_direction
 	# Move spawn position to the correct side of the enemy
-	$Spawn.position.x = -6 * -movement_direction
+	$Spawn.position.x = -scale.x * -movement_direction
 
 func shoot(number_of_projectiles : int) -> void:
 	for i in number_of_projectiles:
@@ -58,7 +58,7 @@ func shoot(number_of_projectiles : int) -> void:
 		var projectile = projectile_scene.instantiate()
 		
 		# set projectile properties
-		projectile.movement_direction = Vector2(1, 0) if movement_direction else Vector2(-1, 0)
+		projectile.movement_direction = Vector2(movement_direction, 0)
 		projectile.scale = Vector2(6, 6) # scaled to size of enemy [temporary]
 		projectile.global_position = $Spawn.global_position
 		
@@ -69,8 +69,3 @@ func _on_range_body_entered(body: Node2D) -> void:
 	# If entering body is player, set variable true
 	if body.is_in_group("Player"):
 		player = body
-
-func _on_range_body_exited(body: Node2D) -> void:
-	# If exiting body is player, set variable false
-	if body.is_in_group("Player"):
-		player = null

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/return.png-7cf58d0423ddabd6d2fe6c3047900b90.ctex"
+uid="uid://b5g06vwh03pj6"
+path="res://.godot/imported/Waspdemonthing.png-969dfb343466c0ec3d51d92dbcdafd8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/return.png"
-dest_files=["res://.godot/imported/return.png-7cf58d0423ddabd6d2fe6c3047900b90.ctex"]
+source_file="res://Art/Enemies/Waspdemonthing.png"
+dest_files=["res://.godot/imported/Waspdemonthing.png-969dfb343466c0ec3d51d92dbcdafd8d.ctex"]
 
 [params]
 

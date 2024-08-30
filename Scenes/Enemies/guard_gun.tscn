@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_f6ea4"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/guard_gun.gd" id="2_gcgvk"]
-[ext_resource type="Texture2D" uid="uid://bmrl4lprm61j2" path="res://Art/Enemies/temp_enemy.png" id="2_xclt2"]
+[ext_resource type="Texture2D" uid="uid://bory1qvcyjpbu" path="res://Art/Enemies/Batdemon.png" id="3_dpbfg"]
 [ext_resource type="Script" path="res://Scripts/Enemies/state_manager.gd" id="4_ld8hp"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/idle.gd" id="5_2e3xp"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/pace.gd" id="6_k38xw"]
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_88j35"]
@@ -40,7 +40,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [2, 3]
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_2u18m"]
@@ -123,9 +123,8 @@ shape = SubResource("RectangleShape2D_frvum")
 [node name="Sprite" parent="." index="2"]
 texture_filter = 1
 position = Vector2(0, -8)
-texture = ExtResource("2_xclt2")
+texture = ExtResource("3_dpbfg")
 hframes = 2
-vframes = 2
 
 [node name="Spawn" type="Node2D" parent="." index="3"]
 position = Vector2(-10, -6)
