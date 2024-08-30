@@ -285,7 +285,7 @@ _data = {
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_grhsv"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("audioPlayer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("audioPlayer") groups=["Player"]]
 position = Vector2(498, 498)
 script = ExtResource("1_cvqb3")
 audioPlayer = NodePath("playerSounds")
@@ -295,6 +295,7 @@ position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_f2pqq")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -2)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ind5g")

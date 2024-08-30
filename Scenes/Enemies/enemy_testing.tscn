@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceguw3gquhbxa"]
+[gd_scene load_steps=6 format=3 uid="uid://ceguw3gquhbxa"]
 
-[ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="2_2l064"]
+[ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_3kmqq"]
 [ext_resource type="PackedScene" uid="uid://dnpt88g0ifq87" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
+[ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="3_o53wr"]
+[ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="4_6g62y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]
 size = Vector2(1, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_o77ii"]
-radius = 4.0
 
 [node name="EnemyTesting" type="Node2D"]
 
@@ -53,17 +52,15 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="GuardFlying" parent="." instance=ExtResource("2_vacef")]
-position = Vector2(808, 192)
-scale = Vector2(6, 6)
+position = Vector2(1312, 248)
+scale = Vector2(4, 4)
 
-[node name="TestPlayer" type="CharacterBody2D" parent="." groups=["Player"]]
-position = Vector2(504, 512)
-scale = Vector2(6, 6)
-metadata/_edit_group_ = true
+[node name="Player" parent="." instance=ExtResource("2_3kmqq")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestPlayer"]
-shape = SubResource("CircleShape2D_o77ii")
+[node name="GuardGun" parent="." instance=ExtResource("3_o53wr")]
+position = Vector2(880, 592)
+scale = Vector2(4, 4)
 
-[node name="Sprite2D" type="Sprite2D" parent="TestPlayer"]
-texture_filter = 1
-texture = ExtResource("2_2l064")
+[node name="Guard" parent="." instance=ExtResource("4_6g62y")]
+position = Vector2(400, 552)
+scale = Vector2(4, 4)

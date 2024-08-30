@@ -8,7 +8,7 @@ func enter() -> void:
 	
 	# create timer and wait for it to timeout
 	done = false
-	await get_tree().create_timer(0.75).timeout
+	await get_tree().create_timer(0.5).timeout
 	# set variable to keep track of timer
 	done = true
 
