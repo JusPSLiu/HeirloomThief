@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var audioPlayer : AudioStreamPlayer2D
 @export var GUI : Control
+@export var deathAnimator : AnimationPlayer
 
 const SPEED = 500.0 # player movement speed
 const BOOST_SPEED = 2400.0 # player dash speed
@@ -10,15 +11,19 @@ const JUMP_VELOCITY = -1000.0 # player jump velocity
 const COYOTE_MAX = 0.14 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
 const jumpsound = preload("res://Sounds/player/jump.wav")
+const hitsound = preload("res://Sounds/player/beenhit.wav")
 const slashsound = preload("res://Sounds/player/slice.wav")
 const shoot = preload("res://Sounds/player/shoot.wav")
 const projectile = preload("res://Scenes/Enemies/projectile.tscn")
+const deathparticle = preload("res://Scenes/Player/death.tscn")
 
 var coyoteTime = 0.14
 var boostimer = 0.3
 var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false
 var soundEffects : AudioStreamPlaybackPolyphonic
+var respawnPoint : Vector2 = Vector2(0,0)
+var DO_NOT_MOVE = false
 
 # Abilities
 var currentAbilities : Array[bool] = [false, false, false]
@@ -36,6 +41,7 @@ func _ready() -> void:
 	audioPlayer.stream = AudioStreamPolyphonic.new()
 	audioPlayer.play()
 	soundEffects = audioPlayer.get_stream_playback()
+	respawnPoint = position
 
 
 func _physics_process(delta: float) -> void:
@@ -101,68 +107,68 @@ func expDecay(a, b, decay, dt):
 # using an interrupt for controls other than run because polling is dumb
 func _input(event: InputEvent) -> void:
 	# if mouse event
-	if (event is InputEventMouse):
-		# basic meelee attack
-		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
-			$playerattacks.play("swing")
-			$attackbox.look_at(get_global_mouse_position())
-			soundEffects.play_stream(slashsound) #slashsound
-			
-			# slight double jump for bat attack
-			if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
-				velocity.y = JUMP_VELOCITY*0.2
-				doublejumped = true
-		
-		elif (event.is_action_pressed("Shoot") and !$playerattacks.is_playing()):
-			if (currentAbilities[ability.ring]):
-				soundEffects.play_stream(shoot) #shootsound
-				$playerattacks.play("shoot")
-				#make the projectile; possibly replace with special player projectile later
-				var newprojectile = projectile.instantiate()
-				newprojectile.position = position
-				newprojectile.apply_scale(Vector2(4, 4))
-				newprojectile.movement_direction = (get_global_mouse_position()-position).normalized()
-				newprojectile.speed = 1000
-				add_sibling(newprojectile)
+	if (!DO_NOT_MOVE):
+		if (event is InputEventMouse):
+			# basic meelee attack
+			if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
+				$playerattacks.play("swing")
+				$attackbox.look_at(get_global_mouse_position())
+				soundEffects.play_stream(slashsound) #slashsound
 				
-				# the double jump for laser
-				if ((get_global_mouse_position()-position).dot(Vector2(0, 1)) > 0):
-					velocity.y = JUMP_VELOCITY
+				# slight double jump for bat attack
+				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
-	# if keyboard / button event
-	else:
-		# Handle jump.
-		if event.is_action_pressed("Jump") and coyoteTime > 0:
-			velocity.y = JUMP_VELOCITY
-			coyoteTime = 0
-			if (currentDirection): $playerSprite.play('jumpR')
-			else: $playerSprite.play('jumpL')
-			soundEffects.play_stream(jumpsound) #jumpsound
-			doublejumped = false
-		# dash / boost
-		if event.is_action_pressed("Dash"):
-			if currentAbilities[ability.cape] and boostimer < 0:
-				Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
-				velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
-				boostimer = BOOST_COOLDOWN
-				get_hit(1)
-		# basic meelee attack
-		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
-			$playerattacks.play("swing")
-			$attackbox.rotation = getSwingAngle()
-			soundEffects.play_stream(slashsound) #slashsound
-			# slight double jump for bat attack
-			if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
-				velocity.y = JUMP_VELOCITY*0.2
-				doublejumped = true
-		if (event.is_action_pressed("keyboardslice") and !$playerattacks.is_playing()):
-			$playerattacks.play("swing")
-			$attackbox.rotation = 0 if currentDirection else PI
-			soundEffects.play_stream(slashsound) #slashsound
-			# slight double jump for bat attack
-			if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
-				velocity.y = JUMP_VELOCITY*0.2
-				doublejumped = true
+			
+			elif (event.is_action_pressed("Shoot") and !$playerattacks.is_playing()):
+				if (currentAbilities[ability.ring]):
+					soundEffects.play_stream(shoot) #shootsound
+					$playerattacks.play("shoot")
+					#make the projectile; possibly replace with special player projectile later
+					var newprojectile = projectile.instantiate()
+					newprojectile.position = position
+					newprojectile.apply_scale(Vector2(4, 4))
+					newprojectile.movement_direction = (get_global_mouse_position()-position).normalized()
+					newprojectile.speed = 1000
+					add_sibling(newprojectile)
+					
+					# the double jump for laser
+					if ((get_global_mouse_position()-position).dot(Vector2(0, 1)) > 0):
+						velocity.y = JUMP_VELOCITY
+						doublejumped = true
+		# if keyboard / button event
+		else:
+			# Handle jump.
+			if event.is_action_pressed("Jump") and coyoteTime > 0:
+				velocity.y = JUMP_VELOCITY
+				coyoteTime = 0
+				if (currentDirection): $playerSprite.play('jumpR')
+				else: $playerSprite.play('jumpL')
+				soundEffects.play_stream(jumpsound) #jumpsound
+				doublejumped = false
+			# dash / boost
+			if event.is_action_pressed("Dash"):
+				if currentAbilities[ability.cape] and boostimer < 0:
+					Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
+					velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
+					boostimer = BOOST_COOLDOWN
+			# basic meelee attack
+			if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
+				$playerattacks.play("swing")
+				$attackbox.rotation = getSwingAngle()
+				soundEffects.play_stream(slashsound) #slashsound
+				# slight double jump for bat attack
+				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+					velocity.y = JUMP_VELOCITY*0.2
+					doublejumped = true
+			if (event.is_action_pressed("keyboardslice") and !$playerattacks.is_playing()):
+				$playerattacks.play("swing")
+				$attackbox.rotation = 0 if currentDirection else PI
+				soundEffects.play_stream(slashsound) #slashsound
+				# slight double jump for bat attack
+				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+					velocity.y = JUMP_VELOCITY*0.2
+					doublejumped = true
 
 
 func getSwingAngle():
@@ -179,9 +185,37 @@ func getSwingAngle():
 
 
 # INJURY CONTROL
-func get_hit(dmg : int) -> void:
-	if !$player_fx.is_playing():
+func get_hit(dmg : int, vec : Vector2) -> bool:
+	if $player_fx.is_playing():
+		return false
+	elif (!deathAnimator.is_playing()):
 		$player_fx.play("player_injured")
+		soundEffects.play_stream(hitsound) #hitsound
+		velocity = vec*200 # get knocked away
+		coyoteTime = 0 # no jump 4 u
 		SaveManager.current_health -= dmg
 		if (GUI):
 			GUI.show_curr_hp()
+		if (SaveManager.current_health <= 0):
+			if (deathAnimator != null):
+				deathAnimator.play("die")
+				$camera_carrot_on_stick.position.x = 0
+				set_physics_process(false)
+				hide()
+				var deathy = deathparticle.instantiate()
+				deathy.position = position
+				add_sibling(deathy)
+				velocity = Vector2(0, 0)
+			else:
+				respawn()
+			return true
+	return false
+
+func respawn():
+	position = respawnPoint
+	self.set_physics_process(true)
+	SaveManager.current_health = 4
+	velocity = Vector2(0, 0)
+	show()
+	if (GUI):
+		GUI.show_curr_hp()
