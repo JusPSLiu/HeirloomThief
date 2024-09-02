@@ -337,7 +337,7 @@ texture_filter = 1
 position = Vector2(0, -2)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ind5g")
-animation = &"runL"
+animation = &"defaultR"
 autoplay = "defaultR"
 
 [node name="player_fx" type="AnimationPlayer" parent="."]

@@ -145,6 +145,7 @@ func _input(event: InputEvent) -> void:
 				Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 				velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
 				boostimer = BOOST_COOLDOWN
+				get_hit(1)
 		# basic meelee attack
 		if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
 			$playerattacks.play("swing")
