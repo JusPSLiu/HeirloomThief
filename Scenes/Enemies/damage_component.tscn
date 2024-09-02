@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://n3s8ne2dn485"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/damage_component.gd" id="1_xgfwv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kmb5"]
+size = Vector2(30, 30)
+
+[node name="DamageComponent" type="Area2D"]
+script = ExtResource("1_xgfwv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6kmb5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
