@@ -16,6 +16,7 @@ const slashsound = preload("res://Sounds/player/slice.wav")
 const shoot = preload("res://Sounds/player/shoot.wav")
 const projectile = preload("res://Scenes/Enemies/projectile.tscn")
 const deathparticle = preload("res://Scenes/Player/death.tscn")
+const healedsound = preload("res://Sounds/player/get_healed.wav")
 
 var coyoteTime = 0.14
 var boostimer = 0.3
@@ -215,6 +216,12 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 				respawn()
 			return true
 	return false
+
+func get_healed(hlth : int):
+	SaveManager.current_health += hlth
+	soundEffects.play_stream(healedsound) #healedsound
+	if (GUI):
+		GUI.show_curr_hp()
 
 func respawn():
 	position = respawnPoint

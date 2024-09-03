@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=4 uid="uid://ckoi6jeqtbufc"]
+[gd_scene load_steps=15 format=4 uid="uid://ckoi6jeqtbufc"]
 
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="1_waon5"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_ufaod"]
-[ext_resource type="AudioStream" uid="uid://co7miyrk8qljr" path="res://Sounds/Music/thirdlevel.mp3" id="3_7bxi8"]
+[ext_resource type="AudioStream" uid="uid://ba5ajgqe04tu4" path="res://Sounds/Music/enemylevel.mp3" id="3_ug6hq"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="5_ih8hu"]
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="5_rnyxt"]
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="6_2u8ax"]
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="6_sgtvf"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="7_e5bhl"]
+[ext_resource type="PackedScene" uid="uid://d2y4867yq3p3" path="res://Scenes/Enemies/healing_component.tscn" id="9_sxglr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gqvj"]
 texture = ExtResource("1_waon5")
@@ -93,8 +94,7 @@ deathAnimator = NodePath("../UI/DeathAnimator")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("3_7bxi8")
-volume_db = -7.0
+stream = ExtResource("3_ug6hq")
 autoplay = true
 bus = &"Music"
 
@@ -149,5 +149,8 @@ knockPlayerInCustomVector = Vector2(0, -4)
 [node name="CollisionShape2D" parent="DamageComponent" index="0"]
 position = Vector2(-20, -3.5)
 shape = SubResource("RectangleShape2D_l5kdh")
+
+[node name="DamageComponent4" parent="." instance=ExtResource("9_sxglr")]
+position = Vector2(1010, 622)
 
 [editable path="DamageComponent"]

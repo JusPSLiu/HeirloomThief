@@ -1,6 +1,7 @@
 extends Node
 
-var current_health  = 3
+var current_health = 3
+var current_gems = 2
 var max_health = 8
 var current_room = 0
 var currfile = "" # the default name given to the file in the system

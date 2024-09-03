@@ -2,8 +2,12 @@ extends CanvasLayer
 
 #@onready var optionsMenu : Control = get_parent().get_node("OptionsMenu")
 @onready var sound : AudioStreamPlayer = get_node("ButtonSound")
-@onready var main_menu : Control = $BackColor.get_node("MainMenu")
-@onready var settings_menu : Label = $BackColor.get_node("Settings")
+@onready var main_menu : Control = get_node("BackColor/MainMenu")
+@onready var settings_menu : Label = get_node("BackColor/Settings")
+@onready var upgrade_menu : TextureRect = get_node("BackColor/Upgrades")
+@onready var gem_number : Label = get_node("BackColor/heart_gem_display/display_gems/gems_num")
+@onready var heart_number : Label = get_node("BackColor/heart_gem_display/display_hearts/hearts_num")
+@onready var upgrade_available : TextureRect = get_node("BackColor/MainMenu/UpgradeAvailable")
 
 @export var musicPlayer : AudioStreamPlayer
 @export var Fader : AnimationPlayer
@@ -51,6 +55,11 @@ func togglePause():
 	if (!get_tree().paused):
 		main_menu.show()
 		settings_menu.hide()
+	else:
+		#if pausing then make sure the display is right
+		heart_number.text = str(int(SaveManager.max_health)>>1)
+		gem_number.text = str(SaveManager.current_gems)
+		upgrade_available.visible = (SaveManager.current_gems > 1)
 
 func set_pausability(pause : bool):
 	pausable = pause
@@ -68,14 +77,18 @@ func _to_settings_menu() -> void:
 	sound.play()
 	settings_menu.show()
 	main_menu.hide()
+	upgrade_menu.hide()
 
 #go to upgrade menu
 func _to_upgrade_menu() -> void:
 	sound.play()
-	pass # Replace with function body.
+	upgrade_menu.show()
+	settings_menu.hide()
+	main_menu.hide()
 
 #back to main pause menu
 func _to_main_pause_menu():
 	sound.play()
 	main_menu.show()
 	settings_menu.hide()
+	upgrade_menu.hide()

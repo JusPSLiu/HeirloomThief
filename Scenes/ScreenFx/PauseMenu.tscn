@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=28 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -16,10 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://dbluu68xm7j7x" path="res://Art/UI/Pause/main/upgrades.png" id="11_k8u6a"]
 [ext_resource type="Texture2D" uid="uid://dq84572x2fty5" path="res://Art/UI/Pause/main/upgradesSelected.png" id="12_kc0wq"]
 [ext_resource type="Texture2D" uid="uid://10oeumw5ttq1" path="res://Art/UI/Pause/main/settings.png" id="13_6d3x2"]
+[ext_resource type="Texture2D" uid="uid://c637a213y22sw" path="res://Art/UI/Pause/main/available.png" id="13_75v31"]
 [ext_resource type="Texture2D" uid="uid://clwokwkiuel0w" path="res://Art/UI/Pause/main/settingsSelected.png" id="14_cota7"]
 [ext_resource type="Texture2D" uid="uid://b1ogy1scrgwfh" path="res://Art/UI/Pause/main/exit.png" id="15_04q0r"]
 [ext_resource type="Texture2D" uid="uid://bjwqdw4oscb4g" path="res://Art/UI/Pause/main/exitSelected.png" id="16_vbiiw"]
+[ext_resource type="Texture2D" uid="uid://b805kpxm3bcoh" path="res://Art/Backgrounds/upgrade_preview.png" id="18_212k4"]
 [ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="20_06nsv"]
+[ext_resource type="Texture2D" uid="uid://u6fb78t0gx7c" path="res://Art/UI/Pause/main/hearts.png" id="20_d6s1q"]
+[ext_resource type="Texture2D" uid="uid://bjxiw2cufkrae" path="res://Art/UI/Pause/main/gems.png" id="21_kwxeu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tqmp"]
 atlas = ExtResource("3_o3frg")
@@ -59,6 +63,7 @@ stretch_mode = 0
 [node name="BackColor" type="ColorRect" parent="."]
 visible = false
 z_index = 10
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -99,6 +104,16 @@ texture_hover = ExtResource("14_cota7")
 layout_mode = 2
 texture_normal = ExtResource("15_04q0r")
 texture_hover = ExtResource("16_vbiiw")
+
+[node name="UpgradeAvailable" type="TextureRect" parent="BackColor/MainMenu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1128.0
+offset_top = 264.0
+offset_right = 1142.0
+offset_bottom = 288.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_75v31")
 
 [node name="Settings" type="Label" parent="BackColor"]
 visible = false
@@ -206,6 +221,75 @@ texture_hover = ExtResource("8_btxw5")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="Upgrades" type="TextureRect" parent="BackColor"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_212k4")
+
+[node name="Return" type="TextureButton" parent="BackColor/Upgrades"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -120.0
+offset_right = 54.0
+offset_bottom = -98.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_3tqmp")
+texture_pressed = SubResource("AtlasTexture_ri5ei")
+texture_hover = SubResource("AtlasTexture_h6eft")
+
+[node name="heart_gem_display" type="Control" parent="BackColor"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="display_hearts" type="TextureRect" parent="BackColor/heart_gem_display"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 48.0
+offset_bottom = 44.0
+scale = Vector2(4, 4)
+texture = ExtResource("20_d6s1q")
+
+[node name="hearts_num" type="Label" parent="BackColor/heart_gem_display/display_hearts"]
+layout_mode = 0
+offset_left = 18.75
+offset_top = -5.0
+offset_right = 25.75
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("2_r07rn")
+text = "1"
+
+[node name="display_gems" type="TextureRect" parent="BackColor/heart_gem_display"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 256.0
+offset_top = 32.0
+offset_right = 274.0
+offset_bottom = 44.0
+scale = Vector2(4, 4)
+texture = ExtResource("21_kwxeu")
+
+[node name="gems_num" type="Label" parent="BackColor/heart_gem_display/display_gems"]
+layout_mode = 0
+offset_left = 18.75
+offset_top = -5.0
+offset_right = 25.75
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("2_r07rn")
+text = "1"
+
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_06nsv")
 volume_db = -2.0
@@ -222,3 +306,4 @@ bus = &"Sounds"
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/Upgrades/Return" to="." method="_to_main_pause_menu"]
