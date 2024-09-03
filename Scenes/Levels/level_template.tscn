@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://ckoi6jeqtbufc"]
+[gd_scene load_steps=13 format=4 uid="uid://ckoi6jeqtbufc"]
 
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="1_waon5"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_ufaod"]
 [ext_resource type="AudioStream" uid="uid://co7miyrk8qljr" path="res://Sounds/Music/thirdlevel.mp3" id="3_7bxi8"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="5_ih8hu"]
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="5_rnyxt"]
+[ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="6_2u8ax"]
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="6_sgtvf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gqvj"]
@@ -122,6 +123,8 @@ theme_override_constants/separation = 0
 libraries = {
 "": SubResource("AnimationLibrary_y6vgx")
 }
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("6_2u8ax")]
 
 [node name="DamageComponent2" parent="." instance=ExtResource("6_sgtvf")]
 position = Vector2(1101, 659)
