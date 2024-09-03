@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ckoi6jeqtbufc"]
+[gd_scene load_steps=14 format=4 uid="uid://ckoi6jeqtbufc"]
 
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="1_waon5"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_ufaod"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="5_rnyxt"]
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="6_2u8ax"]
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="6_sgtvf"]
+[ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="7_e5bhl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gqvj"]
 texture = ExtResource("1_waon5")
@@ -90,7 +91,8 @@ floor_constant_speed = true
 GUI = NodePath("../UI/gui")
 deathAnimator = NodePath("../UI/DeathAnimator")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("3_7bxi8")
 volume_db = -7.0
 autoplay = true
@@ -124,10 +126,14 @@ libraries = {
 "": SubResource("AnimationLibrary_y6vgx")
 }
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("6_2u8ax")]
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("Fader") instance=ExtResource("6_2u8ax")]
+Fader = NodePath("../Fader")
+
+[node name="Fader" parent="." instance=ExtResource("7_e5bhl")]
 
 [node name="DamageComponent2" parent="." instance=ExtResource("6_sgtvf")]
 position = Vector2(1101, 659)
+damageInHalfHearts = 2
 knockPlayerAwayFromCenter = true
 
 [node name="DamageComponent3" parent="." instance=ExtResource("6_sgtvf")]
@@ -137,6 +143,7 @@ damageInHalfHearts = 999
 
 [node name="DamageComponent" parent="." instance=ExtResource("6_sgtvf")]
 position = Vector2(852, 599)
+damageInHalfHearts = 2
 knockPlayerInCustomVector = Vector2(0, -4)
 
 [node name="CollisionShape2D" parent="DamageComponent" index="0"]

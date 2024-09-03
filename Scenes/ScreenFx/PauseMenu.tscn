@@ -1,104 +1,224 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=24 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
+[ext_resource type="Texture2D" uid="uid://bsum68urq58do" path="res://Art/UI/Pause/pause.png" id="2_t3t1b"]
 [ext_resource type="Texture2D" uid="uid://c16ifbt2sew8s" path="res://Art/UI/Pause/slidBar.png" id="3_852t1"]
-[ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/return.png" id="3_o3frg"]
+[ext_resource type="Texture2D" uid="uid://c50avb80vh75g" path="res://Art/UI/Pause/pauseClic.png" id="3_huxcl"]
+[ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/Return.png" id="3_o3frg"]
 [ext_resource type="Texture2D" uid="uid://cu1x6hvu0mh3x" path="res://Art/UI/Pause/slidBarClic.png" id="4_dfe2y"]
+[ext_resource type="Texture2D" uid="uid://df6010laaqqnk" path="res://Art/UI/Pause/pauseHov.png" id="4_j7y2v"]
+[ext_resource type="Texture2D" uid="uid://bkvw3u2o0ptrr" path="res://Art/UI/Pause/play.png" id="6_0qsjp"]
+[ext_resource type="Texture2D" uid="uid://7pr8c0sntenf" path="res://Art/UI/Pause/playClic.png" id="7_bwwdn"]
+[ext_resource type="Texture2D" uid="uid://c6r4w8isaslit" path="res://Art/UI/Pause/playHov.png" id="8_btxw5"]
+[ext_resource type="Texture2D" uid="uid://dgmqfi0umiy4d" path="res://Art/UI/Pause/main/resume.png" id="9_8blvn"]
+[ext_resource type="Texture2D" uid="uid://bok8lkcpc4r30" path="res://Art/UI/Pause/main/resumeSelected.png" id="10_0njbj"]
+[ext_resource type="Texture2D" uid="uid://dbluu68xm7j7x" path="res://Art/UI/Pause/main/upgrades.png" id="11_k8u6a"]
+[ext_resource type="Texture2D" uid="uid://dq84572x2fty5" path="res://Art/UI/Pause/main/upgradesSelected.png" id="12_kc0wq"]
+[ext_resource type="Texture2D" uid="uid://10oeumw5ttq1" path="res://Art/UI/Pause/main/settings.png" id="13_6d3x2"]
+[ext_resource type="Texture2D" uid="uid://clwokwkiuel0w" path="res://Art/UI/Pause/main/settingsSelected.png" id="14_cota7"]
+[ext_resource type="Texture2D" uid="uid://b1ogy1scrgwfh" path="res://Art/UI/Pause/main/exit.png" id="15_04q0r"]
+[ext_resource type="Texture2D" uid="uid://bjwqdw4oscb4g" path="res://Art/UI/Pause/main/exitSelected.png" id="16_vbiiw"]
+[ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="20_06nsv"]
 
-[node name="PauseMenu" type="CanvasLayer"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tqmp"]
+atlas = ExtResource("3_o3frg")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri5ei"]
+atlas = ExtResource("3_o3frg")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6eft"]
+atlas = ExtResource("3_o3frg")
+region = Rect2(44, 0, 22, 22)
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("soundSlider", "musicSlider")]
 process_mode = 3
 script = ExtResource("1_6x0n8")
+soundSlider = NodePath("BackColor/Settings/MenuContainer/SoundSlider")
+musicSlider = NodePath("BackColor/Settings/MenuContainer/MusicSlider")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="PauseButton" type="TextureButton" parent="."]
+z_index = 9
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 128.0
+grow_horizontal = 0
+focus_mode = 0
+texture_normal = ExtResource("2_t3t1b")
+texture_pressed = ExtResource("3_huxcl")
+texture_hover = ExtResource("4_j7y2v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="BackColor" type="ColorRect" parent="."]
 visible = false
+z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.490196)
+color = Color(0, 0, 0, 0.607)
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="MainMenu" type="Control" parent="BackColor"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackColor/MainMenu"]
+texture_filter = 1
 layout_mode = 0
-offset_top = 97.0
+offset_left = 816.0
+offset_top = 160.0
+offset_right = 894.0
+offset_bottom = 264.0
+scale = Vector2(4, 4)
+
+[node name="Resume" type="TextureButton" parent="BackColor/MainMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_8blvn")
+texture_hover = ExtResource("10_0njbj")
+
+[node name="Upgrades" type="TextureButton" parent="BackColor/MainMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_k8u6a")
+texture_hover = ExtResource("12_kc0wq")
+
+[node name="Settings" type="TextureButton" parent="BackColor/MainMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_6d3x2")
+texture_hover = ExtResource("14_cota7")
+
+[node name="Exit" type="TextureButton" parent="BackColor/MainMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("15_04q0r")
+texture_hover = ExtResource("16_vbiiw")
+
+[node name="Settings" type="Label" parent="BackColor"]
+visible = false
+layout_mode = 0
+offset_top = 48.0
 offset_right = 1280.0
-offset_bottom = 262.0
+offset_bottom = 213.0
+theme_override_fonts/font = ExtResource("2_r07rn")
 theme_override_font_sizes/font_size = 120
-text = "Paused"
+text = "Settings"
 horizontal_alignment = 1
 
-[node name="MenuContainer" type="VBoxContainer" parent="ColorRect"]
+[node name="MenuContainer" type="VBoxContainer" parent="BackColor/Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 367.2
-offset_top = 262.0
-offset_right = -230.8
-offset_bottom = 118.5
+offset_left = 367.0
+offset_top = 158.0
+offset_right = -231.0
+offset_bottom = 399.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 theme_override_constants/separation = 20
 
-[node name="MusicLabel" type="Label" parent="ColorRect/MenuContainer"]
+[node name="MusicLabel" type="Label" parent="BackColor/Settings/MenuContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_fonts/font = ExtResource("2_r07rn")
+theme_override_font_sizes/font_size = 64
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicSlider" type="HSlider" parent="ColorRect/MenuContainer"]
+[node name="MusicSlider" type="HSlider" parent="BackColor/Settings/MenuContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_icons/grabber = ExtResource("3_852t1")
 theme_override_icons/grabber_highlight = ExtResource("4_dfe2y")
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="HSeparator" type="HSeparator" parent="ColorRect/MenuContainer"]
+[node name="HSeparator" type="HSeparator" parent="BackColor/Settings/MenuContainer"]
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="ColorRect/MenuContainer"]
+[node name="HSeparator2" type="HSeparator" parent="BackColor/Settings/MenuContainer"]
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="SoundLabel" type="Label" parent="ColorRect/MenuContainer"]
+[node name="SoundLabel" type="Label" parent="BackColor/Settings/MenuContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_fonts/font = ExtResource("2_r07rn")
+theme_override_font_sizes/font_size = 64
 text = "Sound Volume"
 horizontal_alignment = 1
 
-[node name="SoundSlider" type="HSlider" parent="ColorRect/MenuContainer"]
+[node name="SoundSlider" type="HSlider" parent="BackColor/Settings/MenuContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_icons/grabber = ExtResource("3_852t1")
 theme_override_icons/grabber_highlight = ExtResource("4_dfe2y")
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="HSeparator3" type="HSeparator" parent="ColorRect/MenuContainer"]
+[node name="HSeparator3" type="HSeparator" parent="BackColor/Settings/MenuContainer"]
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="ColorRect/MenuContainer"]
+[node name="HSeparator4" type="HSeparator" parent="BackColor/Settings/MenuContainer"]
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="Exit" type="TextureButton" parent="ColorRect/MenuContainer"]
-layout_mode = 2
+[node name="Return" type="TextureButton" parent="BackColor/Settings"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 387.0
+offset_right = 54.0
+offset_bottom = 409.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_3tqmp")
+texture_pressed = SubResource("AtlasTexture_ri5ei")
+texture_hover = SubResource("AtlasTexture_h6eft")
+
+[node name="PlayButton" type="TextureButton" parent="BackColor"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 128.0
+grow_horizontal = 0
 focus_mode = 0
-texture_normal = ExtResource("3_o3frg")
-
-[node name="TextSkip" type="CheckButton" parent="ColorRect/MenuContainer"]
-layout_mode = 2
-text = "                                                                            Enable Text Skip (possibly slightly buggy)"
+texture_normal = ExtResource("6_0qsjp")
+texture_pressed = ExtResource("7_bwwdn")
+texture_hover = ExtResource("8_btxw5")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_06nsv")
+volume_db = -2.0
+bus = &"Sounds"
 
-[connection signal="value_changed" from="ColorRect/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="ColorRect/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
-[connection signal="pressed" from="ColorRect/MenuContainer/Exit" to="." method="_on_quit_button_pressed"]
-[connection signal="toggled" from="ColorRect/MenuContainer/TextSkip" to="." method="_on_texkip_button_toggled"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
+[connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
+[connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Exit" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]

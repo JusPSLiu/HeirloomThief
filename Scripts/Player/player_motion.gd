@@ -111,6 +111,10 @@ func _input(event: InputEvent) -> void:
 		if (event is InputEventMouse):
 			# basic meelee attack
 			if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
+				#MAKE SURE NOT JUST PAUSING
+				if (event.position.x > 1152 && event.position.x < 1248):
+					if (event.position.y > 32 && event.position.y < 128):
+						return
 				$playerattacks.play("swing")
 				$attackbox.look_at(get_global_mouse_position())
 				soundEffects.play_stream(slashsound) #slashsound
@@ -206,6 +210,7 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 				deathy.position = position
 				add_sibling(deathy)
 				velocity = Vector2(0, 0)
+				DO_NOT_MOVE = true
 			else:
 				respawn()
 			return true
@@ -219,3 +224,4 @@ func respawn():
 	show()
 	if (GUI):
 		GUI.show_curr_hp()
+	DO_NOT_MOVE = false

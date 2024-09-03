@@ -17,9 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://bfa3ila75qrsc" path="res://Art/UI/Pause/gear.png" id="18_jmguy"]
 [ext_resource type="Texture2D" uid="uid://bkimf272sdcmv" path="res://Art/UI/Pause/gearClic.png" id="19_h633f"]
 [ext_resource type="Texture2D" uid="uid://bmmiiqigag568" path="res://Art/UI/Pause/gearHov.png" id="20_xte7y"]
-[ext_resource type="Texture2D" uid="uid://bkvw3u2o0ptrr" path="res://Art/UI/Pause/play.png" id="21_wa2vu"]
-[ext_resource type="Texture2D" uid="uid://7pr8c0sntenf" path="res://Art/UI/Pause/playClic.png" id="22_o5d6v"]
-[ext_resource type="Texture2D" uid="uid://c6r4w8isaslit" path="res://Art/UI/Pause/playHov.png" id="23_oraf8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jxu18"]
 shader = ExtResource("2_mm0s2")
@@ -32,26 +29,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SettingsMenu/PauseButton:position")
+tracks/0/path = NodePath("maintitle/SettingsButton:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(592, 700)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SettingsMenu/PauseButton:modulate")
+tracks/1/path = NodePath("maintitle/SettingsButton:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(592, 700)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -277,26 +274,26 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SettingsMenu/PauseButton:position")
+tracks/9/path = NodePath("maintitle/SettingsButton:disabled")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(1.5, 1.9),
-"transitions": PackedFloat32Array(0.3, 1),
-"update": 0,
-"values": [Vector2(592, 740), Vector2(592, 600)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("SettingsMenu/PauseButton:disabled")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
 "times": PackedFloat32Array(0.55, 1.85),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("maintitle/SettingsButton:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.5, 1.9),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [Vector2(592, 740), Vector2(592, 600)]
 }
 
 [sub_resource type="Animation" id="Animation_h3mb4"]
@@ -380,7 +377,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SettingsMenu/PauseButton:modulate")
+tracks/3/path = NodePath("maintitle/SettingsButton:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -508,7 +505,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SettingsMenu/PauseButton:modulate")
+tracks/3/path = NodePath("maintitle/SettingsButton:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -684,6 +681,18 @@ _data = {
 "musicIn": SubResource("Animation_3xdeg")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubvy3"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uymn"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8psg4"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(44, 0, 22, 22)
+
 [node name="TitleScene" type="ColorRect" node_paths=PackedStringArray("musicFader", "Fader", "TitleAnimator", "buttonSound", "filename", "saveListContainer", "confirmDeleteFilename")]
 process_mode = 3
 anchors_preset = 15
@@ -786,6 +795,19 @@ ignore_texture_size = true
 stretch_mode = 1
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="maintitle/PlayButton"]
+
+[node name="SettingsButton" type="TextureButton" parent="maintitle"]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 700.0
+offset_right = 712.0
+offset_bottom = 820.0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("18_jmguy")
+texture_pressed = ExtResource("19_h633f")
+texture_hover = ExtResource("20_xte7y")
 
 [node name="FileMenu" type="Control" parent="."]
 visible = false
@@ -989,115 +1011,101 @@ libraries = {
 }
 autoplay = "musicIn"
 
-[node name="SettingsMenu" type="CanvasLayer" parent="."]
-process_mode = 3
-
-[node name="ColorRect" type="ColorRect" parent="SettingsMenu"]
+[node name="Settings" type="Label" parent="."]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.756863)
-
-[node name="Label" type="Label" parent="SettingsMenu/ColorRect"]
-texture_filter = 1
 layout_mode = 0
-offset_top = 97.0
+offset_top = 48.0
 offset_right = 1280.0
-offset_bottom = 262.0
+offset_bottom = 213.0
+theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 120
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/ColorRect"]
+[node name="MenuContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 314.0
-offset_top = 262.0
-offset_right = -314.0
+offset_left = 367.0
+offset_top = 158.0
+offset_right = -231.0
+offset_bottom = 399.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 theme_override_constants/separation = 20
 
-[node name="MusicLabel" type="Label" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="MusicLabel" type="Label" parent="Settings/MenuContainer"]
+texture_filter = 1
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 64
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicSlider" type="HSlider" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="MusicSlider" type="HSlider" parent="Settings/MenuContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_icons/grabber = ExtResource("15_oij1a")
 theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="HSeparator" type="HSeparator" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Settings/MenuContainer"]
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Settings/MenuContainer"]
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="SoundLabel" type="Label" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="SoundLabel" type="Label" parent="Settings/MenuContainer"]
+texture_filter = 1
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 64
 text = "Sound Volume"
 horizontal_alignment = 1
 
-[node name="SoundSlider" type="HSlider" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="SoundSlider" type="HSlider" parent="Settings/MenuContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_icons/grabber = ExtResource("15_oij1a")
 theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="TextSkip" type="CheckButton" parent="SettingsMenu/ColorRect/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Settings/MenuContainer"]
+modulate = Color(0, 0, 0, 0)
 layout_mode = 2
-focus_mode = 0
-text = "                                                                            Enable Text Skip (possibly slightly buggy)"
 
-[node name="ButtonSound" type="AudioStreamPlayer" parent="SettingsMenu"]
+[node name="HSeparator4" type="HSeparator" parent="Settings/MenuContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
 
-[node name="PauseButton" type="TextureButton" parent="SettingsMenu"]
-offset_left = 592.0
-offset_top = 700.0
-offset_right = 712.0
-offset_bottom = 820.0
-scale = Vector2(0.8, 0.8)
-focus_mode = 0
-toggle_mode = true
-texture_normal = ExtResource("18_jmguy")
-texture_pressed = ExtResource("19_h633f")
-texture_hover = ExtResource("20_xte7y")
-
-[node name="ResumeButton" type="TextureButton" parent="SettingsMenu/PauseButton"]
-visible = false
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 96.0
-focus_mode = 0
-toggle_mode = true
-texture_normal = ExtResource("21_wa2vu")
-texture_pressed = ExtResource("22_o5d6v")
-texture_hover = ExtResource("23_oraf8")
-flip_h = true
+[node name="Return" type="TextureButton" parent="Settings"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 387.0
+offset_right = 54.0
+offset_bottom = 409.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_ubvy3")
+texture_pressed = SubResource("AtlasTexture_5uymn")
+texture_hover = SubResource("AtlasTexture_8psg4")
 
 [connection signal="pressed" from="maintitle/PlayButton" to="." method="playButtonPressed"]
+[connection signal="pressed" from="maintitle/SettingsButton" to="." method="_toggle_settings"]
 [connection signal="pressed" from="FileMenu/game1" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="FileMenu/Return" to="." method="_on_files_return_pressed"]
 [connection signal="pressed" from="DeletionConfirmation/confirmdelete" to="." method="YES_delete_file"]
 [connection signal="pressed" from="DeletionConfirmation/goback" to="." method="dont_delete_file"]
 [connection signal="pressed" from="nameFile/confirmation_button" to="." method="make_new_file"]
 [connection signal="pressed" from="nameFile/Return" to="." method="_on_newgame_return_pressed"]
-[connection signal="value_changed" from="SettingsMenu/ColorRect/VBoxContainer/MusicSlider" to="SettingsMenu" method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="SettingsMenu/ColorRect/VBoxContainer/SoundSlider" to="SettingsMenu" method="_on_sound_slider_value_changed"]
-[connection signal="pressed" from="SettingsMenu/PauseButton" to="SettingsMenu" method="togglePauseFall"]
-[connection signal="pressed" from="SettingsMenu/PauseButton/ResumeButton" to="SettingsMenu" method="togglePauseFall"]
+[connection signal="pressed" from="Settings/Return" to="." method="_toggle_settings"]

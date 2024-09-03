@@ -121,3 +121,8 @@ func YES_delete_file() -> void:
 		TitleAnimator.play("unsure")
 		await TitleAnimator.animation_finished
 		waiting = false
+
+
+func _toggle_settings():
+	$maintitle.visible = !$maintitle.visible
+	$Settings.visible = !$maintitle.visible

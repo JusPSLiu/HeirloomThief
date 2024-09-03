@@ -384,3 +384,4 @@ position_smoothing_speed = 2.2
 
 [node name="playerSounds" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamPolyphonic_grhsv")
+bus = &"Sounds"
