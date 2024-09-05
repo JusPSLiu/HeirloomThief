@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2y4867yq3p3"]
 
-[ext_resource type="Script" path="res://Scripts/healing_component.gd" id="1_h4uyj"]
+[ext_resource type="Script" path="res://Scripts/health_pickup.gd" id="1_h4uyj"]
 [ext_resource type="Texture2D" uid="uid://kyqqiop17nqx" path="res://Art/Sprites/collectibles/heal_heart.png" id="2_tks2n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6kmb5"]
 size = Vector2(30, 30)
 
-[node name="HealingComponent" type="Area2D"]
+[node name="health_pickup" type="Area2D"]
 script = ExtResource("1_h4uyj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6kmb5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="<3" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("2_tks2n")
 
