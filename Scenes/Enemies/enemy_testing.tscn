@@ -116,3 +116,4 @@ scale = Vector2(4, 4)
 [node name="Guard" parent="." instance=ExtResource("4_6g62y")]
 position = Vector2(400, 552)
 scale = Vector2(4, 4)
+startFacingRight = false

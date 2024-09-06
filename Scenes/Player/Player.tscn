@@ -353,6 +353,9 @@ size = Vector2(0, 0)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("audioPlayer") groups=["Player"]]
 position = Vector2(498, 498)
+floor_constant_speed = true
+floor_max_angle = 0.872665
+floor_snap_length = 8.0
 script = ExtResource("1_cvqb3")
 audioPlayer = NodePath("playerSounds")
 
