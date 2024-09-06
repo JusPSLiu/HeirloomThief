@@ -1,23 +1,52 @@
 extends Node
 
-var current_health = 3
-var current_gems = 2
-var max_health = 8
+var current_health = 2
+var current_gems = 0
+var max_health = 4
 var current_room = 0
 var currfile = "" # the default name given to the file in the system
 var currsavename = "" # the custom name by the user, less restrictive than windows
 var powerstatus = [false, false, false, false]
+var collectedGems : Dictionary = {}
+var collectedHealth : Dictionary = {}
 
+enum Item {
+	health = 0,
+	gem = 1
+}
+
+## UPGRADE STUFF
+func already_collected(type, id):
+	print_debug(collectedHealth)
+	if (type == Item.health):
+		return (collectedHealth.has(id) && collectedHealth[id])
+	else:
+		return (collectedGems.has(id) && collectedGems[id])
+
+func collect_item(type, id):
+	if (type == Item.health):
+		collectedHealth[id] = true
+	else:
+		collectedGems[id] = true
+		print_debug(collectedGems)
+	save_game()
+
+
+
+## FILE STUFF
 
 func save_game():
-	var save_file = FileAccess.open("user://saves/"+currfile, FileAccess.WRITE)
-	save_file.store_var({
-		"savename" : currsavename,
-		"current_health" : current_health,
-		"max_health" : max_health,
-		"powerstatus" : powerstatus
-	})
-	save_file.close()
+	if (currfile != ""):
+		var save_file = FileAccess.open("user://saves/"+currfile, FileAccess.WRITE)
+		save_file.store_var({
+			"savename" : currsavename,
+			"current_health" : current_health,
+			"max_health" : max_health,
+			"powerstatus" : powerstatus,
+			"collectedHealth" : collectedHealth,
+			"collectedGems" : collectedGems
+		})
+		save_file.close()
 
 func load_game(file):
 	currfile = file
@@ -25,6 +54,18 @@ func load_game(file):
 	if (save_file != null):
 		var data = save_file.get_var()
 		currsavename = data['savename']
+		
+		# Health
+		if (data.has("max_health")):
+			max_health = data["max_health"]
+		if (data.has("current_health")):
+			current_health = data["current_health"]
+		
+		# Collected Items
+		if (data.has("collectedHealth")):
+			collectedHealth = data["collectedHealth"]
+		if (data.has("collectedGems")):
+			collectedGems = data["collectedGems"]
 
 func menu_load_file_details() -> Array[Dictionary]:
 	var deer = DirAccess.open("user://saves/")
@@ -81,10 +122,12 @@ func make_new_file(newname):
 	# assign name
 	currsavename = newname
 	# reset to default valuess
-	current_health  = 4
+	current_health = 4
 	max_health = 4
 	current_room = 0
 	powerstatus = [false, false, false, false]
+	collectedGems = {}
+	collectedHealth = {}
 	# make new file name so you dont overwrite a previous file
 	currfile = "HeirloomSave-"
 	var number = 0

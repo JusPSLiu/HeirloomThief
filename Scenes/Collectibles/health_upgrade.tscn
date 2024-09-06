@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdml046nkqkqj"]
+
+[ext_resource type="Script" path="res://Scripts/Collectibles/upgrade.gd" id="1_helhp"]
+[ext_resource type="Texture2D" uid="uid://bfwjn4igq6xsy" path="res://Art/Sprites/collectibles/hearts.png" id="2_gkr8x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dx7q5"]
+size = Vector2(38, 40)
+
+[node name="health_upgrade" type="Area2D" groups=["health_upgrade"]]
+script = ExtResource("1_helhp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dx7q5")
+
+[node name="<3" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_gkr8x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -217,12 +217,6 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 			return true
 	return false
 
-func get_healed(hlth : int):
-	SaveManager.current_health += hlth
-	soundEffects.play_stream(healedsound) #healedsound
-	if (GUI):
-		GUI.show_curr_hp()
-
 func respawn():
 	position = respawnPoint
 	self.set_physics_process(true)
@@ -232,3 +226,26 @@ func respawn():
 	if (GUI):
 		GUI.show_curr_hp()
 	DO_NOT_MOVE = false
+
+## collectibles and health section :D
+func get_healed(hlth : int):
+	SaveManager.current_health += hlth
+	soundEffects.play_stream(healedsound)
+	if (GUI):
+		GUI.show_curr_hp()
+
+func get_health_upgrade(id:int):
+	if (!SaveManager.already_collected(SaveManager.Item.health, id)):
+		SaveManager.max_health += 2
+		SaveManager.current_health = SaveManager.max_health
+		SaveManager.collect_item(SaveManager.Item.health, id)
+		soundEffects.play_stream(healedsound)
+		if (GUI):
+			GUI.make_enough_hearts()
+			GUI.show_curr_hp()
+
+func get_gem_upgrade(id:int):
+	if (!SaveManager.already_collected(SaveManager.Item.gem, id)):
+		SaveManager.current_gems += 1
+		SaveManager.collect_item(SaveManager.Item.gem, id)
+		soundEffects.play_stream(healedsound)

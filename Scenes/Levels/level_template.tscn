@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://ckoi6jeqtbufc"]
+[gd_scene load_steps=18 format=4 uid="uid://ckoi6jeqtbufc"]
 
+[ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_lvi3r"]
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="1_waon5"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_ufaod"]
 [ext_resource type="AudioStream" uid="uid://ba5ajgqe04tu4" path="res://Sounds/Music/enemylevel.mp3" id="3_ug6hq"]
@@ -9,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="6_sgtvf"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="7_e5bhl"]
 [ext_resource type="PackedScene" uid="uid://d2y4867yq3p3" path="res://Scenes/Enemies/health_pickup.tscn" id="9_sxglr"]
+[ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Collectibles/health_upgrade.tscn" id="10_iy1oq"]
+[ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Collectibles/gem_upgrade.tscn" id="12_xq313"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gqvj"]
 texture = ExtResource("1_waon5")
@@ -75,6 +78,7 @@ size = Vector2(192, 27)
 
 [node name="LevelTemplate" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_lvi3r")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(4, 4)
@@ -110,6 +114,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_rnyxt")
+metadata/_edit_use_anchors_ = true
 
 [node name="healthbox" type="HBoxContainer" parent="UI/gui"]
 texture_filter = 1
@@ -150,7 +155,21 @@ knockPlayerInCustomVector = Vector2(0, -4)
 position = Vector2(-20, -3.5)
 shape = SubResource("RectangleShape2D_l5kdh")
 
-[node name="DamageComponent4" parent="." instance=ExtResource("9_sxglr")]
+[node name="health_upgrade" parent="." instance=ExtResource("10_iy1oq")]
 position = Vector2(1010, 622)
+
+[node name="health_pickup" parent="." instance=ExtResource("9_sxglr")]
+position = Vector2(1347, 495)
+
+[node name="gem_upgrade" parent="." instance=ExtResource("12_xq313")]
+position = Vector2(667, 618)
+
+[node name="gem_upgrade2" parent="." instance=ExtResource("12_xq313")]
+position = Vector2(72, 468)
+id = 1
+
+[node name="health_upgrade2" parent="." instance=ExtResource("10_iy1oq")]
+position = Vector2(791, 426)
+id = 1
 
 [editable path="DamageComponent"]
