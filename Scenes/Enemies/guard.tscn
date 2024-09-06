@@ -11,6 +11,7 @@ size = Vector2(8, 13)
 [node name="Guard" instance=ExtResource("1_k15v2")]
 texture_filter = 1
 script = ExtResource("2_qtomr")
+startFacingRight = false
 
 [node name="Collider" parent="." index="0"]
 position = Vector2(0, -6.5)

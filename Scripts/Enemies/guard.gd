@@ -1,5 +1,7 @@
 extends Enemy
 
+@export var startFacingRight = false
+
 # functional variables
 var movement_direction : int
 
@@ -8,7 +10,7 @@ func _ready():
 	super._ready()
 	
 	# Move left by default
-	movement_direction = -1
+	movement_direction = 1 if startFacingRight else -1
 
 func _physics_process(delta: float) -> void:
 	# Run physics process from inhereted script

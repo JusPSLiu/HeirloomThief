@@ -17,6 +17,7 @@ const shoot = preload("res://Sounds/player/shoot.wav")
 const projectile = preload("res://Scenes/Enemies/projectile.tscn")
 const deathparticle = preload("res://Scenes/Player/death.tscn")
 const healedsound = preload("res://Sounds/player/get_healed.wav")
+const collectsound = preload("res://Sounds/player/collect.wav")
 
 var coyoteTime = 0.14
 var boostimer = 0.3
@@ -36,8 +37,8 @@ enum ability {
 
 # when spawn in, activate proper abilities
 func _ready() -> void:
-	currentAbilities[ability.ring] = true
-	currentAbilities[ability.cape] = true
+	#currentAbilities[ability.ring] = true
+	#currentAbilities[ability.cape] = true
 	#currentAbilities[ability.boot] = true
 	audioPlayer.stream = AudioStreamPolyphonic.new()
 	audioPlayer.play()
@@ -239,7 +240,7 @@ func get_health_upgrade(id:int):
 		SaveManager.max_health += 2
 		SaveManager.current_health = SaveManager.max_health
 		SaveManager.collect_item(SaveManager.Item.health, id)
-		soundEffects.play_stream(healedsound)
+		soundEffects.play_stream(collectsound)
 		if (GUI):
 			GUI.make_enough_hearts()
 			GUI.show_curr_hp()
@@ -248,7 +249,7 @@ func get_gem_upgrade(id:int):
 	if (!SaveManager.already_collected(SaveManager.Item.gem, id)):
 		SaveManager.current_gems += 1
 		SaveManager.collect_item(SaveManager.Item.gem, id)
-		soundEffects.play_stream(healedsound)
+		soundEffects.play_stream(collectsound)
 
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):

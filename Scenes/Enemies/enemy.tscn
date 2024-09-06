@@ -15,7 +15,7 @@ gravity = 800.0
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
-process_mode = 3
+process_mode = 1
 one_shot = true
 
 [node name="sounds" type="AudioStreamPlayer2D" parent="."]
