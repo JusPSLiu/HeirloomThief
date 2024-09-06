@@ -15,7 +15,7 @@ var soundEffects : AudioStreamPlaybackPolyphonic
 
 const hit_sound = preload("res://Sounds/player/hitty.wav")
 const death_sound = preload("res://Sounds/enemy/boom.wav")
-const deathparticle = preload("res://Scenes/Player/death.tscn")
+const deathparticle = preload("res://Scenes/Enemies/enemy_death_effect.tscn")
 
 func _ready() -> void:
 	current_health = max_health
@@ -28,7 +28,7 @@ func _ready() -> void:
 	
 	# OKAY ACTUALLY DO DELETE THIS WHEN LEVELS ARE IMPLEMENTED.
 	# ITS JUST TO TEST RESPAWNING
-	$Timer.wait_time = 3.0  # Set the timer to 20 seconds
+	$Timer.wait_time = 15.0  # Set the timer to 20 seconds
 	$Timer.connect("timeout", respawn)
 
 

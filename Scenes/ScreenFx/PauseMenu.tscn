@@ -20,9 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://clwokwkiuel0w" path="res://Art/UI/Pause/main/settingsSelected.png" id="14_cota7"]
 [ext_resource type="Texture2D" uid="uid://b1ogy1scrgwfh" path="res://Art/UI/Pause/main/exit.png" id="15_04q0r"]
 [ext_resource type="Texture2D" uid="uid://bjwqdw4oscb4g" path="res://Art/UI/Pause/main/exitSelected.png" id="16_vbiiw"]
-[ext_resource type="Texture2D" uid="uid://b805kpxm3bcoh" path="res://Art/Backgrounds/upgrade_preview.png" id="18_212k4"]
 [ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="20_06nsv"]
 [ext_resource type="Texture2D" uid="uid://u6fb78t0gx7c" path="res://Art/UI/Pause/main/hearts.png" id="20_d6s1q"]
+[ext_resource type="Texture2D" uid="uid://no83po41ri1f" path="res://Art/Backgrounds/upgrades.png" id="21_ihhd4"]
 [ext_resource type="Texture2D" uid="uid://bjxiw2cufkrae" path="res://Art/UI/Pause/main/gems.png" id="21_kwxeu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tqmp"]
@@ -229,7 +229,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("18_212k4")
+texture = ExtResource("21_ihhd4")
 
 [node name="Return" type="TextureButton" parent="BackColor/Upgrades"]
 texture_filter = 1
@@ -295,8 +295,8 @@ stream = ExtResource("20_06nsv")
 volume_db = -2.0
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="togglePause"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -304,6 +304,6 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/Upgrades/Return" to="." method="_to_main_pause_menu"]
