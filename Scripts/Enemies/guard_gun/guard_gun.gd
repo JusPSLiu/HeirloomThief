@@ -50,20 +50,22 @@ func _physics_process(delta: float) -> void:
 	$Spawn.position.x = -scale.x * -movement_direction
 
 func shoot(number_of_projectiles : int) -> void:
-	for i in number_of_projectiles:
-		# wait
-		await get_tree().create_timer(fire_rate).timeout
-		
-		# create instance of projectile
-		var projectile = projectile_scene.instantiate()
-		
-		# set projectile properties
-		projectile.movement_direction = Vector2(movement_direction, 0)
-		projectile.scale = Vector2(6, 6) # scaled to size of enemy [temporary]
-		projectile.global_position = $Spawn.global_position
-		
-		# add to scene
-		get_parent().add_child(projectile)
+	if current_health > 0:
+		for i in number_of_projectiles:
+			# wait
+			await get_tree().create_timer(fire_rate).timeout
+			
+			# create instance of projectile
+			var projectile = projectile_scene.instantiate()
+			
+			# set projectile properties
+			projectile.movement_direction = Vector2(movement_direction, 0)
+			projectile.speed = 700
+			projectile.scale = Vector2(6, 6) # scaled to size of enemy [temporary]
+			projectile.global_position = $Spawn.global_position
+			
+			# add to scene
+			get_parent().add_child(projectile)
 
 func _on_range_body_entered(body: Node2D) -> void:
 	# If entering body is player, set variable true

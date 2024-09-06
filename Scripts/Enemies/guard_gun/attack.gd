@@ -11,7 +11,7 @@ func physics_update(delta : float):
 	super.physics_update(delta)
 	
 	if abs(entity.player.global_position.x - entity.global_position.x) > 50:
-		entity.velocity.x = entity.max_speed * entity.movement_direction * delta
+		entity.velocity.x = entity.max_speed * 2 * entity.movement_direction * delta
 	else:
 		entity.velocity.x = 0
 	

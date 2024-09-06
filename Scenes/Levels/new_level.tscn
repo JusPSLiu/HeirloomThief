@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://rr6j5p5q1bv8"]
+[gd_scene load_steps=16 format=4 uid="uid://dggagc0p3bk3r"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_0gkxg"]
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="2_hme3w"]
@@ -97,7 +97,6 @@ scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_xxwjy")
 
 [node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator") instance=ExtResource("3_juudc")]
-floor_constant_speed = true
 GUI = NodePath("../UI/gui")
 deathAnimator = NodePath("../UI/DeathAnimator")
 
@@ -151,7 +150,6 @@ id = 1
 [node name="Guard" parent="." instance=ExtResource("5_6cv7o")]
 position = Vector2(-3257, 192)
 scale = Vector2(4, 4)
-startFacingRight = false
 
 [node name="health_upgrade" parent="." instance=ExtResource("10_2t7rl")]
 position = Vector2(-2743, -206)
@@ -159,16 +157,13 @@ position = Vector2(-2743, -206)
 [node name="Guard2" parent="." instance=ExtResource("5_6cv7o")]
 position = Vector2(-6206, -64)
 scale = Vector2(4, 4)
-startFacingRight = false
 
 [node name="Guard3" parent="." instance=ExtResource("5_6cv7o")]
 position = Vector2(-5893, -64)
 scale = Vector2(4, 4)
-startFacingRight = false
 
 [node name="Guard4" parent="." instance=ExtResource("5_6cv7o")]
 position = Vector2(-5535, -64)
 scale = Vector2(4, 4)
-startFacingRight = false
 
 [editable path="Player"]
