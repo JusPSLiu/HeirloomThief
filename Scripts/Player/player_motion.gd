@@ -249,3 +249,11 @@ func get_gem_upgrade(id:int):
 		SaveManager.current_gems += 1
 		SaveManager.collect_item(SaveManager.Item.gem, id)
 		soundEffects.play_stream(healedsound)
+
+func _on_room_detector_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Room"):
+		var camera = $camera_carrot_on_stick/Camera2D
+		camera.limit_top = area.global_position.y
+		camera.limit_left = area.global_position.x
+		camera.limit_bottom = area.global_position.y + area.scale.y
+		camera.limit_right = area.global_position.x + area.scale.x

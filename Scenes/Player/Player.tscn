@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=25 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
@@ -348,6 +348,9 @@ _data = {
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_grhsv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hr2v"]
+size = Vector2(0, 0)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("audioPlayer") groups=["Player"]]
 position = Vector2(498, 498)
 script = ExtResource("1_cvqb3")
@@ -414,4 +417,10 @@ position_smoothing_speed = 2.2
 stream = SubResource("AudioStreamPolyphonic_grhsv")
 bus = &"Sounds"
 
+[node name="roomDetector" type="Area2D" parent="."]
+
+[node name="collider" type="CollisionShape2D" parent="roomDetector"]
+shape = SubResource("RectangleShape2D_2hr2v")
+
 [connection signal="body_entered" from="attackbox" to="attackbox" method="_on_body_entered"]
+[connection signal="area_entered" from="roomDetector" to="." method="_on_room_detector_area_entered"]

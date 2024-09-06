@@ -1,18 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceguw3gquhbxa"]
+[gd_scene load_steps=7 format=3 uid="uid://ceguw3gquhbxa"]
 
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_3kmqq"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
+[ext_resource type="PackedScene" uid="uid://dnpt88g0ifq87" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="3_o53wr"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="4_6g62y"]
+[ext_resource type="PackedScene" uid="uid://b148dcptpfcpw" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]
 size = Vector2(1, 1)
 
 [node name="EnemyTesting" type="Node2D"]
 
+[node name="Room" parent="." instance=ExtResource("5_hbdg0")]
+scale = Vector2(1280, 720)
+metadata/_edit_lock_ = true
+
+[node name="Room2" parent="." instance=ExtResource("5_hbdg0")]
+position = Vector2(1280, 0)
+scale = Vector2(2560, 720)
+metadata/_edit_lock_ = true
+
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(128, 608)
-scale = Vector2(1024, 32)
+scale = Vector2(4096, 32)
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Ground"]
@@ -38,7 +48,7 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="Wall2" type="StaticBody2D" parent="."]
-position = Vector2(1152, 128)
+position = Vector2(3776, 128)
 rotation = 1.5708
 scale = Vector2(512, 32)
 metadata/_edit_group_ = true
@@ -51,11 +61,53 @@ offset_bottom = 1.0
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
+[node name="Wall3" type="StaticBody2D" parent="."]
+position = Vector2(2904, 488)
+rotation = 1.5708
+scale = Vector2(512, 32)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Wall3"]
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="Wall3"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_et5ws")
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+position = Vector2(3240, 528)
+rotation = 1.5708
+scale = Vector2(512, 32)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Wall4"]
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="Wall4"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_et5ws")
+
+[node name="Wall5" type="StaticBody2D" parent="."]
+position = Vector2(1248, 0)
+scale = Vector2(64, 512)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Wall5"]
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="Wall5"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_et5ws")
+
 [node name="GuardFlying" parent="." instance=ExtResource("2_vacef")]
-position = Vector2(1312, 248)
+position = Vector2(1928, 192)
 scale = Vector2(4, 4)
 
 [node name="Player" parent="." instance=ExtResource("2_3kmqq")]
+position = Vector2(304, 264)
 
 [node name="GuardGun" parent="." instance=ExtResource("3_o53wr")]
 position = Vector2(880, 592)
