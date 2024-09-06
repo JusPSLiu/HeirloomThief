@@ -1,24 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://ceguw3gquhbxa"]
+[gd_scene load_steps=10 format=3 uid="uid://ceguw3gquhbxa"]
 
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_3kmqq"]
 [ext_resource type="PackedScene" uid="uid://dnpt88g0ifq87" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="3_o53wr"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="4_6g62y"]
 [ext_resource type="PackedScene" uid="uid://b148dcptpfcpw" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
+[ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="6_s5rwo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]
 size = Vector2(1, 1)
+
+[sub_resource type="Animation" id="Animation_7wcv3"]
+resource_name = "die"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"respawn"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y6vgx"]
+_data = {
+"die": SubResource("Animation_7wcv3")
+}
 
 [node name="EnemyTesting" type="Node2D"]
 
 [node name="Room" parent="." instance=ExtResource("5_hbdg0")]
 scale = Vector2(1280, 720)
-metadata/_edit_lock_ = true
 
 [node name="Room2" parent="." instance=ExtResource("5_hbdg0")]
 position = Vector2(1280, 0)
 scale = Vector2(2560, 720)
-metadata/_edit_lock_ = true
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(128, 608)
@@ -103,11 +124,8 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="GuardFlying" parent="." instance=ExtResource("2_vacef")]
-position = Vector2(1928, 192)
+position = Vector2(1880, 272)
 scale = Vector2(4, 4)
-
-[node name="Player" parent="." instance=ExtResource("2_3kmqq")]
-position = Vector2(304, 264)
 
 [node name="GuardGun" parent="." instance=ExtResource("3_o53wr")]
 position = Vector2(880, 592)
@@ -116,4 +134,31 @@ scale = Vector2(4, 4)
 [node name="Guard" parent="." instance=ExtResource("4_6g62y")]
 position = Vector2(400, 552)
 scale = Vector2(4, 4)
-startFacingRight = false
+
+[node name="Player" parent="." node_paths=PackedStringArray("deathAnimator") instance=ExtResource("2_3kmqq")]
+deathAnimator = NodePath("../UI/DeathAnimator")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="gui" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_s5rwo")
+metadata/_edit_use_anchors_ = true
+
+[node name="healthbox" type="HBoxContainer" parent="UI/gui"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 67.0
+offset_bottom = 27.0
+scale = Vector2(8, 8)
+theme_override_constants/separation = 0
+
+[node name="DeathAnimator" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_y6vgx")
+}
