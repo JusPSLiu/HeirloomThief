@@ -258,3 +258,7 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		camera.limit_left = area.global_position.x
 		camera.limit_bottom = area.global_position.y + area.scale.y
 		camera.limit_right = area.global_position.x + area.scale.x
+
+func get_checkpoint(positron):
+	respawnPoint = positron
+	SaveManager.save_game()
