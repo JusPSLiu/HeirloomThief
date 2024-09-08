@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var GUI : Control
 @export var deathAnimator : AnimationPlayer
 
+@onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
+
 const SPEED = 500.0 # player movement speed
 const BOOST_SPEED = 2400.0 # player dash speed
 const BOOST_COOLDOWN = 0.5 # player dash cooldown rate (in seconds)
@@ -24,7 +26,6 @@ var boostimer = 0.3
 var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false
 var soundEffects : AudioStreamPlaybackPolyphonic
-var respawnPoint : Vector2 = Vector2(0,0)
 var DO_NOT_MOVE = false
 
 # Abilities
@@ -43,13 +44,16 @@ func _ready() -> void:
 	audioPlayer.stream = AudioStreamPolyphonic.new()
 	audioPlayer.play()
 	soundEffects = audioPlayer.get_stream_playback()
-	respawnPoint = position
+	if (SaveManager.respawn_point == Vector2.ZERO):
+		SaveManager.respawn_point = position
+	else: position = SaveManager.respawn_point
 
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	# Add the gravity.
 	if is_on_floor():
+		$camera_carrot_on_stick.position.y = 0
 		if (coyoteTime <= 0):
 			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 			doublejumped = false
@@ -60,12 +64,17 @@ func _physics_process(delta: float) -> void:
 				velocity += get_gravity() * delta * 2.5
 			else:
 				velocity += get_gravity() * delta * 6
+			$camera_carrot_on_stick.position.y = 0
 		else:
 			# if cape ability, and up pressed, slow down
 			if currentAbilities[ability.cape] and Input.is_action_pressed("Jump") and boostimer <= 0:
 				velocity.y = expDecay(velocity.y, get_gravity().y * 0.3, LERP_DECAY_RATE, delta)
 			else:
 				velocity += get_gravity() * delta * 3.2
+			if (velocity.y > 1300):
+				$camera_carrot_on_stick.position.y = (velocity.y-1300)*2
+			else:
+				$camera_carrot_on_stick.position.y = 0
 		if (coyoteTime > 0):
 			coyoteTime -= delta
 
@@ -219,7 +228,7 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 	return false
 
 func respawn():
-	position = respawnPoint
+	position = SaveManager.respawn_point
 	self.set_physics_process(true)
 	SaveManager.current_health = 4
 	velocity = Vector2(0, 0)
@@ -253,12 +262,11 @@ func get_gem_upgrade(id:int):
 
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
-		var camera = $camera_carrot_on_stick/Camera2D
 		camera.limit_top = area.global_position.y
 		camera.limit_left = area.global_position.x
 		camera.limit_bottom = area.global_position.y + area.scale.y
 		camera.limit_right = area.global_position.x + area.scale.x
 
 func get_checkpoint(positron):
-	respawnPoint = positron
+	SaveManager.respawn_point = positron
 	SaveManager.save_game()

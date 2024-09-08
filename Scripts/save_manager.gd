@@ -9,6 +9,7 @@ var currsavename = "" # the custom name by the user, less restrictive than windo
 var powerstatus = [false, false, false, false]
 var collectedGems : Dictionary = {}
 var collectedHealth : Dictionary = {}
+var respawn_point : Vector2 = Vector2(0,0)
 
 enum Item {
 	health = 0,
@@ -38,6 +39,7 @@ func save_game():
 		var save_file = FileAccess.open("user://saves/"+currfile, FileAccess.WRITE)
 		save_file.store_var({
 			"savename" : currsavename,
+			"respawn_point" : respawn_point,
 			"current_health" : current_health,
 			"current_gems" : current_gems,
 			"max_health" : max_health,
@@ -53,6 +55,8 @@ func load_game(file):
 	if (save_file != null):
 		var data = save_file.get_var()
 		currsavename = data['savename']
+		
+		respawn_point = data['respawn_point'] if (data.has("respawn_point")) else Vector2.ZERO
 		
 		# Health and Gems in Inventory
 		max_health = data["max_health"] if (data.has("max_health")) else 4
@@ -118,6 +122,7 @@ func make_new_file(newname):
 	# assign name
 	currsavename = newname
 	# reset to default values
+	respawn_point = Vector2.ZERO
 	current_gems = 0
 	current_health = 4
 	max_health = 4

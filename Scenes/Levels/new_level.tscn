@@ -699,7 +699,7 @@ id = 1
 position = Vector2(-2743, -206)
 
 [node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator") instance=ExtResource("3_juudc")]
-position = Vector2(499, 546)
+position = Vector2(500, 546)
 floor_snap_length = 12.0
 GUI = NodePath("../UI/gui")
 deathAnimator = NodePath("../UI/DeathAnimator")
@@ -707,6 +707,7 @@ deathAnimator = NodePath("../UI/DeathAnimator")
 [node name="Camera2D" parent="Player/camera_carrot_on_stick" index="0"]
 offset = Vector2(0, -64)
 limit_bottom = 10000000
+drag_vertical_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
 position = Vector2(2, 15)
