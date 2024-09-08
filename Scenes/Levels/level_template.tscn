@@ -92,7 +92,6 @@ tile_map_data = PackedByteArray("AAA2ABUAAAAAAAMAAAA3ABUAAAAAAAMAAAA4ABUAAAAAAAM
 tile_set = SubResource("TileSet_xxwjy")
 
 [node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator") instance=ExtResource("2_ufaod")]
-floor_constant_speed = true
 GUI = NodePath("../UI/gui")
 deathAnimator = NodePath("../UI/DeathAnimator")
 

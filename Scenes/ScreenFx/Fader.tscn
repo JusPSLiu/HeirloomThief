@@ -190,6 +190,7 @@ autoplay = "FadeIn"
 layer = 10
 
 [node name="LeftRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 offset_top = 736.0
 offset_right = 737.0
 offset_bottom = 1376.0
@@ -197,6 +198,7 @@ rotation = 4.71239
 color = Color(0, 0, 0, 1)
 
 [node name="RightRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 offset_left = 1280.0
 offset_right = 2017.0
 offset_bottom = 640.0

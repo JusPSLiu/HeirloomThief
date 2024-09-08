@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://b3ibxs6u7vfhe"
+path="res://.godot/imported/smallwood_normal.png-a7c7cba932e6327a78c395f1e2ae293d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/Tilesets/smallwood_normal.png"
+dest_files=["res://.godot/imported/smallwood_normal.png-a7c7cba932e6327a78c395f1e2ae293d.ctex"]
 
 [params]
 
