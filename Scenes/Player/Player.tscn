@@ -435,6 +435,8 @@ position_smoothing_speed = 2.2
 stream = SubResource("AudioStreamPolyphonic_grhsv")
 bus = &"Sounds"
 
+[node name="testOtherAudio" type="AudioStreamPlayer2D" parent="."]
+
 [node name="roomDetector" type="Area2D" parent="."]
 
 [node name="collider" type="CollisionShape2D" parent="roomDetector"]

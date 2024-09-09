@@ -12,14 +12,16 @@ const BOOST_COOLDOWN = 0.5 # player dash cooldown rate (in seconds)
 const JUMP_VELOCITY = -1000.0 # player jump velocity
 const COYOTE_MAX = 0.1 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
-const jumpsound = preload("res://Sounds/player/jump.wav")
-const hitsound = preload("res://Sounds/player/beenhit.wav")
-const slashsound = preload("res://Sounds/player/slice.wav")
-const shoot = preload("res://Sounds/player/shoot.wav")
-const projectile = preload("res://Scenes/Enemies/projectile.tscn")
-const deathparticle = preload("res://Scenes/Player/death.tscn")
-const healedsound = preload("res://Sounds/player/get_healed.wav")
-const collectsound = preload("res://Sounds/player/collect.wav")
+
+
+@onready var jumpsound = preload("res://Sounds/player/jump.wav")
+@onready var hitsound = preload("res://Sounds/player/beenhit.wav")
+@onready var slashsound = preload("res://Sounds/player/slice.wav")
+@onready var shoot = preload("res://Sounds/player/shoot.wav")
+@onready var projectile = preload("res://Scenes/Enemies/projectile.tscn")
+@onready var deathparticle = preload("res://Scenes/Player/death.tscn")
+@onready var healedsound = preload("res://Sounds/player/get_healed.wav")
+@onready var collectsound = preload("res://Sounds/player/collect.wav")
 
 var coyoteTime = 0.14
 var boostimer = 0.3
@@ -128,7 +130,8 @@ func _input(event: InputEvent) -> void:
 						return
 				$playerattacks.play("swing")
 				$attackbox.look_at(get_global_mouse_position())
-				soundEffects.play_stream(slashsound) #slashsound
+				$testOtherAudio.stream = slashsound
+				$testOtherAudio.play() #slashsound
 				
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
@@ -159,7 +162,12 @@ func _input(event: InputEvent) -> void:
 				coyoteTime = 0
 				if (currentDirection): $playerSprite.play('jumpR')
 				else: $playerSprite.play('jumpL')
-				soundEffects.play_stream(jumpsound) #jumpsound
+				if (!soundEffects.play_stream(jumpsound)): #jumpsound
+					audioPlayer.stop()
+					audioPlayer.stream = AudioStreamPolyphonic.new()
+					audioPlayer.play()
+					soundEffects = audioPlayer.get_stream_playback()
+					soundEffects.play_stream(jumpsound)
 				doublejumped = false
 			# dash / boost
 			if event.is_action_pressed("Dash"):
