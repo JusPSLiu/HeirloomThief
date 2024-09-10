@@ -53,10 +53,10 @@ func _on_files_pressed(arg):
 		Fader.play("FadeOut")
 		await Fader.animation_finished
 		SaveManager.load_game(arg)
-		get_tree().change_scene_to_file("res://Scenes/Levels/new_level.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
 
 func resumeGame():
-	get_tree().change_scene_to_file("res://Scenes/Levels/new_level.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
 
 
 
@@ -86,7 +86,7 @@ func make_new_file():
 			Fader.play("FadeOut")
 			SaveManager.make_new_file(filename.text)
 			await Fader.animation_finished
-			get_tree().change_scene_to_file("res://Scenes/Levels/new_level.tscn")
+			get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
 
 # save file deletion
 func delete_file(data):

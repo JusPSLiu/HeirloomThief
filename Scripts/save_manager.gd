@@ -6,7 +6,8 @@ var max_health = 4
 var current_room = 0
 var currfile = "" # the default name given to the file in the system
 var currsavename = "" # the custom name by the user, less restrictive than windows
-var powerstatus = [false, false, false, false]
+var powerstatus : Array[bool] = [false, false, false, false]
+var powerupgradestatus : Array[bool] = [false, false, false, false]
 var collectedGems : Dictionary = {}
 var collectedHealth : Dictionary = {}
 var respawn_point : Vector2 = Vector2(0,0)
@@ -44,6 +45,7 @@ func save_game():
 			"current_gems" : current_gems,
 			"max_health" : max_health,
 			"powerstatus" : powerstatus,
+			"powerupgradestatus" : powerupgradestatus,
 			"collectedHealth" : collectedHealth,
 			"collectedGems" : collectedGems
 		})
@@ -55,7 +57,8 @@ func load_game(file):
 	if (save_file != null):
 		var data = save_file.get_var()
 		currsavename = data['savename']
-		
+		powerstatus = data["powerstatus"] if data.has("powerstatus") else [false, false, false, false]
+		powerupgradestatus = data["powerupgradestatus"] if data.has("powerupgradestatus") else [false, false, false, false]
 		respawn_point = data['respawn_point'] if (data.has("respawn_point")) else Vector2.ZERO
 		
 		# Health and Gems in Inventory
