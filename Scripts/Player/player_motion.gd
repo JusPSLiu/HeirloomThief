@@ -37,8 +37,8 @@ var DO_NOT_MOVE = false
 var currentlyFloating = false
 
 # Abilities
-var currentAbilities : Array[bool] = [false, false, false]
-var currentUpgrades : Array[bool] = [false, false, false]
+var currentAbilities : Array = [false, false, false]
+var currentUpgrades : Array = [false, false, false]
 enum ability {
 	ring = 0,
 	cape = 1,

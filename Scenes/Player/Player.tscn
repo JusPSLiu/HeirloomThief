@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=36 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
@@ -12,6 +12,10 @@
 [ext_resource type="AudioStream" uid="uid://t1rw5cv2nakn" path="res://Sounds/player/shoot.wav" id="9_16akr"]
 [ext_resource type="AudioStream" uid="uid://cgrsmkemgss4n" path="res://Sounds/player/collect.wav" id="10_k4ark"]
 [ext_resource type="AudioStream" uid="uid://cosy82urnq38n" path="res://Sounds/player/get_healed.wav" id="11_h14xb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wi3qs"]
+shader = ExtResource("2_rs5m2")
+shader_parameter/normal_map = ExtResource("3_fds4o")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2pqq"]
 radius = 15.0
@@ -365,13 +369,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hr2v"]
 size = Vector2(0, 0)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("audioPlayer", "jumpsound", "hitsound", "slashsound", "shootsound", "healedsound", "collectsound") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jumpsound", "hitsound", "slashsound", "shootsound", "healedsound", "collectsound") groups=["Player"]]
+material = SubResource("ShaderMaterial_wi3qs")
 position = Vector2(498, 498)
 floor_constant_speed = true
 floor_max_angle = 0.872665
 floor_snap_length = 16.0
 script = ExtResource("1_cvqb3")
-audioPlayer = NodePath("")
 jumpsound = NodePath("sounds/jumpSound")
 hitsound = NodePath("sounds/hitSound")
 slashsound = NodePath("sounds/slashSound")
@@ -438,7 +442,6 @@ color = Color(0.867444, 0.00133418, 0.963343, 1)
 
 [node name="Camera2D" type="Camera2D" parent="camera_carrot_on_stick"]
 limit_top = -720
-limit_bottom = 2160
 position_smoothing_enabled = true
 position_smoothing_speed = 2.2
 
