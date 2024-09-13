@@ -12,24 +12,25 @@ size = Vector2(8, 13)
 texture_filter = 1
 script = ExtResource("2_qtomr")
 startFacingRight = false
+max_health = 4
 
-[node name="Collider" parent="." index="0"]
+[node name="Collider" parent="." index="1"]
 position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_h28r3")
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 texture_filter = 1
 position = Vector2(0, -8)
 texture = ExtResource("3_eydcd")
 hframes = 2
 vframes = 2
 
-[node name="VisibleOnScreenEnabler2D" parent="." index="2"]
-position = Vector2(-2.38419e-07, -6.5)
-scale = Vector2(0.4, 0.65)
-
 [node name="DamageComponent" parent="." index="3" instance=ExtResource("4_ggoch")]
-position = Vector2(0, -4)
-scale = Vector2(0.328013, 0.294839)
+position = Vector2(0, -5)
+scale = Vector2(0.368013, 0.454839)
 knockPlayerAwayFromCenter = true
 knockPlayerInCustomVector = Vector2(0, -4)
+
+[node name="VisibleOnScreenEnabler2D" parent="." index="4"]
+position = Vector2(-2.38419e-07, -6.5)
+scale = Vector2(0.4, 0.65)

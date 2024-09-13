@@ -139,7 +139,7 @@ animations = [{
 }]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1fllr"]
-polygon = PackedVector2Array(-12, 7, -12, 6, 16, 6, 16, 7)
+polygon = PackedVector2Array(-8, 22, -8, 6, 12, 6, 12, 22)
 
 [sub_resource type="Animation" id="Animation_tjupa"]
 length = 0.001
