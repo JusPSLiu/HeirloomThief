@@ -1,12 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://buvkmren4hvjd"]
+[gd_scene load_steps=4 format=3 uid="uid://buvkmren4hvjd"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/enemy.gd" id="1_er7bl"]
+[ext_resource type="AudioStream" uid="uid://5p5rrpcm2s47" path="res://Sounds/player/hitty.wav" id="2_no2bf"]
+[ext_resource type="AudioStream" uid="uid://cm8bombiw877u" path="res://Sounds/enemy/boom.wav" id="3_vicr3"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_er7bl")
 max_health = 2
 max_speed = 20000.0
 gravity = 800.0
+
+[node name="HealthBar" type="ColorRect" parent="."]
+offset_left = -6.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = -15.0
+color = Color(0, 0, 0, 1)
+
+[node name="health_back" type="ColorRect" parent="HealthBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 11.0
+offset_bottom = 2.0
+color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[node name="health" type="ColorRect" parent="HealthBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 11.0
+offset_bottom = 2.0
+color = Color(0.847311, 0, 0.107077, 1)
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 
@@ -18,8 +43,14 @@ gravity = 800.0
 process_mode = 1
 one_shot = true
 
-[node name="sounds" type="AudioStreamPlayer2D" parent="."]
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
+stream = ExtResource("2_no2bf")
+bus = &"Sounds"
+
+[node name="die" type="AudioStreamPlayer2D" parent="hit"]
+process_mode = 3
+stream = ExtResource("3_vicr3")
 bus = &"Sounds"
 
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]

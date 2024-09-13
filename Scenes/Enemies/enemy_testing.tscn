@@ -128,11 +128,15 @@ position = Vector2(1880, 272)
 scale = Vector2(4, 4)
 
 [node name="GuardGun" parent="." instance=ExtResource("3_o53wr")]
-position = Vector2(880, 592)
+position = Vector2(920, 328)
 scale = Vector2(4, 4)
 
 [node name="Guard" parent="." instance=ExtResource("4_6g62y")]
 position = Vector2(400, 552)
+scale = Vector2(4, 4)
+
+[node name="Guard2" parent="." instance=ExtResource("4_6g62y")]
+position = Vector2(248, 592)
 scale = Vector2(4, 4)
 
 [node name="Player" parent="." node_paths=PackedStringArray("deathAnimator") instance=ExtResource("2_3kmqq")]

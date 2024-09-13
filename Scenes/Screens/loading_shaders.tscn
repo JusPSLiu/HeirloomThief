@@ -1,0 +1,205 @@
+[gd_scene load_steps=24 format=3 uid="uid://ddk6mm3bemrvb"]
+
+[ext_resource type="Script" path="res://Scripts/shaders/loading_shaders.gd" id="1_2551s"]
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="1_psn6w"]
+[ext_resource type="PackedScene" uid="uid://b1h7imdk8728g" path="res://Scenes/Player/death.tscn" id="2_a5107"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_ctp4i"]
+[ext_resource type="PackedScene" uid="uid://dvudgrud88qmx" path="res://Scenes/Enemies/enemy_death_effect.tscn" id="3_wwc8m"]
+[ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="6_s5lt1"]
+[ext_resource type="Texture2D" uid="uid://bdeq8d5m23orl" path="res://Art/Sprites/SpriteSheets/playerNormal.png" id="7_sa36q"]
+[ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Collectibles/gem_upgrade.tscn" id="7_up38r"]
+[ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="8_5gly0"]
+[ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Collectibles/health_upgrade.tscn" id="8_rtfxj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]
+shader = ExtResource("6_s5lt1")
+shader_parameter/normal_map = ExtResource("7_sa36q")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dsjt"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv2dq"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tnjw"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xow1d"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c57gq"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmvla"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gh5k"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p4bu"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul5ev"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gjym"]
+atlas = ExtResource("8_5gly0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ind5g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dsjt")
+}],
+"loop": true,
+"name": &"defaultL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv2dq")
+}],
+"loop": true,
+"name": &"defaultR",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tnjw")
+}],
+"loop": true,
+"name": &"floatL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xow1d")
+}],
+"loop": true,
+"name": &"floatR",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c57gq")
+}],
+"loop": true,
+"name": &"jumpL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmvla")
+}],
+"loop": true,
+"name": &"jumpR",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gh5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p4bu")
+}],
+"loop": true,
+"name": &"runL",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul5ev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gjym")
+}],
+"loop": true,
+"name": &"runR",
+"speed": 12.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1fllr"]
+polygon = PackedVector2Array(-12, 7, -12, 6, 16, 6, 16, 7)
+
+[node name="LoadingShaders" type="ColorRect" node_paths=PackedStringArray("particles")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_2551s")
+particles = [NodePath("behind/Explosion2"), NodePath("behind/Explosion")]
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 484.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("1_psn6w")
+theme_override_font_sizes/font_size = 64
+text = "COMPILING SHADERS"
+
+[node name="behind" type="Node2D" parent="."]
+z_index = -100
+position = Vector2(421, 232)
+
+[node name="Explosion2" parent="behind" instance=ExtResource("3_wwc8m")]
+emitting = false
+
+[node name="Explosion" parent="behind" instance=ExtResource("2_a5107")]
+emitting = false
+
+[node name="PointLight2D" type="PointLight2D" parent="behind"]
+position = Vector2(184, -7)
+scale = Vector2(14.5458, 12.854)
+color = Color(1, 0.69, 0.23, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("3_ctp4i")
+
+[node name="playerSprite" type="AnimatedSprite2D" parent="behind"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_e7iex")
+position = Vector2(108, 46)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ind5g")
+animation = &"defaultR"
+autoplay = "defaultR"
+
+[node name="ColorRect" type="ColorRect" parent="behind/playerSprite"]
+offset_left = -41.25
+offset_top = -14.5
+offset_right = 49.75
+offset_bottom = -10.5
+rotation = 0.338671
+color = Color(0.867444, 0.00133418, 0.963343, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="behind/playerSprite"]
+position = Vector2(0, 0.5)
+scale = Vector2(0.25, 0.25)
+occluder = SubResource("OccluderPolygon2D_1fllr")
+
+[node name="Polygon2D" type="Polygon2D" parent="behind/playerSprite"]
+position = Vector2(-30.25, 17.25)
+scale = Vector2(0.375, 0.375)
+color = Color(0.724627, 0.000887531, 0.805243, 1)
+polygon = PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32)
+
+[node name="gem_upgrade" parent="behind" instance=ExtResource("7_up38r")]
+position = Vector2(63, 40)
+
+[node name="health_upgrade" parent="behind" instance=ExtResource("8_rtfxj")]
+position = Vector2(152, 43)

@@ -3,18 +3,18 @@
 [ext_resource type="Script" path="res://Scripts/UI/save_file_button.gd" id="1_04tt0"]
 
 [node name="game1" type="Button"]
-custom_minimum_size = Vector2(800, 50)
-offset_right = 800.0
-offset_bottom = 61.0
+custom_minimum_size = Vector2(810, 64)
+offset_right = 812.0
+offset_bottom = 64.0
 theme_override_font_sizes/font_size = 38
 text = "New Game"
 script = ExtResource("1_04tt0")
 
 [node name="DeleteButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 809.0
+offset_left = 812.0
 offset_right = 876.0
-offset_bottom = 61.0
+offset_bottom = 64.0
 text = "delete"
 
 [connection signal="pressed" from="." to="." method="pressed"]

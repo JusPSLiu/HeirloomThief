@@ -4,31 +4,46 @@ extends CharacterBody2D
 @export var GUI : Control
 @export var deathAnimator : AnimationPlayer
 
+@onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
+@onready var projectile = preload("res://Scenes/Enemies/projectile.tscn")
+@onready var deathparticle = preload("res://Scenes/Player/death.tscn")
+
 const SPEED = 500.0 # player movement speed
 const BOOST_SPEED = 2400.0 # player dash speed
 const BOOST_COOLDOWN = 0.5 # player dash cooldown rate (in seconds)
 const JUMP_VELOCITY = -1000.0 # player jump velocity
-const COYOTE_MAX = 0.15 # player jump coyote time cooldown
+const COYOTE_MAX = 0.1 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
-const jumpsound = preload("res://Sounds/player/jump.wav")
-const hitsound = preload("res://Sounds/player/beenhit.wav")
-const slashsound = preload("res://Sounds/player/slice.wav")
-const shoot = preload("res://Sounds/player/shoot.wav")
-const projectile = preload("res://Scenes/Enemies/projectile.tscn")
-const deathparticle = preload("res://Scenes/Player/death.tscn")
-const healedsound = preload("res://Sounds/player/get_healed.wav")
-const collectsound = preload("res://Sounds/player/collect.wav")
+
+
+@export var jumpsound : AudioStreamPlayer2D
+@export var hitsound : AudioStreamPlayer2D
+@export var slashsound : AudioStreamPlayer2D
+@export var shootsound : AudioStreamPlayer2D
+@export var healedsound : AudioStreamPlayer2D
+@export var collectsound : AudioStreamPlayer2D
+#@onready var jumpsound = preload("res://Sounds/player/jump.wav")
+#@onready var hitsound = preload("res://Sounds/player/beenhit.wav")
+#@onready var slashsound = preload("res://Sounds/player/slice.wav")
+#@onready var shoot = preload("res://Sounds/player/shoot.wav")
+#@onready var healedsound = preload("res://Sounds/player/get_healed.wav")
+#@onready var collectsound = preload("res://Sounds/player/collect.wav")
 
 var coyoteTime = 0.14
 var boostimer = 0.3
 var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false
-var soundEffects : AudioStreamPlaybackPolyphonic
-var respawnPoint : Vector2 = Vector2(0,0)
 var DO_NOT_MOVE = false
+var currentlyFloating = false
+
+var camera_target_top = 0>0
+var camera_target_bottom = 0.0
+var camera_target_left = 0.0
+var camera_target_right = 0.0
 
 # Abilities
-var currentAbilities : Array[bool] = [false, false, false]
+var currentAbilities : Array = [false, false, false]
+var currentUpgrades : Array = [false, false, false]
 enum ability {
 	ring = 0,
 	cape = 1,
@@ -40,18 +55,26 @@ func _ready() -> void:
 	#currentAbilities[ability.ring] = true
 	#currentAbilities[ability.cape] = true
 	#currentAbilities[ability.boot] = true
-	audioPlayer.stream = AudioStreamPolyphonic.new()
-	audioPlayer.play()
-	soundEffects = audioPlayer.get_stream_playback()
-	respawnPoint = position
+	currentAbilities = SaveManager.powerstatus
+	currentUpgrades = SaveManager.powerupgradestatus
+	
+	if (SaveManager.respawn_point == Vector2.ZERO):
+		SaveManager.respawn_point = position
+	else: position = SaveManager.respawn_point
+	
+	#camera.limit_bottom = 0
+	#camera.limit_top = 0
+	#camera.limit_left = 0
+	#camera.limit_right = 0
 
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	# Add the gravity.
 	if is_on_floor():
+		$camera_carrot_on_stick.position.y = 0
 		if (coyoteTime <= 0):
-			Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
+			currentlyFloating = false
 			doublejumped = false
 		coyoteTime = COYOTE_MAX
 	else:
@@ -60,12 +83,18 @@ func _physics_process(delta: float) -> void:
 				velocity += get_gravity() * delta * 2.5
 			else:
 				velocity += get_gravity() * delta * 6
+			$camera_carrot_on_stick.position.y = 0
 		else:
 			# if cape ability, and up pressed, slow down
 			if currentAbilities[ability.cape] and Input.is_action_pressed("Jump") and boostimer <= 0:
 				velocity.y = expDecay(velocity.y, get_gravity().y * 0.3, LERP_DECAY_RATE, delta)
+				currentlyFloating = true
 			else:
 				velocity += get_gravity() * delta * 3.2
+			if (velocity.y > 1300):
+				$camera_carrot_on_stick.position.y = (velocity.y-1300)*2
+			else:
+				$camera_carrot_on_stick.position.y = 0
 		if (coyoteTime > 0):
 			coyoteTime -= delta
 
@@ -78,13 +107,15 @@ func _physics_process(delta: float) -> void:
 			if (is_on_floor()):
 				$playerSprite.play('runR')
 			else:
-				$playerSprite.play('jumpR')
+				if (currentlyFloating): $playerSprite.play('floatR')
+				else: $playerSprite.play('jumpR')
 		else:
 			currentDirection = false
 			if (is_on_floor()):
 				$playerSprite.play('runL')
 			else:
-				$playerSprite.play('jumpL')
+				if (currentlyFloating): $playerSprite.play('floatL')
+				else: $playerSprite.play('jumpL')
 			
 	else:
 		velocity.x = expDecay(velocity.x, 0, LERP_DECAY_RATE, delta)
@@ -101,6 +132,8 @@ func _physics_process(delta: float) -> void:
 		$camera_carrot_on_stick.position.x = velocity.x * 0.6
 	else:
 		$camera_carrot_on_stick.position.x = expDecay($camera_carrot_on_stick.position.x, 0, 2, delta)
+	
+	#camera_transitions(delta)
 
 # i saw a yt video by freya holmer abt this being a better exponential lerp
 func expDecay(a, b, decay, dt):
@@ -119,7 +152,7 @@ func _input(event: InputEvent) -> void:
 						return
 				$playerattacks.play("swing")
 				$attackbox.look_at(get_global_mouse_position())
-				soundEffects.play_stream(slashsound) #slashsound
+				if (slashsound): slashsound.play()
 				
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
@@ -128,7 +161,7 @@ func _input(event: InputEvent) -> void:
 			
 			elif (event.is_action_pressed("Shoot") and !$playerattacks.is_playing()):
 				if (currentAbilities[ability.ring]):
-					soundEffects.play_stream(shoot) #shootsound
+					if (shootsound): shootsound.play()
 					$playerattacks.play("shoot")
 					#make the projectile; possibly replace with special player projectile later
 					var newprojectile = projectile.instantiate()
@@ -150,7 +183,7 @@ func _input(event: InputEvent) -> void:
 				coyoteTime = 0
 				if (currentDirection): $playerSprite.play('jumpR')
 				else: $playerSprite.play('jumpL')
-				soundEffects.play_stream(jumpsound) #jumpsound
+				if (jumpsound): jumpsound.play()
 				doublejumped = false
 			# dash / boost
 			if event.is_action_pressed("Dash"):
@@ -162,7 +195,7 @@ func _input(event: InputEvent) -> void:
 			if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
 				$playerattacks.play("swing")
 				$attackbox.rotation = getSwingAngle()
-				soundEffects.play_stream(slashsound) #slashsound
+				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
 					velocity.y = JUMP_VELOCITY*0.2
@@ -170,7 +203,7 @@ func _input(event: InputEvent) -> void:
 			if (event.is_action_pressed("keyboardslice") and !$playerattacks.is_playing()):
 				$playerattacks.play("swing")
 				$attackbox.rotation = 0 if currentDirection else PI
-				soundEffects.play_stream(slashsound) #slashsound
+				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
 					velocity.y = JUMP_VELOCITY*0.2
@@ -196,7 +229,7 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 		return false
 	elif (!deathAnimator.is_playing()):
 		$player_fx.play("player_injured")
-		soundEffects.play_stream(hitsound) #hitsound
+		if (hitsound): hitsound.play()
 		velocity = vec*200 # get knocked away
 		coyoteTime = 0 # no jump 4 u
 		SaveManager.current_health -= dmg
@@ -219,7 +252,7 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 	return false
 
 func respawn():
-	position = respawnPoint
+	position = SaveManager.respawn_point
 	self.set_physics_process(true)
 	SaveManager.current_health = 4
 	velocity = Vector2(0, 0)
@@ -231,7 +264,7 @@ func respawn():
 ## collectibles and health section :D
 func get_healed(hlth : int):
 	SaveManager.current_health += hlth
-	soundEffects.play_stream(healedsound)
+	if (healedsound): healedsound.play()
 	if (GUI):
 		GUI.show_curr_hp()
 
@@ -240,7 +273,7 @@ func get_health_upgrade(id:int):
 		SaveManager.max_health += 2
 		SaveManager.current_health = SaveManager.max_health
 		SaveManager.collect_item(SaveManager.Item.health, id)
-		soundEffects.play_stream(collectsound)
+		if (collectsound): collectsound.play()
 		if (GUI):
 			GUI.make_enough_hearts()
 			GUI.show_curr_hp()
@@ -249,12 +282,30 @@ func get_gem_upgrade(id:int):
 	if (!SaveManager.already_collected(SaveManager.Item.gem, id)):
 		SaveManager.current_gems += 1
 		SaveManager.collect_item(SaveManager.Item.gem, id)
-		soundEffects.play_stream(collectsound)
+		if (collectsound): collectsound.play()
 
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
-		var camera = $camera_carrot_on_stick/Camera2D
+		
 		camera.limit_top = area.global_position.y
 		camera.limit_left = area.global_position.x
 		camera.limit_bottom = area.global_position.y + area.scale.y
 		camera.limit_right = area.global_position.x + area.scale.x
+		
+		#camera_target_top = area.global_position.y
+		#camera_target_left = area.global_position.x
+		#camera_target_bottom = area.global_position.y + area.scale.y
+		#camera_target_right = area.global_position.x + area.scale.x
+
+func get_checkpoint(positron):
+	SaveManager.respawn_point = positron
+	SaveManager.save_game()
+
+func camera_transitions(delta):
+	var trans_speed = 5.0
+	camera.limit_top = lerpf(camera.limit_top, camera_target_top, trans_speed * delta)
+	camera.limit_left = lerpf(camera.limit_left, camera_target_left, trans_speed * delta)
+	camera.limit_bottom = lerpf(camera.limit_bottom, camera_target_bottom, trans_speed * delta)
+	camera.limit_right = lerpf(camera.limit_right, camera_target_right, trans_speed * delta)
+	
+	print(camera.limit_bottom, " ", camera.limit_left, " ", camera.limit_bottom, " ", camera.limit_right)

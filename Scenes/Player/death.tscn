@@ -31,6 +31,7 @@ _data = {
 }
 
 [node name="Explosion" type="CPUParticles2D"]
+light_mask = 0
 z_index = -1
 amount = 80
 lifetime = 0.9
