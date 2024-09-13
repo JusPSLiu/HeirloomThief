@@ -20,9 +20,10 @@ func _physics_process(delta: float) -> void:
 	velocity.x = max_speed * movement_direction * delta
 	
 	# Bounce off of walls
-	if is_on_wall():
+	if is_on_wall() and $RayCast2D.is_colliding():
 		velocity.x = 0 # stop moving horizontally
 		movement_direction *= -1 # reverse direction
 	
 	# Flip sprite based on movement direction
 	$Sprite.scale.x = -movement_direction
+	$RayCast2D.scale.x = -movement_direction

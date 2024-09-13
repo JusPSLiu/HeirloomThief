@@ -33,3 +33,7 @@ position = Vector2(0, -4)
 scale = Vector2(0.328013, 0.294839)
 knockPlayerAwayFromCenter = true
 knockPlayerInCustomVector = Vector2(0, -4)
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="6"]
+position = Vector2(0, -4)
+target_position = Vector2(-7, 0)

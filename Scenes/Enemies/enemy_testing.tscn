@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://ceguw3gquhbxa"]
 
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_3kmqq"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
+[ext_resource type="PackedScene" uid="uid://dnpt88g0ifq87" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="3_o53wr"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="4_6g62y"]
-[ext_resource type="PackedScene" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
+[ext_resource type="PackedScene" uid="uid://b148dcptpfcpw" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="6_s5rwo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]
@@ -133,6 +133,10 @@ scale = Vector2(4, 4)
 
 [node name="Guard" parent="." instance=ExtResource("4_6g62y")]
 position = Vector2(400, 552)
+scale = Vector2(4, 4)
+
+[node name="Guard2" parent="." instance=ExtResource("4_6g62y")]
+position = Vector2(248, 592)
 scale = Vector2(4, 4)
 
 [node name="Player" parent="." node_paths=PackedStringArray("deathAnimator") instance=ExtResource("2_3kmqq")]
