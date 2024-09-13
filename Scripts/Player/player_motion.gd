@@ -36,6 +36,11 @@ var doublejumped = false
 var DO_NOT_MOVE = false
 var currentlyFloating = false
 
+var camera_target_top = 0>0
+var camera_target_bottom = 0.0
+var camera_target_left = 0.0
+var camera_target_right = 0.0
+
 # Abilities
 var currentAbilities : Array = [false, false, false]
 var currentUpgrades : Array = [false, false, false]
@@ -56,6 +61,11 @@ func _ready() -> void:
 	if (SaveManager.respawn_point == Vector2.ZERO):
 		SaveManager.respawn_point = position
 	else: position = SaveManager.respawn_point
+	
+	#camera.limit_bottom = 0
+	#camera.limit_top = 0
+	#camera.limit_left = 0
+	#camera.limit_right = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -122,6 +132,8 @@ func _physics_process(delta: float) -> void:
 		$camera_carrot_on_stick.position.x = velocity.x * 0.6
 	else:
 		$camera_carrot_on_stick.position.x = expDecay($camera_carrot_on_stick.position.x, 0, 2, delta)
+	
+	#camera_transitions(delta)
 
 # i saw a yt video by freya holmer abt this being a better exponential lerp
 func expDecay(a, b, decay, dt):
@@ -274,11 +286,26 @@ func get_gem_upgrade(id:int):
 
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
+		
 		camera.limit_top = area.global_position.y
 		camera.limit_left = area.global_position.x
 		camera.limit_bottom = area.global_position.y + area.scale.y
 		camera.limit_right = area.global_position.x + area.scale.x
+		
+		#camera_target_top = area.global_position.y
+		#camera_target_left = area.global_position.x
+		#camera_target_bottom = area.global_position.y + area.scale.y
+		#camera_target_right = area.global_position.x + area.scale.x
 
 func get_checkpoint(positron):
 	SaveManager.respawn_point = positron
 	SaveManager.save_game()
+
+func camera_transitions(delta):
+	var trans_speed = 5.0
+	camera.limit_top = lerpf(camera.limit_top, camera_target_top, trans_speed * delta)
+	camera.limit_left = lerpf(camera.limit_left, camera_target_left, trans_speed * delta)
+	camera.limit_bottom = lerpf(camera.limit_bottom, camera_target_bottom, trans_speed * delta)
+	camera.limit_right = lerpf(camera.limit_right, camera_target_right, trans_speed * delta)
+	
+	print(camera.limit_bottom, " ", camera.limit_left, " ", camera.limit_bottom, " ", camera.limit_right)

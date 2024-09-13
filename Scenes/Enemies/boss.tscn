@@ -95,15 +95,19 @@ libraries = {
 "": SubResource("AnimationLibrary_ml576")
 }
 
-[node name="Collider" parent="." index="1"]
+[node name="Collider" parent="." index="2"]
 shape = SubResource("CircleShape2D_s8vs5")
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="3"]
 texture_filter = 1
 texture = ExtResource("3_vgyol")
 
-[node name="VisibleOnScreenEnabler2D" parent="." index="3"]
+[node name="VisibleOnScreenEnabler2D" parent="." index="4"]
 scale = Vector2(2.4, 2.4)
+
+[node name="sounds" type="AudioStreamPlayer2D" parent="." index="5"]
+process_mode = 3
+bus = &"Sounds"
 
 [node name="StateManager" type="Node2D" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_ptnp2")

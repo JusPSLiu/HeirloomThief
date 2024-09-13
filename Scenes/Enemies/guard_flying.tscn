@@ -120,18 +120,14 @@ libraries = {
 "": SubResource("AnimationLibrary_m0qpa")
 }
 
-[node name="Collider" parent="." index="1"]
+[node name="Collider" parent="." index="2"]
 shape = SubResource("CircleShape2D_qkh7t")
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="3"]
 texture_filter = 1
 position = Vector2(0, -3)
 texture = ExtResource("2_fsne4")
 hframes = 2
-
-[node name="VisibleOnScreenEnabler2D" parent="." index="3"]
-position = Vector2(-1.19209e-07, -1.19209e-07)
-scale = Vector2(0.7, 0.7)
 
 [node name="Range" type="Area2D" parent="." index="4"]
 
@@ -158,5 +154,9 @@ auto_animate = true
 
 [node name="Reset" type="Node2D" parent="StateManager" index="3"]
 script = ExtResource("8_xlyl3")
+
+[node name="VisibleOnScreenEnabler2D" parent="." index="6"]
+position = Vector2(-1.19209e-07, -1.19209e-07)
+scale = Vector2(0.7, 0.7)
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]

@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cj3pw2xsg8dco" path="res://Art/Tilesets/stonebricks_red_small.png" id="11_crwyp"]
 [ext_resource type="PackedScene" uid="uid://c5e2eqcdwdgbq" path="res://Scenes/Collectibles/checkpoint.tscn" id="11_r8arm"]
 [ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Collectibles/gem_upgrade.tscn" id="12_b044c"]
-[ext_resource type="PackedScene" path="res://Scenes/Levels/room.tscn" id="16_3d5ji"]
+[ext_resource type="PackedScene" uid="uid://b148dcptpfcpw" path="res://Scenes/Levels/room.tscn" id="16_3d5ji"]
 [ext_resource type="AudioStream" uid="uid://co7miyrk8qljr" path="res://Sounds/Music/thirdlevel.mp3" id="17_gcn68"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0st3j"]

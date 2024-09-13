@@ -160,5 +160,9 @@ auto_animate = true
 script = ExtResource("8_ob78m")
 auto_animate = true
 
+[node name="sounds" type="AudioStreamPlayer2D" parent="." index="8"]
+process_mode = 3
+bus = &"Sounds"
+
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
