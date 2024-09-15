@@ -5,7 +5,7 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if (enabled): skipToActivated()
+	if (enabled and pairedDoor.enabled): skipToActivated()
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("Player") and enabled and pairedDoor.enabled):
@@ -17,7 +17,9 @@ func _on_body_exited(body: Node2D) -> void:
 
 func activate():
 	$sprite.play("opening")
-	enabled = true
+	if (!enabled):
+		pairedDoor.activate()
+		enabled = true
 
 func skipToActivated():
 	$sprite.play("open")

@@ -143,20 +143,25 @@ activateyThing = NodePath("Door")
 position = Vector2(0, -5)
 scale = Vector2(3, 3)
 color = Color(0.2, 1, 1, 1)
+energy = 0.0
 shadow_enabled = true
 shadow_filter_smooth = 4.0
 texture = ExtResource("5_hdlfk")
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_thhmg")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["torch"]]
 collision_layer = 16
 collision_mask = 0
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 2.75)
 shape = SubResource("RectangleShape2D_pywby")
+metadata/_edit_lock_ = true
 
 [node name="Door" type="Area2D" parent="." node_paths=PackedStringArray("pairedDoor")]
 position = Vector2(20, 10)
@@ -170,10 +175,12 @@ position = Vector2(0.75, -7.5)
 sprite_frames = SubResource("SpriteFrames_5cx4n")
 animation = &"open"
 autoplay = "closed"
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(0.25, -6)
 shape = SubResource("RectangleShape2D_ycopj")
+metadata/_edit_lock_ = true
 
 [node name="Door2" type="Area2D" parent="Door" node_paths=PackedStringArray("pairedDoor")]
 position = Vector2(29.75, 0)
@@ -186,10 +193,12 @@ position = Vector2(0.75, -7.5)
 sprite_frames = SubResource("SpriteFrames_5cx4n")
 animation = &"open"
 autoplay = "closed"
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Door2"]
 position = Vector2(0.25, -6)
 shape = SubResource("RectangleShape2D_ycopj")
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]
 [connection signal="body_exited" from="Door" to="Door" method="_on_body_exited"]

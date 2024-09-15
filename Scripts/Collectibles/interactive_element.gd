@@ -8,12 +8,14 @@ func _ready() -> void:
 	if (SaveManager.already_interacted(id)):
 		lit = true
 		play('on')
+		$torchlight.energy = 1
 		activateyThing.skipToActivated()
 
 func alight() -> bool:
 	if (lit): return false
 	lit = true
 	play('on')
+	$torchlight.energy = 1
 	if (activateyThing):
 		activateyThing.activate()
 	return true
