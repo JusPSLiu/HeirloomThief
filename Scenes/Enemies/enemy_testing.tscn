@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="3_o53wr"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="4_6g62y"]
-[ext_resource type="PackedScene" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
+[ext_resource type="PackedScene" uid="uid://bilsxcgxlam7c" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="6_s5rwo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]

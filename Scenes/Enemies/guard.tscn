@@ -7,18 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="4_ggoch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h28r3"]
-size = Vector2(8, 13)
+size = Vector2(6, 13)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1ux5e"]
 diffuse_texture = ExtResource("3_eydcd")
 normal_texture = ExtResource("4_4ylpt")
 specular_shininess = 0.8
 
-[node name="Guard" instance=ExtResource("1_k15v2")]
+[node name="Guard" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_k15v2")]
 texture_filter = 1
 script = ExtResource("2_qtomr")
 startFacingRight = false
-max_health = 4
+damage_component = NodePath("DamageComponent")
 
 [node name="Collider" parent="." index="1"]
 position = Vector2(0, -6.5)
@@ -36,10 +36,6 @@ position = Vector2(0, -5)
 scale = Vector2(0.368013, 0.454839)
 knockPlayerAwayFromCenter = true
 knockPlayerInCustomVector = Vector2(0, -4)
-
-[node name="VisibleOnScreenEnabler2D" parent="." index="4"]
-position = Vector2(-2.38419e-07, -6.5)
-scale = Vector2(0.4, 0.65)
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="6"]
 position = Vector2(0, -4)

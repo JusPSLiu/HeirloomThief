@@ -1734,3 +1734,4 @@ position = Vector2(1248, 536)
 
 [editable path="Checkpoints/Checkpoint2"]
 [editable path="upgrades/gem_upgrade"]
+[editable path="torchy"]
