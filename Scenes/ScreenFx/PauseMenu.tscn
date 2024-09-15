@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=31 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -17,8 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://dq84572x2fty5" path="res://Art/UI/Pause/main/upgradesSelected.png" id="12_kc0wq"]
 [ext_resource type="Texture2D" uid="uid://10oeumw5ttq1" path="res://Art/UI/Pause/main/settings.png" id="13_6d3x2"]
 [ext_resource type="Texture2D" uid="uid://c637a213y22sw" path="res://Art/UI/Pause/main/available.png" id="13_75v31"]
+[ext_resource type="Texture2D" uid="uid://drxd11m6c04kj" path="res://Art/Backgrounds/the_map.png" id="14_7a5wj"]
 [ext_resource type="Texture2D" uid="uid://clwokwkiuel0w" path="res://Art/UI/Pause/main/settingsSelected.png" id="14_cota7"]
+[ext_resource type="Material" uid="uid://dxkjhs0ldnhoj" path="res://Scenes/ScreenFx/map_shader.tres" id="14_kilgh"]
 [ext_resource type="Texture2D" uid="uid://b1ogy1scrgwfh" path="res://Art/UI/Pause/main/exit.png" id="15_04q0r"]
+[ext_resource type="Script" path="res://Scripts/UI/MapScript.gd" id="16_r3vwa"]
 [ext_resource type="Texture2D" uid="uid://bjwqdw4oscb4g" path="res://Art/UI/Pause/main/exitSelected.png" id="16_vbiiw"]
 [ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="20_06nsv"]
 [ext_resource type="Texture2D" uid="uid://u6fb78t0gx7c" path="res://Art/UI/Pause/main/hearts.png" id="20_d6s1q"]
@@ -73,8 +76,8 @@ color = Color(0, 0, 0, 0.607)
 
 [node name="MainMenu" type="Control" parent="BackColor"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BackColor/MainMenu"]
 texture_filter = 1
@@ -114,6 +117,135 @@ offset_right = 1142.0
 offset_bottom = 288.0
 scale = Vector2(4, 4)
 texture = ExtResource("13_75v31")
+
+[node name="Map" type="Sprite2D" parent="BackColor/MainMenu" node_paths=PackedStringArray("healthLocations", "gemLocations")]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-695, 199)
+texture = ExtResource("14_7a5wj")
+centered = false
+script = ExtResource("16_r3vwa")
+maxPos = Vector2(-1.007, -0.326)
+minPos = Vector2(-0.149, -0.671)
+healthLocations = [NodePath("Room1/health0"), NodePath("Room6/health1")]
+gemLocations = [NodePath("Room1/gem0"), NodePath("Room1/gem1"), NodePath("Room5/gem2")]
+
+[node name="Room0" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 30.0
+offset_top = 6.0
+offset_right = 36.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="Room1" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 26.0
+offset_top = 7.0
+offset_right = 29.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="health0" type="ColorRect" parent="BackColor/MainMenu/Map/Room1"]
+material = ExtResource("14_kilgh")
+offset_left = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.168627, 1)
+
+[node name="gem0" type="ColorRect" parent="BackColor/MainMenu/Map/Room1"]
+material = ExtResource("14_kilgh")
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 2.0
+color = Color(1, 0.8, 0.168627, 1)
+
+[node name="gem1" type="ColorRect" parent="BackColor/MainMenu/Map/Room1"]
+material = ExtResource("14_kilgh")
+offset_left = 2.0
+offset_right = 3.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.17, 1)
+
+[node name="Room2" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 24.0
+offset_top = 7.0
+offset_right = 25.0
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="Room3" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 23.0
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="Room4" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 18.0
+offset_top = 10.0
+offset_right = 19.0
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="Room5" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 17.0
+offset_bottom = 12.0
+
+[node name="gem2" type="ColorRect" parent="BackColor/MainMenu/Map/Room5"]
+material = ExtResource("14_kilgh")
+offset_left = 2.0
+offset_right = 3.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.168627, 1)
+
+[node name="Room6" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 13.0
+offset_bottom = 12.0
+
+[node name="health1" type="ColorRect" parent="BackColor/MainMenu/Map/Room6"]
+material = ExtResource("14_kilgh")
+offset_left = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.168627, 1)
+
+[node name="Room7" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 11.0
+
+[node name="Room8" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 6.0
+offset_top = 10.0
+offset_right = 7.0
+offset_bottom = 12.0
+
+[node name="Room9" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 3.0
+offset_top = 11.0
+offset_right = 5.0
+offset_bottom = 12.0
+
+[node name="Roomr10" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 37.0
+offset_top = 7.0
+offset_right = 40.0
+offset_bottom = 9.0
 
 [node name="Settings" type="Label" parent="BackColor"]
 visible = false

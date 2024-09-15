@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceel7nt7oknhy"]
+[gd_scene load_steps=8 format=3 uid="uid://ceel7nt7oknhy"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_k15v2"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard.gd" id="2_qtomr"]
 [ext_resource type="Texture2D" uid="uid://bmrl4lprm61j2" path="res://Art/Enemies/temp_enemy.png" id="3_eydcd"]
+[ext_resource type="Texture2D" uid="uid://dhxi4c11ectn0" path="res://Art/Enemies/temp_enemy_normal.png" id="4_4ylpt"]
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="4_ggoch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h28r3"]
 size = Vector2(8, 13)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1ux5e"]
+diffuse_texture = ExtResource("3_eydcd")
+normal_texture = ExtResource("4_4ylpt")
+specular_shininess = 0.8
 
 [node name="Guard" instance=ExtResource("1_k15v2")]
 texture_filter = 1
@@ -21,7 +27,7 @@ shape = SubResource("RectangleShape2D_h28r3")
 [node name="Sprite" parent="." index="2"]
 texture_filter = 1
 position = Vector2(0, -8)
-texture = ExtResource("3_eydcd")
+texture = SubResource("CanvasTexture_1ux5e")
 hframes = 2
 vframes = 2
 

@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var gem_number : Label = get_node("BackColor/heart_gem_display/display_gems/gems_num")
 @onready var heart_number : Label = get_node("BackColor/heart_gem_display/display_hearts/hearts_num")
 @onready var upgrade_available : TextureRect = get_node("BackColor/MainMenu/UpgradeAvailable")
+@onready var map : Sprite2D = get_node("BackColor/MainMenu/Map")
 
 @export var musicPlayer : AudioStreamPlayer
 @export var Fader : AnimationPlayer
@@ -27,7 +28,8 @@ func _ready():
 	if (soundVolume != null):
 		soundSlider.value = (db_to_linear(soundVolume))
 	#wait for opening transition to finish before allowing pausing
-	await Fader.animation_finished
+	if (Fader):
+		await Fader.animation_finished
 	pausable = true
 	# make sure pause menu isnt visible
 	$BackColor.visible = false
@@ -55,11 +57,17 @@ func togglePause():
 	if (!get_tree().paused):
 		main_menu.show()
 		settings_menu.hide()
+		#tell the map that if its clicking to stop. plz
+		map.clicking = false
 	else:
 		#if pausing then make sure the display is right
 		heart_number.text = str(int(SaveManager.max_health)>>1)
 		gem_number.text = str(SaveManager.current_gems)
 		upgrade_available.visible = (SaveManager.current_gems > 1)
+		#tell the map to set up
+		#also make sure you start up in the main pause menu
+		map.set_up()
+		_to_main_pause_menu()
 
 func set_pausability(pause : bool):
 	pausable = pause
@@ -78,6 +86,7 @@ func _to_settings_menu() -> void:
 	settings_menu.show()
 	main_menu.hide()
 	upgrade_menu.hide()
+	map.mapIsShown = false
 
 #go to upgrade menu
 func _to_upgrade_menu() -> void:
@@ -85,6 +94,7 @@ func _to_upgrade_menu() -> void:
 	upgrade_menu.show()
 	settings_menu.hide()
 	main_menu.hide()
+	map.mapIsShown = false
 
 #back to main pause menu
 func _to_main_pause_menu():
@@ -92,3 +102,4 @@ func _to_main_pause_menu():
 	main_menu.show()
 	settings_menu.hide()
 	upgrade_menu.hide()
+	map.mapIsShown = true

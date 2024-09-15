@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var deathAnimator : AnimationPlayer
 
 @onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
-@onready var projectile = preload("res://Scenes/Enemies/projectile.tscn")
+@onready var projectile = preload("res://Scenes/Player/projectile.tscn")
 @onready var deathparticle = preload("res://Scenes/Player/death.tscn")
 
 const SPEED = 500.0 # player movement speed
@@ -35,6 +35,7 @@ var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false
 var DO_NOT_MOVE = false
 var currentlyFloating = false
+var doorLocation = null
 
 var camera_target_top = 0>0
 var camera_target_bottom = 0.0
@@ -52,11 +53,11 @@ enum ability {
 
 # when spawn in, activate proper abilities
 func _ready() -> void:
-	#currentAbilities[ability.ring] = true
+	currentAbilities[ability.ring] = true
 	#currentAbilities[ability.cape] = true
 	#currentAbilities[ability.boot] = true
-	currentAbilities = SaveManager.powerstatus
-	currentUpgrades = SaveManager.powerupgradestatus
+	#currentAbilities = SaveManager.powerstatus
+	#currentUpgrades = SaveManager.powerupgradestatus
 	
 	if (SaveManager.respawn_point == Vector2.ZERO):
 		SaveManager.respawn_point = position
@@ -100,7 +101,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
+	if direction and !DO_NOT_MOVE:
 		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
 		if (direction > 0):
 			currentDirection = true
@@ -178,13 +179,17 @@ func _input(event: InputEvent) -> void:
 		# if keyboard / button event
 		else:
 			# Handle jump.
-			if event.is_action_pressed("Jump") and coyoteTime > 0:
-				velocity.y = JUMP_VELOCITY
-				coyoteTime = 0
-				if (currentDirection): $playerSprite.play('jumpR')
-				else: $playerSprite.play('jumpL')
-				if (jumpsound): jumpsound.play()
-				doublejumped = false
+			if event.is_action_pressed("Jump"):
+				if (doorLocation != null):
+					#if in doorway, the jump button opens the door
+					position = doorLocation
+				elif coyoteTime > 0:
+					velocity.y = JUMP_VELOCITY
+					coyoteTime = 0
+					if (currentDirection): $playerSprite.play('jumpR')
+					else: $playerSprite.play('jumpL')
+					if (jumpsound): jumpsound.play()
+					doublejumped = false
 			# dash / boost
 			if event.is_action_pressed("Dash"):
 				if currentAbilities[ability.cape] and boostimer < 0:
@@ -239,7 +244,8 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 			if (deathAnimator != null):
 				deathAnimator.play("die")
 				$camera_carrot_on_stick.position.x = 0
-				set_physics_process(false)
+				#set_physics_process(false)
+				set_collision_layer_value(1, false)
 				hide()
 				var deathy = deathparticle.instantiate()
 				deathy.position = position
@@ -253,7 +259,8 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 
 func respawn():
 	position = SaveManager.respawn_point
-	self.set_physics_process(true)
+	#self.set_physics_process(true)
+	set_collision_layer_value(1, true)
 	SaveManager.current_health = 4
 	velocity = Vector2(0, 0)
 	show()
@@ -296,10 +303,26 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		#camera_target_left = area.global_position.x
 		#camera_target_bottom = area.global_position.y + area.scale.y
 		#camera_target_right = area.global_position.x + area.scale.x
+		
+		SaveManager.current_room = area.room_number
+		if (SaveManager.visited_rooms.size() <= area.room_number):
+			var sizeToGet = SaveManager.visited_rooms.size()-area.room_number
+			var newArr : PackedByteArray = [0]
+			while (newArr.size() < sizeToGet):
+				newArr.append_array([0,0,0,0,0])
+			SaveManager.visited_rooms.append_array(newArr)
+		SaveManager.visited_rooms[area.room_number] = true
 
 func get_checkpoint(positron):
 	SaveManager.respawn_point = positron
 	SaveManager.save_game()
+
+func allow_doory(gotopos):
+	doorLocation = gotopos
+
+func exit_doory(gotopos):
+	if (doorLocation == gotopos):
+		doorLocation = null
 
 func camera_transitions(delta):
 	var trans_speed = 5.0

@@ -4,12 +4,14 @@ var current_health = 2
 var current_gems = 0
 var max_health = 4
 var current_room = 0
+var visited_rooms : PackedByteArray = [false,false,false,false,false,false,false,false,false,false]
 var currfile = "" # the default name given to the file in the system
 var currsavename = "" # the custom name by the user, less restrictive than windows
 var powerstatus : Array = [false, false, false, false]
 var powerupgradestatus : Array = [false, false, false, false]
 var collectedGems : Dictionary = {}
 var collectedHealth : Dictionary = {}
+var interactedElements : Dictionary = {}
 var respawn_point : Vector2 = Vector2(0,0)
 
 enum Item {
@@ -30,7 +32,13 @@ func collect_item(type, id):
 	else:
 		collectedGems[id] = true
 	save_game()
+## INTERACTIVE STUFF
+func already_interacted(id):
+	return (interactedElements.has(id) && interactedElements[id])
 
+func interact(type, id):
+	interactedElements[id] = true
+	save_game()
 
 
 ## FILE STUFF
@@ -47,7 +55,9 @@ func save_game():
 			"powerstatus" : powerstatus,
 			"powerupgradestatus" : powerupgradestatus,
 			"collectedHealth" : collectedHealth,
-			"collectedGems" : collectedGems
+			"collectedGems" : collectedGems,
+			"interactedElements" : interactedElements,
+			"visited_rooms" : visited_rooms
 		})
 		save_file.close()
 
@@ -60,6 +70,7 @@ func load_game(file):
 		powerstatus = data["powerstatus"] if data.has("powerstatus") else [false, false, false, false]
 		powerupgradestatus = data["powerupgradestatus"] if data.has("powerupgradestatus") else [false, false, false, false]
 		respawn_point = data['respawn_point'] if (data.has("respawn_point")) else Vector2.ZERO
+		visited_rooms = data['visited_rooms'] if (data.has("visited_rooms")) else [false]
 		
 		# Health and Gems in Inventory
 		max_health = data["max_health"] if (data.has("max_health")) else 4
@@ -69,6 +80,7 @@ func load_game(file):
 		# Collected Items in World
 		collectedHealth = data["collectedHealth"] if (data.has("collectedHealth")) else {}
 		collectedGems = data["collectedGems"] if (data.has("collectedGems")) else {}
+		interactedElements = data["interactedElements"] if (data.has("interactedElements")) else {}
 
 func menu_load_file_details() -> Array[Dictionary]:
 	var deer = DirAccess.open("user://saves/")
@@ -130,9 +142,11 @@ func make_new_file(newname):
 	current_health = 4
 	max_health = 4
 	current_room = 0
+	visited_rooms = [false, false, false]
 	powerstatus = [false, false, false, false]
 	collectedGems = {}
 	collectedHealth = {}
+	interactedElements = {}
 	# make new file name so you dont overwrite a previous file
 	currfile = "HeirloomSave-"
 	var number = 0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://ma7juea0fcwu"
+path="res://.godot/imported/dirt_small_normal.png-df9dcde7e272050b8666f929956b4285.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/Tilesets/dirt_small_normal.png"
+dest_files=["res://.godot/imported/dirt_small_normal.png-df9dcde7e272050b8666f929956b4285.ctex"]
 
 [params]
 

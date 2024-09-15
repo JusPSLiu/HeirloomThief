@@ -6,5 +6,5 @@ uniform sampler2D normal_map : filter_nearest;
 
 void fragment(){
 	// Converts the texture data into a unit vector, with each channel in the [-1, 1] range
-	NORMAL = 1.0 * texture(normal_map, UV).rgb - 1.0;
+	NORMAL = 2.0f * texture(normal_map, UV).rgb - 1.0;
 }

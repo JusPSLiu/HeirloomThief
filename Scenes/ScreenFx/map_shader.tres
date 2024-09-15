@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dxkjhs0ldnhoj"]
+
+[ext_resource type="Shader" path="res://Scripts/shaders/screenspace_mask.gdshader" id="1_b7n6j"]
+
+[sub_resource type="Gradient" id="Gradient_ngdb6"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.546875, 0.604167)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l38po"]
+gradient = SubResource("Gradient_ngdb6")
+width = 80
+
+[sub_resource type="Gradient" id="Gradient_3dl4x"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.166667, 0.213542)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3583h"]
+gradient = SubResource("Gradient_3dl4x")
+width = 45
+
+[resource]
+shader = ExtResource("1_b7n6j")
+shader_parameter/mask_texture_h = SubResource("GradientTexture1D_l38po")
+shader_parameter/mask_texture_v = SubResource("GradientTexture1D_3583h")

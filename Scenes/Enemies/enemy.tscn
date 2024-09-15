@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://buvkmren4hvjd"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/enemy.gd" id="1_er7bl"]
-[ext_resource type="AudioStream" uid="uid://5p5rrpcm2s47" path="res://Sounds/player/hitty.wav" id="2_no2bf"]
+[ext_resource type="AudioStream" uid="uid://cx7ggfurw4oq6" path="res://Sounds/enemy/tap.wav" id="2_10wem"]
 [ext_resource type="AudioStream" uid="uid://cm8bombiw877u" path="res://Sounds/enemy/boom.wav" id="3_vicr3"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
@@ -45,7 +45,8 @@ one_shot = true
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
-stream = ExtResource("2_no2bf")
+stream = ExtResource("2_10wem")
+volume_db = 5.0
 bus = &"Sounds"
 
 [node name="die" type="AudioStreamPlayer2D" parent="hit"]

@@ -14,6 +14,14 @@ func _physics_process(delta: float) -> void:
 	position += speed * movement_direction * delta
 
 
-func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
+func die_me():
 	# Delete self when exiting screen
 	call_deferred("free")
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if (body.is_in_group("enemy")):
+		body.damage(1)
+		die_me()
+	elif (body.is_in_group("torch")):
+		if (body.get_parent().alight()): die_me()

@@ -1,0 +1,197 @@
+[gd_scene load_steps=25 format=3 uid="uid://dqsatwfb0ss2q"]
+
+[ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="1_0fgca"]
+[ext_resource type="Texture2D" uid="uid://nfed7kv84iik" path="res://Art/Sprites/SpriteSheets/lighty_torch_normal.png" id="2_l25lr"]
+[ext_resource type="Texture2D" uid="uid://ccx2qht8dfofv" path="res://Art/Sprites/SpriteSheets/lighty_torch.png" id="3_osj00"]
+[ext_resource type="Script" path="res://Scripts/Collectibles/interactive_element.gd" id="4_q1qdb"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="5_hdlfk"]
+[ext_resource type="Texture2D" uid="uid://dscqh83oc51ig" path="res://Art/Sprites/SpriteSheets/door.png" id="6_7ojp2"]
+[ext_resource type="Script" path="res://Scripts/Collectibles/activated_door.gd" id="6_s0gr6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_luphl"]
+shader = ExtResource("1_0fgca")
+shader_parameter/normal_map = ExtResource("2_l25lr")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko2po"]
+atlas = ExtResource("3_osj00")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2g2tg"]
+atlas = ExtResource("3_osj00")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alwpd"]
+atlas = ExtResource("3_osj00")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0skoc"]
+atlas = ExtResource("3_osj00")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqohr"]
+atlas = ExtResource("3_osj00")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lla77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko2po")
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2g2tg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alwpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0skoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqohr")
+}],
+"loop": true,
+"name": &"on",
+"speed": 10.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_thhmg"]
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 1, -2, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pywby"]
+size = Vector2(10, 18.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8fab"]
+atlas = ExtResource("6_7ojp2")
+region = Rect2(0, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qij5"]
+atlas = ExtResource("6_7ojp2")
+region = Rect2(64, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aguei"]
+atlas = ExtResource("6_7ojp2")
+region = Rect2(16, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vphhv"]
+atlas = ExtResource("6_7ojp2")
+region = Rect2(32, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gives"]
+atlas = ExtResource("6_7ojp2")
+region = Rect2(48, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u512c"]
+atlas = ExtResource("6_7ojp2")
+region = Rect2(64, 0, 16, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5cx4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8fab")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qij5")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aguei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vphhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gives")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u512c")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycopj"]
+size = Vector2(11, 12)
+
+[node name="torchy" type="AnimatedSprite2D" node_paths=PackedStringArray("activateyThing") groups=["torch"]]
+light_mask = 2
+material = SubResource("ShaderMaterial_luphl")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_lla77")
+animation = &"off"
+autoplay = "off"
+script = ExtResource("4_q1qdb")
+activateyThing = NodePath("Door")
+
+[node name="torchlight" type="PointLight2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(3, 3)
+color = Color(0.2, 1, 1, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("5_hdlfk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_thhmg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["torch"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 2.75)
+shape = SubResource("RectangleShape2D_pywby")
+
+[node name="Door" type="Area2D" parent="." node_paths=PackedStringArray("pairedDoor")]
+position = Vector2(20, 10)
+script = ExtResource("6_s0gr6")
+pairedDoor = NodePath("Door2")
+enabled = false
+
+[node name="sprite" type="AnimatedSprite2D" parent="Door"]
+z_index = -1
+position = Vector2(0.75, -7.5)
+sprite_frames = SubResource("SpriteFrames_5cx4n")
+animation = &"open"
+autoplay = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(0.25, -6)
+shape = SubResource("RectangleShape2D_ycopj")
+
+[node name="Door2" type="Area2D" parent="Door" node_paths=PackedStringArray("pairedDoor")]
+position = Vector2(29.75, 0)
+script = ExtResource("6_s0gr6")
+pairedDoor = NodePath("..")
+
+[node name="sprite" type="AnimatedSprite2D" parent="Door/Door2"]
+z_index = -1
+position = Vector2(0.75, -7.5)
+sprite_frames = SubResource("SpriteFrames_5cx4n")
+animation = &"open"
+autoplay = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Door2"]
+position = Vector2(0.25, -6)
+shape = SubResource("RectangleShape2D_ycopj")
+
+[connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]
+[connection signal="body_exited" from="Door" to="Door" method="_on_body_exited"]
+[connection signal="body_entered" from="Door/Door2" to="Door/Door2" method="_on_body_entered"]
+[connection signal="body_exited" from="Door/Door2" to="Door/Door2" method="_on_body_exited"]

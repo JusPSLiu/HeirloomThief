@@ -439,6 +439,7 @@ rotation = 0.338671
 color = Color(0.867444, 0.00133418, 0.963343, 1)
 
 [node name="camera_carrot_on_stick" type="Node2D" parent="."]
+position = Vector2(3, 2)
 
 [node name="Camera2D" type="Camera2D" parent="camera_carrot_on_stick"]
 limit_top = -720

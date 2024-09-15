@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bs1jg68cvcir0"]
+[gd_scene load_steps=14 format=3 uid="uid://dydj1f61lym74"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_q5flq"]
 [ext_resource type="Script" path="res://Scripts/Enemies/boss/boss.gd" id="2_pcfnv"]
@@ -24,6 +24,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ru3n7"]
+resource_name = "Jump"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(0.8, 1.2)]
 }
 
 [sub_resource type="Animation" id="Animation_vehqh"]
@@ -57,23 +74,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ru3n7"]
-resource_name = "Jump"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(0.8, 1.2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ml576"]
