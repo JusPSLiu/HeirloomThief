@@ -305,7 +305,7 @@ func get_gem_upgrade(id:int):
 
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
-		
+		# set the camera limits
 		#camera.limit_top = area.global_position.y
 		#camera.limit_left = area.global_position.x
 		#camera.limit_bottom = area.global_position.y + area.scale.y
@@ -314,6 +314,8 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		camera_target_left = area.global_position.x
 		camera_target_bottom = area.global_position.y + area.scale.y
 		camera_target_right = area.global_position.x + area.scale.x
+		
+		# fancy camera transition stuff
 		transitioning = true
 		if (camera.global_position.y-360 < camera_target_top and camera.limit_top != camera_target_top):
 			camera.limit_top = camera.global_position.y-360
@@ -324,12 +326,13 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		if (camera.global_position.x+640 > camera_target_right and camera.limit_right != camera_target_right):
 			camera.limit_right = camera.global_position.x+(640*1.5)
 		
+		# set the current room, and tell the manager youve visited it
 		SaveManager.current_room = area.room_number
 		if (SaveManager.visited_rooms.size() <= area.room_number):
-			var sizeToGet = SaveManager.visited_rooms.size()-area.room_number
+			var sizeToGet = area.room_number - SaveManager.visited_rooms.size()
 			var newArr : PackedByteArray = [0]
-			while (newArr.size() < sizeToGet):
-				newArr.append_array([0,0,0,0,0])
+			while (newArr.size() <= sizeToGet):
+				newArr.append_array([0, 0, 0, 0, 0])
 			SaveManager.visited_rooms.append_array(newArr)
 		SaveManager.visited_rooms[area.room_number] = true
 
