@@ -1,7 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://ddk6mm3bemrvb"]
 
 [ext_resource type="Script" path="res://Scripts/shaders/loading_shaders.gd" id="1_2551s"]
-[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="1_psn6w"]
 [ext_resource type="PackedScene" uid="uid://b1h7imdk8728g" path="res://Scenes/Player/death.tscn" id="2_a5107"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_ctp4i"]
 [ext_resource type="PackedScene" uid="uid://dvudgrud88qmx" path="res://Scenes/Enemies/enemy_death_effect.tscn" id="3_wwc8m"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Collectibles/gem_upgrade.tscn" id="7_up38r"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="8_5gly0"]
 [ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Collectibles/health_upgrade.tscn" id="8_rtfxj"]
+[ext_resource type="Material" uid="uid://dxkjhs0ldnhoj" path="res://Scenes/ScreenFx/map_shader.tres" id="10_k7u5f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]
 shader = ExtResource("6_s5lt1")
@@ -141,17 +141,6 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("1_2551s")
 particles = [NodePath("behind/Explosion2"), NodePath("behind/Explosion")]
 
-[node name="Label" type="Label" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 32.0
-offset_top = 16.0
-offset_right = 484.0
-offset_bottom = 88.0
-theme_override_fonts/font = ExtResource("1_psn6w")
-theme_override_font_sizes/font_size = 64
-text = "COMPILING SHADERS"
-
 [node name="behind" type="Node2D" parent="."]
 z_index = -100
 position = Vector2(421, 232)
@@ -203,3 +192,10 @@ position = Vector2(63, 40)
 
 [node name="health_upgrade" parent="behind" instance=ExtResource("8_rtfxj")]
 position = Vector2(152, 43)
+
+[node name="ColorRect" type="ColorRect" parent="behind"]
+material = ExtResource("10_k7u5f")
+offset_left = -5.0
+offset_top = -161.0
+offset_right = 421.0
+offset_bottom = -40.0

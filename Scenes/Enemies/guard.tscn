@@ -33,7 +33,7 @@ vframes = 2
 
 [node name="DamageComponent" parent="." index="3" instance=ExtResource("4_ggoch")]
 position = Vector2(0, -5)
-scale = Vector2(0.368013, 0.454839)
+scale = Vector2(0.448013, 0.454839)
 knockPlayerAwayFromCenter = true
 knockPlayerInCustomVector = Vector2(0, -4)
 

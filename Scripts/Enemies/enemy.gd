@@ -17,6 +17,7 @@ var current_speed : int
 var home_area : int = -1
 
 const deathparticle = preload("res://Scenes/Enemies/enemy_death_effect.tscn")
+const healthpickup = preload("res://Scenes/Enemies/health_pickup.tscn")
 
 func _ready() -> void:
 	current_health = max_health
@@ -49,11 +50,20 @@ func damage(damage_val):
 	current_health -= damage_val
 	healthBar.size.x = max(0, (10*current_health/max_health))
 	if (current_health <= 0):
+		# death sound
 		if (soundDeath):
 			soundDeath.play()
+		
+		# particle effects
 		var deathy = deathparticle.instantiate()
 		deathy.position = position + Vector2(0, -16)
 		add_sibling(deathy)
+		
+		# randomly give health pickup
+		if (randi() % 5 > 2):
+			var healthy = healthpickup.instantiate()
+			healthy.position = position + Vector2(0, -8)
+			add_sibling(healthy)
 		disable()
 	elif (soundGetHit):
 		soundGetHit.play()

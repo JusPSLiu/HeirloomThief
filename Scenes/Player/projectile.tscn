@@ -82,7 +82,7 @@ tracks/2/path = NodePath("Sprite:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.866667, 1),
+"times": PackedFloat32Array(1, 1.03333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 4, 4, 1), Color(0, 4, 4, 0)]

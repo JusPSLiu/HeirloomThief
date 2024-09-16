@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=35 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/attackbox.gd" id="3_b327e"]
 [ext_resource type="Texture2D" uid="uid://bdeq8d5m23orl" path="res://Art/Sprites/SpriteSheets/playerNormal.png" id="3_fds4o"]
 [ext_resource type="AudioStream" uid="uid://djgwmulqbi6kh" path="res://Sounds/player/jump.wav" id="6_3xbed"]
-[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="6_h3sup"]
 [ext_resource type="AudioStream" uid="uid://dnhvvfl6ejvq" path="res://Sounds/player/beenhit.wav" id="7_68r47"]
 [ext_resource type="AudioStream" uid="uid://dej2jkgj0xdw3" path="res://Sounds/player/slice.wav" id="8_yny8k"]
 [ext_resource type="AudioStream" uid="uid://t1rw5cv2nakn" path="res://Sounds/player/shoot.wav" id="9_16akr"]
@@ -465,19 +464,12 @@ bus = &"Sounds"
 
 [node name="healedSound" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource("11_h14xb")
+volume_db = -3.0
 bus = &"Sounds"
 
 [node name="collectSound" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource("10_k4ark")
 bus = &"Sounds"
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-3172, 38)
-scale = Vector2(14.5458, 12.854)
-color = Color(1, 0.69, 0.23, 1)
-shadow_enabled = true
-shadow_filter_smooth = 4.0
-texture = ExtResource("6_h3sup")
 
 [node name="roomDetector" type="Area2D" parent="."]
 

@@ -124,5 +124,6 @@ func YES_delete_file() -> void:
 
 
 func _toggle_settings():
+	buttonSound.play()
 	$maintitle.visible = !$maintitle.visible
 	$Settings.visible = !$maintitle.visible

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bawhbhakk6q0"]
+[gd_scene load_steps=39 format=3 uid="uid://bawhbhakk6q0"]
 
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="1_6rpfu"]
 [ext_resource type="Script" path="res://Scripts/UI/TitleScreen.gd" id="1_68eqn"]
@@ -13,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/Return.png" id="12_n2kjl"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="15_mudgg"]
 [ext_resource type="Texture2D" uid="uid://c16ifbt2sew8s" path="res://Art/UI/Pause/slidBar.png" id="15_oij1a"]
+[ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="16_2t6hu"]
 [ext_resource type="Texture2D" uid="uid://cu1x6hvu0mh3x" path="res://Art/UI/Pause/slidBarClic.png" id="16_g40ql"]
+[ext_resource type="Script" path="res://Scripts/UI/settings.gd" id="16_mp6dt"]
 [ext_resource type="Texture2D" uid="uid://bfa3ila75qrsc" path="res://Art/UI/Pause/gear.png" id="18_jmguy"]
 [ext_resource type="Texture2D" uid="uid://bkimf272sdcmv" path="res://Art/UI/Pause/gearClic.png" id="19_h633f"]
 [ext_resource type="Texture2D" uid="uid://bmmiiqigag568" path="res://Art/UI/Pause/gearHov.png" id="20_xte7y"]
@@ -705,7 +707,7 @@ script = ExtResource("1_68eqn")
 musicFader = NodePath("MusicPlayer/MusicController")
 Fader = NodePath("Fader")
 TitleAnimator = NodePath("TitleAnimator")
-buttonSound = NodePath("maintitle/PlayButton/ButtonSound")
+buttonSound = NodePath("ButtonSound")
 filename = NodePath("nameFile/LineEdit")
 saveListContainer = NodePath("FileMenu/ScrollContainer/VBoxContainer")
 confirmDeleteFilename = NodePath("DeletionConfirmation/fileName")
@@ -793,8 +795,6 @@ texture_hover = ExtResource("7_50pjy")
 texture_disabled = ExtResource("5_qdvgj")
 ignore_texture_size = true
 stretch_mode = 1
-
-[node name="ButtonSound" type="AudioStreamPlayer" parent="maintitle/PlayButton"]
 
 [node name="SettingsButton" type="TextureButton" parent="maintitle"]
 layout_mode = 0
@@ -1004,6 +1004,7 @@ texture_hover = SubResource("AtlasTexture_utrmd")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_uqgl8")
 volume_db = -80.0
+bus = &"Music"
 
 [node name="MusicController" type="AnimationPlayer" parent="MusicPlayer"]
 libraries = {
@@ -1011,7 +1012,12 @@ libraries = {
 }
 autoplay = "musicIn"
 
-[node name="Settings" type="Label" parent="."]
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_2t6hu")
+volume_db = -2.0
+bus = &"Sounds"
+
+[node name="Settings" type="Label" parent="." node_paths=PackedStringArray("sound", "soundSlider", "musicSlider")]
 visible = false
 layout_mode = 0
 offset_top = 48.0
@@ -1021,6 +1027,10 @@ theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 120
 text = "Settings"
 horizontal_alignment = 1
+script = ExtResource("16_mp6dt")
+sound = NodePath("../ButtonSound")
+soundSlider = NodePath("MenuContainer/SoundSlider")
+musicSlider = NodePath("MenuContainer/MusicSlider")
 
 [node name="MenuContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -1108,4 +1118,6 @@ texture_hover = SubResource("AtlasTexture_8psg4")
 [connection signal="pressed" from="DeletionConfirmation/goback" to="." method="dont_delete_file"]
 [connection signal="pressed" from="nameFile/confirmation_button" to="." method="make_new_file"]
 [connection signal="pressed" from="nameFile/Return" to="." method="_on_newgame_return_pressed"]
+[connection signal="value_changed" from="Settings/MenuContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Settings/MenuContainer/SoundSlider" to="Settings" method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="Settings/Return" to="." method="_toggle_settings"]

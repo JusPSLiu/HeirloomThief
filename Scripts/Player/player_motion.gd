@@ -35,6 +35,7 @@ var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false
 var transitioning = false
 var DO_NOT_MOVE = false
+var just_respawned = false
 var currentlyFloating = false
 var doorLocation = null
 
@@ -62,7 +63,10 @@ func _ready() -> void:
 	
 	if (SaveManager.respawn_point == Vector2.ZERO):
 		SaveManager.respawn_point = position
-	else: position = SaveManager.respawn_point
+	else:
+		position = SaveManager.respawn_point
+		camera.position_smoothing_enabled = false
+		just_respawned = true
 	
 	#camera.limit_bottom = 0
 	#camera.limit_top = 0
@@ -71,6 +75,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if (just_respawned):
+		camera.position_smoothing_enabled = true
+		just_respawned = false
 	move_and_slide()
 	# Add the gravity.
 	if is_on_floor():
@@ -245,7 +252,7 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 			if (deathAnimator != null):
 				deathAnimator.play("die")
 				$camera_carrot_on_stick.position.x = 0
-				#set_physics_process(false)
+				set_physics_process(false)
 				set_collision_layer_value(1, false)
 				hide()
 				var deathy = deathparticle.instantiate()
@@ -260,7 +267,9 @@ func get_hit(dmg : int, vec : Vector2) -> bool:
 
 func respawn():
 	position = SaveManager.respawn_point
-	#self.set_physics_process(true)
+	camera.position_smoothing_enabled = false
+	
+	self.set_physics_process(true)
 	set_collision_layer_value(1, true)
 	SaveManager.current_health = 4
 	velocity = Vector2(0, 0)
@@ -268,6 +277,8 @@ func respawn():
 	if (GUI):
 		GUI.show_curr_hp()
 	DO_NOT_MOVE = false
+	
+	just_respawned = true
 
 ## collectibles and health section :D
 func get_healed(hlth : int):
@@ -304,19 +315,14 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		camera_target_bottom = area.global_position.y + area.scale.y
 		camera_target_right = area.global_position.x + area.scale.x
 		transitioning = true
-		if (camera.global_position.y-350 > camera_target_top or camera.limit_top == camera_target_top):
-			camera.limit_top = camera_target_top
-		else:
-			camera.limit_top = camera.global_position.y-350
-		if (camera.global_position.x-640 > camera_target_left or camera.limit_left == camera_target_left):
-			camera.limit_left# = camera_target_left
-		else: camera.limit_left = camera.global_position.x-(640*1.5)
-		if (camera.global_position.y+350 < camera_target_bottom or camera.limit_bottom == camera_target_bottom):
-			camera.limit_bottom# = camera_target_bottom
-		else: camera.limit_bottom = camera.global_position.y+350
-		if (camera.global_position.x+640 < camera_target_right or camera.limit_right == camera_target_right):
-			camera.limit_right# = camera_target_right
-		else: camera.limit_right = camera.global_position.x+(640*1.5)
+		if (camera.global_position.y-360 < camera_target_top and camera.limit_top != camera_target_top):
+			camera.limit_top = camera.global_position.y-360
+		if (camera.global_position.x-640 < camera_target_left and camera.limit_left != camera_target_left):
+			camera.limit_left = camera.global_position.x-(640*1.5)
+		if (camera.global_position.y+360 > camera_target_bottom and camera.limit_bottom != camera_target_bottom):
+			camera.limit_bottom = camera.global_position.y+360
+		if (camera.global_position.x+640 > camera_target_right and camera.limit_right != camera_target_right):
+			camera.limit_right = camera.global_position.x+(640*1.5)
 		
 		SaveManager.current_room = area.room_number
 		if (SaveManager.visited_rooms.size() <= area.room_number):
@@ -367,7 +373,6 @@ func camera_transitions(delta):
 		
 		if (!transing):
 			transitioning = false
-			print_debug("TRANSITION PERIOD IS OVER")
 	
 	
 	#rint(camera.limit_bottom, " ", camera.limit_left, " ", camera.limit_bottom, " ", camera.limit_right)
