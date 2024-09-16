@@ -33,11 +33,12 @@ var coyoteTime = 0.14
 var boostimer = 0.3
 var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false
+var transitioning = false
 var DO_NOT_MOVE = false
 var currentlyFloating = false
 var doorLocation = null
 
-var camera_target_top = 0>0
+var camera_target_top = 0.0
 var camera_target_bottom = 0.0
 var camera_target_left = 0.0
 var camera_target_right = 0.0
@@ -134,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		$camera_carrot_on_stick.position.x = expDecay($camera_carrot_on_stick.position.x, 0, 2, delta)
 	
-	#camera_transitions(delta)
+	camera_transitions(delta)
 
 # i saw a yt video by freya holmer abt this being a better exponential lerp
 func expDecay(a, b, decay, dt):
@@ -294,15 +295,28 @@ func get_gem_upgrade(id:int):
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
 		
-		camera.limit_top = area.global_position.y
-		camera.limit_left = area.global_position.x
-		camera.limit_bottom = area.global_position.y + area.scale.y
-		camera.limit_right = area.global_position.x + area.scale.x
-		
-		#camera_target_top = area.global_position.y
-		#camera_target_left = area.global_position.x
-		#camera_target_bottom = area.global_position.y + area.scale.y
-		#camera_target_right = area.global_position.x + area.scale.x
+		#camera.limit_top = area.global_position.y
+		#camera.limit_left = area.global_position.x
+		#camera.limit_bottom = area.global_position.y + area.scale.y
+		#camera.limit_right = area.global_position.x + area.scale.x
+		camera_target_top = area.global_position.y
+		camera_target_left = area.global_position.x
+		camera_target_bottom = area.global_position.y + area.scale.y
+		camera_target_right = area.global_position.x + area.scale.x
+		transitioning = true
+		if (camera.global_position.y-350 > camera_target_top or camera.limit_top == camera_target_top):
+			camera.limit_top = camera_target_top
+		else:
+			camera.limit_top = camera.global_position.y-350
+		if (camera.global_position.x-640 > camera_target_left or camera.limit_left == camera_target_left):
+			camera.limit_left# = camera_target_left
+		else: camera.limit_left = camera.global_position.x-(640*1.5)
+		if (camera.global_position.y+350 < camera_target_bottom or camera.limit_bottom == camera_target_bottom):
+			camera.limit_bottom# = camera_target_bottom
+		else: camera.limit_bottom = camera.global_position.y+350
+		if (camera.global_position.x+640 < camera_target_right or camera.limit_right == camera_target_right):
+			camera.limit_right# = camera_target_right
+		else: camera.limit_right = camera.global_position.x+(640*1.5)
 		
 		SaveManager.current_room = area.room_number
 		if (SaveManager.visited_rooms.size() <= area.room_number):
@@ -326,9 +340,34 @@ func exit_doory(gotopos):
 
 func camera_transitions(delta):
 	var trans_speed = 5.0
-	camera.limit_top = lerpf(camera.limit_top, camera_target_top, trans_speed * delta)
-	camera.limit_left = lerpf(camera.limit_left, camera_target_left, trans_speed * delta)
-	camera.limit_bottom = lerpf(camera.limit_bottom, camera_target_bottom, trans_speed * delta)
-	camera.limit_right = lerpf(camera.limit_right, camera_target_right, trans_speed * delta)
+	if (transitioning):
+		# for some reason lerping and exp decay both are having trouble with this
+		# and the workaround looks a bit messy, but it works
+		var transing = false
+		
+		var prev_val = camera.limit_top
+		camera.limit_top = ceil(expDecay(camera.limit_top, camera_target_top, LERP_DECAY_RATE, delta))
+		if (camera.limit_top == prev_val): camera.limit_top = camera_target_top
+		else: transing = true
+		
+		prev_val = camera.limit_left
+		camera.limit_left = ceil(expDecay(camera.limit_left, camera_target_left, LERP_DECAY_RATE, delta))
+		if (camera.limit_left == prev_val): camera.limit_left = camera_target_left
+		else: transing = true
+		
+		prev_val = camera.limit_bottom
+		camera.limit_bottom = floor(expDecay(camera.limit_bottom, camera_target_bottom, LERP_DECAY_RATE, delta))
+		if (camera.limit_bottom == prev_val): camera.limit_bottom = camera_target_bottom
+		else: transing = true
+		
+		prev_val = camera.limit_right
+		camera.limit_right = floor(expDecay(camera.limit_right, camera_target_right, LERP_DECAY_RATE, delta))
+		if (camera.limit_right == prev_val): camera.limit_right = camera_target_right
+		else: transing = true
+		
+		if (!transing):
+			transitioning = false
+			print_debug("TRANSITION PERIOD IS OVER")
 	
-	print(camera.limit_bottom, " ", camera.limit_left, " ", camera.limit_bottom, " ", camera.limit_right)
+	
+	#rint(camera.limit_bottom, " ", camera.limit_left, " ", camera.limit_bottom, " ", camera.limit_right)

@@ -442,7 +442,6 @@ color = Color(0.867444, 0.00133418, 0.963343, 1)
 position = Vector2(3, 2)
 
 [node name="Camera2D" type="Camera2D" parent="camera_carrot_on_stick"]
-limit_top = -720
 position_smoothing_enabled = true
 position_smoothing_speed = 2.2
 
