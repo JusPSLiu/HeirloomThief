@@ -3,6 +3,7 @@ extends TextureRect
 @export var buttonSounds : AudioStreamPlayer
 @export var description : RichTextLabel
 @export var buttons : Array[TextureButton]
+@export var upgradeButton : TextureButton
 
 var currMode = 0
 
@@ -11,6 +12,12 @@ func _ready():
 
 func _set_up():
 	for i in range(4):
+		# set the selection background to only show up for the selected one
+		if (i == currMode):
+			buttons[i].get_child(1).show()
+		else: buttons[i].get_child(1).hide()
+		
+		# disable uncollected item buttons
 		if (SaveManager.powerstatus[i]):
 			buttons[i].set_focus_mode(Control.FocusMode.FOCUS_ALL)
 			buttons[i].set_disabled(false)
@@ -21,13 +28,17 @@ func _set_up():
 			buttons[i].set_disabled(true)
 			buttons[i].get_child(0).hide()
 	if (SaveManager.current_gems >= 2):
-		$upgrade.set_focus_mode(Control.FocusMode.FOCUS_ALL)
-		$upgrade.set_disabled(false)
+		upgradeButton.set_focus_mode(Control.FocusMode.FOCUS_ALL)
+		upgradeButton.set_disabled(false)
+		upgradeButton.set_focus_neighbor(SIDE_TOP, buttons[currMode].get_path())
 	else:
-		$upgrade.set_focus_mode(Control.FocusMode.FOCUS_NONE)
-		$upgrade.set_disabled(true)
+		upgradeButton.set_focus_mode(Control.FocusMode.FOCUS_NONE)
+		upgradeButton.set_disabled(true)
 
 func _select(item: int) -> void:
+	buttons[currMode].get_child(1).hide() # hide the outline of previous
+	buttons[item].get_child(1).show() # show outline of next
+	upgradeButton.set_focus_neighbor(SIDE_TOP, buttons[item].get_path()) # make the upgrade button let you select from there lol
 	buttonSounds.play()
 	currMode = item
 	

@@ -237,7 +237,7 @@ texture = ExtResource("14_7a5wj")
 centered = false
 script = ExtResource("16_r3vwa")
 maxPos = Vector2(-1.007, -0.326)
-minPos = Vector2(-0.149, -0.671)
+minPos = Vector2(0.1, -0.671)
 healthLocations = [NodePath("Room1/health0"), NodePath("Room6/health1")]
 gemLocations = [NodePath("Room1/gem0"), NodePath("Room1/gem1"), NodePath("Room5/gem2")]
 
@@ -517,7 +517,7 @@ texture_hover = ExtResource("8_btxw5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Upgrades" type="TextureRect" parent="BackColor" node_paths=PackedStringArray("buttonSounds", "description", "buttons")]
+[node name="Upgrades" type="TextureRect" parent="BackColor" node_paths=PackedStringArray("buttonSounds", "description", "buttons", "upgradeButton")]
 modulate = Color(0.803325, 0.803325, 0.803325, 1)
 layout_mode = 0
 anchor_right = 1.0
@@ -529,6 +529,7 @@ script = ExtResource("25_6dnu0")
 buttonSounds = NodePath("../../ButtonSound")
 description = NodePath("UpgradeSelectors/RichTextLabel")
 buttons = [NodePath("UpgradeSelectors/Stick"), NodePath("UpgradeSelectors/Ring"), NodePath("UpgradeSelectors/Cape"), NodePath("UpgradeSelectors/Crown")]
+upgradeButton = NodePath("upgrade")
 
 [node name="UpgradeSelectors" type="Control" parent="BackColor/Upgrades"]
 anchors_preset = 0
@@ -536,6 +537,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Stick" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
+z_index = 1
 layout_mode = 0
 offset_left = 372.0
 offset_top = 36.0
@@ -544,19 +546,28 @@ offset_bottom = 70.0
 scale = Vector2(4, 4)
 focus_neighbor_left = NodePath("../../Return")
 focus_neighbor_right = NodePath("../Ring")
+focus_neighbor_bottom = NodePath("../../upgrade")
 focus_next = NodePath("../Ring")
 focus_previous = NodePath("../../Return")
 texture_normal = ExtResource("25_di86o")
 texture_hover = ExtResource("25_gh5kc")
 texture_disabled = ExtResource("28_cfhbv")
-texture_focused = ExtResource("28_4mevs")
 
 [node name="StickIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Stick"]
+z_index = 1
 position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_igspc")
 animation = &"2"
 
+[node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Stick"]
+z_index = -1
+layout_mode = 0
+offset_right = 54.0
+offset_bottom = 34.0
+texture = ExtResource("28_4mevs")
+
 [node name="Ring" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
+z_index = 1
 layout_mode = 0
 offset_left = 580.0
 offset_top = 36.0
@@ -565,19 +576,26 @@ offset_bottom = 70.0
 scale = Vector2(4, 4)
 focus_neighbor_left = NodePath("../Stick")
 focus_neighbor_right = NodePath("../Cape")
+focus_neighbor_bottom = NodePath("../../upgrade")
 focus_next = NodePath("../Cape")
 focus_previous = NodePath("../Stick")
 texture_normal = ExtResource("26_i4aay")
 texture_hover = ExtResource("27_js21s")
 texture_disabled = ExtResource("32_8o2oa")
-texture_focused = ExtResource("31_hbfkg")
 
 [node name="RingIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Ring"]
 position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_xh7ye")
 animation = &"1"
 
+[node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Ring"]
+z_index = -1
+offset_right = 54.0
+offset_bottom = 34.0
+texture = ExtResource("31_hbfkg")
+
 [node name="Cape" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
+z_index = 1
 layout_mode = 0
 offset_left = 788.0
 offset_top = 36.0
@@ -586,19 +604,26 @@ offset_bottom = 70.0
 scale = Vector2(4, 4)
 focus_neighbor_left = NodePath("../Ring")
 focus_neighbor_right = NodePath("../Crown")
+focus_neighbor_bottom = NodePath("../../upgrade")
 focus_next = NodePath("../Crown")
 focus_previous = NodePath("../Ring")
 texture_normal = ExtResource("29_a1und")
 texture_hover = ExtResource("30_ihrhf")
 texture_disabled = ExtResource("34_r03wg")
-texture_focused = ExtResource("34_4vn75")
 
 [node name="CapeIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Cape"]
 position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_onysl")
 animation = &"1"
 
+[node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Cape"]
+z_index = -1
+offset_right = 54.0
+offset_bottom = 34.0
+texture = ExtResource("34_4vn75")
+
 [node name="Crown" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
+z_index = 1
 layout_mode = 0
 offset_left = 996.0
 offset_top = 36.0
@@ -606,16 +631,22 @@ offset_right = 1050.0
 offset_bottom = 70.0
 scale = Vector2(4, 4)
 focus_neighbor_left = NodePath("../Cape")
+focus_neighbor_bottom = NodePath("../../upgrade")
 focus_previous = NodePath("../Cape")
 texture_normal = ExtResource("31_fw8fw")
 texture_hover = ExtResource("32_a3vm8")
 texture_disabled = ExtResource("40_5yady")
-texture_focused = ExtResource("37_t7me0")
 
 [node name="StickIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
 position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_igspc")
 animation = &"1"
+
+[node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
+z_index = -1
+offset_right = 54.0
+offset_bottom = 34.0
+texture = ExtResource("37_t7me0")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
@@ -640,8 +671,9 @@ offset_top = 280.0
 offset_right = 628.0
 offset_bottom = 305.0
 scale = Vector2(4, 4)
-focus_neighbor_left = NodePath("../UpgradeSelectors/Cape")
-focus_previous = NodePath("../UpgradeSelectors/Cape")
+focus_neighbor_left = NodePath("../Return")
+focus_neighbor_bottom = NodePath("../Return")
+focus_previous = NodePath("../Return")
 texture_normal = ExtResource("42_r844g")
 texture_hover = ExtResource("43_iwaiv")
 texture_focused = ExtResource("43_iwaiv")
@@ -718,8 +750,8 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="togglePause"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -727,8 +759,8 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]

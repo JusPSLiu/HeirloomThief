@@ -1,13 +1,13 @@
 extends Node
 
 var current_health = 2
-var current_gems = 0
+var current_gems = 4 ## TODO set back to zero
 var max_health = 4
 var current_room = 0
 var visited_rooms : PackedByteArray = [false,false,false,false,false,false,false,false,false,false]
 var currfile = "" # the default name given to the file in the system
 var currsavename = "" # the custom name by the user, less restrictive than windows
-var powerstatus = [1, 0, 0, 0, 0]
+var powerstatus = [1, 1, 1, 1, 1] ## TODO reset to [1, 0, 0, 0, 0]
 var collectedGems : Dictionary = {}
 var collectedHealth : Dictionary = {}
 var interactedElements : Dictionary = {}
