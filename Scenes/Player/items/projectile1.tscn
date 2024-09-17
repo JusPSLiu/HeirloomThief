@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://doprt5vtepg72"]
 
-[ext_resource type="Script" path="res://Scripts/Enemies/projectile.gd" id="1_ccm41"]
+[ext_resource type="Script" path="res://Scripts/Player/projectile_weak.gd" id="1_7kyfh"]
 [ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="2_yr4m7"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_tyap1"]
 
@@ -109,8 +109,7 @@ _data = {
 [node name="Projectile" type="Area2D"]
 texture_filter = 1
 collision_mask = 17
-script = ExtResource("1_ccm41")
-speed = 500.0
+script = ExtResource("1_7kyfh")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wsnlq")

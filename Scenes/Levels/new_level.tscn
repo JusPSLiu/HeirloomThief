@@ -1719,7 +1719,7 @@ scale = Vector2(1280, 2160)
 room_number = 8
 
 [node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator") instance=ExtResource("3_juudc")]
-position = Vector2(-19907, 1521)
+position = Vector2(-1823, -287)
 floor_snap_length = 12.0
 GUI = NodePath("../UI/gui")
 deathAnimator = NodePath("../UI/DeathAnimator")
@@ -1755,8 +1755,9 @@ libraries = {
 "": SubResource("AnimationLibrary_y6vgx")
 }
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("Fader") instance=ExtResource("7_ukw63")]
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("Fader", "player") instance=ExtResource("7_ukw63")]
 Fader = NodePath("../Fader")
+player = NodePath("../Player")
 
 [node name="Fader" parent="." instance=ExtResource("8_0cnxj")]
 

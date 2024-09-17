@@ -14,8 +14,16 @@ extends CanvasLayer
 @export var Fader : AnimationPlayer
 @export var soundSlider : HSlider
 @export var musicSlider : HSlider
+@export var player : CharacterBody2D
 
 var pausable : bool = false
+var unfocused : bool = true # checks if anything is focused; for controller users
+var currentMenu : int = 0
+enum menu {
+	pause=0,
+	upgrades=1,
+	settings=2
+}
 
 func _ready():
 	pausable = true
@@ -43,10 +51,19 @@ func _on_quit_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/Screens/TitleScreen.tscn")
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and !event.is_echo():
-		if event.keycode == KEY_ESCAPE and pausable:
-			if event.pressed:
-				togglePause()
+	if (event is not InputEventMouse):
+		if event is InputEventKey and !event.is_echo():
+			if event.keycode == KEY_ESCAPE and pausable:
+				if event.pressed:
+					togglePause()
+		if (unfocused):
+			if (event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right")):
+				unfocused = false
+				match(currentMenu):
+					menu.pause:
+						$BackColor/MainMenu/VBoxContainer/Resume.grab_focus()
+					menu.settings:
+						$BackColor/Settings/MenuContainer/MusicSlider.grab_focus()
 
 func togglePause():
 	sound.play()
@@ -61,13 +78,16 @@ func togglePause():
 		map.clicking = false
 	else:
 		#if pausing then make sure the display is right
-		heart_number.text = str(int(SaveManager.max_health)>>1)
-		gem_number.text = str(SaveManager.current_gems)
-		upgrade_available.visible = (SaveManager.current_gems > 1)
+		update_gui()
 		#tell the map to set up
 		#also make sure you start up in the main pause menu
 		map.set_up()
 		_to_main_pause_menu()
+
+func update_gui():
+	heart_number.text = str(int(SaveManager.max_health)>>1)
+	gem_number.text = str(SaveManager.current_gems)
+	upgrade_available.visible = (SaveManager.current_gems > 1)
 
 func set_pausability(pause : bool):
 	pausable = pause
@@ -82,24 +102,37 @@ func _on_sound_slider_value_changed(value):
 
 #go to settings menu
 func _to_settings_menu() -> void:
+	currentMenu = menu.settings
 	sound.play()
 	settings_menu.show()
 	main_menu.hide()
 	upgrade_menu.hide()
 	map.mapIsShown = false
+	unfocused = true
 
 #go to upgrade menu
 func _to_upgrade_menu() -> void:
+	currentMenu = menu.upgrades
 	sound.play()
 	upgrade_menu.show()
 	settings_menu.hide()
 	main_menu.hide()
 	map.mapIsShown = false
+	$BackColor/Upgrades/UpgradeSelectors/Stick.grab_focus()
+	$BackColor/Upgrades._set_up()
 
 #back to main pause menu
 func _to_main_pause_menu():
+	currentMenu = menu.pause
 	sound.play()
 	main_menu.show()
 	settings_menu.hide()
 	upgrade_menu.hide()
 	map.mapIsShown = true
+	unfocused = true
+
+func player_update_powerstatus(currMode):
+	if (player):
+		player.update_powerstatus(currMode)
+		return true
+	return false

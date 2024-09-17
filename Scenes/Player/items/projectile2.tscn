@@ -1,0 +1,138 @@
+[gd_scene load_steps=8 format=3 uid="uid://5l3dw2l58ex2"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/projectile.gd" id="1_l281a"]
+[ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="2_aecrl"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_56mh3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wsnlq"]
+radius = 3.0
+
+[sub_resource type="Animation" id="Animation_kay2s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 4, 4, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, 15)]
+}
+
+[sub_resource type="Animation" id="Animation_bld8x"]
+resource_name = "projectile_fx"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.866667, 1),
+"transitions": PackedFloat32Array(2, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"die_me"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 4, 4, 1), Color(0, 4, 4, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 6), Vector2(0.8, 0.8), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_okajs"]
+_data = {
+"RESET": SubResource("Animation_kay2s"),
+"projectile_fx": SubResource("Animation_bld8x")
+}
+
+[node name="Projectile" type="Area2D"]
+texture_filter = 1
+collision_mask = 17
+script = ExtResource("1_l281a")
+speed = 500.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wsnlq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 4, 4, 1)
+texture = ExtResource("2_aecrl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 3
+scale = Vector2(15, 15)
+color = Color(0.2, 1, 1, 1)
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+shadow_item_cull_mask = 3
+texture = ExtResource("3_56mh3")
+
+[node name="flight" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_okajs")
+}
+autoplay = "projectile_fx"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

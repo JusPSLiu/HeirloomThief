@@ -1,0 +1,148 @@
+[gd_scene load_steps=21 format=3 uid="uid://bvqi4fjlyfrag"]
+
+[ext_resource type="Texture2D" uid="uid://no83po41ri1f" path="res://Art/Backgrounds/upgrades.png" id="1_3y8s3"]
+[ext_resource type="Script" path="res://Scripts/UI/UpgradeMenu.gd" id="2_e8142"]
+[ext_resource type="Texture2D" uid="uid://bb3yvp5cbd8do" path="res://Art/UI/Pause/upgrades/stickbutton.png" id="3_nsysw"]
+[ext_resource type="Texture2D" uid="uid://bqi5bnjn6wvnr" path="res://Art/UI/Pause/upgrades/stickbutton_hover.png" id="4_lo1wg"]
+[ext_resource type="Texture2D" uid="uid://c3qwwka3ajg2l" path="res://Art/UI/Pause/upgrades/stickbutton_selected.png" id="5_y2ntt"]
+[ext_resource type="Texture2D" uid="uid://bedvcb3hsqi7w" path="res://Art/UI/Pause/upgrades/ringbutton.png" id="6_47lq1"]
+[ext_resource type="Texture2D" uid="uid://4p24j440t2i" path="res://Art/UI/Pause/upgrades/ringbutton_hover.png" id="7_i88mj"]
+[ext_resource type="Texture2D" uid="uid://nqxyc8q03nu1" path="res://Art/UI/Pause/upgrades/ringbutton_selected.png" id="8_34462"]
+[ext_resource type="Texture2D" uid="uid://cadc8g3s8x6dq" path="res://Art/UI/Pause/upgrades/capebutton.png" id="9_4wwjp"]
+[ext_resource type="Texture2D" uid="uid://cepraf03ckcsm" path="res://Art/UI/Pause/upgrades/capebutton_hover.png" id="10_e2muc"]
+[ext_resource type="Texture2D" uid="uid://cdlpjfnqibfkc" path="res://Art/UI/Pause/upgrades/capebutton_locked.png" id="11_24yuk"]
+[ext_resource type="Texture2D" uid="uid://bilgy5nihpkq7" path="res://Art/UI/Pause/upgrades/capebutton_selected.png" id="12_evg2k"]
+[ext_resource type="Texture2D" uid="uid://cu01c4hex65fp" path="res://Art/UI/Pause/upgrades/crownbutton.png" id="13_61bp2"]
+[ext_resource type="Texture2D" uid="uid://4jjr4fjr8rgu" path="res://Art/UI/Pause/upgrades/crownbutton_hover.png" id="14_l0rvr"]
+[ext_resource type="Texture2D" uid="uid://dnjhef1lwglyc" path="res://Art/UI/Pause/upgrades/crownbutton_selected.png" id="15_xnnwd"]
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="16_g8apn"]
+[ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/Return.png" id="17_e2hjp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tqmp"]
+atlas = ExtResource("17_e2hjp")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri5ei"]
+atlas = ExtResource("17_e2hjp")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6eft"]
+atlas = ExtResource("17_e2hjp")
+region = Rect2(44, 0, 22, 22)
+
+[node name="Upgrades" type="TextureRect" node_paths=PackedStringArray("buttonSounds", "description")]
+visible = false
+modulate = Color(0.803325, 0.803325, 0.803325, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3y8s3")
+script = ExtResource("2_e8142")
+buttonSounds = NodePath("")
+description = NodePath("UpgradeSelectors/RichTextLabel")
+
+[node name="UpgradeSelectors" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Stick" type="TextureButton" parent="UpgradeSelectors"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 36.0
+offset_right = 426.0
+offset_bottom = 70.0
+scale = Vector2(4, 4)
+focus_neighbor_left = NodePath("../../Return")
+focus_neighbor_right = NodePath("../Ring")
+focus_next = NodePath("../Ring")
+focus_previous = NodePath("../../Return")
+texture_normal = ExtResource("3_nsysw")
+texture_hover = ExtResource("4_lo1wg")
+texture_focused = ExtResource("5_y2ntt")
+
+[node name="Ring" type="TextureButton" parent="UpgradeSelectors"]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 36.0
+offset_right = 634.0
+offset_bottom = 70.0
+scale = Vector2(4, 4)
+focus_neighbor_left = NodePath("../Stick")
+focus_neighbor_right = NodePath("../Cape")
+focus_next = NodePath("../Cape")
+focus_previous = NodePath("../Stick")
+texture_normal = ExtResource("6_47lq1")
+texture_hover = ExtResource("7_i88mj")
+texture_focused = ExtResource("8_34462")
+
+[node name="Cape" type="TextureButton" parent="UpgradeSelectors"]
+layout_mode = 0
+offset_left = 788.0
+offset_top = 36.0
+offset_right = 842.0
+offset_bottom = 70.0
+scale = Vector2(4, 4)
+focus_neighbor_left = NodePath("../Ring")
+focus_neighbor_right = NodePath("../Crown")
+focus_next = NodePath("../Crown")
+focus_previous = NodePath("../Ring")
+focus_mode = 0
+disabled = true
+texture_normal = ExtResource("9_4wwjp")
+texture_hover = ExtResource("10_e2muc")
+texture_disabled = ExtResource("11_24yuk")
+texture_focused = ExtResource("12_evg2k")
+
+[node name="Crown" type="TextureButton" parent="UpgradeSelectors"]
+layout_mode = 0
+offset_left = 996.0
+offset_top = 36.0
+offset_right = 1050.0
+offset_bottom = 70.0
+scale = Vector2(4, 4)
+focus_neighbor_left = NodePath("../Cape")
+focus_previous = NodePath("../Cape")
+texture_normal = ExtResource("13_61bp2")
+texture_hover = ExtResource("14_l0rvr")
+texture_focused = ExtResource("15_xnnwd")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UpgradeSelectors"]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 482.0
+offset_right = 798.0
+offset_bottom = 601.0
+scale = Vector2(2, 2)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("16_g8apn")
+text = "i remember last time i saw this ere ring. just left home. on me own. ran to the ports of (name). the frost started. thought i wouldn make it when the light showed up. a great big bonfire started by a smol ring. course the (name) family took it back. then they fell and the (current_house_name) took it."
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeSelectors"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Return" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -120.0
+offset_right = 54.0
+offset_bottom = -98.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_3tqmp")
+texture_pressed = SubResource("AtlasTexture_ri5ei")
+texture_hover = SubResource("AtlasTexture_h6eft")
+
+[connection signal="focus_entered" from="UpgradeSelectors/Stick" to="." method="_select" binds= [0]]
+[connection signal="focus_entered" from="UpgradeSelectors/Ring" to="." method="_select" binds= [1]]
+[connection signal="focus_entered" from="UpgradeSelectors/Cape" to="." method="_select" binds= [2]]
+[connection signal="focus_entered" from="UpgradeSelectors/Crown" to="." method="_select" binds= [3]]
+[connection signal="pressed" from="UpgradeSelectors/Crown" to="." method="_select" binds= [3]]

@@ -1,10 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=29 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
 [ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="2_rs5m2"]
-[ext_resource type="Script" path="res://Scripts/Player/attackbox.gd" id="3_b327e"]
-[ext_resource type="Texture2D" uid="uid://bdeq8d5m23orl" path="res://Art/Sprites/SpriteSheets/playerNormal.png" id="3_fds4o"]
 [ext_resource type="AudioStream" uid="uid://djgwmulqbi6kh" path="res://Sounds/player/jump.wav" id="6_3xbed"]
 [ext_resource type="AudioStream" uid="uid://dnhvvfl6ejvq" path="res://Sounds/player/beenhit.wav" id="7_68r47"]
 [ext_resource type="AudioStream" uid="uid://dej2jkgj0xdw3" path="res://Sounds/player/slice.wav" id="8_yny8k"]
@@ -14,7 +12,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wi3qs"]
 shader = ExtResource("2_rs5m2")
-shader_parameter/normal_map = ExtResource("3_fds4o")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2pqq"]
 radius = 15.0
@@ -22,7 +19,6 @@ height = 48.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]
 shader = ExtResource("2_rs5m2")
-shader_parameter/normal_map = ExtResource("3_fds4o")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dsjt"]
 atlas = ExtResource("2_lmbdo")
@@ -178,193 +174,6 @@ _data = {
 "player_injured": SubResource("Animation_qg8hs")
 }
 
-[sub_resource type="Animation" id="Animation_r2vo8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:disable_mode")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("rotator/ColorRect:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.338671]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("rotator/ColorRect:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("rotator/Polygon2D:polygon")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("rotator:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath(".:process_mode")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_m7rku"]
-resource_name = "shoot"
-step = 0.01
-
-[sub_resource type="Animation" id="Animation_phhkb"]
-resource_name = "swing"
-length = 0.4
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:disable_mode")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.22),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [2, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.22),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("rotator/ColorRect:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.19, 0.21),
-"transitions": PackedFloat32Array(0.2, 1, 1),
-"update": 0,
-"values": [-0.698132, 0.350811, 0.338671]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("rotator/ColorRect:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.19, 0.22),
-"transitions": PackedFloat32Array(0.4, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.2, 1), Vector2(1, 1), Vector2(1, 1), Vector2(0.1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("rotator/Polygon2D:polygon")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.01, 0.09, 0.2),
-"transitions": PackedFloat32Array(0.4, 0.6, 1),
-"update": 0,
-"values": [PackedVector2Array(1, 0, 83, -40), PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32), PackedVector2Array(1, 0, 85, 32)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("rotator:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.523599, 0.523599]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath(".:process_mode")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.22),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 4]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m0gdd"]
-_data = {
-"RESET": SubResource("Animation_r2vo8"),
-"shoot": SubResource("Animation_m7rku"),
-"swing": SubResource("Animation_phhkb")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hr2v"]
 size = Vector2(0, 0)
 
@@ -405,38 +214,6 @@ libraries = {
 "": SubResource("AnimationLibrary_tb5uq")
 }
 
-[node name="playerattacks" type="AnimationPlayer" parent="."]
-root_node = NodePath("../attackbox")
-libraries = {
-"": SubResource("AnimationLibrary_m0gdd")
-}
-
-[node name="attackbox" type="Area2D" parent="."]
-process_mode = 4
-visible = false
-position = Vector2(1, 12)
-scale = Vector2(1.5, 1.5)
-collision_layer = 0
-script = ExtResource("3_b327e")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackbox"]
-position = Vector2(0, -9)
-polygon = PackedVector2Array(2, -17, 62.6667, -72.3333, 98, -49.6667, 113, -1, 100.667, 55.6667, 64, 85, 1, 24)
-
-[node name="rotator" type="Node2D" parent="attackbox"]
-
-[node name="Polygon2D" type="Polygon2D" parent="attackbox/rotator"]
-color = Color(0.724627, 0.000887531, 0.805243, 1)
-polygon = PackedVector2Array(1, 0, 83, -40, 91, -18, 92, 3, 90, 21, 85, 32)
-
-[node name="ColorRect" type="ColorRect" parent="attackbox/rotator"]
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 92.0
-offset_bottom = 3.0
-rotation = 0.338671
-color = Color(0.867444, 0.00133418, 0.963343, 1)
-
 [node name="camera_carrot_on_stick" type="Node2D" parent="."]
 position = Vector2(3, 2)
 
@@ -476,5 +253,4 @@ bus = &"Sounds"
 [node name="collider" type="CollisionShape2D" parent="roomDetector"]
 shape = SubResource("RectangleShape2D_2hr2v")
 
-[connection signal="body_entered" from="attackbox" to="attackbox" method="_on_body_entered"]
 [connection signal="area_entered" from="roomDetector" to="." method="_on_room_detector_area_entered"]

@@ -1,13 +1,16 @@
 extends CharacterBody2D
 
-@export var audioPlayer : AudioStreamPlayer2D
+# exported variables
 @export var GUI : Control
 @export var deathAnimator : AnimationPlayer
+@export var jumpsound : AudioStreamPlayer2D
+@export var hitsound : AudioStreamPlayer2D
+@export var slashsound : AudioStreamPlayer2D
+@export var shootsound : AudioStreamPlayer2D
+@export var healedsound : AudioStreamPlayer2D
+@export var collectsound : AudioStreamPlayer2D
 
-@onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
-@onready var projectile = preload("res://Scenes/Player/projectile.tscn")
-@onready var deathparticle = preload("res://Scenes/Player/death.tscn")
-
+# constant variables
 const SPEED = 500.0 # player movement speed
 const BOOST_SPEED = 2400.0 # player dash speed
 const BOOST_COOLDOWN = 0.5 # player dash cooldown rate (in seconds)
@@ -15,51 +18,42 @@ const JUMP_VELOCITY = -1000.0 # player jump velocity
 const COYOTE_MAX = 0.1 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
 
+# automatically initialized variables
+@onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
+@onready var projectile = preload("res://Scenes/Player/items/projectile1.tscn")
+@onready var deathparticle = preload("res://Scenes/Player/death.tscn")
 
-@export var jumpsound : AudioStreamPlayer2D
-@export var hitsound : AudioStreamPlayer2D
-@export var slashsound : AudioStreamPlayer2D
-@export var shootsound : AudioStreamPlayer2D
-@export var healedsound : AudioStreamPlayer2D
-@export var collectsound : AudioStreamPlayer2D
-#@onready var jumpsound = preload("res://Sounds/player/jump.wav")
-#@onready var hitsound = preload("res://Sounds/player/beenhit.wav")
-#@onready var slashsound = preload("res://Sounds/player/slice.wav")
-#@onready var shoot = preload("res://Sounds/player/shoot.wav")
-#@onready var healedsound = preload("res://Sounds/player/get_healed.wav")
-#@onready var collectsound = preload("res://Sounds/player/collect.wav")
-
+# regular variables
 var coyoteTime = 0.14
-var boostimer = 0.3
+var boostimer = 0.3 # cooldown for boost
 var currentDirection = false # false == left, true == right, used for dash
-var doublejumped = false
-var transitioning = false
-var DO_NOT_MOVE = false
-var just_respawned = false
-var currentlyFloating = false
-var doorLocation = null
-
+var doublejumped = false # has double jumped, do full jump height
+var DO_NOT_MOVE = false # not actually a const, just really important
+var currentlyFloating = false # for animation; floating means air animation
+var doorLocation = null # location of other door; null if not there
+# Abilities
+var currentAbilities : Array = [-1, 0, 0, 0, 0]
+var stick : Node2D
+# specifically camera variables
+var just_respawned = false # just respawned; camera just snapped, turn back on smoothing plz
+var transitioning = false # camera is moving
 var camera_target_top = 0.0
 var camera_target_bottom = 0.0
 var camera_target_left = 0.0
 var camera_target_right = 0.0
 
-# Abilities
-var currentAbilities : Array = [false, false, false]
-var currentUpgrades : Array = [false, false, false]
 enum ability {
-	ring = 0,
-	cape = 1,
-	boot = 2
+	stick = 0,
+	ring = 1,
+	cape = 2,
+	crown = 3,
+	hook = 4
 }
 
 # when spawn in, activate proper abilities
 func _ready() -> void:
-	currentAbilities[ability.ring] = true
-	#currentAbilities[ability.cape] = true
-	#currentAbilities[ability.boot] = true
-	#currentAbilities = SaveManager.powerstatus
-	#currentUpgrades = SaveManager.powerupgradestatus
+	#SaveManager.powerstatus[ability.ring] = 1
+	set_powerstatus()
 	
 	if (SaveManager.respawn_point == Vector2.ZERO):
 		SaveManager.respawn_point = position
@@ -144,23 +138,21 @@ func _physics_process(delta: float) -> void:
 	
 	camera_transitions(delta)
 
-# i saw a yt video by freya holmer abt this being a better exponential lerp
-func expDecay(a, b, decay, dt):
-	return b+(a-b)*exp(-decay*dt)
 
+## Inputs
 # using an interrupt for controls other than run because polling is dumb
 func _input(event: InputEvent) -> void:
 	# if mouse event
 	if (!DO_NOT_MOVE):
 		if (event is InputEventMouse):
 			# basic meelee attack
-			if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
+			if (event.is_action_pressed("Attack") and !stick.get_child(0).is_playing()):
 				#MAKE SURE NOT JUST PAUSING
 				if (event.position.x > 1152 && event.position.x < 1248):
 					if (event.position.y > 32 && event.position.y < 128):
 						return
-				$playerattacks.play("swing")
-				$attackbox.look_at(get_global_mouse_position())
+				stick.get_child(0).play("swing")
+				stick.get_child(1).look_at(get_global_mouse_position())
 				if (slashsound): slashsound.play()
 				
 				# slight double jump for bat attack
@@ -168,10 +160,10 @@ func _input(event: InputEvent) -> void:
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 			
-			elif (event.is_action_pressed("Shoot") and !$playerattacks.is_playing()):
+			elif (event.is_action_pressed("Shoot") and !stick.get_child(0).is_playing()):
 				if (currentAbilities[ability.ring]):
 					if (shootsound): shootsound.play()
-					$playerattacks.play("shoot")
+					stick.get_child(0).play("shoot")
 					#make the projectile; possibly replace with special player projectile later
 					var newprojectile = projectile.instantiate()
 					newprojectile.position = position
@@ -205,24 +197,24 @@ func _input(event: InputEvent) -> void:
 					velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
 					boostimer = BOOST_COOLDOWN
 			# basic meelee attack
-			if (event.is_action_pressed("Attack") and !$playerattacks.is_playing()):
-				$playerattacks.play("swing")
-				$attackbox.rotation = getSwingAngle()
+			if (event.is_action_pressed("Attack") and !stick.get_child(0).is_playing()):
+				stick.get_child(0).play("swing")
+				stick.get_child(1).rotation = getSwingAngle()
 				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
-			if (event.is_action_pressed("keyboardslice") and !$playerattacks.is_playing()):
-				$playerattacks.play("swing")
-				$attackbox.rotation = 0 if currentDirection else PI
+			if (event.is_action_pressed("keyboardslice") and !stick.get_child(0).is_playing()):
+				stick.get_child(0).play("swing")
+				stick.get_child(1).rotation = 0 if currentDirection else PI
 				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 
-
+# get input angle
 func getSwingAngle():
 	var joystickInput = Vector2(
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
@@ -236,7 +228,7 @@ func getSwingAngle():
 	return joystickInput.angle()
 
 
-# INJURY CONTROL
+## INJURY CONTROL
 func get_hit(dmg : int, vec : Vector2) -> bool:
 	if $player_fx.is_playing():
 		return false
@@ -280,7 +272,8 @@ func respawn():
 	
 	just_respawned = true
 
-## collectibles and health section :D
+
+## Upgrades and Health section :D
 func get_healed(hlth : int):
 	SaveManager.current_health += hlth
 	if (healedsound): healedsound.play()
@@ -303,6 +296,44 @@ func get_gem_upgrade(id:int):
 		SaveManager.collect_item(SaveManager.Item.gem, id)
 		if (collectsound): collectsound.play()
 
+## Powerups
+func update_powerstatus(currMode):
+	currMode = clamp(int(currMode), 0, ability.hook)
+	print(currentAbilities)
+	currentAbilities[currMode] += 1
+	print(currentAbilities)
+	SaveManager.powerstatus[currMode] += 1
+	
+	if (currMode == ability.ring):
+		projectile = load("res://Scenes/Player/items/projectile"+str(clamp(currentAbilities[ability.ring], 1, 2))+".tscn")
+	elif (currMode == ability.stick):
+		if (stick):
+			stick.queue_free()
+		var newstick = load("res://Scenes/Player/items/stick_attack"+str(clamp(currentAbilities[ability.stick], 1, 2))+".tscn")
+		stick = newstick.instantiate()
+		add_child(stick)
+		stick.position = Vector2.ZERO
+
+func set_powerstatus():
+	# update ring if must
+	if (currentAbilities[ability.ring] != SaveManager.powerstatus[ability.ring]):
+		if (SaveManager.powerstatus[ability.ring] == 1):
+			projectile = preload("res://Scenes/Player/items/projectile1.tscn")
+		else:
+			projectile = preload("res://Scenes/Player/items/projectile2.tscn")
+	
+	# update stick if must
+	if (currentAbilities[ability.stick] != SaveManager.powerstatus[ability.stick]):
+		if (stick):
+			stick.queue_free()
+		var newstick = load("res://Scenes/Player/items/stick_attack"+str(clamp(currentAbilities[ability.stick], 1, 2))+".tscn")
+		stick = newstick.instantiate()
+		add_child(stick)
+		stick.position = Vector2.ZERO
+	
+	currentAbilities = SaveManager.powerstatus
+
+## Rooms
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
 		# set the camera limits
@@ -336,22 +367,11 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 			SaveManager.visited_rooms.append_array(newArr)
 		SaveManager.visited_rooms[area.room_number] = true
 
-func get_checkpoint(positron):
-	SaveManager.respawn_point = positron
-	SaveManager.save_game()
-
-func allow_doory(gotopos):
-	doorLocation = gotopos
-
-func exit_doory(gotopos):
-	if (doorLocation == gotopos):
-		doorLocation = null
-
 func camera_transitions(delta):
-	var trans_speed = 5.0
 	if (transitioning):
 		# for some reason lerping and exp decay both are having trouble with this
 		# and the workaround looks a bit messy, but it works
+		#var trans_speed = 5.0 # im using lerp decay rate, no need for this thing
 		var transing = false
 		
 		var prev_val = camera.limit_top
@@ -376,6 +396,21 @@ func camera_transitions(delta):
 		
 		if (!transing):
 			transitioning = false
-	
-	
-	#rint(camera.limit_bottom, " ", camera.limit_left, " ", camera.limit_bottom, " ", camera.limit_right)
+
+
+## Checkpoints and Doors
+func get_checkpoint(positron):
+	SaveManager.respawn_point = positron
+	SaveManager.save_game()
+
+func allow_doory(gotopos):
+	doorLocation = gotopos
+
+func exit_doory(gotopos):
+	if (doorLocation == gotopos):
+		doorLocation = null
+
+
+# i saw a yt video by freya holmer abt this being a better exponential lerp
+func expDecay(a, b, decay, dt):
+	return b+(a-b)*exp(-decay*dt)
