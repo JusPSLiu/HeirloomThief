@@ -18,6 +18,12 @@ func _set_up():
 		else:
 			buttons[i].set_focus_mode(Control.FocusMode.FOCUS_NONE)
 			buttons[i].set_disabled(true)
+	if (SaveManager.current_gems >= 2):
+		$upgrade.set_focus_mode(Control.FocusMode.FOCUS_ALL)
+		$upgrade.set_disabled(false)
+	else:
+		$upgrade.set_focus_mode(Control.FocusMode.FOCUS_NONE)
+		$upgrade.set_disabled(true)
 
 func _select(item: int) -> void:
 	buttonSounds.play()
