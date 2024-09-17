@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=61 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -36,14 +36,18 @@
 [ext_resource type="Texture2D" uid="uid://c4xopma2h0ny0" path="res://Art/UI/Pause/upgrades/stickbutton_locked.png" id="28_cfhbv"]
 [ext_resource type="Texture2D" uid="uid://cadc8g3s8x6dq" path="res://Art/UI/Pause/upgrades/capebutton.png" id="29_a1und"]
 [ext_resource type="Texture2D" uid="uid://cepraf03ckcsm" path="res://Art/UI/Pause/upgrades/capebutton_hover.png" id="30_ihrhf"]
+[ext_resource type="Texture2D" uid="uid://3u8kulkvbne5" path="res://Art/UI/Pause/upgrades/items/stick1.png" id="30_tbhvj"]
+[ext_resource type="Texture2D" uid="uid://drohj8iv5hkh2" path="res://Art/UI/Pause/upgrades/items/stick2.png" id="31_eou02"]
 [ext_resource type="Texture2D" uid="uid://cu01c4hex65fp" path="res://Art/UI/Pause/upgrades/crownbutton.png" id="31_fw8fw"]
 [ext_resource type="Texture2D" uid="uid://nqxyc8q03nu1" path="res://Art/UI/Pause/upgrades/ringbutton_selected.png" id="31_hbfkg"]
 [ext_resource type="Texture2D" uid="uid://b8gd2myk6m2e2" path="res://Art/UI/Pause/upgrades/ringbutton_locked.png" id="32_8o2oa"]
 [ext_resource type="Texture2D" uid="uid://4jjr4fjr8rgu" path="res://Art/UI/Pause/upgrades/crownbutton_hover.png" id="32_a3vm8"]
 [ext_resource type="Texture2D" uid="uid://bilgy5nihpkq7" path="res://Art/UI/Pause/upgrades/capebutton_selected.png" id="34_4vn75"]
 [ext_resource type="Texture2D" uid="uid://cdlpjfnqibfkc" path="res://Art/UI/Pause/upgrades/capebutton_locked.png" id="34_r03wg"]
+[ext_resource type="Texture2D" uid="uid://cfxtdi101kdok" path="res://Art/UI/Pause/upgrades/items/ring1.png" id="36_7dg8q"]
 [ext_resource type="Texture2D" uid="uid://dnjhef1lwglyc" path="res://Art/UI/Pause/upgrades/crownbutton_selected.png" id="37_t7me0"]
 [ext_resource type="Texture2D" uid="uid://ld34qhxjgkie" path="res://Art/UI/Pause/upgrades/crownbutton_locked.png" id="40_5yady"]
+[ext_resource type="Texture2D" uid="uid://beofb7jxa7gl1" path="res://Art/UI/Pause/upgrades/items/cape1.png" id="41_dmobc"]
 [ext_resource type="Texture2D" uid="uid://b11p041r66isi" path="res://Art/UI/Pause/upgrades/upgrade_button.png" id="42_r844g"]
 [ext_resource type="Texture2D" uid="uid://v5b1iglh5g11" path="res://Art/UI/Pause/upgrades/upgrade_button_hover.png" id="43_iwaiv"]
 
@@ -59,7 +63,66 @@ region = Rect2(22, 0, 22, 22)
 atlas = ExtResource("3_o3frg")
 region = Rect2(44, 0, 22, 22)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r73ik"]
+atlas = ExtResource("30_tbhvj")
+region = Rect2(0, 0, 44, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_igspc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r73ik")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_eou02")
+}],
+"loop": false,
+"name": &"2",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xh7ye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_7dg8q")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_eou02")
+}],
+"loop": false,
+"name": &"2",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onysl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_dmobc")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_eou02")
+}],
+"loop": false,
+"name": &"2",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0r7f"]
 atlas = ExtResource("3_o3frg")
@@ -97,7 +160,6 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="BackColor" type="ColorRect" parent="."]
-visible = false
 z_index = 10
 texture_filter = 1
 anchors_preset = 15
@@ -456,7 +518,6 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Upgrades" type="TextureRect" parent="BackColor" node_paths=PackedStringArray("buttonSounds", "description", "buttons")]
-visible = false
 modulate = Color(0.803325, 0.803325, 0.803325, 1)
 layout_mode = 0
 anchor_right = 1.0
@@ -490,8 +551,10 @@ texture_hover = ExtResource("25_gh5kc")
 texture_disabled = ExtResource("28_cfhbv")
 texture_focused = ExtResource("28_4mevs")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Stick"]
+[node name="StickIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Stick"]
+position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_igspc")
+animation = &"2"
 
 [node name="Ring" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
@@ -509,6 +572,11 @@ texture_hover = ExtResource("27_js21s")
 texture_disabled = ExtResource("32_8o2oa")
 texture_focused = ExtResource("31_hbfkg")
 
+[node name="RingIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Ring"]
+position = Vector2(27, 17)
+sprite_frames = SubResource("SpriteFrames_xh7ye")
+animation = &"1"
+
 [node name="Cape" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
 offset_left = 788.0
@@ -525,6 +593,11 @@ texture_hover = ExtResource("30_ihrhf")
 texture_disabled = ExtResource("34_r03wg")
 texture_focused = ExtResource("34_4vn75")
 
+[node name="CapeIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Cape"]
+position = Vector2(27, 17)
+sprite_frames = SubResource("SpriteFrames_onysl")
+animation = &"1"
+
 [node name="Crown" type="TextureButton" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
 offset_left = 996.0
@@ -538,6 +611,11 @@ texture_normal = ExtResource("31_fw8fw")
 texture_hover = ExtResource("32_a3vm8")
 texture_disabled = ExtResource("40_5yady")
 texture_focused = ExtResource("37_t7me0")
+
+[node name="StickIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
+position = Vector2(27, 17)
+sprite_frames = SubResource("SpriteFrames_igspc")
+animation = &"1"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
@@ -640,8 +718,8 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -649,8 +727,8 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]

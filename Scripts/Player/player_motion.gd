@@ -151,8 +151,21 @@ func _input(event: InputEvent) -> void:
 				if (event.position.x > 1152 && event.position.x < 1248):
 					if (event.position.y > 32 && event.position.y < 128):
 						return
+				
+				#play the swing animation
 				stick.get_child(0).play("swing")
 				stick.get_child(1).look_at(get_global_mouse_position())
+				if (get_global_mouse_position().x > position.x):
+					stick.get_child(1).look_at(get_global_mouse_position())
+					var sticksprite = stick.get_child(1).get_child(0)
+					sticksprite.set_flip_h(false)
+					sticksprite.rotation = 0
+				else:
+					var sticksprite = stick.get_child(1).get_child(0)
+					sticksprite.set_flip_h(true)
+					sticksprite.rotation = PI
+				
+				# and the sound
 				if (slashsound): slashsound.play()
 				
 				# slight double jump for bat attack
@@ -326,7 +339,7 @@ func set_powerstatus():
 	if (currentAbilities[ability.stick] != SaveManager.powerstatus[ability.stick]):
 		if (stick):
 			stick.queue_free()
-		var newstick = load("res://Scenes/Player/items/stick_attack"+str(clamp(currentAbilities[ability.stick], 1, 2))+".tscn")
+		var newstick = load("res://Scenes/Player/items/stick_attack"+str(clamp(SaveManager.powerstatus[ability.stick], 1, 2))+".tscn")
 		stick = newstick.instantiate()
 		add_child(stick)
 		stick.position = Vector2.ZERO

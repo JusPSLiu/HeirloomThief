@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg33wiqa2koxj"]
+[gd_scene load_steps=11 format=3 uid="uid://b4va7qy1e6ret"]
 
-[ext_resource type="Script" path="res://Scripts/Player/attackbox.gd" id="1_3dqcv"]
-[ext_resource type="Texture2D" uid="uid://cvhs7p2jryfoh" path="res://Art/Sprites/Abilities/stick_smol_attack.png" id="2_kg5am"]
+[ext_resource type="Script" path="res://Scripts/Player/attackbox.gd" id="1_atahb"]
+[ext_resource type="Texture2D" uid="uid://bq3b8g46yh4ik" path="res://Art/Sprites/Abilities/stick_big_attack.png" id="3_6kpb2"]
 
 [sub_resource type="Animation" id="Animation_r2vo8"]
 length = 0.001
@@ -108,29 +108,29 @@ _data = {
 "swing": SubResource("Animation_phhkb")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwyjd"]
-atlas = ExtResource("2_kg5am")
-region = Rect2(0, 0, 30, 43)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihaey"]
+atlas = ExtResource("3_6kpb2")
+region = Rect2(0, 0, 42, 55)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i7rsa"]
-atlas = ExtResource("2_kg5am")
-region = Rect2(30, 0, 30, 43)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcmmi"]
+atlas = ExtResource("3_6kpb2")
+region = Rect2(42, 0, 42, 55)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_otgxy"]
-atlas = ExtResource("2_kg5am")
-region = Rect2(60, 0, 30, 43)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldx3f"]
+atlas = ExtResource("3_6kpb2")
+region = Rect2(84, 0, 42, 55)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_s4hoh"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_br3kt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iwyjd")
+"texture": SubResource("AtlasTexture_ihaey")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i7rsa")
+"texture": SubResource("AtlasTexture_gcmmi")
 }, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_otgxy")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldx3f")
 }],
 "loop": false,
 "name": &"slice",
@@ -149,19 +149,21 @@ libraries = {
 process_mode = 4
 visible = false
 position = Vector2(1, 12)
-scale = Vector2(1.5, 1.5)
 collision_layer = 0
-script = ExtResource("1_3dqcv")
+script = ExtResource("1_atahb")
+damage_value = 2
 
 [node name="stickFrames" type="AnimatedSprite2D" parent="attackbox"]
 process_mode = 3
-position = Vector2(38, 0)
-scale = Vector2(2.66667, 2.66667)
-sprite_frames = SubResource("SpriteFrames_s4hoh")
+position = Vector2(84, 0)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_br3kt")
 animation = &"slice"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackbox"]
 position = Vector2(0, -9)
-polygon = PackedVector2Array(2, -17, 49.3333, -60.3333, 65.3333, -51, 80.6667, -4.33333, 75.3333, 42.3333, 49.3333, 70.3333, 1, 24)
+polygon = PackedVector2Array(2, -17, 113, -106, 160, -74, 174, -4, 155, 81, 103, 125, 1, 24)
 
 [connection signal="body_entered" from="attackbox" to="attackbox" method="_on_body_entered"]
