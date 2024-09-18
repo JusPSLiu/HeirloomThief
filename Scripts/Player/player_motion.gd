@@ -3,6 +3,7 @@ extends CharacterBody2D
 # exported variables
 @export var GUI : Control
 @export var deathAnimator : AnimationPlayer
+@export var musicPlayer : AudioStreamPlayer
 @export var jumpsound : AudioStreamPlayer2D
 @export var hitsound : AudioStreamPlayer2D
 @export var slashsound : AudioStreamPlayer2D
@@ -362,13 +363,13 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		# fancy camera transition stuff
 		transitioning = true
 		if (camera.global_position.y-360 < camera_target_top and camera.limit_top != camera_target_top):
-			camera.limit_top = camera.global_position.y-360
+			camera.limit_top = int(camera.global_position.y-360)
 		if (camera.global_position.x-640 < camera_target_left and camera.limit_left != camera_target_left):
-			camera.limit_left = camera.global_position.x-(640*1.5)
+			camera.limit_left =  int(camera.global_position.x-(640*1.5))
 		if (camera.global_position.y+360 > camera_target_bottom and camera.limit_bottom != camera_target_bottom):
-			camera.limit_bottom = camera.global_position.y+360
+			camera.limit_bottom =  int(camera.global_position.y+360)
 		if (camera.global_position.x+640 > camera_target_right and camera.limit_right != camera_target_right):
-			camera.limit_right = camera.global_position.x+(640*1.5)
+			camera.limit_right =  int(camera.global_position.x+(640*1.5))
 		
 		# set the current room, and tell the manager youve visited it
 		SaveManager.current_room = area.room_number
@@ -379,6 +380,10 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 				newArr.append_array([0, 0, 0, 0, 0])
 			SaveManager.visited_rooms.append_array(newArr)
 		SaveManager.visited_rooms[area.room_number] = true
+		
+		#finally, play the music
+		if (area.music != '_'):
+			musicPlayer.transition_to_track(area.music)
 
 func camera_transitions(delta):
 	if (transitioning):

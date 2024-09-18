@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/thirdlevel.mp3-1824b66cd18e6bfb400711581fee03
 [params]
 
 loop=true
-loop_offset=0.0
+loop_offset=0.03
 bpm=0.0
 beat_count=0
 bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=62 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -124,6 +124,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_s135d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r73ik")
+}],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_eou02")
+}],
+"loop": false,
+"name": &"2",
+"speed": 5.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0r7f"]
 atlas = ExtResource("3_o3frg")
 region = Rect2(0, 0, 22, 22)
@@ -160,6 +179,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="BackColor" type="ColorRect" parent="."]
+visible = false
 z_index = 10
 texture_filter = 1
 anchors_preset = 15
@@ -590,6 +610,7 @@ animation = &"1"
 
 [node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Ring"]
 z_index = -1
+layout_mode = 0
 offset_right = 54.0
 offset_bottom = 34.0
 texture = ExtResource("31_hbfkg")
@@ -618,6 +639,7 @@ animation = &"1"
 
 [node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Cape"]
 z_index = -1
+layout_mode = 0
 offset_right = 54.0
 offset_bottom = 34.0
 texture = ExtResource("34_4vn75")
@@ -637,13 +659,14 @@ texture_normal = ExtResource("31_fw8fw")
 texture_hover = ExtResource("32_a3vm8")
 texture_disabled = ExtResource("40_5yady")
 
-[node name="StickIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
+[node name="CrownIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
 position = Vector2(27, 17)
-sprite_frames = SubResource("SpriteFrames_igspc")
+sprite_frames = SubResource("SpriteFrames_s135d")
 animation = &"1"
 
 [node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
 z_index = -1
+layout_mode = 0
 offset_right = 54.0
 offset_bottom = 34.0
 texture = ExtResource("37_t7me0")
@@ -765,6 +788,5 @@ bus = &"Sounds"
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Crown" to="BackColor/Upgrades" method="_select" binds= [3]]
-[connection signal="pressed" from="BackColor/Upgrades/UpgradeSelectors/Crown" to="BackColor/Upgrades" method="_select" binds= [3]]
 [connection signal="pressed" from="BackColor/Upgrades/upgrade" to="BackColor/Upgrades" method="upgrade"]
 [connection signal="pressed" from="BackColor/Upgrades/Return" to="." method="_to_main_pause_menu"]
