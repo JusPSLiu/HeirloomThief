@@ -33,6 +33,7 @@ var doublejumped = false # has double jumped, do full jump height
 var DO_NOT_MOVE = false # not actually a const, just really important
 var currentlyFloating = false # for animation; floating means air animation
 var doorLocation = null # location of other door; null if not there
+var lastFloorHeight = 0
 # Abilities
 var currentAbilities : Array = [-1, 0, 0, 0, 0]
 var stick : Node2D
@@ -82,6 +83,7 @@ func _physics_process(delta: float) -> void:
 			currentlyFloating = false
 			doublejumped = false
 		coyoteTime = COYOTE_MAX
+		lastFloorHeight = position.y
 	else:
 		if (velocity.y < 0):
 			if Input.is_action_pressed("Jump") or doublejumped:
@@ -96,9 +98,12 @@ func _physics_process(delta: float) -> void:
 				currentlyFloating = true
 			else:
 				velocity += get_gravity() * delta * 3.2
-			if (velocity.y > 1300):
+			# camera physics
+			if (velocity.y > 1300): # in case you fall WAY too fast
 				$camera_carrot_on_stick.position.y = (velocity.y-1300)*2
-			else:
+			elif (position.y > lastFloorHeight + 64): # for floating
+				$camera_carrot_on_stick.position.y = expDecay($camera_carrot_on_stick.position.y, clamp(position.y-lastFloorHeight, 0, 256), LERP_DECAY_RATE, delta)
+			else: # for any other time
 				$camera_carrot_on_stick.position.y = 0
 		if (coyoteTime > 0):
 			coyoteTime -= delta
