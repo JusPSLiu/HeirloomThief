@@ -23,25 +23,47 @@ func _process(_delta: float) -> void:
 	if (clicking):
 		position = clickingStartPos+get_global_mouse_position()
 		set_center_here()
-		var pastEdge = false
-		if (currCenter.x < maxPos.x):
-			pastEdge = true
-			currCenter.x = maxPos.x
-		elif (currCenter.x > minPos.x):
-			pastEdge = true
-			currCenter.x = minPos.x
-		if (currCenter.y > maxPos.y):
-			pastEdge = true
-			currCenter.y = maxPos.y
-		elif (currCenter.y < minPos.y):
-			pastEdge = true
-			currCenter.y = minPos.y
-		if (pastEdge):
-			reset_position_to_center()
+		make_sure_not_past_edge()
+	else:
+		var joystickInput = Vector2(
+			Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
+			Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+		)
+		if (abs(joystickInput) > Vector2(0.1,0.1)):
+			position -= joystickInput*10
+			set_center_here()
+			make_sure_not_past_edge()
+	if Input.is_action_pressed("controller_zoom_in"):
+		scale *= Vector2(1.02, 1.02)
+		if (scale.x > 64):
+			scale = Vector2(64, 64)
+		reset_position_to_center()
+	if Input.is_action_pressed("controller_zoom_out"):
+		scale /= Vector2(1.02, 1.02)
+		if (scale.x < 8):
+			scale = Vector2(8, 8)
+		reset_position_to_center()
+
+func make_sure_not_past_edge():
+	var pastEdge = false
+	if (currCenter.x < maxPos.x):
+		pastEdge = true
+		currCenter.x = maxPos.x
+	elif (currCenter.x > minPos.x):
+		pastEdge = true
+		currCenter.x = minPos.x
+	if (currCenter.y > maxPos.y):
+		pastEdge = true
+		currCenter.y = maxPos.y
+	elif (currCenter.y < minPos.y):
+		pastEdge = true
+		currCenter.y = minPos.y
+	if (pastEdge):
+		reset_position_to_center()
 
 func _input(event: InputEvent) -> void:
 	if (get_tree().paused and mapIsShown):
-		if (event is InputEventMouse):
+		if (event is InputEventMouse and !event.is_echo()):
 			if (event.position.x < 814 and event.position.y > 104):
 				if event.is_action_pressed("zoom_in"):
 					scale *= Vector2(1.1, 1.1)

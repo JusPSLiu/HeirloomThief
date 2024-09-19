@@ -52,8 +52,8 @@ func _on_quit_button_pressed():
 
 func _input(event: InputEvent) -> void:
 	if (event is not InputEventMouse):
-		if event is InputEventKey and !event.is_echo():
-			if event.keycode == KEY_ESCAPE and pausable:
+		if !event.is_echo():
+			if event.is_action_pressed("pause") and pausable:
 				if event.pressed:
 					togglePause()
 		if (unfocused):

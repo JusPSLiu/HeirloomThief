@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var shootsound : AudioStreamPlayer2D
 @export var healedsound : AudioStreamPlayer2D
 @export var collectsound : AudioStreamPlayer2D
+@export var dashsound : AudioStreamPlayer2D
 
 # constant variables
 const SPEED = 500.0 # player movement speed
@@ -207,6 +208,7 @@ func _input(event: InputEvent) -> void:
 			# dash / boost
 			if event.is_action_pressed("Dash"):
 				if currentAbilities[ability.cape] and boostimer < 0:
+					dashsound.play()
 					Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 					velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
 					boostimer = BOOST_COOLDOWN
@@ -234,7 +236,7 @@ func getSwingAngle():
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	)
-	if (joystickInput.x < 0.1 and joystickInput.y < 0.1):
+	if (abs(joystickInput.x) < 0.1 and abs(joystickInput.y) < 0.1):
 		joystickInput = Vector2(
 			Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
 			Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
