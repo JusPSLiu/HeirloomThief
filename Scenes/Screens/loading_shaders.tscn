@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dvudgrud88qmx" path="res://Scenes/Enemies/enemy_death_effect.tscn" id="3_wwc8m"]
 [ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="6_s5lt1"]
 [ext_resource type="Texture2D" uid="uid://bdeq8d5m23orl" path="res://Art/Sprites/SpriteSheets/playerNormal.png" id="7_sa36q"]
-[ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Collectibles/gem_upgrade.tscn" id="7_up38r"]
+[ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Interactable/gem_upgrade.tscn" id="7_up38r"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="8_5gly0"]
-[ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Collectibles/health_upgrade.tscn" id="8_rtfxj"]
+[ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Interactable/health_upgrade.tscn" id="8_rtfxj"]
 [ext_resource type="Material" uid="uid://dxkjhs0ldnhoj" path="res://Scenes/ScreenFx/map_shader.tres" id="10_k7u5f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]

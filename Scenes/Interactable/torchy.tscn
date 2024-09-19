@@ -1,12 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://dqsatwfb0ss2q"]
+[gd_scene load_steps=26 format=3 uid="uid://dqsatwfb0ss2q"]
 
 [ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="1_0fgca"]
 [ext_resource type="Texture2D" uid="uid://nfed7kv84iik" path="res://Art/Sprites/SpriteSheets/lighty_torch_normal.png" id="2_l25lr"]
 [ext_resource type="Texture2D" uid="uid://ccx2qht8dfofv" path="res://Art/Sprites/SpriteSheets/lighty_torch.png" id="3_osj00"]
-[ext_resource type="Script" path="res://Scripts/Collectibles/interactive_element.gd" id="4_q1qdb"]
+[ext_resource type="Script" path="res://Scripts/Interactable/interactive_element_primary.gd" id="4_7ru0j"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="5_hdlfk"]
 [ext_resource type="Texture2D" uid="uid://dscqh83oc51ig" path="res://Art/Sprites/SpriteSheets/door.png" id="6_7ojp2"]
-[ext_resource type="Script" path="res://Scripts/Collectibles/activated_door.gd" id="6_s0gr6"]
+[ext_resource type="Script" path="res://Scripts/Interactable/activated_door.gd" id="6_s0gr6"]
+[ext_resource type="Texture2D" uid="uid://qf4e72olq752" path="res://Art/UI/Prompts/UpArrow.png" id="7_nhw65"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_luphl"]
 shader = ExtResource("1_0fgca")
@@ -136,7 +137,7 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_lla77")
 animation = &"off"
 autoplay = "off"
-script = ExtResource("4_q1qdb")
+script = ExtResource("4_7ru0j")
 activateyThing = NodePath("Door")
 
 [node name="torchlight" type="PointLight2D" parent="."]
@@ -169,6 +170,12 @@ script = ExtResource("6_s0gr6")
 pairedDoor = NodePath("Door2")
 enabled = false
 
+[node name="Arrow" type="Sprite2D" parent="Door"]
+visible = false
+position = Vector2(0, -20)
+texture = ExtResource("7_nhw65")
+metadata/_edit_lock_ = true
+
 [node name="sprite" type="AnimatedSprite2D" parent="Door"]
 z_index = -1
 position = Vector2(0.75, -7.5)
@@ -198,6 +205,12 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Door2"]
 position = Vector2(0.25, -6)
 shape = SubResource("RectangleShape2D_ycopj")
+metadata/_edit_lock_ = true
+
+[node name="Arrow" type="Sprite2D" parent="Door/Door2"]
+visible = false
+position = Vector2(0, -20)
+texture = ExtResource("7_nhw65")
 metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]

@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="26_axwa8"]
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="27_mgwlt"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="28_h4mlk"]
-[ext_resource type="PackedScene" uid="uid://dqsatwfb0ss2q" path="res://Scenes/Collectibles/torchy.tscn" id="30_8od5l"]
+[ext_resource type="PackedScene" uid="uid://dqsatwfb0ss2q" path="res://Scenes/Interactable/torchy.tscn" id="30_8od5l"]
 
 [sub_resource type="Animation" id="Animation_7wcv3"]
 resource_name = "die"

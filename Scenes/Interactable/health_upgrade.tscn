@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvsxhqbjcaae4"]
+[gd_scene load_steps=10 format=3 uid="uid://bdml046nkqkqj"]
 
-[ext_resource type="Script" path="res://Scripts/Collectibles/upgrade.gd" id="1_y13eo"]
-[ext_resource type="Texture2D" uid="uid://bouqbi02sddbi" path="res://Art/Sprites/collectibles/gem.png" id="2_p08lw"]
-[ext_resource type="Shader" path="res://Scripts/shaders/collect_me.gdshader" id="2_xwcrf"]
-[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_jxokw"]
+[ext_resource type="Script" path="res://Scripts/Interactable/upgrade.gd" id="1_helhp"]
+[ext_resource type="Texture2D" uid="uid://bfwjn4igq6xsy" path="res://Art/Sprites/collectibles/hearts.png" id="2_gkr8x"]
+[ext_resource type="Shader" path="res://Scripts/shaders/collect_me.gdshader" id="2_s1oft"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_vuwds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dx7q5"]
 size = Vector2(38, 40)
@@ -22,28 +22,27 @@ height = 8
 color_ramp = SubResource("Gradient_8owqe")
 noise = SubResource("FastNoiseLite_hesjw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1n00u"]
-shader = ExtResource("2_xwcrf")
-shader_parameter/scale = 7.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8b6qb"]
+shader = ExtResource("2_s1oft")
+shader_parameter/scale = 9.0
 shader_parameter/texture = SubResource("NoiseTexture2D_q3ql3")
 
-[node name="gem_upgrade" type="Area2D" groups=["gem_upgrade"]]
-script = ExtResource("1_y13eo")
+[node name="health_upgrade" type="Area2D" groups=["health_upgrade"]]
+script = ExtResource("1_helhp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_dx7q5")
 
-[node name="v" type="Sprite2D" parent="."]
+[node name="<3" type="Sprite2D" parent="."]
 light_mask = 0
 texture_filter = 1
-material = SubResource("ShaderMaterial_1n00u")
+material = SubResource("ShaderMaterial_8b6qb")
 scale = Vector2(4, 4)
-texture = ExtResource("2_p08lw")
+texture = ExtResource("2_gkr8x")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(2, 2)
-color = Color(0.7, 1, 1, 1)
-texture = ExtResource("3_jxokw")
+color = Color(1, 0.7, 0.7, 1)
+texture = ExtResource("3_vuwds")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

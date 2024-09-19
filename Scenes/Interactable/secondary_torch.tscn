@@ -1,0 +1,98 @@
+[gd_scene load_steps=15 format=3 uid="uid://bxwgbrspdq7if"]
+
+[ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="1_0al27"]
+[ext_resource type="Texture2D" uid="uid://nfed7kv84iik" path="res://Art/Sprites/SpriteSheets/lighty_torch_normal.png" id="2_mmnaf"]
+[ext_resource type="Texture2D" uid="uid://ccx2qht8dfofv" path="res://Art/Sprites/SpriteSheets/lighty_torch.png" id="3_ech0l"]
+[ext_resource type="Script" path="res://Scripts/Interactable/interactive_element_secondary.gd" id="4_0kfp3"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="5_161je"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_luphl"]
+shader = ExtResource("1_0al27")
+shader_parameter/normal_map = ExtResource("2_mmnaf")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko2po"]
+atlas = ExtResource("3_ech0l")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2g2tg"]
+atlas = ExtResource("3_ech0l")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alwpd"]
+atlas = ExtResource("3_ech0l")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0skoc"]
+atlas = ExtResource("3_ech0l")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqohr"]
+atlas = ExtResource("3_ech0l")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lla77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko2po")
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2g2tg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alwpd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0skoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqohr")
+}],
+"loop": true,
+"name": &"on",
+"speed": 10.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_thhmg"]
+polygon = PackedVector2Array(-2, 0, 2, 0, 2, 1, -2, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pywby"]
+size = Vector2(10, 18.5)
+
+[node name="secondaryTorch" type="AnimatedSprite2D" groups=["torch"]]
+light_mask = 2
+material = SubResource("ShaderMaterial_luphl")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_lla77")
+animation = &"off"
+autoplay = "off"
+script = ExtResource("4_0kfp3")
+
+[node name="torchlight" type="PointLight2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(3, 3)
+color = Color(0.2, 1, 1, 1)
+energy = 0.0
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("5_161je")
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_thhmg")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["torch"]]
+collision_layer = 16
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 2.75)
+shape = SubResource("RectangleShape2D_pywby")
+metadata/_edit_lock_ = true

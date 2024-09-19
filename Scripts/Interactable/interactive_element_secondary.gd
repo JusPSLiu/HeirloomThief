@@ -1,7 +1,8 @@
 extends AnimatedSprite2D
 
-@export var activateyThing : Area2D
 @export var id : int = 0
+@export var primaryTorch : AnimatedSprite2D
+
 var lit = false
 
 func _ready() -> void:
@@ -9,13 +10,14 @@ func _ready() -> void:
 		lit = true
 		play('on')
 		$torchlight.energy = 1
-		activateyThing.skipToActivated()
+		if (primaryTorch):
+			primaryTorch.check_if_all_lit()
 
 func alight() -> bool:
 	if (lit): return false
 	lit = true
 	play('on')
 	$torchlight.energy = 1
-	if (activateyThing):
-		activateyThing.activate()
+	if (primaryTorch):
+		primaryTorch.check_if_all_lit()
 	return true

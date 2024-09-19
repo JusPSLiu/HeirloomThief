@@ -198,6 +198,7 @@ func _input(event: InputEvent) -> void:
 				if (doorLocation != null):
 					#if in doorway, the jump button opens the door
 					position = doorLocation
+					dashsound.play()
 				elif coyoteTime > 0:
 					velocity.y = JUMP_VELOCITY
 					coyoteTime = 0
@@ -364,14 +365,22 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		
 		# fancy camera transition stuff
 		transitioning = true
-		if (camera.global_position.y-360 < camera_target_top and camera.limit_top != camera_target_top):
-			camera.limit_top = int(camera.global_position.y-360)
-		if (camera.global_position.x-640 < camera_target_left and camera.limit_left != camera_target_left):
-			camera.limit_left =  int(camera.global_position.x-(640*1.5))
-		if (camera.global_position.y+360 > camera_target_bottom and camera.limit_bottom != camera_target_bottom):
-			camera.limit_bottom =  int(camera.global_position.y+360)
-		if (camera.global_position.x+640 > camera_target_right and camera.limit_right != camera_target_right):
-			camera.limit_right =  int(camera.global_position.x+(640*1.5))
+		# force camera to actually physically clamp to bounds
+		# because godot only kind of applies the bounds
+		print("OLD: ", camera.global_position)
+		var currCamPositionY = clamp(camera.global_position.y, camera.limit_top+360, camera.limit_bottom-360)
+		var currCamPositionX = clamp(camera.global_position.x, camera.limit_left+360, camera.limit_right-360)
+		print("NEW: ", camera.global_position)
+		
+		# now FINALLY set the limits if proper
+		if (currCamPositionY-360 <= camera_target_top and camera.limit_top != camera_target_top):
+			camera.limit_top = int(currCamPositionY-360)
+		if (currCamPositionX-640 < camera_target_left and camera.limit_left != camera_target_left):
+			camera.limit_left =  int(currCamPositionX-(640))
+		if (currCamPositionY+360 >= camera_target_bottom and camera.limit_bottom != camera_target_bottom):
+			camera.limit_bottom =  int(currCamPositionY+360)
+		if (currCamPositionX+640 > camera_target_right and camera.limit_right != camera_target_right):
+			camera.limit_right =  int(currCamPositionX+(640))
 		
 		# set the current room, and tell the manager youve visited it
 		SaveManager.current_room = area.room_number
