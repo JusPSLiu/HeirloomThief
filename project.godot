@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Heirloom Thief"
-run/main_scene="res://Scenes/Screens/godotSplashscreen.tscn"
+run/main_scene="res://Scenes/Levels/new_level.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
