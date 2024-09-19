@@ -8,6 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_luphl"]
 shader = ExtResource("1_0al27")
+shader_parameter/intensity = 2.0
 shader_parameter/normal_map = ExtResource("2_mmnaf")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko2po"]

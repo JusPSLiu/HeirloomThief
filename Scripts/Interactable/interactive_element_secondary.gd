@@ -1,8 +1,8 @@
 extends AnimatedSprite2D
 
 @export var id : int = 0
-@export var primaryTorch : AnimatedSprite2D
 
+var primaryTorch : AnimatedSprite2D
 var lit = false
 
 func _ready() -> void:

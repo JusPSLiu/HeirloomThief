@@ -13,6 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wi3qs"]
 shader = ExtResource("2_rs5m2")
+shader_parameter/intensity = 2.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2pqq"]
 radius = 15.0
@@ -20,6 +21,7 @@ height = 48.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]
 shader = ExtResource("2_rs5m2")
+shader_parameter/intensity = 2.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dsjt"]
 atlas = ExtResource("2_lmbdo")
@@ -256,6 +258,7 @@ bus = &"Sounds"
 
 [node name="dashSound" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource("10_eyubb")
+max_polyphony = 3
 bus = &"Sounds"
 
 [node name="roomDetector" type="Area2D" parent="."]

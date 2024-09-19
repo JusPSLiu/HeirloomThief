@@ -316,9 +316,7 @@ func get_gem_upgrade(id:int):
 ## Powerups
 func update_powerstatus(currMode):
 	currMode = clamp(int(currMode), 0, ability.hook)
-	print(currentAbilities)
 	currentAbilities[currMode] += 1
-	print(currentAbilities)
 	SaveManager.powerstatus[currMode] += 1
 	
 	if (currMode == ability.ring):
@@ -367,10 +365,8 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		transitioning = true
 		# force camera to actually physically clamp to bounds
 		# because godot only kind of applies the bounds
-		print("OLD: ", camera.global_position)
 		var currCamPositionY = clamp(camera.global_position.y, camera.limit_top+360, camera.limit_bottom-360)
 		var currCamPositionX = clamp(camera.global_position.x, camera.limit_left+360, camera.limit_right-360)
-		print("NEW: ", camera.global_position)
 		
 		# now FINALLY set the limits if proper
 		if (currCamPositionY-360 <= camera_target_top and camera.limit_top != camera_target_top):

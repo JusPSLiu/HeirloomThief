@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dqsatwfb0ss2q"]
+[gd_scene load_steps=29 format=3 uid="uid://dqsatwfb0ss2q"]
 
 [ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="1_0fgca"]
 [ext_resource type="Texture2D" uid="uid://nfed7kv84iik" path="res://Art/Sprites/SpriteSheets/lighty_torch_normal.png" id="2_l25lr"]
@@ -7,10 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="5_hdlfk"]
 [ext_resource type="Texture2D" uid="uid://dscqh83oc51ig" path="res://Art/Sprites/SpriteSheets/door.png" id="6_7ojp2"]
 [ext_resource type="Script" path="res://Scripts/Interactable/activated_door.gd" id="6_s0gr6"]
+[ext_resource type="Texture2D" uid="uid://3qc62r2lj0ou" path="res://Art/Sprites/SpriteSheets/door_normal.png" id="6_sb17g"]
 [ext_resource type="Texture2D" uid="uid://qf4e72olq752" path="res://Art/UI/Prompts/UpArrow.png" id="7_nhw65"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_luphl"]
 shader = ExtResource("1_0fgca")
+shader_parameter/intensity = 2.0
 shader_parameter/normal_map = ExtResource("2_l25lr")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko2po"]
@@ -66,6 +68,11 @@ polygon = PackedVector2Array(-2, 0, 2, 0, 2, 1, -2, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pywby"]
 size = Vector2(10, 18.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w4lo5"]
+shader = ExtResource("1_0fgca")
+shader_parameter/intensity = 2.0
+shader_parameter/normal_map = ExtResource("6_sb17g")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8fab"]
 atlas = ExtResource("6_7ojp2")
@@ -130,6 +137,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ycopj"]
 size = Vector2(11, 12)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_181oi"]
+shader = ExtResource("1_0fgca")
+shader_parameter/intensity = 2.0
+shader_parameter/normal_map = ExtResource("6_sb17g")
+
 [node name="torchy" type="AnimatedSprite2D" node_paths=PackedStringArray("activateyThing") groups=["torch"]]
 light_mask = 2
 material = SubResource("ShaderMaterial_luphl")
@@ -178,6 +190,7 @@ metadata/_edit_lock_ = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="Door"]
 z_index = -1
+material = SubResource("ShaderMaterial_w4lo5")
 position = Vector2(0.75, -7.5)
 sprite_frames = SubResource("SpriteFrames_5cx4n")
 animation = &"open"
@@ -196,6 +209,7 @@ pairedDoor = NodePath("..")
 
 [node name="sprite" type="AnimatedSprite2D" parent="Door/Door2"]
 z_index = -1
+material = SubResource("ShaderMaterial_181oi")
 position = Vector2(0.75, -7.5)
 sprite_frames = SubResource("SpriteFrames_5cx4n")
 animation = &"open"

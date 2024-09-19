@@ -26,11 +26,9 @@ func alight() -> bool:
 	return true
 
 func check_if_all_lit():
-	print_debug("CHECK_AGAIN")
 	# if even one other torch isn't lit, return out of the function
 	if (!lit): return
 	for torch in otherTorches:
-		print(torch.lit)
 		if (!torch.lit): return
 	
 	# activate the door
