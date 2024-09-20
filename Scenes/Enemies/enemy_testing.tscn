@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://ceguw3gquhbxa"]
+[gd_scene load_steps=11 format=3 uid="uid://ceguw3gquhbxa"]
 
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="2_3kmqq"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
+[ext_resource type="PackedScene" uid="uid://bpgf6kn085iul" path="res://Scenes/Enemies/guard_flying.tscn" id="2_vacef"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="3_o53wr"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="4_6g62y"]
-[ext_resource type="PackedScene" uid="uid://bilsxcgxlam7c" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
+[ext_resource type="PackedScene" uid="uid://dtkq8v8c1chlp" path="res://Scenes/Levels/room.tscn" id="5_hbdg0"]
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="6_s5rwo"]
+[ext_resource type="PackedScene" uid="uid://dydj1f61lym74" path="res://Scenes/Enemies/boss.tscn" id="7_lik31"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_et5ws"]
 size = Vector2(1, 1)
@@ -83,7 +84,7 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="Wall3" type="StaticBody2D" parent="."]
-position = Vector2(2904, 488)
+position = Vector2(1088, 496)
 rotation = 1.5708
 scale = Vector2(512, 32)
 metadata/_edit_group_ = true
@@ -111,7 +112,7 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="Wall5" type="StaticBody2D" parent="."]
-position = Vector2(1248, 0)
+position = Vector2(1248, -240)
 scale = Vector2(64, 512)
 metadata/_edit_group_ = true
 
@@ -124,23 +125,24 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="GuardFlying" parent="." instance=ExtResource("2_vacef")]
-position = Vector2(1880, 272)
+position = Vector2(384, 240)
 scale = Vector2(4, 4)
 
 [node name="GuardGun" parent="." instance=ExtResource("3_o53wr")]
-position = Vector2(920, 328)
-scale = Vector2(4, 4)
-
-[node name="Guard" parent="." instance=ExtResource("4_6g62y")]
-position = Vector2(400, 552)
+position = Vector2(936, 608)
 scale = Vector2(4, 4)
 
 [node name="Guard2" parent="." instance=ExtResource("4_6g62y")]
-position = Vector2(248, 592)
+position = Vector2(320, 600)
 scale = Vector2(4, 4)
 
 [node name="Player" parent="." node_paths=PackedStringArray("deathAnimator") instance=ExtResource("2_3kmqq")]
+position = Vector2(1504, 456)
 deathAnimator = NodePath("../UI/DeathAnimator")
+
+[node name="Boss" parent="." instance=ExtResource("7_lik31")]
+position = Vector2(2480, 304)
+scale = Vector2(6, 6)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

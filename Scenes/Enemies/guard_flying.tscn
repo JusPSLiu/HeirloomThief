@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpgf6kn085iul"]
+[gd_scene load_steps=21 format=3 uid="uid://bpgf6kn085iul"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_t2o7m"]
 [ext_resource type="Texture2D" uid="uid://bory1qvcyjpbu" path="res://Art/Enemies/Batdemon.png" id="2_fsne4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_flying/alert.gd" id="6_odgdd"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_flying/dive.gd" id="6_vh4gp"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_flying/reset.gd" id="8_xlyl3"]
+[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="11_ryvwy"]
 
 [sub_resource type="Animation" id="Animation_kyivq"]
 resource_name = "Alert"
@@ -107,7 +108,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qkh7t"]
-radius = 7.0
+radius = 4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4m46u"]
 shader = ExtResource("3_o2noc")
@@ -117,10 +118,12 @@ shader_parameter/normal_map = ExtResource("4_h6t4y")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_keku4"]
 size = Vector2(80, 88)
 
-[node name="GuardFlying" instance=ExtResource("1_t2o7m")]
+[node name="GuardFlying" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_t2o7m")]
+motion_mode = 1
 script = ExtResource("2_rcbjx")
 max_speed = 10000.0
 gravity = 0.0
+damage_component = NodePath("DamageComponentWOWZA!!!!")
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -163,4 +166,8 @@ auto_animate = true
 [node name="Reset" type="Node2D" parent="StateManager" index="3"]
 script = ExtResource("8_xlyl3")
 
+[node name="DamageComponentWOWZA!!!!" parent="." index="8" instance=ExtResource("11_ryvwy")]
+scale = Vector2(0.3, 0.3)
+
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_entered" from="DamageComponentWOWZA!!!!" to="StateManager/Dive" method="_on_damage_component_body_entered"]

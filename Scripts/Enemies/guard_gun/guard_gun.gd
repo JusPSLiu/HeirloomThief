@@ -60,7 +60,7 @@ func shoot(number_of_projectiles : int) -> void:
 			
 			# set projectile properties
 			projectile.movement_direction = Vector2(movement_direction, 0)
-			projectile.speed = 700
+			projectile.speed = 500
 			projectile.scale = Vector2(6, 6) # scaled to size of enemy [temporary]
 			projectile.global_position = $Spawn.global_position
 			
