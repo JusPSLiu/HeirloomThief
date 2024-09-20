@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://bktl83p5usom0"
+path="res://.godot/imported/lava.png-def377b50601ae104ea00163e0bfef01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/Tilesets/lava.png"
+dest_files=["res://.godot/imported/lava.png-def377b50601ae104ea00163e0bfef01.ctex"]
 
 [params]
 

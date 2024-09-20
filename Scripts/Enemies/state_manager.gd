@@ -17,6 +17,11 @@ func init(parent_entity) -> void:
 	# Change state to initial state
 	change_state(initial_state)
 
+# call when die, so respawn in inital state
+func reset() -> void:
+	# Change state to initial state
+	change_state(initial_state)
+
 # Call in physics process of parent entity
 func physics_update(delta : float) -> void:
 	# When a state's physics update returns a state, change to that state

@@ -1,6 +1,13 @@
 extends CharacterBody2D
 
 # exported variables
+@export var AbilityOverride : Dictionary = {
+	'Ring' : false,
+	'Cape' : false,
+	'upgradedStick' : false,
+	'ringThroughWalls' : false,
+	'upgradedCape' : false
+}
 @export var GUI : Control
 @export var deathAnimator : AnimationPlayer
 @export var musicPlayer : AudioStreamPlayer
@@ -55,7 +62,15 @@ enum ability {
 
 # when spawn in, activate proper abilities
 func _ready() -> void:
-	#SaveManager.powerstatus[ability.ring] = 1
+	## TODO: remove this. this is a debugging tool.
+	if (AbilityOverride.upgradedStick):
+		SaveManager.powerstatus[ability.stick] = 2
+	if (AbilityOverride.Ring):
+		SaveManager.powerstatus[ability.ring] = 1 + int(AbilityOverride.ringThroughWalls)
+	if (AbilityOverride.Cape):
+		SaveManager.powerstatus[ability.cape] = 1 + int(AbilityOverride.upgradedCape)
+	
+	
 	set_powerstatus()
 	
 	if (SaveManager.respawn_point == Vector2.ZERO):
@@ -64,11 +79,6 @@ func _ready() -> void:
 		position = SaveManager.respawn_point
 		camera.position_smoothing_enabled = false
 		just_respawned = true
-	
-	#camera.limit_bottom = 0
-	#camera.limit_top = 0
-	#camera.limit_left = 0
-	#camera.limit_right = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -162,15 +172,7 @@ func _input(event: InputEvent) -> void:
 				#play the swing animation
 				stick.get_child(0).play("swing")
 				stick.get_child(1).look_at(get_global_mouse_position())
-				if (get_global_mouse_position().x > position.x):
-					stick.get_child(1).look_at(get_global_mouse_position())
-					var sticksprite = stick.get_child(1).get_child(0)
-					sticksprite.set_flip_h(false)
-					sticksprite.rotation = 0
-				else:
-					var sticksprite = stick.get_child(1).get_child(0)
-					sticksprite.set_flip_h(true)
-					sticksprite.rotation = PI
+				flipStickTo(get_global_mouse_position().x > position.x)
 				
 				# and the sound
 				if (slashsound): slashsound.play()
@@ -220,8 +222,12 @@ func _input(event: InputEvent) -> void:
 					boostimer = BOOST_COOLDOWN
 			# basic meelee attack
 			if (event.is_action_pressed("Attack") and !stick.get_child(0).is_playing()):
+				# set the swing angle (flip sprite so swipe down to left and right)
+				var properAngle = getSwingAngle()
+				stick.get_child(1).rotation = properAngle
+				flipStickTo(properAngle.x > 0)
+				# play swing animation
 				stick.get_child(0).play("swing")
-				stick.get_child(1).rotation = getSwingAngle()
 				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
@@ -230,6 +236,7 @@ func _input(event: InputEvent) -> void:
 			if (event.is_action_pressed("keyboardslice") and !stick.get_child(0).is_playing()):
 				stick.get_child(0).play("swing")
 				stick.get_child(1).rotation = 0 if currentDirection else PI
+				flipStickTo(currentDirection)
 				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
@@ -248,6 +255,16 @@ func getSwingAngle():
 			Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 		)
 	return joystickInput.angle()
+
+func flipStickTo(right : bool):
+	if (right):
+		var sticksprite = stick.get_child(1).get_child(0)
+		sticksprite.set_flip_h(false)
+		sticksprite.rotation = 0
+	else:
+		var sticksprite = stick.get_child(1).get_child(0)
+		sticksprite.set_flip_h(true)
+		sticksprite.rotation = PI
 
 
 ## INJURY CONTROL
@@ -356,17 +373,26 @@ func set_powerstatus():
 ## Rooms
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
+		if (just_respawned):
+			# if you just respawned then NO FANCY TRANSITION 4 U >:(
+			camera.limit_top = area.global_position.y
+			camera.limit_left = area.global_position.x
+			camera.limit_bottom = area.global_position.y + area.scale.y
+			camera.limit_right = area.global_position.x + area.scale.x
+			return
 		# set the camera limits
-		#camera.limit_top = area.global_position.y
-		#camera.limit_left = area.global_position.x
-		#camera.limit_bottom = area.global_position.y + area.scale.y
-		#camera.limit_right = area.global_position.x + area.scale.x
 		camera_target_top = area.global_position.y
 		camera_target_left = area.global_position.x
 		camera_target_bottom = area.global_position.y + area.scale.y
 		camera_target_right = area.global_position.x + area.scale.x
 		
 		# fancy camera transition stuff
+		# TODO: remove debug statements
+		print("TOP: ", camera_target_top)
+		print("BOTTOM: ", camera_target_bottom)
+		print("LEFT: ", camera_target_left)
+		print("RIGHT: ", camera_target_right)
+		print_debug("")
 		transitioning = true
 		# force camera to actually physically clamp to bounds
 		# because godot only kind of applies the bounds
@@ -406,22 +432,22 @@ func camera_transitions(delta):
 		
 		var prev_val = camera.limit_top
 		camera.limit_top = ceil(expDecay(camera.limit_top, camera_target_top, LERP_DECAY_RATE, delta))
-		if (camera.limit_top == prev_val): camera.limit_top = camera_target_top
+		if (camera.limit_top == prev_val): camera.limit_top = int(camera_target_top)
 		else: transing = true
 		
 		prev_val = camera.limit_left
 		camera.limit_left = ceil(expDecay(camera.limit_left, camera_target_left, LERP_DECAY_RATE, delta))
-		if (camera.limit_left == prev_val): camera.limit_left = camera_target_left
+		if (camera.limit_left == prev_val): camera.limit_left = int(camera_target_left)
 		else: transing = true
 		
 		prev_val = camera.limit_bottom
 		camera.limit_bottom = floor(expDecay(camera.limit_bottom, camera_target_bottom, LERP_DECAY_RATE, delta))
-		if (camera.limit_bottom == prev_val): camera.limit_bottom = camera_target_bottom
+		if (camera.limit_bottom == prev_val): camera.limit_bottom = int(camera_target_bottom)
 		else: transing = true
 		
 		prev_val = camera.limit_right
 		camera.limit_right = floor(expDecay(camera.limit_right, camera_target_right, LERP_DECAY_RATE, delta))
-		if (camera.limit_right == prev_val): camera.limit_right = camera_target_right
+		if (camera.limit_right == prev_val): camera.limit_right = int(camera_target_right)
 		else: transing = true
 		
 		if (!transing):

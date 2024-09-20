@@ -33,6 +33,7 @@ script = ExtResource("1_y13eo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_dx7q5")
+metadata/_edit_lock_ = true
 
 [node name="v" type="Sprite2D" parent="."]
 light_mask = 0
@@ -40,10 +41,12 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_1n00u")
 scale = Vector2(4, 4)
 texture = ExtResource("2_p08lw")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(2, 2)
 color = Color(0.7, 1, 1, 1)
 texture = ExtResource("3_jxokw")
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
