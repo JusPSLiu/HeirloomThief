@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=27 format=3 uid="uid://cw74evm60x0ej"]
+[gd_resource type="TileSet" load_steps=31 format=3 uid="uid://cw74evm60x0ej"]
 
 [ext_resource type="Texture2D" uid="uid://cst73h3jdiyhi" path="res://Art/Tilesets/stonebricks_light_small.png" id="1_gtk6k"]
 [ext_resource type="Texture2D" uid="uid://cxgx8eenn54jy" path="res://Art/Tilesets/stonebricks_small_normal.png" id="2_gb5y3"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://be527g85pyus1" path="res://Art/Tilesets/dirt_specular.png" id="9_xfv56"]
 [ext_resource type="Texture2D" uid="uid://d4lphyl13ikku" path="res://Art/Tilesets/transitiontiles_normal.png" id="10_llb3j"]
 [ext_resource type="Texture2D" uid="uid://3brof6dm1yja" path="res://Art/Tilesets/carpet_small.png" id="11_8mm1n"]
+[ext_resource type="Texture2D" uid="uid://bktl83p5usom0" path="res://Art/Tilesets/lava.png" id="13_lsq6a"]
+[ext_resource type="Texture2D" uid="uid://bh0ldnjny041j" path="res://Art/Tilesets/spikes.png" id="14_f1kuj"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_hmlqo"]
 diffuse_texture = ExtResource("1_gtk6k")
@@ -1586,6 +1588,42 @@ texture_region_size = Vector2i(8, 8)
 7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 7:5/0/terrains_peering_bit/top_side = 5
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_px44o"]
+texture = ExtResource("13_lsq6a")
+texture_region_size = Vector2i(8, 8)
+0:0/animation_columns = 2
+0:0/animation_frame_0/duration = 0.5
+0:0/animation_frame_1/duration = 0.5
+0:0/0 = 0
+0:1/animation_columns = 2
+0:1/animation_frame_0/duration = 0.5
+0:1/animation_frame_1/duration = 0.5
+0:1/0 = 0
+0:2/animation_columns = 2
+0:2/animation_frame_0/duration = 0.5
+0:2/animation_frame_1/duration = 0.5
+0:2/0 = 0
+0:3/animation_columns = 2
+0:3/animation_frame_0/duration = 0.5
+0:3/animation_frame_1/duration = 0.5
+0:3/0 = 0
+0:4/animation_columns = 2
+0:4/animation_frame_0/duration = 0.5
+0:4/animation_frame_1/duration = 0.5
+0:4/0 = 0
+0:5/animation_columns = 2
+0:5/animation_frame_0/duration = 0.5
+0:5/animation_frame_1/duration = 0.5
+0:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yi0nw"]
+texture = ExtResource("14_f1kuj")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
 [resource]
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
@@ -1609,3 +1647,5 @@ sources/3 = SubResource("TileSetAtlasSource_37iwi")
 sources/4 = SubResource("TileSetAtlasSource_mvo82")
 sources/5 = SubResource("TileSetAtlasSource_v6ngc")
 sources/6 = SubResource("TileSetAtlasSource_gi7k8")
+sources/7 = SubResource("TileSetAtlasSource_px44o")
+sources/8 = SubResource("TileSetAtlasSource_yi0nw")
