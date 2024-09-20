@@ -4,7 +4,7 @@ func enter() -> void:
 	super.enter()
 	
 	while entity.player:
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1.8).timeout
 		entity.shoot(3)
 
 func physics_update(delta : float):
