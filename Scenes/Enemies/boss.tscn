@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dydj1f61lym74"]
+[gd_scene load_steps=16 format=3 uid="uid://dydj1f61lym74"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_q5flq"]
 [ext_resource type="Script" path="res://Scripts/Enemies/boss/boss.gd" id="2_pcfnv"]
@@ -86,13 +86,17 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8vs5"]
-radius = 20.0
+radius = 18.0
 
-[node name="Boss" instance=ExtResource("1_q5flq")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0aybm"]
+radius = 21.0051
+
+[node name="Boss" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_q5flq")]
 script = ExtResource("2_pcfnv")
 fire_rate = 0.3
 max_health = 20
 gravity = 0.0
+damage_component = NodePath("DamageComponent")
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -132,11 +136,12 @@ auto_animate = true
 script = ExtResource("7_g5k4v")
 
 [node name="DamageComponent" parent="." index="8" instance=ExtResource("8_14l14")]
-visible = false
 position = Vector2(0, 2)
-scale = Vector2(1.4, 1.3)
 knockPlayerAwayFromCenter = true
-knockPlayerInCustomVector = Vector2(0, -4)
+
+[node name="CollisionShape2D" parent="DamageComponent" index="0"]
+position = Vector2(0, 0.538462)
+shape = SubResource("CircleShape2D_0aybm")
 
 [node name="ProjectileSpawns" type="Node2D" parent="." index="9"]
 
@@ -158,3 +163,5 @@ rotation = 0.785398
 
 [node name="Position5" type="Node2D" parent="ProjectileSpawns" index="4"]
 position = Vector2(-1.90735e-06, 32)
+
+[editable path="DamageComponent"]
