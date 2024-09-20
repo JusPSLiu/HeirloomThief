@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://bau2acs52srkv"]
+[gd_scene load_steps=54 format=4 uid="uid://bau2acs52srkv"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_mlbic"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_eaegu"]
@@ -19,9 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://cg3umhljbpw80" path="res://Art/Tilesets/stonebricks_light.png" id="17_w0qfv"]
 [ext_resource type="Texture2D" uid="uid://r05n73bgi5xj" path="res://Art/Tilesets/stonebricks_normal.png" id="18_4pa5k"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="19_nghnl"]
-[ext_resource type="PackedScene" path="res://Scenes/Collectibles/checkpoint.tscn" id="20_cnfvo"]
-[ext_resource type="PackedScene" path="res://Scenes/Collectibles/gem_upgrade.tscn" id="21_1ha6m"]
-[ext_resource type="PackedScene" path="res://Scenes/Collectibles/health_upgrade.tscn" id="22_nexcf"]
 [ext_resource type="PackedScene" uid="uid://dtkq8v8c1chlp" path="res://Scenes/Levels/room.tscn" id="23_6x7r7"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="24_rpwo6"]
 [ext_resource type="AudioStream" uid="uid://ba5ajgqe04tu4" path="res://Sounds/Music/enemylevel.mp3" id="25_6gv2q"]
@@ -1629,49 +1626,166 @@ texture = ExtResource("19_nghnl")
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
-[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-88, 384)
+script = null
 
-[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint2" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-5027, -196)
+script = null
 
-[node name="RespawnPointOnFloor" parent="Checkpoints/Checkpoint2" index="1"]
-position = Vector2(62, 100)
-
-[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint3" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-8060, 1792)
+script = null
 
-[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint4" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-11896, 1600)
+script = null
 
-[node name="Checkpoint6" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint6" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-11784, 1600)
+script = null
 
-[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint5" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-13796, 1600)
+script = null
 
-[node name="Checkpoint7" parent="Checkpoints" instance=ExtResource("20_cnfvo")]
+[node name="Checkpoint7" parent="Checkpoints"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-13660, 1600)
+script = null
 
 [node name="upgrades" type="Node2D" parent="."]
 
-[node name="gem_upgrade" parent="upgrades" instance=ExtResource("21_1ha6m")]
+[node name="gem_upgrade" parent="upgrades"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-1828, 690)
+script = null
 
-[node name="gem_upgrade2" parent="upgrades" instance=ExtResource("21_1ha6m")]
+[node name="gem_upgrade2" parent="upgrades"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-2273, -234)
 id = 1
+script = null
 
-[node name="gem_upgrade3" parent="upgrades" instance=ExtResource("21_1ha6m")]
+[node name="gem_upgrade3" parent="upgrades"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-14490, 1850)
 id = 2
+script = null
 
-[node name="health_upgrade" parent="upgrades" instance=ExtResource("22_nexcf")]
+[node name="health_upgrade" parent="upgrades"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-2743, -206)
+script = null
 
-[node name="health_upgrade2" parent="upgrades" instance=ExtResource("22_nexcf")]
+[node name="health_upgrade2" parent="upgrades"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(-18554, 1618)
 id = 1
+script = null
 
 [node name="borders" type="Node2D" parent="."]
 
@@ -1813,6 +1927,3 @@ scale = Vector2(4, 4)
 [node name="GuardFlying2" parent="." instance=ExtResource("30_incys")]
 position = Vector2(-21153, 1490)
 scale = Vector2(4, 4)
-
-[editable path="Checkpoints/Checkpoint2"]
-[editable path="upgrades/gem_upgrade"]
