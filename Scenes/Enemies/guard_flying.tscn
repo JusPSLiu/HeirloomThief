@@ -120,6 +120,7 @@ size = Vector2(80, 88)
 
 [node name="GuardFlying" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_t2o7m")]
 motion_mode = 1
+safe_margin = 0.04
 script = ExtResource("2_rcbjx")
 max_speed = 10000.0
 gravity = 0.0
