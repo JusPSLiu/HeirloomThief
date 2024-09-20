@@ -123,7 +123,7 @@ motion_mode = 1
 script = ExtResource("2_rcbjx")
 max_speed = 10000.0
 gravity = 0.0
-damage_component = NodePath("DamageComponent")
+damage_component = NodePath("DamageComponentWOWZA!!!!")
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -166,8 +166,8 @@ auto_animate = true
 [node name="Reset" type="Node2D" parent="StateManager" index="3"]
 script = ExtResource("8_xlyl3")
 
-[node name="DamageComponent" parent="." index="8" instance=ExtResource("11_ryvwy")]
+[node name="DamageComponentWOWZA!!!!" parent="." index="8" instance=ExtResource("11_ryvwy")]
 scale = Vector2(0.3, 0.3)
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
-[connection signal="body_entered" from="DamageComponent" to="StateManager/Dive" method="_on_damage_component_body_entered"]
+[connection signal="body_entered" from="DamageComponentWOWZA!!!!" to="StateManager/Dive" method="_on_damage_component_body_entered"]
