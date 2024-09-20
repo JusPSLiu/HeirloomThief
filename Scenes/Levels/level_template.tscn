@@ -130,7 +130,7 @@ _data = {
 "RESET": SubResource("Animation_5gwl0")
 }
 
-[node name="LevelTemplate" type="Node2D"]
+[node name="LevelTemplate2" type="Node2D"]
 texture_filter = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
