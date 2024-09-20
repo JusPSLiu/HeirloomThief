@@ -43,6 +43,7 @@ func disable():
 	hide()
 	set_physics_process(false)
 	set_collision_layer_value(1, false)
+	position = startPos
 	if (damage_component):
 		damage_component.process_mode = Node.PROCESS_MODE_DISABLED
 
@@ -50,23 +51,26 @@ func damage(damage_val):
 	current_health -= damage_val
 	healthBar.size.x = max(0, (10*current_health/max_health))
 	if (current_health <= 0):
-		# death sound
-		if (soundDeath):
-			soundDeath.play()
-		
-		# particle effects
-		var deathy = deathparticle.instantiate()
-		deathy.position = position + Vector2(0, -16)
-		add_sibling(deathy)
-		
-		# randomly give health pickup
-		if (randi() % 5 > 2):
-			var healthy = healthpickup.instantiate()
-			healthy.position = position + Vector2(0, -8)
-			add_sibling(healthy)
-		disable()
+		die()
 	elif (soundGetHit):
 		soundGetHit.play()
+
+func die():
+	# randomly give health pickup
+	if (randi() % 5 > 2):
+		var healthy = healthpickup.instantiate()
+		healthy.position = position + Vector2(0, -8)
+		add_sibling(healthy)
+	
+	# death sound
+	if (soundDeath):
+		soundDeath.play()
+	
+	# particle effects
+	var deathy = deathparticle.instantiate()
+	deathy.position = position + Vector2(0, -16)
+	add_sibling(deathy)
+	disable()
 
 func respawn():
 	position = startPos

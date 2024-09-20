@@ -14,4 +14,17 @@ shape = SubResource("RectangleShape2D_rrx15")
 [node name="RespawnPointOnFloor" type="Node2D" parent="."]
 position = Vector2(0, 64)
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -28.0
+offset_top = 64.0
+offset_right = 28.0
+offset_bottom = 68.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = 60.0
+offset_right = 5.0
+offset_bottom = 64.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

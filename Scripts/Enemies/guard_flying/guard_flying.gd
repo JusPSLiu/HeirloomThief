@@ -41,3 +41,7 @@ func _physics_process(delta: float) -> void:
 func _on_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player = body
+
+func disable():
+	states.reset()
+	super.disable()

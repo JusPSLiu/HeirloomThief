@@ -18,3 +18,9 @@ func _on_body_entered(body: Node2D) -> void:
 	elif (body.is_in_group("Player")):
 		for enemy in my_enemies:
 			enemy.enable()
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if (body.is_in_group("Player") and body.is_physics_processing()):
+		for enemy in my_enemies:
+			enemy.disable()
