@@ -13,7 +13,12 @@ func enter():
 
 func physics_update(delta: float):
 	super.physics_update(delta)
-	entity.velocity = Vector2.ZERO
+	entity.velocity.x = 0
+	if abs(entity.global_position.y - entity.starting_height) > 32:
+		entity.velocity.y = lerpf(entity.velocity.y, 150, 5.0 * delta)
+	else:
+		entity.velocity.y = lerpf(entity.velocity.y, 0, 5.0 * delta)
+	
 	
 	if end:
 		return entity.idle

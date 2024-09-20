@@ -18,6 +18,7 @@ specular_shininess = 0.8
 texture_filter = 1
 script = ExtResource("2_qtomr")
 startFacingRight = false
+max_speed = 18000.0
 damage_component = NodePath("DamageComponent")
 
 [node name="Collider" parent="." index="1"]

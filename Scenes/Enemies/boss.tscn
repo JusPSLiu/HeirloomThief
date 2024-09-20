@@ -92,6 +92,7 @@ radius = 18.0
 radius = 21.0051
 
 [node name="Boss" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_q5flq")]
+motion_mode = 1
 script = ExtResource("2_pcfnv")
 fire_rate = 0.3
 max_health = 20
