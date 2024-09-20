@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Heirloom Thief"
-run/main_scene="res://Scenes/Levels/new_level.tscn"
+run/main_scene="res://Scenes/Levels/ring_puzzle1.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+<<<<<<<Updatedupstreamrun/main_scene="res://Scenes/Levels/new_level.tscn"
 
 [autoload]
 
