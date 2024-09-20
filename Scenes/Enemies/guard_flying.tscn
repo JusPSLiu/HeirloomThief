@@ -118,10 +118,11 @@ shader_parameter/normal_map = ExtResource("4_h6t4y")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_keku4"]
 size = Vector2(80, 88)
 
-[node name="GuardFlying" instance=ExtResource("1_t2o7m")]
+[node name="GuardFlying" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_t2o7m")]
 script = ExtResource("2_rcbjx")
 max_speed = 10000.0
 gravity = 0.0
+damage_component = NodePath("DamageComponent")
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
