@@ -107,7 +107,7 @@ size = Vector2(56, 24)
 
 [node name="GuardGun" instance=ExtResource("1_f6ea4")]
 script = ExtResource("2_gcgvk")
-fire_rate = 0.2
+fire_rate = 0.4
 number_of_shots = 3
 max_speed = 10000.0
 
@@ -116,15 +116,9 @@ libraries = {
 "": SubResource("AnimationLibrary_fifks")
 }
 
-[node name="Collider" parent="." index="1"]
+[node name="Collider" parent="." index="2"]
 position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_frvum")
-
-[node name="Sprite" parent="." index="2"]
-texture_filter = 1
-position = Vector2(0, -8)
-texture = ExtResource("3_dpbfg")
-hframes = 2
 
 [node name="Spawn" type="Node2D" parent="." index="3"]
 position = Vector2(-10, -6)
@@ -135,14 +129,15 @@ position = Vector2(-10, -6)
 position = Vector2(-28, -12)
 shape = SubResource("RectangleShape2D_e62nn")
 
-[node name="VisibleOnScreenEnabler2D" parent="." index="5"]
-position = Vector2(1.19209e-07, -6.5)
-scale = Vector2(0.5, 0.65)
+[node name="Sprite" parent="." index="5"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_dpbfg")
+hframes = 2
 
 [node name="StateManager" type="Node2D" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_ld8hp")
 initial_state = NodePath("Idle")
-print_states = true
 
 [node name="Idle" type="Node2D" parent="StateManager" index="0"]
 script = ExtResource("5_2e3xp")

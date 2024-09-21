@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dydj1f61lym74"]
+[gd_scene load_steps=16 format=3 uid="uid://dydj1f61lym74"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_q5flq"]
 [ext_resource type="Script" path="res://Scripts/Enemies/boss/boss.gd" id="2_pcfnv"]
@@ -7,10 +7,11 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/boss/idle.gd" id="5_dcrvj"]
 [ext_resource type="Script" path="res://Scripts/Enemies/boss/run.gd" id="6_q13u5"]
 [ext_resource type="Script" path="res://Scripts/Enemies/boss/jump.gd" id="7_g5k4v"]
+[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="8_14l14"]
 
 [sub_resource type="Animation" id="Animation_oku63"]
 resource_name = "Idle"
-length = 0.8
+length = 1.6
 loop_mode = 2
 step = 0.1
 tracks/0/type = "value"
@@ -20,10 +21,10 @@ tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8),
+"times": PackedFloat32Array(0, 0.8, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.9), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ru3n7"]
@@ -43,23 +44,8 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(0.8, 1.2)]
 }
 
-[sub_resource type="Animation" id="Animation_vehqh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_td6fq"]
-resource_name = "Run"
+resource_name = "ProjAttack"
 length = 0.2
 loop_mode = 2
 step = 0.1
@@ -76,34 +62,59 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_vehqh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ml576"]
 _data = {
 "Idle": SubResource("Animation_oku63"),
 "Jump": SubResource("Animation_ru3n7"),
-"RESET": SubResource("Animation_vehqh"),
-"Run": SubResource("Animation_td6fq")
+"ProjAttack": SubResource("Animation_td6fq"),
+"RESET": SubResource("Animation_vehqh")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8vs5"]
-radius = 23.0868
+radius = 18.0
 
-[node name="Boss" instance=ExtResource("1_q5flq")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0aybm"]
+radius = 21.0051
+
+[node name="Boss" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_q5flq")]
+motion_mode = 1
 script = ExtResource("2_pcfnv")
+fire_rate = 0.3
+max_health = 20
+gravity = 0.0
+damage_component = NodePath("DamageComponent")
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
 "": SubResource("AnimationLibrary_ml576")
 }
 
+[node name="HealthBar" parent="." index="1"]
+offset_top = -27.0
+offset_bottom = -24.0
+
 [node name="Collider" parent="." index="2"]
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_s8vs5")
 
 [node name="Sprite" parent="." index="3"]
 texture_filter = 1
 texture = ExtResource("3_vgyol")
-
-[node name="VisibleOnScreenEnabler2D" parent="." index="4"]
-scale = Vector2(2.4, 2.4)
 
 [node name="sounds" type="AudioStreamPlayer2D" parent="." index="5"]
 process_mode = 3
@@ -112,12 +123,46 @@ bus = &"Sounds"
 [node name="StateManager" type="Node2D" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_ptnp2")
 initial_state = NodePath("Idle")
+print_states = true
 
 [node name="Idle" type="Node2D" parent="StateManager" index="0"]
 script = ExtResource("5_dcrvj")
+auto_animate = true
 
-[node name="Run" type="Node2D" parent="StateManager" index="1"]
+[node name="ProjAttack" type="Node2D" parent="StateManager" index="1"]
 script = ExtResource("6_q13u5")
+auto_animate = true
 
 [node name="Jump" type="Node2D" parent="StateManager" index="2"]
 script = ExtResource("7_g5k4v")
+
+[node name="DamageComponent" parent="." index="8" instance=ExtResource("8_14l14")]
+position = Vector2(0, 2)
+knockPlayerAwayFromCenter = true
+
+[node name="CollisionShape2D" parent="DamageComponent" index="0"]
+position = Vector2(0, 0.538462)
+shape = SubResource("CircleShape2D_0aybm")
+
+[node name="ProjectileSpawns" type="Node2D" parent="." index="9"]
+
+[node name="Position1" type="Node2D" parent="ProjectileSpawns" index="0"]
+position = Vector2(24, 14)
+rotation = -0.785398
+
+[node name="Position2" type="Node2D" parent="ProjectileSpawns" index="1"]
+position = Vector2(16, 28)
+rotation = -0.383972
+
+[node name="Position3" type="Node2D" parent="ProjectileSpawns" index="2"]
+position = Vector2(-16, 28)
+rotation = 0.383972
+
+[node name="Position4" type="Node2D" parent="ProjectileSpawns" index="3"]
+position = Vector2(-24, 16)
+rotation = 0.785398
+
+[node name="Position5" type="Node2D" parent="ProjectileSpawns" index="4"]
+position = Vector2(-1.90735e-06, 32)
+
+[editable path="DamageComponent"]
