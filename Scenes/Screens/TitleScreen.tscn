@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bawhbhakk6q0"]
+[gd_scene load_steps=44 format=3 uid="uid://bawhbhakk6q0"]
 
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="1_6rpfu"]
 [ext_resource type="Script" path="res://Scripts/UI/TitleScreen.gd" id="1_68eqn"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://doua04qcaxxcr" path="res://Art/UI/PlayHover.png" id="7_50pjy"]
 [ext_resource type="AudioStream" uid="uid://b550nam8j715c" path="res://Sounds/Music/title.mp3" id="11_uqgl8"]
 [ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/Return.png" id="12_n2kjl"]
+[ext_resource type="Texture2D" uid="uid://b7qypqr60oxst" path="res://Art/UI/TitleButtons/new_game.png" id="14_ooiab"]
+[ext_resource type="Texture2D" uid="uid://daf3i861esjg7" path="res://Art/UI/TitleButtons/new_game_selected.png" id="15_4iku0"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="15_mudgg"]
 [ext_resource type="Texture2D" uid="uid://c16ifbt2sew8s" path="res://Art/UI/Pause/slidBar.png" id="15_oij1a"]
 [ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="16_2t6hu"]
@@ -633,6 +635,19 @@ _data = {
 "unsure": SubResource("Animation_ely0r")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qq5vq"]
+texture = ExtResource("15_oij1a")
+expand_margin_left = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ob5yk"]
+texture = ExtResource("15_oij1a")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_wrd2m"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_qq5vq")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_ob5yk")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqhov"]
 atlas = ExtResource("12_n2kjl")
 region = Rect2(0, 0, 22, 22)
@@ -832,27 +847,32 @@ theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 150
 text = "File Select"
 
-[node name="game1" type="Button" parent="FileMenu"]
+[node name="game1" type="TextureButton" parent="FileMenu"]
+texture_filter = 1
 custom_minimum_size = Vector2(876, 50)
 layout_mode = 2
 offset_left = 198.0
 offset_top = 198.0
 offset_right = 1074.0
 offset_bottom = 259.0
-theme_override_font_sizes/font_size = 38
-text = "New Game"
+texture_normal = ExtResource("14_ooiab")
+texture_focused = ExtResource("15_4iku0")
+stretch_mode = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="FileMenu"]
-layout_mode = 0
+texture_filter = 1
+layout_mode = 2
 offset_left = 198.0
 offset_top = 270.0
-offset_right = 1082.0
-offset_bottom = 612.0
+offset_right = 419.0
+offset_bottom = 355.0
+scale = Vector2(4, 4)
+theme = SubResource("Theme_wrd2m")
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FileMenu/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 2
 
 [node name="Return" type="TextureButton" parent="FileMenu"]
 texture_filter = 1

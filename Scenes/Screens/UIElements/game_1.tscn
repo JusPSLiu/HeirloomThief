@@ -1,21 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc4cxekb8ebn5"]
+[gd_scene load_steps=10 format=3 uid="uid://cc4cxekb8ebn5"]
 
 [ext_resource type="Script" path="res://Scripts/UI/save_file_button.gd" id="1_04tt0"]
+[ext_resource type="Texture2D" uid="uid://dj6sroob1w828" path="res://Art/UI/TitleButtons/save_file.png" id="1_07cj7"]
+[ext_resource type="Texture2D" uid="uid://bgvu1cropgtkn" path="res://Art/UI/TitleButtons/save_file_selected.png" id="2_5t6ad"]
+[ext_resource type="Texture2D" uid="uid://bor27j527lw85" path="res://Art/UI/TitleButtons/delete.png" id="4_c1q1v"]
+[ext_resource type="Texture2D" uid="uid://b0v80o3ad8rag" path="res://Art/UI/TitleButtons/delete_selected.png" id="5_i40kr"]
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="6_bs1wp"]
+[ext_resource type="Texture2D" uid="uid://by3at0rjg5mb0" path="res://Art/UI/TitleButtons/ring.png" id="7_g7ypi"]
+[ext_resource type="Texture2D" uid="uid://dsi7d841tknf4" path="res://Art/UI/TitleButtons/cape.png" id="8_ti2r2"]
+[ext_resource type="Texture2D" uid="uid://pekakjttnuyh" path="res://Art/UI/TitleButtons/crown.png" id="9_umi1r"]
 
-[node name="game1" type="Button"]
-custom_minimum_size = Vector2(810, 64)
-offset_right = 812.0
-offset_bottom = 64.0
-theme_override_font_sizes/font_size = 38
-text = "New Game"
+[node name="game1" type="TextureButton"]
+texture_filter = 1
+custom_minimum_size = Vector2(202, 16)
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 201.0
+offset_bottom = 14.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("1_07cj7")
+texture_focused = ExtResource("2_5t6ad")
 script = ExtResource("1_04tt0")
 
-[node name="DeleteButton" type="Button" parent="."]
+[node name="DeleteButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 812.0
-offset_right = 876.0
-offset_bottom = 64.0
-text = "delete"
+offset_left = 203.0
+offset_right = 221.0
+offset_bottom = 18.0
+texture_normal = ExtResource("4_c1q1v")
+texture_focused = ExtResource("5_i40kr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -1.0
+offset_right = 163.0
+offset_bottom = 17.0
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0.211765, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_bs1wp")
+text = "New Game"
+
+[node name="Ring" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 2.0
+offset_right = 174.0
+offset_bottom = 16.0
+texture = ExtResource("7_g7ypi")
+
+[node name="Cape" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 2.0
+offset_right = 189.0
+offset_bottom = 16.0
+texture = ExtResource("8_ti2r2")
+
+[node name="Crown" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 5.0
+offset_right = 201.0
+offset_bottom = 14.0
+texture = ExtResource("9_umi1r")
 
 [connection signal="pressed" from="." to="." method="pressed"]
 [connection signal="pressed" from="DeleteButton" to="." method="delete_pressed"]

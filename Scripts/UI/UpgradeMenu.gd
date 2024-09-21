@@ -39,12 +39,12 @@ func _select(item: int) -> void:
 	buttons[currMode].get_child(1).hide() # hide the outline of previous
 	buttons[item].get_child(1).show() # show outline of next
 	upgradeButton.set_focus_neighbor(SIDE_TOP, buttons[item].get_path()) # make the upgrade button let you select from there lol
-	buttonSounds.play()
+	if (get_tree().paused): buttonSounds.play()
 	currMode = item
 	
 	match(item):
 		0:
-			description.text = "me trusty beatin stick. curt a see o me mum. back wen she was aroun an kickin. a littl airloom of me own. ad it from afore the mountain filled the sky with smoke. afore the (house_name) took over. theres wisperins ya see. they say (house_name) is workin on sumthin to fell even more o the grate famlies. sumthin even more poweful. might as well take some o there earlier spoils afore they finish. an ere i am"
+			description.text = "me trusty beatin stick. curt a see o me mum. back wen she was aroun an kickin. a littl airloom of me own. ad it from afore the mountain filled the sky with smoke. afore the (house_name) took over. theres wisperins ya see. they say (house_name) is workin on sumfin to fell even more o the grate famlies. sumfin even more poweful. might as well take some o there earlier spoils afore they finish. an ere i am"
 		1:
 			description.text = "i remember last time i saw this ere ring. ome was gone. just me left. on me own. ran to the ports of (port_name). the frost started. thought i wouldn make it when the light showed up. a great big bonfire started by a smol ring. never can foget that. course the (port_name) famly took it back. its theirs after all. then they fell and the (house_name) took it"
 		2:

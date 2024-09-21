@@ -224,7 +224,7 @@ func _input(event: InputEvent) -> void:
 			if (event.is_action_pressed("Attack") and !stick.get_child(0).is_playing()):
 				# set the swing angle (flip sprite so swipe down to left and right)
 				var properAngle = getSwingAngle()
-				stick.get_child(1).rotation = properAngle
+				stick.get_child(1).rotation = properAngle.angle()
 				flipStickTo(properAngle.x > 0)
 				# play swing animation
 				stick.get_child(0).play("swing")
@@ -242,6 +242,23 @@ func _input(event: InputEvent) -> void:
 				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
+			# shooting attack
+			elif (event.is_action_pressed("Shoot") and !stick.get_child(0).is_playing()):
+				if (currentAbilities[ability.ring]):
+					if (shootsound): shootsound.play()
+					stick.get_child(0).play("shoot")
+					#make the projectile; possibly replace with special player projectile later
+					var newprojectile = projectile.instantiate()
+					newprojectile.position = position
+					newprojectile.apply_scale(Vector2(4, 4))
+					newprojectile.movement_direction = getSwingAngle().normalized()
+					newprojectile.speed = 1000
+					add_sibling(newprojectile)
+					
+					# the double jump for laser
+					if (getSwingAngle().dot(Vector2(0, 1)) > 0):
+						velocity.y = JUMP_VELOCITY
+						doublejumped = true
 
 # get input angle
 func getSwingAngle():
@@ -254,7 +271,7 @@ func getSwingAngle():
 			Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
 			Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 		)
-	return joystickInput.angle()
+	return joystickInput
 
 func flipStickTo(right : bool):
 	if (right):
@@ -314,7 +331,7 @@ func respawn():
 
 ## Upgrades and Health section :D
 func get_healed(hlth : int):
-	SaveManager.current_health += hlth
+	SaveManager.current_health = min(SaveManager.current_health+hlth, SaveManager.max_health)
 	if (healedsound): healedsound.play()
 	if (GUI):
 		GUI.show_curr_hp()

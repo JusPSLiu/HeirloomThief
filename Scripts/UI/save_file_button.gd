@@ -1,14 +1,18 @@
-extends Button
+extends TextureButton
 
 var my_file_name = ""
 var rootNode = null
 var myData = {}
 
 func set_self(data, rootParentNode):
-	text = data['save_name']
+	scale = Vector2(4, 4)
+	$Label.text = data['save_name']
 	my_file_name = data['file_name']
 	#data['healthy']
-	#data['progress']
+	print(data.progress)
+	$Ring.visible = (data['progress'][1] > 0)
+	$Cape.visible = (data['progress'][2] > 0)
+	$Crown.visible = (data['progress'][3] > 0)
 	
 	rootNode = rootParentNode
 	myData = data

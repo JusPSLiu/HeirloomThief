@@ -96,7 +96,7 @@ func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(2, linear_to_db(value))
 
 func _on_sound_slider_value_changed(value):
-	if (!sound.playing and value != (db_to_linear(AudioServer.get_bus_volume_db(1)))):
+	if (!sound.playing and value < (db_to_linear(AudioServer.get_bus_volume_db(1)))):
 		sound.play()
 	AudioServer.set_bus_volume_db(1, linear_to_db(value))
 
