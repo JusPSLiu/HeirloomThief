@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://ba5ajgqe04tu4" path="res://Sounds/Music/enemylevel.mp3" id="16_1l12o"]
 [ext_resource type="PackedScene" uid="uid://dqsatwfb0ss2q" path="res://Scenes/Interactable/torchy.tscn" id="17_qnlba"]
 [ext_resource type="PackedScene" uid="uid://bxwgbrspdq7if" path="res://Scenes/Interactable/secondary_torch.tscn" id="18_0arec"]
-[ext_resource type="PackedScene" uid="uid://dnpt88g0ifq87" path="res://Scenes/Enemies/guard_flying.tscn" id="19_67ykg"]
+[ext_resource type="PackedScene" uid="uid://bpgf6kn085iul" path="res://Scenes/Enemies/guard_flying.tscn" id="19_67ykg"]
 [ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Interactable/gem_upgrade.tscn" id="20_otdft"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="21_8rx2u"]
 

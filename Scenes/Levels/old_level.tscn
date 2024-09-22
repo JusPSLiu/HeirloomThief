@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_eaegu"]
 [ext_resource type="Texture2D" uid="uid://d12k4qjoiv0ys" path="res://Art/Tilesets/stonebricks_dark.png" id="3_5arg6"]
 [ext_resource type="Texture2D" uid="uid://cj1ro7q04eyjo" path="res://Art/Tilesets/empty.png" id="4_p50a5"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemies/damage_component.tscn" id="5_r58l5"]
+[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="5_r58l5"]
 [ext_resource type="Texture2D" uid="uid://cst73h3jdiyhi" path="res://Art/Tilesets/stonebricks_light_small.png" id="6_yjaok"]
 [ext_resource type="Texture2D" uid="uid://cxgx8eenn54jy" path="res://Art/Tilesets/stonebricks_small_normal.png" id="7_386qk"]
 [ext_resource type="Texture2D" uid="uid://b6dh78grbs0w" path="res://Art/Tilesets/smallwood.png" id="8_f42xa"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="27_r4tyj"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="28_1jpxo"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="29_hwcmx"]
-[ext_resource type="PackedScene" uid="uid://dnpt88g0ifq87" path="res://Scenes/Enemies/guard_flying.tscn" id="30_incys"]
+[ext_resource type="PackedScene" uid="uid://bpgf6kn085iul" path="res://Scenes/Enemies/guard_flying.tscn" id="30_incys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0st3j"]
 texture = ExtResource("2_eaegu")
@@ -1626,166 +1626,7 @@ texture = ExtResource("19_nghnl")
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
-[node name="Checkpoint" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-88, 384)
-script = null
-
-[node name="Checkpoint2" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-5027, -196)
-script = null
-
-[node name="Checkpoint3" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-8060, 1792)
-script = null
-
-[node name="Checkpoint4" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-11896, 1600)
-script = null
-
-[node name="Checkpoint6" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-11784, 1600)
-script = null
-
-[node name="Checkpoint5" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-13796, 1600)
-script = null
-
-[node name="Checkpoint7" parent="Checkpoints"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-13660, 1600)
-script = null
-
 [node name="upgrades" type="Node2D" parent="."]
-
-[node name="gem_upgrade" parent="upgrades"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-1828, 690)
-script = null
-
-[node name="gem_upgrade2" parent="upgrades"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-2273, -234)
-id = 1
-script = null
-
-[node name="gem_upgrade3" parent="upgrades"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-14490, 1850)
-id = 2
-script = null
-
-[node name="health_upgrade" parent="upgrades"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-2743, -206)
-script = null
-
-[node name="health_upgrade2" parent="upgrades"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(-18554, 1618)
-id = 1
-script = null
 
 [node name="borders" type="Node2D" parent="."]
 
