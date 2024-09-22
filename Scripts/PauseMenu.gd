@@ -16,6 +16,7 @@ extends CanvasLayer
 @export var musicSlider : HSlider
 @export var player : CharacterBody2D
 
+var pauseReload = 0.1 # only pause after 0.1 seconds because i made esc and ` both pause
 var pausable : bool = false
 var unfocused : bool = true # checks if anything is focused; for controller users
 var currentMenu : int = 0
@@ -42,6 +43,10 @@ func _ready():
 	# make sure pause menu isnt visible
 	$BackColor.visible = false
 
+func _process(delta: float) -> void:
+	if pauseReload > 0:
+		pauseReload -= delta
+
 func _on_quit_button_pressed():
 	sound.play() #TODO: fix sound
 	#musicPlayer.fadeOut()
@@ -53,9 +58,13 @@ func _on_quit_button_pressed():
 func _input(event: InputEvent) -> void:
 	if (event is not InputEventMouse):
 		if !event.is_echo():
-			if event.is_action_pressed("pause") and pausable:
+			if event.is_action_pressed("pause") and pausable and pauseReload < 0:
 				if event.pressed:
 					togglePause()
+					pauseReload = 0.1
+			elif event.is_action_pressed("go_back"):
+				if currentMenu != menu.pause:
+					_to_main_pause_menu()
 		if (unfocused):
 			if (event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right")):
 				unfocused = false

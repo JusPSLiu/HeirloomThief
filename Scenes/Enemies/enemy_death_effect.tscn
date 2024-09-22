@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkwpkgfxajcaf"]
+[gd_scene load_steps=5 format=3 uid="uid://dvudgrud88qmx"]
 
 [sub_resource type="Gradient" id="Gradient_107s2"]
 offsets = PackedFloat32Array(0.640927, 1)
@@ -32,7 +32,6 @@ _data = {
 
 [node name="Explosion" type="CPUParticles2D"]
 z_index = -1
-emitting = false
 amount = 80
 lifetime = 0.9
 one_shot = true

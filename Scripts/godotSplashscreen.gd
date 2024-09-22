@@ -24,7 +24,7 @@ func _on_animation_player_animation_finished(_anim_name):
 	get_tree().change_scene_to_file("res://Scenes/Screens/splashscreen.tscn")
 
 func _input(event : InputEvent):
-	if (event is InputEventKey and event.keycode == KEY_ESCAPE) or (event is InputEventMouseButton and event.is_double_click()):
+	if (event.is_action_pressed("pause")) or (event is InputEventMouseButton and event.is_double_click()):
 		if (!transitionToBlack.is_playing()):
 			transitionToBlack.play("FadeOut")
 			buttonSound.play()

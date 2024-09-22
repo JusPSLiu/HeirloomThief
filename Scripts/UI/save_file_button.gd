@@ -9,7 +9,6 @@ func set_self(data, rootParentNode):
 	$Label.text = data['save_name']
 	my_file_name = data['file_name']
 	#data['healthy']
-	print(data.progress)
 	$Ring.visible = (data['progress'][1] > 0)
 	$Cape.visible = (data['progress'][2] > 0)
 	$Crown.visible = (data['progress'][3] > 0)
@@ -24,3 +23,11 @@ func pressed():
 func delete_pressed():
 	if (rootNode != null):
 		rootNode.delete_file(myData)
+
+
+func _on_focus_entered() -> void:
+	$DeleteButton.z_index = -1
+
+
+func _on_focus_exited() -> void:
+	$DeleteButton.z_index = 0

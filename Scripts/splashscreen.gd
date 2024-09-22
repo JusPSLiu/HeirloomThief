@@ -27,7 +27,7 @@ func _on_video_stream_player_finished():
 	pass # Replace with function body.
 
 func _input(event : InputEvent):
-	if (event is InputEventKey and event.keycode == KEY_ESCAPE) or (event is InputEventMouseButton and event.is_double_click()):
+	if (event.is_action_pressed("pause")) or (event is InputEventMouseButton and event.is_double_click()):
 		if (!skipping):
 			skipping = true
 			transitionToBlack.play("FadeOut")

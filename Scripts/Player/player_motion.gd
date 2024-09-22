@@ -392,10 +392,10 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
 		if (just_respawned):
 			# if you just respawned then NO FANCY TRANSITION 4 U >:(
-			camera.limit_top = area.global_position.y
-			camera.limit_left = area.global_position.x
-			camera.limit_bottom = area.global_position.y + area.scale.y
-			camera.limit_right = area.global_position.x + area.scale.x
+			camera.limit_top = int(area.global_position.y)
+			camera.limit_left = int(area.global_position.x)
+			camera.limit_bottom = int(area.global_position.y + area.scale.y)
+			camera.limit_right = int(area.global_position.x + area.scale.x)
 			return
 		# set the camera limits
 		camera_target_top = area.global_position.y
@@ -404,12 +404,6 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 		camera_target_right = area.global_position.x + area.scale.x
 		
 		# fancy camera transition stuff
-		# TODO: remove debug statements
-		print("TOP: ", camera_target_top)
-		print("BOTTOM: ", camera_target_bottom)
-		print("LEFT: ", camera_target_left)
-		print("RIGHT: ", camera_target_right)
-		print_debug("")
 		transitioning = true
 		# force camera to actually physically clamp to bounds
 		# because godot only kind of applies the bounds

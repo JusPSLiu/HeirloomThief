@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=59 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -51,17 +51,17 @@
 [ext_resource type="Texture2D" uid="uid://b11p041r66isi" path="res://Art/UI/Pause/upgrades/upgrade_button.png" id="42_r844g"]
 [ext_resource type="Texture2D" uid="uid://v5b1iglh5g11" path="res://Art/UI/Pause/upgrades/upgrade_button_hover.png" id="43_iwaiv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3tqmp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfa4r"]
 atlas = ExtResource("3_o3frg")
-region = Rect2(0, 0, 22, 22)
+region = Rect2(0, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ri5ei"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6nuh"]
 atlas = ExtResource("3_o3frg")
-region = Rect2(22, 0, 22, 22)
+region = Rect2(48, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6eft"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5re2n"]
 atlas = ExtResource("3_o3frg")
-region = Rect2(44, 0, 22, 22)
+region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r73ik"]
 atlas = ExtResource("30_tbhvj")
@@ -142,18 +142,6 @@ animations = [{
 "name": &"2",
 "speed": 5.0
 }]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p0r7f"]
-atlas = ExtResource("3_o3frg")
-region = Rect2(0, 0, 22, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3yjre"]
-atlas = ExtResource("3_o3frg")
-region = Rect2(22, 0, 22, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3f51"]
-atlas = ExtResource("3_o3frg")
-region = Rect2(44, 0, 22, 22)
 
 [node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("soundSlider", "musicSlider")]
 process_mode = 3
@@ -249,6 +237,28 @@ offset_right = 1142.0
 offset_bottom = 288.0
 scale = Vector2(4, 4)
 texture = ExtResource("13_75v31")
+
+[node name="MapLabels" type="Label" parent="BackColor/MainMenu"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 88.0
+offset_right = 472.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("2_r07rn")
+theme_override_font_sizes/font_size = 64
+text = "MAP"
+
+[node name="MapLabels2" type="Label" parent="BackColor/MainMenu"]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 145.0
+offset_right = 519.0
+offset_bottom = 217.0
+theme_override_constants/line_spacing = -4
+theme_override_fonts/font = ExtResource("2_r07rn")
+theme_override_font_sizes/font_size = 16
+text = "click/scroll on mouse to move map
+right stick/triggers on controller"
 
 [node name="Map" type="Sprite2D" parent="BackColor/MainMenu" node_paths=PackedStringArray("healthLocations", "gemLocations")]
 self_modulate = Color(1, 1, 1, 0)
@@ -461,7 +471,6 @@ horizontal_alignment = 1
 
 [node name="MusicSlider" type="HSlider" parent="BackColor/Settings/MenuContainer"]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../Return")
 focus_neighbor_bottom = NodePath("../SoundSlider")
 focus_next = NodePath("../SoundSlider")
 theme_override_icons/grabber = ExtResource("3_852t1")
@@ -487,7 +496,6 @@ horizontal_alignment = 1
 
 [node name="SoundSlider" type="HSlider" parent="BackColor/Settings/MenuContainer"]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../Return")
 focus_neighbor_top = NodePath("../MusicSlider")
 focus_previous = NodePath("../MusicSlider")
 theme_override_icons/grabber = ExtResource("3_852t1")
@@ -511,14 +519,14 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 32.0
 offset_top = 387.0
-offset_right = 54.0
-offset_bottom = 409.0
+offset_right = 56.0
+offset_bottom = 411.0
 grow_vertical = 0
 scale = Vector2(4, 4)
-focus_neighbor_right = NodePath("../MenuContainer/SoundSlider")
-texture_normal = SubResource("AtlasTexture_3tqmp")
-texture_pressed = SubResource("AtlasTexture_ri5ei")
-texture_hover = SubResource("AtlasTexture_h6eft")
+texture_normal = SubResource("AtlasTexture_kfa4r")
+texture_pressed = SubResource("AtlasTexture_c6nuh")
+texture_hover = SubResource("AtlasTexture_5re2n")
+texture_focused = SubResource("AtlasTexture_5re2n")
 
 [node name="PlayButton" type="TextureButton" parent="BackColor"]
 layout_mode = 1
@@ -538,6 +546,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Upgrades" type="TextureRect" parent="BackColor" node_paths=PackedStringArray("buttonSounds", "description", "buttons", "upgradeButton")]
+visible = false
 modulate = Color(0.803325, 0.803325, 0.803325, 1)
 layout_mode = 0
 anchor_right = 1.0
@@ -564,11 +573,9 @@ offset_top = 36.0
 offset_right = 426.0
 offset_bottom = 70.0
 scale = Vector2(4, 4)
-focus_neighbor_left = NodePath("../../Return")
 focus_neighbor_right = NodePath("../Ring")
 focus_neighbor_bottom = NodePath("../../upgrade")
 focus_next = NodePath("../Ring")
-focus_previous = NodePath("../../Return")
 texture_normal = ExtResource("25_di86o")
 texture_hover = ExtResource("25_gh5kc")
 texture_disabled = ExtResource("28_cfhbv")
@@ -694,9 +701,6 @@ offset_top = 280.0
 offset_right = 628.0
 offset_bottom = 305.0
 scale = Vector2(4, 4)
-focus_neighbor_left = NodePath("../Return")
-focus_neighbor_bottom = NodePath("../Return")
-focus_previous = NodePath("../Return")
 texture_normal = ExtResource("42_r844g")
 texture_hover = ExtResource("43_iwaiv")
 texture_focused = ExtResource("43_iwaiv")
@@ -709,13 +713,14 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 32.0
 offset_top = -120.0
-offset_right = 54.0
-offset_bottom = -98.0
+offset_right = 56.0
+offset_bottom = -96.0
 grow_vertical = 0
 scale = Vector2(4, 4)
-texture_normal = SubResource("AtlasTexture_p0r7f")
-texture_pressed = SubResource("AtlasTexture_3yjre")
-texture_hover = SubResource("AtlasTexture_i3f51")
+texture_normal = SubResource("AtlasTexture_kfa4r")
+texture_pressed = SubResource("AtlasTexture_c6nuh")
+texture_hover = SubResource("AtlasTexture_5re2n")
+texture_focused = SubResource("AtlasTexture_5re2n")
 
 [node name="heart_gem_display" type="Control" parent="BackColor"]
 anchors_preset = 0
@@ -773,8 +778,8 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="togglePause"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -782,8 +787,8 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bawhbhakk6q0"]
+[gd_scene load_steps=42 format=3 uid="uid://bawhbhakk6q0"]
 
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="1_6rpfu"]
 [ext_resource type="Script" path="res://Scripts/UI/TitleScreen.gd" id="1_68eqn"]
@@ -45,31 +45,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("maintitle/SettingsButton:position")
+tracks/1/path = NodePath("Background:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(592, 700)]
+"values": [Vector2(0, -133.333)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Background:position")
+tracks/2/path = NodePath("FileMenu:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -133.333)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("FileMenu:modulate")
+tracks/3/path = NodePath("maintitle:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -81,43 +81,43 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("maintitle:modulate")
+tracks/4/path = NodePath("FileMenu:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("FileMenu:visible")
+tracks/5/path = NodePath("nameFile:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("nameFile:modulate")
+tracks/6/path = NodePath("nameFile:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("nameFile:visible")
+tracks/7/path = NodePath("DeletionConfirmation:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -129,34 +129,22 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("DeletionConfirmation:visible")
+tracks/8/path = NodePath("DeletionConfirmation:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("DeletionConfirmation:modulate")
+tracks/9/path = NodePath("DeletionConfirmation/ColorRect:color")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("DeletionConfirmation/ColorRect:color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -290,18 +278,19 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("maintitle/SettingsButton:position")
+tracks/10/path = NodePath("maintitle/SettingsButton:modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(1.5, 1.9),
-"transitions": PackedFloat32Array(0.3, 1),
+"times": PackedFloat32Array(1.35, 1.85),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(592, 740), Vector2(592, 600)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_h3mb4"]
 resource_name = "are_you_sure"
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -337,6 +326,50 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0.643), Color(0.5, 0, 0, 0.643), Color(0, 0, 0, 0.643), Color(0.5, 0, 0, 0.643), Color(0, 0, 0, 0.643)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DeletionConfirmation/goback")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}, {
+"args": [],
+"method": &"grab_focus"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_u3itk"]
@@ -635,30 +668,33 @@ _data = {
 "unsure": SubResource("Animation_ely0r")
 }
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qq5vq"]
-texture = ExtResource("15_oij1a")
-expand_margin_left = 4.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qeoir"]
+texture = ExtResource("16_g40ql")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ob5yk"]
-texture = ExtResource("15_oij1a")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5wqy1"]
+texture = ExtResource("16_g40ql")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8rdg4"]
+vertical = true
 
 [sub_resource type="Theme" id="Theme_wrd2m"]
-VScrollBar/styles/grabber = SubResource("StyleBoxTexture_qq5vq")
-VScrollBar/styles/scroll = SubResource("StyleBoxTexture_ob5yk")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_qeoir")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_5wqy1")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_5wqy1")
+VScrollBar/styles/scroll = SubResource("StyleBoxLine_8rdg4")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxLine_8rdg4")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqhov"]
 atlas = ExtResource("12_n2kjl")
-region = Rect2(0, 0, 22, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ir3w2"]
-atlas = ExtResource("12_n2kjl")
-region = Rect2(22, 0, 22, 22)
+region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_utrmd"]
 atlas = ExtResource("12_n2kjl")
-region = Rect2(44, 0, 22, 22)
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir3w2"]
+atlas = ExtResource("12_n2kjl")
+region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="Animation" id="Animation_ovdyv"]
 resource_name = "fadeMusicOut"
@@ -697,18 +733,6 @@ _data = {
 "fadeMusicOut": SubResource("Animation_ovdyv"),
 "musicIn": SubResource("Animation_3xdeg")
 }
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ubvy3"]
-atlas = ExtResource("12_n2kjl")
-region = Rect2(0, 0, 22, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5uymn"]
-atlas = ExtResource("12_n2kjl")
-region = Rect2(22, 0, 22, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8psg4"]
-atlas = ExtResource("12_n2kjl")
-region = Rect2(44, 0, 22, 22)
 
 [node name="TitleScene" type="ColorRect" node_paths=PackedStringArray("musicFader", "Fader", "TitleAnimator", "buttonSound", "filename", "saveListContainer", "confirmDeleteFilename")]
 process_mode = 3
@@ -783,9 +807,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 291.0
-offset_top = 99.9999
+offset_top = -500.0
 offset_right = 953.0
-offset_bottom = 273.0
+offset_bottom = -327.0
 grow_horizontal = 2
 texture = ExtResource("3_qu7fl")
 
@@ -793,9 +817,9 @@ texture = ExtResource("3_qu7fl")
 visible = false
 layout_mode = 0
 offset_left = 533.0
-offset_top = 533.0
+offset_top = 400.0
 offset_right = 746.0
-offset_bottom = 537.0
+offset_bottom = 400.0
 color = Color(0, 0.4, 0.341176, 1)
 
 [node name="PlayButton" type="TextureButton" parent="maintitle"]
@@ -803,23 +827,28 @@ layout_mode = 0
 offset_left = 533.0
 offset_top = 400.0
 offset_right = 746.0
-offset_bottom = 537.0
+offset_bottom = 400.0
+focus_neighbor_left = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+disabled = true
 texture_normal = ExtResource("5_qdvgj")
 texture_pressed = ExtResource("6_6mgjc")
 texture_hover = ExtResource("7_50pjy")
 texture_disabled = ExtResource("5_qdvgj")
+texture_focused = ExtResource("7_50pjy")
 ignore_texture_size = true
 stretch_mode = 1
 
 [node name="SettingsButton" type="TextureButton" parent="maintitle"]
 layout_mode = 0
-offset_left = 592.0
-offset_top = 700.0
-offset_right = 712.0
-offset_bottom = 820.0
+offset_left = 24.0
+offset_top = 600.0
+offset_right = 144.0
+offset_bottom = 720.0
 scale = Vector2(0.8, 0.8)
-focus_mode = 0
-toggle_mode = true
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_right = NodePath("../PlayButton")
+disabled = true
 texture_normal = ExtResource("18_jmguy")
 texture_pressed = ExtResource("19_h633f")
 texture_hover = ExtResource("20_xte7y")
@@ -851,10 +880,11 @@ text = "File Select"
 texture_filter = 1
 custom_minimum_size = Vector2(876, 50)
 layout_mode = 2
-offset_left = 198.0
+offset_left = 202.0
 offset_top = 198.0
-offset_right = 1074.0
+offset_right = 1078.0
 offset_bottom = 259.0
+focus_neighbor_left = NodePath("../Return")
 texture_normal = ExtResource("14_ooiab")
 texture_focused = ExtResource("15_4iku0")
 stretch_mode = 0
@@ -867,12 +897,16 @@ offset_top = 270.0
 offset_right = 419.0
 offset_bottom = 355.0
 scale = Vector2(4, 4)
+focus_neighbor_left = NodePath("../Return")
+focus_neighbor_top = NodePath("../game1")
+focus_neighbor_bottom = NodePath("../Return")
 theme = SubResource("Theme_wrd2m")
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FileMenu/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
 
 [node name="Return" type="TextureButton" parent="FileMenu"]
 texture_filter = 1
@@ -881,14 +915,15 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = -112.0
-offset_right = 46.0
+offset_top = -114.0
+offset_right = 48.0
 offset_bottom = -90.0
 grow_vertical = 0
 scale = Vector2(4, 4)
 texture_normal = SubResource("AtlasTexture_uqhov")
-texture_pressed = SubResource("AtlasTexture_ir3w2")
-texture_hover = SubResource("AtlasTexture_utrmd")
+texture_pressed = SubResource("AtlasTexture_utrmd")
+texture_hover = SubResource("AtlasTexture_ir3w2")
+texture_focused = SubResource("AtlasTexture_ir3w2")
 
 [node name="DeletionConfirmation" type="Control" parent="."]
 visible = false
@@ -952,6 +987,12 @@ offset_left = 814.0
 offset_top = 380.0
 offset_right = 970.0
 offset_bottom = 480.0
+focus_neighbor_left = NodePath("../goback")
+focus_neighbor_top = NodePath("../goback")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../goback")
+focus_next = NodePath("../goback")
+focus_previous = NodePath("../goback")
 theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 81
 text = "Yes"
@@ -962,6 +1003,12 @@ offset_left = 329.0
 offset_top = 380.0
 offset_right = 485.0
 offset_bottom = 480.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../confirmdelete")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
 theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 81
 text = "No"
@@ -971,6 +1018,14 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="nameFile"]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 202.0
+offset_right = 1014.0
+offset_bottom = 458.0
+color = Color(1, 1, 1, 0.193)
 
 [node name="Label" type="Label" parent="nameFile"]
 layout_mode = 0
@@ -987,23 +1042,36 @@ text = "Name Your Save File"
 
 [node name="LineEdit" type="LineEdit" parent="nameFile"]
 layout_mode = 0
-offset_left = 267.0
+offset_left = 289.0
 offset_top = 221.0
-offset_right = 967.0
+offset_right = 989.0
 offset_bottom = 301.0
+focus_neighbor_left = NodePath("../Return")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../confirmation_button")
+focus_next = NodePath("../confirmation_button")
+focus_previous = NodePath(".")
 theme_override_fonts/font = ExtResource("15_mudgg")
 theme_override_font_sizes/font_size = 64
-max_length = 40
+max_length = 17
 
 [node name="confirmation_button" type="Button" parent="nameFile"]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 0
-offset_left = 440.0
-offset_top = 338.0
-offset_right = 840.0
-offset_bottom = 399.0
-theme_override_font_sizes/font_size = 38
-text = "Conform"
+offset_left = 449.0
+offset_top = 362.0
+offset_right = 849.0
+offset_bottom = 442.0
+focus_neighbor_left = NodePath("../Return")
+focus_neighbor_top = NodePath("../LineEdit")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Return")
+focus_next = NodePath("../Return")
+focus_previous = NodePath("../LineEdit")
+theme_override_fonts/font = ExtResource("15_mudgg")
+theme_override_font_sizes/font_size = 64
+text = "Confirm"
 
 [node name="Return" type="TextureButton" parent="nameFile"]
 texture_filter = 1
@@ -1018,8 +1086,9 @@ offset_bottom = 590.0
 grow_vertical = 0
 scale = Vector2(4, 4)
 texture_normal = SubResource("AtlasTexture_uqhov")
-texture_pressed = SubResource("AtlasTexture_ir3w2")
-texture_hover = SubResource("AtlasTexture_utrmd")
+texture_pressed = SubResource("AtlasTexture_utrmd")
+texture_hover = SubResource("AtlasTexture_ir3w2")
+texture_focused = SubResource("AtlasTexture_ir3w2")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_uqgl8")
@@ -1076,7 +1145,11 @@ horizontal_alignment = 1
 
 [node name="MusicSlider" type="HSlider" parent="Settings/MenuContainer"]
 layout_mode = 2
-focus_mode = 0
+focus_neighbor_left = NodePath("../../Return")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../SoundSlider")
+focus_next = NodePath("../SoundSlider")
 theme_override_icons/grabber = ExtResource("15_oij1a")
 theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
 max_value = 1.0
@@ -1100,7 +1173,12 @@ horizontal_alignment = 1
 
 [node name="SoundSlider" type="HSlider" parent="Settings/MenuContainer"]
 layout_mode = 2
-focus_mode = 0
+focus_neighbor_left = NodePath("../../Return")
+focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Return")
+focus_next = NodePath(".")
+focus_previous = NodePath("../MusicSlider")
 theme_override_icons/grabber = ExtResource("15_oij1a")
 theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
 max_value = 1.0
@@ -1122,13 +1200,14 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 32.0
 offset_top = 387.0
-offset_right = 54.0
-offset_bottom = 409.0
+offset_right = 56.0
+offset_bottom = 411.0
 grow_vertical = 0
 scale = Vector2(4, 4)
-texture_normal = SubResource("AtlasTexture_ubvy3")
-texture_pressed = SubResource("AtlasTexture_5uymn")
-texture_hover = SubResource("AtlasTexture_8psg4")
+texture_normal = SubResource("AtlasTexture_uqhov")
+texture_pressed = SubResource("AtlasTexture_utrmd")
+texture_hover = SubResource("AtlasTexture_ir3w2")
+texture_focused = SubResource("AtlasTexture_ir3w2")
 
 [connection signal="pressed" from="maintitle/PlayButton" to="." method="playButtonPressed"]
 [connection signal="pressed" from="maintitle/SettingsButton" to="." method="_toggle_settings"]
@@ -1136,6 +1215,7 @@ texture_hover = SubResource("AtlasTexture_8psg4")
 [connection signal="pressed" from="FileMenu/Return" to="." method="_on_files_return_pressed"]
 [connection signal="pressed" from="DeletionConfirmation/confirmdelete" to="." method="YES_delete_file"]
 [connection signal="pressed" from="DeletionConfirmation/goback" to="." method="dont_delete_file"]
+[connection signal="text_submitted" from="nameFile/LineEdit" to="." method="make_new_file"]
 [connection signal="pressed" from="nameFile/confirmation_button" to="." method="make_new_file"]
 [connection signal="pressed" from="nameFile/Return" to="." method="_on_newgame_return_pressed"]
 [connection signal="value_changed" from="Settings/MenuContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
