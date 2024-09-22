@@ -3,7 +3,7 @@ extends Area2D
 @export var room_number : int = 0
 @export var music : String = '_'
 
-var my_enemies : Array[CharacterBody2D]
+var my_enemies : Array
 
 
 func _on_body_entered(body: Node2D) -> void:

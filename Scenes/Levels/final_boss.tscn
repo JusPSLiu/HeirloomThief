@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bybfa6gbkuogf"]
+[gd_scene load_steps=44 format=4 uid="uid://bybfa6gbkuogf"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_xgknk"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_sgh5g"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://r05n73bgi5xj" path="res://Art/Tilesets/stonebricks_normal.png" id="9_0ktdi"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="10_vmyri"]
 [ext_resource type="PackedScene" uid="uid://dtkq8v8c1chlp" path="res://Scenes/Levels/room.tscn" id="14_xhats"]
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="15_kchky"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="15_n7ldk"]
 [ext_resource type="Script" path="res://Scripts/music.gd" id="16_eartm"]
 [ext_resource type="Script" path="res://Scripts/Player/gui.gd" id="17_15hg4"]
@@ -19,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bxihm5hm3jk8i" path="res://Art/Enemies/FinalBoss/mask.png" id="18_wmccc"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="19_1f7ec"]
 [ext_resource type="Texture2D" uid="uid://b4k0vrh7v75sm" path="res://Art/Enemies/FinalBoss/pipes.png" id="19_ocils"]
+[ext_resource type="Script" path="res://Scripts/Enemies/boss/final_boss.gd" id="21_0eowi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0st3j"]
 texture = ExtResource("2_sgh5g")
@@ -134,6 +136,14 @@ _data = {
 "fadeOut": SubResource("Animation_f4cl1")
 }
 
+[sub_resource type="Gradient" id="Gradient_shb16"]
+offsets = PackedFloat32Array(0, 0.536946, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1, 0.533748, 3.36915e-06, 0.344595, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hf1w0"]
+gradient = SubResource("Gradient_shb16")
+width = 4
+
 [sub_resource type="Animation" id="Animation_7wcv3"]
 resource_name = "die"
 tracks/0/type = "method"
@@ -189,6 +199,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hinpp"]
+size = Vector2(144, 81)
+
 [node name="LevelTemplate" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_xgknk")
@@ -206,6 +219,7 @@ tile_set = SubResource("TileSet_swjii")
 
 [node name="BossArena" type="TextureRect" parent="."]
 modulate = Color(0.492237, 0.492237, 0.492237, 1)
+z_index = -4
 offset_left = -5.0
 offset_top = -115.0
 offset_right = 413.0
@@ -285,6 +299,57 @@ offset_bottom = 27.0
 scale = Vector2(8, 8)
 theme_override_constants/separation = 0
 
+[node name="BossBar" type="ColorRect" parent="UI/gui"]
+layout_mode = 1
+offset_left = 317.0
+offset_top = 95.0
+offset_right = 963.0
+offset_bottom = 115.0
+
+[node name="Label" type="Label" parent="UI/gui/BossBar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 101.0
+offset_top = -65.0
+offset_right = 647.0
+offset_bottom = 64.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("15_kchky")
+theme_override_font_sizes/font_size = 76
+text = "THE MECHA-WARRIOR"
+
+[node name="HealthBack" type="ColorRect" parent="UI/gui/BossBar"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 643.0
+offset_bottom = 17.0
+color = Color(0, 0, 0, 1)
+
+[node name="GradientEdge" type="ColorRect" parent="UI/gui/BossBar"]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 17.0
+offset_right = 22.0
+offset_bottom = 27.0
+rotation = -1.5708
+scale = Vector2(1, 60)
+color = Color(0.533333, 0, 0.341176, 1)
+
+[node name="HealthGradient" type="TextureRect" parent="UI/gui/BossBar"]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.0
+offset_top = 17.0
+offset_right = 17.0
+offset_bottom = 27.0
+rotation = -1.5708
+scale = Vector2(1, 64)
+texture = SubResource("GradientTexture1D_hf1w0")
+
 [node name="DeathAnimator" type="AnimationPlayer" parent="UI"]
 libraries = {
 "": SubResource("AnimationLibrary_y6vgx")
@@ -300,7 +365,7 @@ player = NodePath("../Player")
 modulate = Color(0.544974, 0.544974, 0.544974, 1)
 position = Vector2(41, 1)
 
-[node name="Head" type="AnimatedSprite2D" parent="Boss"]
+[node name="Head" type="AnimatedSprite2D" parent="Boss" groups=["enemy"]]
 position = Vector2(1082, 530)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_yg0sa")
@@ -313,3 +378,13 @@ sprite_frames = SubResource("SpriteFrames_yxhmm")
 visible = false
 position = Vector2(0, 15.25)
 sprite_frames = SubResource("SpriteFrames_861rd")
+
+[node name="BossHitbox" type="AnimatableBody2D" parent="Boss" node_paths=PackedStringArray("healthBar", "healthBar2") groups=["enemy"]]
+position = Vector2(1066, 544)
+script = ExtResource("21_0eowi")
+healthBar = NodePath("../../UI/gui/BossBar/HealthGradient")
+healthBar2 = NodePath("../../UI/gui/BossBar/GradientEdge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/BossHitbox"]
+position = Vector2(20, 0.5)
+shape = SubResource("RectangleShape2D_hinpp")
