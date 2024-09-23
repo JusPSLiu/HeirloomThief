@@ -37,6 +37,7 @@ var coyoteTime = 0.14
 var boostimer = 0.3 # cooldown for boost
 var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false # has double jumped, do full jump height
+var slicedinair = false # has sliced in air, no more slicing in the air
 var DO_NOT_MOVE = false # not actually a const, just really important
 var currentlyFloating = false # for animation; floating means air animation
 var doorLocation = null # location of other door; null if not there
@@ -178,7 +179,7 @@ func _input(event: InputEvent) -> void:
 				if (slashsound): slashsound.play()
 				
 				# slight double jump for bat attack
-				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2 and !doublejumped):
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 			
@@ -230,7 +231,7 @@ func _input(event: InputEvent) -> void:
 				stick.get_child(0).play("swing")
 				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
-				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2 and !doublejumped):
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 			if (event.is_action_pressed("keyboardslice") and !stick.get_child(0).is_playing()):
@@ -239,7 +240,7 @@ func _input(event: InputEvent) -> void:
 				flipStickTo(currentDirection)
 				if (slashsound): slashsound.play()
 				# slight double jump for bat attack
-				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2):
+				if (!is_on_floor() and velocity.y > JUMP_VELOCITY*0.2 and !doublejumped):
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 			# shooting attack
@@ -464,6 +465,9 @@ func camera_transitions(delta):
 		if (!transing):
 			transitioning = false
 
+# camera vibration
+func shake_camera():
+	$player_fx.play("cam_shake")
 
 ## Checkpoints and Doors
 func get_checkpoint(positron):

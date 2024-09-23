@@ -25,8 +25,8 @@ script = ExtResource("1_04tt0")
 
 [node name="DeleteButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 203.0
-offset_right = 221.0
+offset_left = 202.0
+offset_right = 220.0
 offset_bottom = 18.0
 focus_neighbor_left = NodePath("..")
 texture_normal = ExtResource("4_c1q1v")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxrlbiu6rn72v"]
+
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="1_ewx5g"]
+
+[node name="Lavalight" type="PointLight2D"]
+scale = Vector2(30, 30)
+color = Color(1, 0.659388, 0.612673, 1)
+energy = 0.4
+shadow_filter_smooth = 4.0
+texture = ExtResource("1_ewx5g")
