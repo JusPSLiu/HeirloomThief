@@ -167,6 +167,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="BackColor" type="ColorRect" parent="."]
+visible = false
 z_index = 10
 texture_filter = 1
 anchors_preset = 15
@@ -836,8 +837,8 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -845,8 +846,8 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]
