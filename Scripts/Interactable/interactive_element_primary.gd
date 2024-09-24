@@ -10,6 +10,10 @@ func _ready() -> void:
 	if (SaveManager.already_interacted(id)):
 		lit = true
 		play('on')
+		animation = 'on'
+		set_animation('on')
+		set_autoplay('on')
+		
 		$torchlight.energy = 1
 		activateyThing.skipToActivated()
 	for child in get_children():

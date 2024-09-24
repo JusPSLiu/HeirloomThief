@@ -33,6 +33,7 @@ func collect_item(type, id):
 	save_game()
 ## INTERACTIVE STUFF
 func already_interacted(id):
+	if (id < 0): return true
 	return (interactedElements.has(id) && interactedElements[id])
 
 func interact(type, id):
