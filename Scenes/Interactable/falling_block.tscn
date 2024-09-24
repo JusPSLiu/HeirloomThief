@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=4 uid="uid://be3tl21n4ux16"]
+
+[ext_resource type="TileSet" uid="uid://cw74evm60x0ej" path="res://Art/Tilesets/all_tiles.tres" id="1_i8oo7"]
+[ext_resource type="Script" path="res://Scripts/Interactable/falling_block.gd" id="2_dyl21"]
+[ext_resource type="AudioStream" uid="uid://bfesv37iqnygv" path="res://Sounds/enemy/bossattack.wav" id="3_v1avl"]
+
+[node name="FallingBlock" type="TileMapLayer"]
+texture_filter = 1
+position = Vector2(32, -32)
+tile_map_data = PackedByteArray("AAD//wAAAgAEAAUAAAD/////AgAAAAIAAAD///7/AgAEAAQAAAD///3/AgADAAUAAAAAAAAAAgACAAMAAAAAAP//AgAGAAQAAAAAAP7/AgACAAUAAAA=")
+tile_set = ExtResource("1_i8oo7")
+script = ExtResource("2_dyl21")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v1avl")
+bus = &"Sounds"

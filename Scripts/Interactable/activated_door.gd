@@ -33,5 +33,8 @@ func activate():
 		$Arrow.show()
 
 func skipToActivated():
-	$sprite.play("open")
-	enabled = true
+	if (!enabled):
+		enabled = true
+		$sprite.play("open")
+		$sprite.set_autoplay("open")
+		pairedDoor.skipToActivated()

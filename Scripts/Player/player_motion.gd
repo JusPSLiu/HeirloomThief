@@ -218,6 +218,7 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("Dash"):
 				if currentAbilities[ability.cape] and boostimer < 0:
 					dashsound.play()
+					$player_fx/dashanimation.play("dash")
 					Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 					velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
 					boostimer = BOOST_COOLDOWN
