@@ -20,6 +20,7 @@ func alight() -> bool:
 	$StaticBody2D.set_collision_layer_value(1, false)
 	$breakySprite.visible = false
 	check_if_all_lit()
+	sound.play()
 	return true
 
 func check_if_all_lit():
@@ -35,4 +36,3 @@ func check_if_all_lit():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("break_wall")): alight()
-	else: print_debug("NO, U")

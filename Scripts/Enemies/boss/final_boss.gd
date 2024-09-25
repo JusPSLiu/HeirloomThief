@@ -5,12 +5,18 @@ extends AnimatableBody2D
 @export var healthBar2 : ColorRect
 @export var soundGetHit : AudioStreamPlayer2D
 
+const fireball = preload("res://Scenes/Enemies/projectile.tscn")
+
 var current_health = 64
 var home_area = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	current_health = 64
+
+# runs when player first enters, or when dies
+func enable():
+	respawn()
 
 func respawn():
 	current_health = 64
@@ -29,6 +35,14 @@ func damage(damage_val):
 		die()
 	elif (soundGetHit):
 		soundGetHit.play()
+
+func shoot_fireball():
+	var fiery = fireball.instantiate()
+	fiery.position = position + Vector2(0, 8)
+	fiery.movement_direction = Vector2(cos(rotation+PI), sin(rotation))
+	fiery.speed = 100
+	add_sibling(fiery)
+	
 
 func die():
 	pass

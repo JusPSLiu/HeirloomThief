@@ -58,7 +58,7 @@ func _on_quit_button_pressed():
 func _input(event: InputEvent) -> void:
 	if (event is not InputEventMouse):
 		if !event.is_echo():
-			if event.is_action_pressed("pause") and pausable and pauseReload < 0:
+			if event.is_action_pressed("pause") and pauseReload < 0:
 				if event.pressed:
 					togglePause()
 					pauseReload = 0.1
@@ -75,28 +75,30 @@ func _input(event: InputEvent) -> void:
 						$BackColor/Settings/MenuContainer/MusicSlider.grab_focus()
 
 func togglePause():
-	sound.play()
-	$BackColor.visible = !$BackColor.visible
-	get_tree().paused = !get_tree().paused
-	
-	#if unpausing then close the optionsmenu and open this menu for the next time paused
-	if (!get_tree().paused):
-		main_menu.show()
-		settings_menu.hide()
-		#tell the map that if its clicking to stop. plz
-		map.clicking = false
-	else:
-		#if pausing then make sure the display is right
-		update_gui()
-		#tell the map to set up
-		#also make sure you start up in the main pause menu
-		map.set_up()
-		_to_main_pause_menu()
+	if (pausable || get_tree().paused):
+		sound.play()
+		$BackColor.visible = !$BackColor.visible
+		get_tree().paused = !get_tree().paused
+		
+		#if unpausing then close the optionsmenu and open this menu for the next time paused
+		if (!get_tree().paused):
+			main_menu.show()
+			settings_menu.hide()
+			#tell the map that if its clicking to stop. plz
+			map.clicking = false
+		else:
+			#if pausing then make sure the display is right
+			update_gui()
+			#tell the map to set up
+			#also make sure you start up in the main pause menu
+			map.set_up()
+			_to_main_pause_menu()
 
 func update_gui():
 	heart_number.text = str(int(SaveManager.max_health)>>1)
 	gem_number.text = str(SaveManager.current_gems)
-	upgrade_available.visible = (SaveManager.current_gems > 1)
+	upgrade_available.visible = (SaveManager.current_gems > 1 and SaveManager.powerstatus.has(1))
+	$PauseButton/UpgradeAvailable.visible = upgrade_available.visible
 
 func set_pausability(pause : bool):
 	pausable = pause

@@ -44,3 +44,6 @@ func _on_body_entered(body: Node2D) -> void:
 		if (body.get_parent().alight()):
 			hitSomething = true
 			die_me()
+
+func _on_visible_on_screen_enabler_2d_screen_exited():
+	call_deferred("queue_free")

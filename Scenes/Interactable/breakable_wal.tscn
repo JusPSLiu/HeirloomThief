@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bfesv37iqnygv" path="res://Sounds/enemy/bossattack.wav" id="3_xg1c8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suw6n"]
-size = Vector2(20, 32)
+size = Vector2(17, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ape6o"]
 size = Vector2(16, 32)
@@ -24,7 +24,7 @@ sound = NodePath("sound")
 z_index = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.25, 0)
+position = Vector2(-0.25, 0)
 shape = SubResource("RectangleShape2D_suw6n")
 metadata/_edit_lock_ = true
 
@@ -36,6 +36,7 @@ shape = SubResource("RectangleShape2D_ape6o")
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_xg1c8")
+volume_db = 2.0
 bus = &"Sounds"
 
 [node name="breakySprite" type="Sprite2D" parent="."]
