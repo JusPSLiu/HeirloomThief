@@ -4,6 +4,7 @@ extends AnimatableBody2D
 @export var healthBar : TextureRect
 @export var healthBar2 : ColorRect
 @export var soundGetHit : AudioStreamPlayer2D
+@export var bossAnimator : AnimationPlayer
 
 const fireball = preload("res://Scenes/Enemies/projectile.tscn")
 
@@ -17,6 +18,9 @@ func _ready() -> void:
 # runs when player first enters, or when dies
 func enable():
 	respawn()
+
+func disable():
+	pass
 
 func respawn():
 	current_health = 64
@@ -38,11 +42,12 @@ func damage(damage_val):
 
 func shoot_fireball():
 	var fiery = fireball.instantiate()
-	fiery.position = position + Vector2(0, 8)
+	fiery.position = position + Vector2(0, 12)
 	fiery.movement_direction = Vector2(cos(rotation+PI), sin(rotation))
-	fiery.speed = 100
+	fiery.speed = 200
 	add_sibling(fiery)
 	
 
 func die():
 	pass
+	# bossAnimator.play("die")
