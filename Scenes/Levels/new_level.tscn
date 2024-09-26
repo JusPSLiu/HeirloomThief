@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="7_ty0tw"]
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="7_ukw63"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="8_0cnxj"]
-[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="9_2twlx"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/damage_component.tscn" id="9_2twlx"]
 [ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Interactable/health_upgrade.tscn" id="10_2t7rl"]
 [ext_resource type="Texture2D" uid="uid://cg3umhljbpw80" path="res://Art/Tilesets/stonebricks_light.png" id="10_04ykp"]
 [ext_resource type="Texture2D" uid="uid://bvh4rskdlurmh" path="res://Art/Tilesets/dirtblock.png" id="10_6xbsv"]
@@ -24,6 +24,12 @@
 [ext_resource type="PackedScene" uid="uid://dtkq8v8c1chlp" path="res://Scenes/Levels/room.tscn" id="16_3d5ji"]
 [ext_resource type="PackedScene" uid="uid://bmnncqovarje6" path="res://Scenes/Interactable/ability_ring.tscn" id="17_lhkm5"]
 [ext_resource type="PackedScene" uid="uid://dqsatwfb0ss2q" path="res://Scenes/Interactable/torchy.tscn" id="17_xxl0c"]
+<<<<<<< HEAD
+[ext_resource type="PackedScene" path="res://Scenes/Interactable/breakable_wal.tscn" id="19_qe4wd"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/strong_guard.tscn" id="21_t2ipu"]
+[ext_resource type="Script" path="res://Scripts/music.gd" id="26_12cnb"]
+[ext_resource type="PackedScene" path="res://Scenes/Interactable/falling_block.tscn" id="27_x21pv"]
+=======
 [ext_resource type="Texture2D" uid="uid://beofb7jxa7gl1" path="res://Art/UI/Pause/upgrades/items/cape1.png" id="18_looxd"]
 [ext_resource type="PackedScene" uid="uid://clo5i7rxjp2tx" path="res://Scenes/Interactable/breakable_wal.tscn" id="19_qe4wd"]
 [ext_resource type="PackedScene" uid="uid://c4f5ktegmu58n" path="res://Scenes/Enemies/strong_guard.tscn" id="21_t2ipu"]
@@ -33,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://be3tl21n4ux16" path="res://Scenes/Interactable/falling_block.tscn" id="27_x21pv"]
 [ext_resource type="AudioStream" uid="uid://djr7db2t6dj32" path="res://Sounds/enemy/cutscene_rumbling.mp3" id="28_ilnrs"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="28_xpfev"]
+>>>>>>> 03b708e132c11268ba2812fe3bfe37ec0f8bdabc
 [ext_resource type="PackedScene" uid="uid://bpgf6kn085iul" path="res://Scenes/Enemies/guard_flying.tscn" id="31_v71bn"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="35_y1iv0"]
 

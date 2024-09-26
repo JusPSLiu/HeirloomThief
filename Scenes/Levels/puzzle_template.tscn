@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bptompmj3v7yj"]
+[gd_scene load_steps=11 format=4 uid="uid://t43r256xcsd"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_5uvkt"]
 [ext_resource type="TileSet" uid="uid://cw74evm60x0ej" path="res://Art/Tilesets/all_tiles.tres" id="5_vly53"]
@@ -31,7 +31,7 @@ _data = {
 "die": SubResource("Animation_7wcv3")
 }
 
-[node name="LevelTemplate" type="Node2D"]
+[node name="LevelTemplate4" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_5uvkt")
 

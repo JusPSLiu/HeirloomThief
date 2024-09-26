@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+[gd_scene load_steps=44 format=4 uid="uid://drysa3ie4gylq"]
+=======
 [gd_scene load_steps=88 format=4 uid="uid://bybfa6gbkuogf"]
+>>>>>>> 03b708e132c11268ba2812fe3bfe37ec0f8bdabc
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_xgknk"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_sgh5g"]
