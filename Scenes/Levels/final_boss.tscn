@@ -317,7 +317,7 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(811, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1075, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/11/type = "bezier"
@@ -328,7 +328,7 @@ tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(298, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(601, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/12/type = "value"
@@ -1346,7 +1346,7 @@ offset = Vector2(-3, 30)
 
 [node name="Head" type="AnimatedSprite2D" parent="Boss" groups=["enemy"]]
 material = SubResource("ShaderMaterial_cpigh")
-position = Vector2(811, 298)
+position = Vector2(1075, 601)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_yg0sa")
 autoplay = "default"
