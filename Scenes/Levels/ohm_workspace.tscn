@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://celoiim734ylt"]
+[gd_scene load_steps=32 format=4 uid="uid://5mh5a16onjsl"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_u2637"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_mwi1b"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cpeiygtm7tob1" path="res://Art/Tilesets/wood_normal.png" id="6_0ksnx"]
 [ext_resource type="Texture2D" uid="uid://cg3umhljbpw80" path="res://Art/Tilesets/stonebricks_light.png" id="7_tt554"]
 [ext_resource type="Texture2D" uid="uid://r05n73bgi5xj" path="res://Art/Tilesets/stonebricks_normal.png" id="8_qb23l"]
-[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="9_sj77h"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/damage_component.tscn" id="9_sj77h"]
 [ext_resource type="PackedScene" uid="uid://c5e2eqcdwdgbq" path="res://Scenes/Interactable/checkpoint.tscn" id="10_lwid4"]
 [ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Interactable/gem_upgrade.tscn" id="11_6cnop"]
 [ext_resource type="PackedScene" uid="uid://dtkq8v8c1chlp" path="res://Scenes/Levels/room.tscn" id="12_3tiw4"]

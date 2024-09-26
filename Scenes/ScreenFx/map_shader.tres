@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dxkjhs0ldnhoj"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://defsjj06x13q5"]
 
 [ext_resource type="Shader" path="res://Scripts/shaders/screenspace_mask.gdshader" id="1_b7n6j"]
 

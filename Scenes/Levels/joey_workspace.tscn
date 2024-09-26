@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cpsqa65pw4xch"]
+[gd_scene load_steps=36 format=4 uid="uid://3glp6k66a3k4"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_6oc6g"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_bosxq"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cpeiygtm7tob1" path="res://Art/Tilesets/wood_normal.png" id="7_cvagk"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="7_qxki4"]
 [ext_resource type="Texture2D" uid="uid://cg3umhljbpw80" path="res://Art/Tilesets/stonebricks_light.png" id="8_ulfvv"]
-[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="9_0ldao"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/damage_component.tscn" id="9_0ldao"]
 [ext_resource type="Texture2D" uid="uid://r05n73bgi5xj" path="res://Art/Tilesets/stonebricks_normal.png" id="9_evcp4"]
 [ext_resource type="AudioStream" uid="uid://b28p8ar6ic22n" path="res://Sounds/Music/fierylevel.mp3" id="11_fonsv"]
 [ext_resource type="PackedScene" uid="uid://c5e2eqcdwdgbq" path="res://Scenes/Interactable/checkpoint.tscn" id="11_j3ar2"]

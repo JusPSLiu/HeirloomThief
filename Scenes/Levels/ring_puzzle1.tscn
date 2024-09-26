@@ -1374,7 +1374,7 @@ sources/3 = SubResource("TileSetAtlasSource_37iwi")
 sources/4 = SubResource("TileSetAtlasSource_mvo82")
 sources/5 = SubResource("TileSetAtlasSource_v6ngc")
 
-[node name="LevelTemplate" type="Node2D"]
+[node name="LevelTemplate3" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_kc5rc")
 
