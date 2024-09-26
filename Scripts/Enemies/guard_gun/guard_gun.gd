@@ -17,6 +17,7 @@ var player : CharacterBody2D
 
 # Scene references
 @onready var animator = $Animator
+@onready var sounds = $sounds
 @onready var projectile_scene = preload("res://Scenes/Enemies/projectile.tscn")
 
 func _ready() -> void:
@@ -55,6 +56,13 @@ func shoot(number_of_projectiles : int) -> void:
 			# wait
 			await get_tree().create_timer(fire_rate).timeout
 			
+			# if dead now, don't shoot
+			if (current_health <= 0):
+				return
+			
+			# play sound
+			sounds.play()
+			
 			# create instance of projectile
 			var projectile = projectile_scene.instantiate()
 			
@@ -71,3 +79,13 @@ func _on_range_body_entered(body: Node2D) -> void:
 	# If entering body is player, set variable true
 	if body.is_in_group("Player"):
 		player = body
+
+func enable():
+	states.reset()
+	player = null
+	super.enable()
+
+func disable():
+	states.reset()
+	player = null
+	super.disable()

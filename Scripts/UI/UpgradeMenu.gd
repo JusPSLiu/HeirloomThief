@@ -27,6 +27,9 @@ func _set_up():
 			buttons[i].set_focus_mode(Control.FocusMode.FOCUS_NONE)
 			buttons[i].set_disabled(true)
 			buttons[i].get_child(0).hide()
+	update_upgrade_button()
+
+func update_upgrade_button():
 	if (SaveManager.current_gems >= 2):
 		upgradeButton.set_focus_mode(Control.FocusMode.FOCUS_ALL)
 		upgradeButton.set_disabled(false)
@@ -66,3 +69,4 @@ func upgrade() -> void:
 				# set the button icon
 				buttons[currMode].get_child(0).play(str(clamp(SaveManager.powerstatus[currMode], 1, 2)))
 				get_parent().get_parent().update_gui()
+				update_upgrade_button()
