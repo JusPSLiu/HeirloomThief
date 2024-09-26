@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3ja36gfppnja"]
+[gd_scene load_steps=6 format=3 uid="uid://c3ja36gfppnja"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/projectile.gd" id="1_2feex"]
 [ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="1_mgbhn"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_busk5"]
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="3_u73er"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsnlq"]
@@ -20,6 +21,14 @@ texture = ExtResource("1_mgbhn")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 scale = Vector2(0.3, 0.3)
+
+[node name="PointLight2D" type="PointLight2D" parent="VisibleOnScreenEnabler2D"]
+position = Vector2(1.90735e-06, 4.76837e-07)
+scale = Vector2(5, 5)
+color = Color(1, 0.438563, 0.540848, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("3_busk5")
 
 [node name="DamageComponent" parent="." instance=ExtResource("3_u73er")]
 scale = Vector2(0.15, 0.15)

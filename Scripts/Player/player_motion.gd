@@ -18,6 +18,7 @@ extends CharacterBody2D
 @export var healedsound : AudioStreamPlayer2D
 @export var collectsound : AudioStreamPlayer2D
 @export var dashsound : AudioStreamPlayer2D
+@export var cutsceneAnimator : AnimationPlayer
 
 # constant variables
 const SPEED = 500.0 # player movement speed
@@ -197,7 +198,7 @@ func _input(event: InputEvent) -> void:
 					
 					# the double jump for laser
 					if ((get_global_mouse_position()-position).dot(Vector2(0, 1)) > 0):
-						velocity.y = JUMP_VELOCITY
+						velocity.y = JUMP_VELOCITY * 0.8
 						doublejumped = true
 		# if keyboard / button event
 		else:
@@ -259,7 +260,7 @@ func _input(event: InputEvent) -> void:
 					
 					# the double jump for laser
 					if (getSwingAngle().dot(Vector2(0, 1)) > 0):
-						velocity.y = JUMP_VELOCITY
+						velocity.y = JUMP_VELOCITY * 0.8
 						doublejumped = true
 
 # get input angle
@@ -388,6 +389,18 @@ func set_powerstatus():
 		stick.position = Vector2.ZERO
 	
 	currentAbilities = SaveManager.powerstatus
+
+func get_ability(abilID : int) -> void:
+	abilID = clamp(abilID, 1, 3)
+	if (currentAbilities[abilID]):
+		return
+	currentAbilities[abilID] = 1
+	set_powerstatus()
+	if (cutsceneAnimator):
+		cutsceneAnimator.play("abili"+str(abilID))
+	DO_NOT_MOVE = true
+	await cutsceneAnimator.animation_finished
+	DO_NOT_MOVE = false
 
 ## Rooms
 func _on_room_detector_area_entered(area: Area2D) -> void:

@@ -1,11 +1,15 @@
 extends State
 
+var stopShooting = false
+
 func enter() -> void:
 	super.enter()
+	print_debug("ENTERED_AGAIN")
+	stopShooting = false
 	
-	while entity.player:
+	while entity.player and !stopShooting:
 		await get_tree().create_timer(1.8).timeout
-		entity.shoot(3)
+		entity.shoot(entity.number_of_shots)
 
 func physics_update(delta : float):
 	super.physics_update(delta)
@@ -19,4 +23,5 @@ func physics_update(delta : float):
 		return entity.idle
 
 func exit() -> void:
+	stopShooting = true
 	super.exit()

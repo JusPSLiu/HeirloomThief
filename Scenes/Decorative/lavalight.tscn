@@ -4,7 +4,7 @@
 
 [node name="Lavalight" type="PointLight2D"]
 scale = Vector2(30, 30)
-color = Color(1, 0.659388, 0.612673, 1)
+color = Color(0.999989, 0.424473, 0.368308, 1)
 energy = 0.4
 shadow_filter_smooth = 4.0
 texture = ExtResource("1_ewx5g")

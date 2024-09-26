@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3xs8f4mje4g0"]
+[gd_scene load_steps=18 format=3 uid="uid://b3xs8f4mje4g0"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_f6ea4"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/guard_gun.gd" id="2_gcgvk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/pace.gd" id="6_k38xw"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/alert.gd" id="7_82502"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/attack.gd" id="8_ob78m"]
+[ext_resource type="AudioStream" uid="uid://t1rw5cv2nakn" path="res://Sounds/player/shoot.wav" id="9_v40sk"]
 
 [sub_resource type="Animation" id="Animation_ct5yb"]
 resource_name = "Alert"
@@ -103,12 +104,12 @@ _data = {
 size = Vector2(10, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e62nn"]
-size = Vector2(56, 24)
+size = Vector2(83, 24)
 
 [node name="GuardGun" instance=ExtResource("1_f6ea4")]
 script = ExtResource("2_gcgvk")
 fire_rate = 0.4
-number_of_shots = 3
+number_of_shots = 1
 max_speed = 10000.0
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
@@ -126,7 +127,7 @@ position = Vector2(-10, -6)
 [node name="Range" type="Area2D" parent="." index="4"]
 
 [node name="Collider" type="CollisionShape2D" parent="Range" index="0"]
-position = Vector2(-28, -12)
+position = Vector2(-41.5, -12)
 shape = SubResource("RectangleShape2D_e62nn")
 
 [node name="Sprite" parent="." index="5"]
@@ -157,6 +158,8 @@ auto_animate = true
 
 [node name="sounds" type="AudioStreamPlayer2D" parent="." index="8"]
 process_mode = 3
+stream = ExtResource("9_v40sk")
+pitch_scale = 2.0
 bus = &"Sounds"
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]

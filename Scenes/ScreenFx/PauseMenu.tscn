@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=60 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -50,6 +50,7 @@
 [ext_resource type="Texture2D" uid="uid://beofb7jxa7gl1" path="res://Art/UI/Pause/upgrades/items/cape1.png" id="41_dmobc"]
 [ext_resource type="Texture2D" uid="uid://b11p041r66isi" path="res://Art/UI/Pause/upgrades/upgrade_button.png" id="42_r844g"]
 [ext_resource type="Texture2D" uid="uid://v5b1iglh5g11" path="res://Art/UI/Pause/upgrades/upgrade_button_hover.png" id="43_iwaiv"]
+[ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="48_l71v5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfa4r"]
 atlas = ExtResource("3_o3frg")
@@ -165,6 +166,20 @@ texture_pressed = ExtResource("3_huxcl")
 texture_hover = ExtResource("4_j7y2v")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="UpgradeAvailable" type="Label" parent="PauseButton"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = -124.0
+offset_top = 87.0
+offset_right = -1.0
+offset_bottom = 110.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0.945761, 0.774849, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_r07rn")
+text = "UPGRADES AVAILABLE!"
 
 [node name="BackColor" type="ColorRect" parent="."]
 visible = false
@@ -739,10 +754,10 @@ texture = ExtResource("37_t7me0")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
-offset_left = 356.0
-offset_top = 450.0
-offset_right = 807.0
-offset_bottom = 586.0
+offset_left = 242.0
+offset_top = 402.0
+offset_right = 750.0
+offset_bottom = 562.0
 scale = Vector2(2, 2)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_r07rn")
@@ -765,6 +780,7 @@ texture_hover = ExtResource("43_iwaiv")
 texture_focused = ExtResource("43_iwaiv")
 
 [node name="Return" type="TextureButton" parent="BackColor/Upgrades"]
+z_index = 1
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 2
@@ -780,6 +796,16 @@ texture_normal = SubResource("AtlasTexture_kfa4r")
 texture_pressed = SubResource("AtlasTexture_c6nuh")
 texture_hover = SubResource("AtlasTexture_5re2n")
 texture_focused = SubResource("AtlasTexture_5re2n")
+
+[node name="returnback" type="TextureRect" parent="BackColor/Upgrades/Return"]
+modulate = Color(0, 0, 0, 0.489)
+z_index = -1
+layout_mode = 0
+offset_left = -17.0
+offset_top = -16.5
+offset_right = 41.0
+offset_bottom = 41.5
+texture = ExtResource("48_l71v5")
 
 [node name="heart_gem_display" type="Control" parent="BackColor"]
 anchors_preset = 0
@@ -837,8 +863,8 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="togglePause"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -846,8 +872,8 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]
