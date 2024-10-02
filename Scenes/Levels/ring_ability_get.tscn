@@ -88,7 +88,7 @@ _data = {
 "RESET": SubResource("Animation_5gwl0")
 }
 
-[node name="LevelTemplate" type="Node2D"]
+[node name="LevelTemplate3" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_qiyab")
 

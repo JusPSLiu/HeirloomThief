@@ -8,11 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="6_2u8ax"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="6_c13dm"]
 [ext_resource type="AudioStream" uid="uid://c37pmqktiyce8" path="res://Sounds/player/pickupgrade.wav" id="6_otwid"]
-[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="6_sgtvf"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/damage_component.tscn" id="6_sgtvf"]
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="7_e5bhl"]
-[ext_resource type="PackedScene" uid="uid://d2y4867yq3p3" path="res://Scenes/Enemies/health_pickup.tscn" id="9_sxglr"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/health_pickup.tscn" id="9_sxglr"]
 [ext_resource type="Texture2D" uid="uid://bouqbi02sddbi" path="res://Art/Sprites/collectibles/gem.png" id="11_uamt0"]
-[ext_resource type="PackedScene" uid="uid://bmnncqovarje6" path="res://Scenes/Interactable/ability_ring.tscn" id="13_taita"]
+[ext_resource type="PackedScene" path="res://Scenes/Interactable/ability_ring.tscn" id="13_taita"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gqvj"]
 texture = ExtResource("1_waon5")
@@ -73,6 +73,69 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y6vgx"]
 _data = {
 "die": SubResource("Animation_7wcv3")
+}
+
+[sub_resource type="Animation" id="Animation_gacno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneAnimator/NEW/Desc:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["NEW ABILITY ITEM OBTAINED"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneAnimator/NEW:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneAnimator/NEW:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneAnimator/NEW:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [300.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Music:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_si7oy"]
@@ -199,69 +262,6 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/8/use_blend = true
-
-[sub_resource type="Animation" id="Animation_gacno"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CutsceneAnimator/NEW/Desc:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["NEW ABILITY ITEM OBTAINED"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CutsceneAnimator/NEW:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CutsceneAnimator/NEW:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CutsceneAnimator/NEW:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [300.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Music:volume_db")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4vt0q"]
 _data = {
