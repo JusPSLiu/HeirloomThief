@@ -1,22 +1,17 @@
 extends State
 
 # Functional variables
-var done : bool
+var frames : int
 
 func enter() -> void:
 	super.enter()
 	
-	# turn around
-	entity.movement_direction *= -1
-	
-	# create timer and wait for it to timeout
-	done = false
-	await get_tree().create_timer(2).timeout
-	# set variable to keep track of timer
-	done = true
+	frames = 0
 
 func physics_update(delta : float):
 	super.physics_update(delta)
+	
+	frames += 1
 	
 	entity.velocity.x = entity.max_speed * entity.movement_direction * delta
 	
@@ -24,9 +19,8 @@ func physics_update(delta : float):
 	if entity.player:
 		return entity.alert
 	
-	# change state to idle when timer ends
-	if done:
-		return entity.idle
+	if frames == 60 * 3:
+		entity.movement_direction *= -1
 
 func exit() -> void:
 	super.exit()

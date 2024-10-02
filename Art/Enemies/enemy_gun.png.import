@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/return.png-7cf58d0423ddabd6d2fe6c3047900b90.ctex"
+uid="uid://dbky6ogy1ngma"
+path="res://.godot/imported/enemy_gun.png-72ced052edb65c7d79bb00e2243f814c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/return.png"
-dest_files=["res://.godot/imported/return.png-7cf58d0423ddabd6d2fe6c3047900b90.ctex"]
+source_file="res://Art/Enemies/enemy_gun.png"
+dest_files=["res://.godot/imported/enemy_gun.png-72ced052edb65c7d79bb00e2243f814c.ctex"]
 
 [params]
 

@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3xs8f4mje4g0"]
+[gd_scene load_steps=19 format=3 uid="uid://b3xs8f4mje4g0"]
 
 [ext_resource type="PackedScene" uid="uid://buvkmren4hvjd" path="res://Scenes/Enemies/enemy.tscn" id="1_f6ea4"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/guard_gun.gd" id="2_gcgvk"]
-[ext_resource type="Texture2D" uid="uid://bory1qvcyjpbu" path="res://Art/Enemies/Batdemon.png" id="3_dpbfg"]
+[ext_resource type="Texture2D" uid="uid://dbky6ogy1ngma" path="res://Art/Enemies/enemy_gun.png" id="3_gthew"]
 [ext_resource type="Script" path="res://Scripts/Enemies/state_manager.gd" id="4_ld8hp"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/idle.gd" id="5_2e3xp"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/pace.gd" id="6_k38xw"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/alert.gd" id="7_82502"]
 [ext_resource type="Script" path="res://Scripts/Enemies/guard_gun/attack.gd" id="8_ob78m"]
 [ext_resource type="AudioStream" uid="uid://t1rw5cv2nakn" path="res://Sounds/player/shoot.wav" id="9_v40sk"]
+[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="10_xl24b"]
 
 [sub_resource type="Animation" id="Animation_ct5yb"]
 resource_name = "Alert"
@@ -101,16 +102,16 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frvum"]
-size = Vector2(10, 13)
+size = Vector2(12, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e62nn"]
 size = Vector2(83, 24)
 
-[node name="GuardGun" instance=ExtResource("1_f6ea4")]
+[node name="GuardGun" node_paths=PackedStringArray("damage_component") instance=ExtResource("1_f6ea4")]
 script = ExtResource("2_gcgvk")
 fire_rate = 0.4
-number_of_shots = 1
 max_speed = 10000.0
+damage_component = NodePath("DamageComponent")
 
 [node name="Animator" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -118,7 +119,7 @@ libraries = {
 }
 
 [node name="Collider" parent="." index="2"]
-position = Vector2(0, -6.5)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_frvum")
 
 [node name="Spawn" type="Node2D" parent="." index="3"]
@@ -133,8 +134,7 @@ shape = SubResource("RectangleShape2D_e62nn")
 [node name="Sprite" parent="." index="5"]
 texture_filter = 1
 position = Vector2(0, -8)
-texture = ExtResource("3_dpbfg")
-hframes = 2
+texture = ExtResource("3_gthew")
 
 [node name="StateManager" type="Node2D" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_ld8hp")
@@ -142,19 +142,15 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node2D" parent="StateManager" index="0"]
 script = ExtResource("5_2e3xp")
-auto_animate = true
 
 [node name="Pace" type="Node2D" parent="StateManager" index="1"]
 script = ExtResource("6_k38xw")
-auto_animate = true
 
 [node name="Alert" type="Node2D" parent="StateManager" index="2"]
 script = ExtResource("7_82502")
-auto_animate = true
 
 [node name="Attack" type="Node2D" parent="StateManager" index="3"]
 script = ExtResource("8_ob78m")
-auto_animate = true
 
 [node name="sounds" type="AudioStreamPlayer2D" parent="." index="8"]
 process_mode = 3
@@ -162,5 +158,13 @@ stream = ExtResource("9_v40sk")
 pitch_scale = 2.0
 bus = &"Sounds"
 
+[node name="DamageComponent" parent="." index="10" instance=ExtResource("10_xl24b")]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="11"]
+
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -2,7 +2,7 @@ extends Enemy
 
 # Properties
 @export var fire_rate : float
-@export var number_of_shots : int
+#@export var number_of_shots : int
 
 # Funtional variables
 var movement_direction : int
@@ -19,6 +19,8 @@ var player : CharacterBody2D
 @onready var animator = $Animator
 @onready var sounds = $sounds
 @onready var projectile_scene = preload("res://Scenes/Enemies/projectile.tscn")
+
+var on_screen := false
 
 func _ready() -> void:
 	# Run ready function from inhereted script
@@ -50,30 +52,22 @@ func _physics_process(delta: float) -> void:
 	# Move spawn position to the correct side of the enemy
 	$Spawn.position.x = -scale.x * -movement_direction
 
-func shoot(number_of_projectiles : int) -> void:
-	if current_health > 0:
-		for i in number_of_projectiles:
-			# wait
-			await get_tree().create_timer(fire_rate).timeout
-			
-			# if dead now, don't shoot
-			if (current_health <= 0):
-				return
-			
-			# play sound
-			sounds.play()
-			
-			# create instance of projectile
-			var projectile = projectile_scene.instantiate()
-			
-			# set projectile properties
-			projectile.movement_direction = Vector2(movement_direction, 0)
-			projectile.speed = 500
-			projectile.scale = Vector2(6, 6) # scaled to size of enemy [temporary]
-			projectile.global_position = $Spawn.global_position
-			
-			# add to scene
-			get_parent().add_child(projectile)
+func shoot() -> void:
+	if current_health > 0 and on_screen:
+		# play sound
+		sounds.play()
+				
+		# create instance of projectile
+		var projectile = projectile_scene.instantiate()
+				
+		# set projectile properties
+		projectile.movement_direction = Vector2(movement_direction, 0)
+		projectile.speed = 750
+		projectile.scale = Vector2(6, 6) # scaled to size of enemy [temporary]
+		projectile.global_position = $Spawn.global_position
+	
+		# add to scene
+		get_parent().add_child(projectile)
 
 func _on_range_body_entered(body: Node2D) -> void:
 	# If entering body is player, set variable true
@@ -89,3 +83,10 @@ func disable():
 	states.reset()
 	player = null
 	super.disable()
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	on_screen = true
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	on_screen = false
