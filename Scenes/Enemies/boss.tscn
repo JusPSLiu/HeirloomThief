@@ -123,7 +123,6 @@ bus = &"Sounds"
 [node name="StateManager" type="Node2D" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_ptnp2")
 initial_state = NodePath("Idle")
-print_states = true
 
 [node name="Idle" type="Node2D" parent="StateManager" index="0"]
 script = ExtResource("5_dcrvj")

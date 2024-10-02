@@ -1,24 +1,22 @@
 extends State
 
 # Functional variables
-var done : bool
+var frames : int
 
 func enter() -> void:
 	super.enter()
 	
-	# create timer and wait for it to timeout
-	done = false
-	await get_tree().create_timer(0.5).timeout
-	# set variable to keep track of timer
-	done = true
+	frames = 0
 
 func physics_update(delta : float):
 	super.physics_update(delta)
 	entity.velocity.x = 0
 	entity.velocity.y = 0
 	
+	frames += 1
+	
 	# When timer ends
-	if done:
+	if frames == 30:
 		return entity.dive
 
 func exit() -> void:

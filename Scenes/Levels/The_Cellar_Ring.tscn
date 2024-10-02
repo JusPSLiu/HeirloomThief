@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dcsfy5esvicrn" path="res://Art/Sprites/Effects/random_selection.png" id="9_xtuqq"]
 [ext_resource type="Texture2D" uid="uid://c0pnh36r6nyti" path="res://Art/Sprites/Abilities/PLACEHOLDER_RING.webp" id="10_skdgq"]
 [ext_resource type="PackedScene" uid="uid://b3xs8f4mje4g0" path="res://Scenes/Enemies/guard_gun.tscn" id="11_kxowu"]
-[ext_resource type="PackedScene" path="res://Scenes/Enemies/strong_guard.tscn" id="12_nn63c"]
+[ext_resource type="PackedScene" uid="uid://c4f5ktegmu58n" path="res://Scenes/Enemies/strong_guard.tscn" id="12_nn63c"]
 [ext_resource type="PackedScene" uid="uid://ceel7nt7oknhy" path="res://Scenes/Enemies/guard.tscn" id="13_fwyve"]
 [ext_resource type="PackedScene" uid="uid://bpgf6kn085iul" path="res://Scenes/Enemies/guard_flying.tscn" id="14_ygi15"]
 

@@ -13,10 +13,12 @@ const fireball = preload("res://Scenes/Enemies/projectile.tscn")
 
 var current_health = 64
 var home_area = -1
+var vulnerable = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	current_health = 64
+	head.material.set_shader_parameter("outline_visible", false)
 
 # runs when player first enters, or when dies
 func enable():
@@ -38,10 +40,15 @@ func damage(damage_val):
 	current_health -= damage_val
 	healthBar.scale.y = max(0, current_health)
 	healthBar2.scale.y = healthBar.scale.y
+	head.material.set_shader_parameter("outline_visible", true)
 	if (current_health <= 0):
 		die()
 	elif (soundGetHit):
 		soundGetHit.play()
+
+func look_vulnerable(able=true):
+	vulnerable = able
+	head.material.set_shader_parameter("outline_visible", vulnerable)
 
 func shoot_fireball():
 	var fiery = fireball.instantiate()
@@ -51,7 +58,9 @@ func shoot_fireball():
 	add_sibling(fiery)
 
 func update_sprites():
+	head.material.set_shader_parameter("outline_color", Color(1, 1, 1))
 	if (current_health > 32):
+		head.material.set_shader_parameter("outline_color", Color(0, 1, 0))
 		pass
 
 func die():

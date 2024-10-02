@@ -126,11 +126,11 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_et5ws")
 
 [node name="GuardFlying" parent="." instance=ExtResource("2_vacef")]
-position = Vector2(1682, 144)
+position = Vector2(658, 304)
 scale = Vector2(4, 4)
 
 [node name="GuardGun" parent="." instance=ExtResource("3_o53wr")]
-position = Vector2(922, 544)
+position = Vector2(2266, 472)
 scale = Vector2(4, 4)
 
 [node name="Guard2" parent="." instance=ExtResource("4_6g62y")]

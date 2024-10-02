@@ -6,7 +6,8 @@ extends CharacterBody2D
 	'Cape' : false,
 	'upgradedStick' : false,
 	'ringThroughWalls' : false,
-	'upgradedCape' : false
+	'upgradedCape' : false,
+	'crown' : false
 }
 @export var GUI : Control
 @export var deathAnimator : AnimationPlayer
@@ -32,6 +33,7 @@ const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
 @onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
 @onready var projectile = preload("res://Scenes/Player/items/projectile1.tscn")
 @onready var deathparticle = preload("res://Scenes/Player/death.tscn")
+@onready var cape = $playerSprite/cape
 
 # regular variables
 var coyoteTime = 0.14
@@ -40,7 +42,6 @@ var currentDirection = false # false == left, true == right, used for dash
 var doublejumped = false # has double jumped, do full jump height
 var slicedinair = false # has sliced in air, no more slicing in the air
 var DO_NOT_MOVE = false # not actually a const, just really important
-var currentlyFloating = false # for animation; floating means air animation
 var doorLocation = null # location of other door; null if not there
 var lastFloorHeight = 0
 # Abilities
@@ -71,6 +72,8 @@ func _ready() -> void:
 		SaveManager.powerstatus[ability.ring] = 1 + int(AbilityOverride.ringThroughWalls)
 	if (AbilityOverride.Cape):
 		SaveManager.powerstatus[ability.cape] = 1 + int(AbilityOverride.upgradedCape)
+	if (AbilityOverride.has("crown") and AbilityOverride.crown):
+		SaveManager.powerstatus[ability.crown] = 1
 	
 	
 	set_powerstatus()
@@ -92,7 +95,6 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		$camera_carrot_on_stick.position.y = 0
 		if (coyoteTime <= 0):
-			currentlyFloating = false
 			doublejumped = false
 		coyoteTime = COYOTE_MAX
 		lastFloorHeight = position.y
@@ -107,7 +109,7 @@ func _physics_process(delta: float) -> void:
 			# if cape ability, and up pressed, slow down
 			if currentAbilities[ability.cape] and Input.is_action_pressed("Jump") and boostimer <= 0:
 				velocity.y = expDecay(velocity.y, get_gravity().y * 0.3, LERP_DECAY_RATE, delta)
-				currentlyFloating = true
+				cape.play("falling")
 			else:
 				velocity += get_gravity() * delta * 3.2
 			# camera physics
@@ -128,22 +130,24 @@ func _physics_process(delta: float) -> void:
 			currentDirection = true
 			if (is_on_floor()):
 				$playerSprite.play('runR')
+				cape.play('running')
 			else:
-				if (currentlyFloating): $playerSprite.play('floatR')
-				else: $playerSprite.play('jumpR')
+				$playerSprite.play('jumpR')
 		else:
 			currentDirection = false
 			if (is_on_floor()):
 				$playerSprite.play('runL')
+				cape.play('running')
 			else:
-				if (currentlyFloating): $playerSprite.play('floatL')
-				else: $playerSprite.play('jumpL')
+				$playerSprite.play('jumpL')
+		set_cape_direction()
 			
 	else:
 		velocity.x = expDecay(velocity.x, 0, LERP_DECAY_RATE, delta)
 		if (is_on_floor()):
 			if (currentDirection): $playerSprite.play('defaultR')
 			else: $playerSprite.play("defaultL")
+			if (cape.is_playing() and cape.animation != "stop"): cape.play("stop")
 	
 	# the dash cooldown
 	if (boostimer >= 0):
@@ -156,6 +160,14 @@ func _physics_process(delta: float) -> void:
 		$camera_carrot_on_stick.position.x = expDecay($camera_carrot_on_stick.position.x, 0, 2, delta)
 	
 	camera_transitions(delta)
+
+func set_cape_direction():
+	if currentDirection:
+		cape.position.x = -5
+		cape.flip_h = true
+	else:
+		cape.position.x = 5
+		cape.flip_h = false
 
 
 ## Inputs
@@ -220,6 +232,7 @@ func _input(event: InputEvent) -> void:
 				if currentAbilities[ability.cape] and boostimer < 0:
 					dashsound.play()
 					$player_fx/dashanimation.play("dash")
+					cape.play("falling")
 					Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 					velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
 					boostimer = BOOST_COOLDOWN
@@ -370,6 +383,8 @@ func update_powerstatus(currMode):
 		stick = newstick.instantiate()
 		add_child(stick)
 		stick.position = Vector2.ZERO
+	elif (currMode == ability.cape):
+		cape.show()
 
 func set_powerstatus():
 	# update ring if must
@@ -387,6 +402,9 @@ func set_powerstatus():
 		stick = newstick.instantiate()
 		add_child(stick)
 		stick.position = Vector2.ZERO
+	
+	if (currentAbilities[ability.cape] != SaveManager.powerstatus[ability.cape]):
+		cape.show()
 	
 	currentAbilities = SaveManager.powerstatus
 
@@ -481,7 +499,11 @@ func camera_transitions(delta):
 
 # camera vibration
 func shake_camera():
+	$player_fx.stop()
 	$player_fx.play("cam_shake")
+func light_shake_camera():
+	$player_fx.stop()
+	$player_fx.play("cam_shake_lite")
 
 ## Checkpoints and Doors
 func get_checkpoint(positron):
