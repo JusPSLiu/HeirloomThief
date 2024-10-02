@@ -72,7 +72,7 @@ func _ready() -> void:
 		SaveManager.powerstatus[ability.ring] = 1 + int(AbilityOverride.ringThroughWalls)
 	if (AbilityOverride.Cape):
 		SaveManager.powerstatus[ability.cape] = 1 + int(AbilityOverride.upgradedCape)
-	if (AbilityOverride.crown):
+	if (AbilityOverride.has("crown") and AbilityOverride.crown):
 		SaveManager.powerstatus[ability.crown] = 1
 	
 	
