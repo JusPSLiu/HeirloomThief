@@ -6,6 +6,7 @@ extends Sprite2D
 
 var lit = false
 var otherTorches : Array[AnimatedSprite2D]
+var particles = preload("res://Scenes/Interactable/breakable_particles.tscn")
 
 func _ready() -> void:
 	if (SaveManager.already_interacted(id)):
@@ -21,6 +22,11 @@ func alight() -> bool:
 	$breakySprite.visible = false
 	check_if_all_lit()
 	sound.play()
+	
+	var particly = particles.instantiate()
+	particly.position = position
+	add_sibling(particly)
+	
 	return true
 
 func check_if_all_lit():

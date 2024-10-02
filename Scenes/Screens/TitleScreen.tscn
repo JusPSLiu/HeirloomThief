@@ -755,9 +755,9 @@ confirmDeleteFilename = NodePath("DeletionConfirmation/fileName")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = -133.333
+offset_top = -200.0
 offset_right = 1280.0
-offset_bottom = 602.667
+offset_bottom = 536.0
 texture = ExtResource("1_euucd")
 stretch_mode = 2
 

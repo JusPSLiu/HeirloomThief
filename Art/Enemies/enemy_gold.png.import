@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://r8q02537hxa1"
+path="res://.godot/imported/enemy_gold.png-758c26473eac8e137d6837c81466f376.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/Enemies/enemy_gold.png"
+dest_files=["res://.godot/imported/enemy_gold.png-758c26473eac8e137d6837c81466f376.ctex"]
 
 [params]
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2epnw0o1n2hw"]
+
+[sub_resource type="Gradient" id="Gradient_7sgs3"]
+offsets = PackedFloat32Array(0.0434783, 1)
+colors = PackedColorArray(0.329412, 0.329412, 0.329412, 1, 1, 1, 1, 1)
+
+[node name="breakable_particles" type="CPUParticles2D"]
+scale = Vector2(4, 4)
+amount = 25
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(4, 20)
+gravity = Vector2(0, 1960)
+initial_velocity_max = 242.32
+scale_amount_min = 4.0
+scale_amount_max = 16.0
+color = Color(0.54902, 0.54902, 0.54902, 1)
+color_initial_ramp = SubResource("Gradient_7sgs3")

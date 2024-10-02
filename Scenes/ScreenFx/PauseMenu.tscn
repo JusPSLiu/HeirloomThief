@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=61 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://c637a213y22sw" path="res://Art/UI/Pause/main/available.png" id="13_75v31"]
 [ext_resource type="Texture2D" uid="uid://drxd11m6c04kj" path="res://Art/Backgrounds/the_map.png" id="14_7a5wj"]
 [ext_resource type="Texture2D" uid="uid://clwokwkiuel0w" path="res://Art/UI/Pause/main/settingsSelected.png" id="14_cota7"]
-[ext_resource type="Material" uid="uid://dxkjhs0ldnhoj" path="res://Scenes/ScreenFx/map_shader.tres" id="14_kilgh"]
+[ext_resource type="Material" uid="uid://defsjj06x13q5" path="res://Scenes/ScreenFx/map_shader.tres" id="14_kilgh"]
 [ext_resource type="Texture2D" uid="uid://b1ogy1scrgwfh" path="res://Art/UI/Pause/main/exit.png" id="15_04q0r"]
 [ext_resource type="Script" path="res://Scripts/UI/MapScript.gd" id="16_r3vwa"]
 [ext_resource type="Texture2D" uid="uid://bjwqdw4oscb4g" path="res://Art/UI/Pause/main/exitSelected.png" id="16_vbiiw"]
@@ -50,6 +50,7 @@
 [ext_resource type="Texture2D" uid="uid://beofb7jxa7gl1" path="res://Art/UI/Pause/upgrades/items/cape1.png" id="41_dmobc"]
 [ext_resource type="Texture2D" uid="uid://b11p041r66isi" path="res://Art/UI/Pause/upgrades/upgrade_button.png" id="42_r844g"]
 [ext_resource type="Texture2D" uid="uid://v5b1iglh5g11" path="res://Art/UI/Pause/upgrades/upgrade_button_hover.png" id="43_iwaiv"]
+[ext_resource type="Texture2D" uid="uid://qnmycxb2w46p" path="res://Art/UI/Pause/upgrades/items/crown1.png" id="45_cf6lj"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="48_l71v5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfa4r"]
@@ -129,7 +130,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r73ik")
+"texture": ExtResource("45_cf6lj")
 }],
 "loop": false,
 "name": &"1",
