@@ -4,6 +4,7 @@ extends Area2D
 @export var damageInHalfHearts = 1
 @export var knockPlayerAwayFromCenter : bool = false
 @export var knockPlayerInCustomVector : Vector2 = Vector2(0, 0)
+@export var active = true
 
 var playerInArea
 
@@ -14,7 +15,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if (playerInArea):
+	if (playerInArea and active):
 		var knockVector = knockPlayerInCustomVector
 		if (knockPlayerAwayFromCenter):
 			knockVector += (playerInArea.position-position).normalized()*2

@@ -126,18 +126,17 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction and !DO_NOT_MOVE:
 		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
+		cape.play('running')
 		if (direction > 0):
 			currentDirection = true
 			if (is_on_floor()):
 				$playerSprite.play('runR')
-				cape.play('running')
 			else:
 				$playerSprite.play('jumpR')
 		else:
 			currentDirection = false
 			if (is_on_floor()):
 				$playerSprite.play('runL')
-				cape.play('running')
 			else:
 				$playerSprite.play('jumpL')
 		set_cape_direction()
@@ -217,6 +216,11 @@ func _input(event: InputEvent) -> void:
 			# Handle jump.
 			if event.is_action_pressed("Jump"):
 				if (doorLocation != null):
+					# if doorlocation is LITERALLY VECTOR2.ZERO, then go to next level
+					if (doorLocation == Vector2.ZERO):
+						SaveManager.respawn_point = Vector2(274, 674)
+						get_tree().change_scene_to_file("res://Scenes/Levels/final_boss.tscn")
+						return
 					#if in doorway, the jump button opens the door
 					position = doorLocation
 					dashsound.play()
@@ -229,7 +233,7 @@ func _input(event: InputEvent) -> void:
 					doublejumped = false
 			# dash / boost
 			if event.is_action_pressed("Dash"):
-				if currentAbilities[ability.cape] and boostimer < 0:
+				if currentAbilities[ability.cape] and boostimer < 0 and int(velocity.x) != 0:
 					dashsound.play()
 					$player_fx/dashanimation.play("dash")
 					cape.play("falling")
@@ -403,7 +407,7 @@ func set_powerstatus():
 		add_child(stick)
 		stick.position = Vector2.ZERO
 	
-	if (currentAbilities[ability.cape] != SaveManager.powerstatus[ability.cape]):
+	if (currentAbilities[ability.cape] || SaveManager.powerstatus[ability.cape]):
 		cape.show()
 	
 	currentAbilities = SaveManager.powerstatus

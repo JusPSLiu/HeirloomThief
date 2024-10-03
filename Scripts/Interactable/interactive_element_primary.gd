@@ -7,6 +7,10 @@ var lit = false
 var otherTorches : Array[AnimatedSprite2D]
 
 func _ready() -> void:
+	for child in get_children():
+		if child is AnimatedSprite2D and "primaryTorch" in child:
+			child.primaryTorch = self
+			otherTorches.append(child)
 	if (SaveManager.already_interacted(id)):
 		lit = true
 		play('on')
@@ -16,10 +20,9 @@ func _ready() -> void:
 		
 		$torchlight.energy = 1
 		activateyThing.skipToActivated()
-	for child in get_children():
-		if child is AnimatedSprite2D and "primaryTorch" in child:
-			child.primaryTorch = self
-			otherTorches.append(child)
+		for torch in otherTorches:
+			torch.set_animation('on')
+			torch.set_autoplay('on')
 
 func alight() -> bool:
 	if (lit): return false
@@ -38,3 +41,4 @@ func check_if_all_lit():
 	# activate the door
 	if (activateyThing):
 		activateyThing.activate()
+		SaveManager.interact(id)

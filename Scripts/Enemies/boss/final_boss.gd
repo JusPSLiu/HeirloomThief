@@ -9,7 +9,11 @@ extends StaticBody2D
 @export var head : AnimatedSprite2D
 @export var mask : AnimatedSprite2D
 
+@onready var rootNode = get_parent().get_parent().get_parent().get_parent().get_parent()
+
 const fireball = preload("res://Scenes/Enemies/projectile.tscn")
+const lavawave = preload("res://Scenes/Enemies/boss_attacks/lavawave.tscn")
+const lavawave2 = preload("res://Scenes/Enemies/boss_attacks/lavawave_right.tscn")
 
 var current_health = 64
 var home_area = -1
@@ -37,14 +41,14 @@ func _process(delta: float) -> void:
 	pass
 
 func damage(damage_val):
-	current_health -= damage_val
-	healthBar.scale.y = max(0, current_health)
-	healthBar2.scale.y = healthBar.scale.y
-	head.material.set_shader_parameter("outline_visible", true)
-	if (current_health <= 0):
-		die()
-	elif (soundGetHit):
-		soundGetHit.play()
+	if (vulnerable):
+		current_health -= damage_val
+		healthBar.scale.y = max(0, current_health)
+		healthBar2.scale.y = healthBar.scale.y
+		if (current_health <= 0):
+			die()
+		elif (soundGetHit):
+			soundGetHit.play()
 
 func look_vulnerable(able=true):
 	vulnerable = able
@@ -57,11 +61,18 @@ func shoot_fireball():
 	fiery.speed = 200
 	add_sibling(fiery)
 
+func lava_wave():
+	var fiery = lavawave.instantiate()
+	var fiery2 = lavawave2.instantiate()
+	rootNode.add_child.call_deferred(fiery)
+	rootNode.add_child.call_deferred(fiery2)
+	$boom.play()
+
 func update_sprites():
-	head.material.set_shader_parameter("outline_color", Color(1, 1, 1))
-	if (current_health > 32):
-		head.material.set_shader_parameter("outline_color", Color(0, 1, 0))
-		pass
+	if (current_health <= 32):
+		head.play("breaking")
+		mask.play("breaking")
+
 
 func die():
 	pass

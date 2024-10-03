@@ -6,10 +6,14 @@ extends Area2D
 # ability 4 is grappling hook
 @export var my_ability_id = 1
 @export var animationplayer : AnimationPlayer
+@export var activatey_thing : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if (SaveManager.powerstatus[my_ability_id]):
+		get_parent().hide()
+		if (activatey_thing):
+			activatey_thing.skipToActivated()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

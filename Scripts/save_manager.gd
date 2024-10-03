@@ -36,7 +36,7 @@ func already_interacted(id):
 	if (id < 0): return true
 	return (interactedElements.has(id) && interactedElements[id])
 
-func interact(type, id):
+func interact(id):
 	interactedElements[id] = true
 	save_game()
 

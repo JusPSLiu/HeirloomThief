@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqvwpeyrloy3b"]
+
+[ext_resource type="Texture2D" uid="uid://cedbx8tc678cy" path="res://Art/Enemies/FinalBoss/lava_wave.png" id="1_utrtb"]
+[ext_resource type="PackedScene" uid="uid://bxrlbiu6rn72v" path="res://Scenes/Decorative/lavalight.tscn" id="3_wlnps"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1h13"]
+atlas = ExtResource("1_utrtb")
+region = Rect2(0, 0, 55, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8imd3"]
+atlas = ExtResource("1_utrtb")
+region = Rect2(55, 0, 55, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ta4yv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1h13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8imd3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_r4f3i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(828, 763)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [828.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [763.0]
+}
+
+[sub_resource type="Animation" id="Animation_ywi40"]
+resource_name = "lava_motion"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.8, 1),
+"update": 0,
+"values": [956.0, 2168.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [800.0, 690.0, 754.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lutkh"]
+_data = {
+"RESET": SubResource("Animation_r4f3i"),
+"lava_motion": SubResource("Animation_ywi40")
+}
+
+[node name="lavawave" type="AnimatedSprite2D"]
+position = Vector2(828, 763)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ta4yv")
+autoplay = "default"
+frame_progress = 0.854166
+flip_h = true
+
+[node name="Lavalight" parent="." instance=ExtResource("3_wlnps")]
+scale = Vector2(3, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lutkh")
+}
+autoplay = "lava_motion"

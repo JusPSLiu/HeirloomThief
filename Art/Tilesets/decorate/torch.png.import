@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://bx5hh0otwyc6w"
+path="res://.godot/imported/torch.png-61ffac8703b911e62a2938dda07199c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/Tilesets/decorate/torch.png"
+dest_files=["res://.godot/imported/torch.png-61ffac8703b911e62a2938dda07199c9.ctex"]
 
 [params]
 

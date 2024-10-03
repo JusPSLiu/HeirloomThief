@@ -13,7 +13,7 @@ var movement_direction : Vector2 = Vector2(0, 4)
 var hitSomething = false
 
 func _ready() -> void:
-	pass
+	rotation = atan(movement_direction.y/movement_direction.x)
 
 func _physics_process(delta: float) -> void:
 	# move horizontally each frame

@@ -3,13 +3,15 @@ extends Node2D
 @export var soundPlayer : AudioStreamPlayer2D
 @export var fallingDistance : int = 2
 
-@onready var startPos : Vector2 = position
+@export var startPos : Vector2
 
 var enabled : bool = false
 var falling : bool = false
+var FALL_NOW : bool = false
 var currFallSpeed : float = 0
 
 func _ready() -> void:
+	startPos = position
 	fallingDistance *= 8
 
 func _process(delta: float) -> void:
@@ -18,6 +20,12 @@ func _process(delta: float) -> void:
 		position.y += currFallSpeed
 		if (position.y > startPos.y+fallingDistance):
 			position.y = startPos.y+fallingDistance
+			falling = false
+		
+		# if skip (yes godot is too glitchy for me to put it in skipToActivated)
+		if (FALL_NOW):
+			position.y = startPos.y+fallingDistance
+			FALL_NOW = false
 			falling = false
 
 func activate():
@@ -28,8 +36,8 @@ func activate():
 func skipToActivated():
 	if (!enabled):
 		enabled = true
-		falling = false
-		position.y = startPos.y + fallingDistance
+		falling = true
+		FALL_NOW = true
 
 
 func reset():

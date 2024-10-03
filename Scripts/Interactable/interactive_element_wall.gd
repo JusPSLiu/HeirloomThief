@@ -9,7 +9,9 @@ var otherTorches : Array[AnimatedSprite2D]
 var particles = preload("res://Scenes/Interactable/breakable_particles.tscn")
 
 func _ready() -> void:
+	print_debug("NOT ALREADY INTERACTED WITH "+str(id))
 	if (SaveManager.already_interacted(id)):
+		print_debug("ALREADY INTERACTED WITH "+str(id))
 		lit = true
 		$StaticBody2D.set_collision_layer_value(1, false)
 		$breakySprite.visible = false
@@ -27,6 +29,7 @@ func alight() -> bool:
 	particly.position = position
 	add_sibling(particly)
 	
+	SaveManager.interact(id)
 	return true
 
 func check_if_all_lit():

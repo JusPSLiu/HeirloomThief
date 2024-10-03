@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://bjmmkp4mhcng8"
+path="res://.godot/imported/goaldoor_open.png-0069adc1543e50e18872599ea238f388.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/Tilesets/decorate/goaldoor_open.png"
+dest_files=["res://.godot/imported/goaldoor_open.png-0069adc1543e50e18872599ea238f388.ctex"]
 
 [params]
 
