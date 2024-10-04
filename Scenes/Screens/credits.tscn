@@ -1,0 +1,132 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjg5tqvu0fb0x"]
+
+[ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="1_qyxwr"]
+[ext_resource type="Script" path="res://Scripts/UI/credits.gd" id="1_so2ln"]
+[ext_resource type="AudioStream" uid="uid://jgwjvqo152o6" path="res://Sounds/Music/credits_piano.mp3" id="2_0bgs3"]
+
+[sub_resource type="Animation" id="Animation_sjgrs"]
+resource_name = "scroll"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CreditsText:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [720.0, -3240.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(60),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_go_to_home"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4ybbb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CreditsText:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tl0i6"]
+_data = {
+"RESET": SubResource("Animation_4ybbb"),
+"scroll": SubResource("Animation_sjgrs")
+}
+
+[node name="Credits" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_so2ln")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsText" type="Label" parent="."]
+layout_mode = 0
+offset_top = 720.0
+offset_right = 320.0
+offset_bottom = 1494.0
+scale = Vector2(4, 4)
+theme_override_fonts/font = ExtResource("1_qyxwr")
+text = "CREDITS
+
+
+
+_ART_
+Selah-P
+Jus Liu
+
+
+_MUSIC_&_SOUNDS_
+Jus Liu
+
+
+_LEVEL_DESIGN_
+Jimmy Saldana
+Joey Parker
+Jus Liu
+Ohm Desai
+
+
+_PROGRAMMING_
+Evan Youssef
+Jimmy Saldana
+Jus Liu
+
+
+
+_SPECIAL_THANKS_
+
+The Game Developers Club of the 
+University of North Carolina at Charlotte
+
+All the playtesters
+
+Quentin Trembley III
+
+& Roy"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0bgs3")
+autoplay = true
+bus = &"Music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tl0i6")
+}
+autoplay = "scroll"

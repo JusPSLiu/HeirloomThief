@@ -12,6 +12,8 @@ var collectedGems : Dictionary = {}
 var collectedHealth : Dictionary = {}
 var interactedElements : Dictionary = {}
 var respawn_point : Vector2 = Vector2(0,0)
+var sceneNumber : int = 0
+var nextScene : int = 0
 
 enum Item {
 	health = 0,
@@ -56,7 +58,8 @@ func save_game():
 			"collectedHealth" : collectedHealth,
 			"collectedGems" : collectedGems,
 			"interactedElements" : interactedElements,
-			"visited_rooms" : visited_rooms
+			"visited_rooms" : visited_rooms,
+			"sceneNumber" : sceneNumber
 		})
 		save_file.close()
 
@@ -68,6 +71,7 @@ func load_game(file):
 		currsavename = data['savename']
 		powerstatus = data["powerstatus"] if data.has("powerstatus") else [1, 0, 0, 0, 0]
 		respawn_point = data['respawn_point'] if (data.has("respawn_point")) else Vector2.ZERO
+		sceneNumber = data['sceneNumber'] if data.has("sceneNumber") else 0
 		visited_rooms = data['visited_rooms'] if (data.has("visited_rooms")) else [false]
 		
 		# Health and Gems in Inventory

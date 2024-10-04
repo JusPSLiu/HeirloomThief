@@ -10,6 +10,7 @@ extends StaticBody2D
 @export var mask : AnimatedSprite2D
 
 @onready var rootNode = get_parent().get_parent().get_parent().get_parent().get_parent()
+@onready var firebreath_spawner = $firebreath_spawner
 
 const fireball = preload("res://Scenes/Enemies/projectile.tscn")
 const lavawave = preload("res://Scenes/Enemies/boss_attacks/lavawave.tscn")
@@ -56,10 +57,11 @@ func look_vulnerable(able=true):
 
 func shoot_fireball():
 	var fiery = fireball.instantiate()
-	fiery.position = position + Vector2(0, 12)
-	fiery.movement_direction = Vector2(cos(rotation+PI), sin(rotation))
-	fiery.speed = 200
-	add_sibling(fiery)
+	fiery.global_position = firebreath_spawner.global_position
+	fiery.movement_direction = Vector2(cos(global_rotation+PI), sin(global_rotation))
+	fiery.speed = 200*4
+	fiery.scale = Vector2(4, 4)
+	rootNode.add_child.call_deferred(fiery)
 
 func lava_wave():
 	var fiery = lavawave.instantiate()

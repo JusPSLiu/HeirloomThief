@@ -476,6 +476,12 @@ libraries = {
 "": SubResource("AnimationLibrary_h6bum")
 }
 
+[node name="cameranimation" type="AnimationPlayer" parent="player_fx"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_tb5uq")
+}
+
 [node name="camera_carrot_on_stick" type="Node2D" parent="."]
 position = Vector2(3, 2)
 

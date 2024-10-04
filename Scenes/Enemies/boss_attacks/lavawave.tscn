@@ -90,10 +90,10 @@ tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 1.5),
+"times": PackedFloat32Array(0, 0.2, 1.5),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
-"values": [800.0, 690.0, 754.0]
+"values": [800.0, 690.0, 818.0]
 }
 tracks/2/type = "method"
 tracks/2/imported = false

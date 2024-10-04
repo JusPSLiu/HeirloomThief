@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://dvsxhqbjcaae4" path="res://Scenes/Interactable/gem_upgrade.tscn" id="7_up38r"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="8_5gly0"]
 [ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Interactable/health_upgrade.tscn" id="8_rtfxj"]
-[ext_resource type="Material" uid="uid://dxkjhs0ldnhoj" path="res://Scenes/ScreenFx/map_shader.tres" id="10_k7u5f"]
+[ext_resource type="Material" uid="uid://defsjj06x13q5" path="res://Scenes/ScreenFx/map_shader.tres" id="10_k7u5f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]
 shader = ExtResource("6_s5lt1")
+shader_parameter/intensity = 2.0
 shader_parameter/normal_map = ExtResource("7_sa36q")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dsjt"]

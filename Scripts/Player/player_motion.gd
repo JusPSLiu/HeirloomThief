@@ -20,6 +20,7 @@ extends CharacterBody2D
 @export var collectsound : AudioStreamPlayer2D
 @export var dashsound : AudioStreamPlayer2D
 @export var cutsceneAnimator : AnimationPlayer
+@export var sceneNumber : int = 0
 
 # constant variables
 const SPEED = 500.0 # player movement speed
@@ -78,8 +79,9 @@ func _ready() -> void:
 	
 	set_powerstatus()
 	
-	if (SaveManager.respawn_point == Vector2.ZERO):
+	if (SaveManager.respawn_point == Vector2.ZERO || SaveManager.nextScene != -1):
 		SaveManager.respawn_point = position
+		SaveManager.nextScene == -1
 	else:
 		position = SaveManager.respawn_point
 		camera.position_smoothing_enabled = false
@@ -218,10 +220,12 @@ func _input(event: InputEvent) -> void:
 				if (doorLocation != null):
 					# if doorlocation is LITERALLY VECTOR2.ZERO, then go to next level
 					if (doorLocation == Vector2.ZERO):
-						SaveManager.respawn_point = Vector2(274, 674)
-						get_tree().change_scene_to_file("res://Scenes/Levels/final_boss.tscn")
-						return
+						SaveManager.sceneNumber = SaveManager.nextScene
+						get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
 					#if in doorway, the jump button opens the door
+					if (abs(position.x-doorLocation.x) > 640 || abs(position.y-doorLocation.y) > 360):
+						camera.position_smoothing_enabled = false
+						just_respawned = true
 					position = doorLocation
 					dashsound.play()
 				elif coyoteTime > 0:
@@ -503,11 +507,11 @@ func camera_transitions(delta):
 
 # camera vibration
 func shake_camera():
-	$player_fx.stop()
-	$player_fx.play("cam_shake")
+	$player_fx/cameranimation.stop()
+	$player_fx/cameranimation.play("cam_shake")
 func light_shake_camera():
-	$player_fx.stop()
-	$player_fx.play("cam_shake_lite")
+	$player_fx/cameranimation.stop()
+	$player_fx/cameranimation.play("cam_shake_lite")
 
 ## Checkpoints and Doors
 func get_checkpoint(positron):
