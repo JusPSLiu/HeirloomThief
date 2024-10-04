@@ -1,7 +1,15 @@
 extends TextureRect
 
+const upgradePreviews = [
+	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_stick.png"),
+	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_ring.png"),
+	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_cape.png")
+]
+const MAX_LVL = 2
+
 @export var buttonSounds : AudioStreamPlayer
 @export var description : RichTextLabel
+@export var upgradePreview : TextureRect
 @export var buttons : Array[TextureButton]
 @export var upgradeButton : TextureButton
 
@@ -30,7 +38,7 @@ func _set_up():
 	update_upgrade_button()
 
 func update_upgrade_button():
-	if (SaveManager.current_gems >= 2):
+	if (SaveManager.current_gems >= 2 and SaveManager.powerstatus[currMode] < MAX_LVL):
 		upgradeButton.set_focus_mode(Control.FocusMode.FOCUS_ALL)
 		upgradeButton.set_disabled(false)
 		upgradeButton.modulate = Color(1, 1, 1, 1)
@@ -46,7 +54,6 @@ func _select(item: int) -> void:
 	upgradeButton.set_focus_neighbor(SIDE_TOP, buttons[item].get_path()) # make the upgrade button let you select from there lol
 	if (get_tree().paused && currMode != item): buttonSounds.play()
 	currMode = item
-	
 	match(item):
 		0:
 			description.text = "me trusty beatin stick. curt a see o me mum. back wen she was aroun an kickin. a littl airloom of me own. ad it from afore the mountain filled the sky with smoke. afore the the beasleye famly took over. theres wisperins ya see. they say the beasleye famly is workin on sumfin to fell even more o the grate famlies. sumfin even more poweful. might as well take some o there earlier spoils afore they finish\n\nan ere i am"
@@ -56,11 +63,12 @@ func _select(item: int) -> void:
 			description.text = "this cape olways lookt comfy wen the pertwy famly took it aroun an showd it off. on me own an just left the broken ports of trowton i was. course the pertwy famly fell an i didn think i wood find out. now i hav it i see it reely is. it was ol the way out past the flaiming rocks. gues the flaiming mounten took the beasleye famly by suprise too. evrywon sed they was behind it wot wif the smoke in the sky but nay\n\nbut i do wonder wot those bars in the cave walls was for"
 		3:
 			description.text = "this right ere crown wot wif the fansy joowuls was wot i came ere for. "
+	show_preview()
 
 
 func upgrade() -> void:
 	if (currMode > -1 && currMode < 5):
-		if (SaveManager.current_gems >= 2 and SaveManager.powerstatus[currMode] < 2):
+		if (SaveManager.current_gems >= 2 and SaveManager.powerstatus[currMode] < MAX_LVL):
 			# upgrade
 			if (get_parent().get_parent().player_update_powerstatus(currMode)):
 				buttonSounds.play()
@@ -70,3 +78,11 @@ func upgrade() -> void:
 				buttons[currMode].get_child(0).play(str(clamp(SaveManager.powerstatus[currMode], 1, 2)))
 				get_parent().get_parent().update_gui()
 				update_upgrade_button()
+				show_preview()
+
+func show_preview():
+	if (SaveManager.powerstatus[currMode] < MAX_LVL):
+		upgradePreview.show()
+		upgradePreview.texture = upgradePreviews[currMode]
+	else:
+		upgradePreview.hide()

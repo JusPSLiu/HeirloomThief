@@ -4,6 +4,21 @@
 [ext_resource type="Script" path="res://Scripts/UI/credits.gd" id="1_so2ln"]
 [ext_resource type="AudioStream" uid="uid://jgwjvqo152o6" path="res://Sounds/Music/credits_piano.mp3" id="2_0bgs3"]
 
+[sub_resource type="Animation" id="Animation_4ybbb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CreditsText:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_sjgrs"]
 resource_name = "scroll"
 length = 60.0
@@ -32,21 +47,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"_go_to_home"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_4ybbb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CreditsText:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tl0i6"]

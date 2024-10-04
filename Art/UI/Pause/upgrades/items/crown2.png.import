@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://dg4nqhr33c254"
+path="res://.godot/imported/crown2.png-1951c080d7702775deece4a0d311d109.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/UI/Pause/upgrades/items/crown2.png"
+dest_files=["res://.godot/imported/crown2.png-1951c080d7702775deece4a0d311d109.ctex"]
 
 [params]
 

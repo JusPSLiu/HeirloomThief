@@ -245,7 +245,7 @@ resource_name = "die"
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Player")
+tracks/0/path = NodePath("../Interactive/Player")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -327,7 +327,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset")
+tracks/5/path = NodePath("../Interactive/Player/camera_carrot_on_stick/Camera2D:offset")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -339,7 +339,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:x")
+tracks/6/path = NodePath("../Interactive/Player/camera_carrot_on_stick/Camera2D:offset:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -351,7 +351,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:y")
+tracks/7/path = NodePath("../Interactive/Player/camera_carrot_on_stick/Camera2D:offset:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -375,7 +375,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Player:position")
+tracks/9/path = NodePath("../Interactive/Player:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -643,7 +643,7 @@ tracks/8/use_blend = true
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:y")
+tracks/9/path = NodePath("../Interactive/Player/camera_carrot_on_stick/Camera2D:offset:y")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -669,7 +669,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:x")
+tracks/11/path = NodePath("../Interactive/Player/camera_carrot_on_stick/Camera2D:offset:x")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -696,7 +696,7 @@ resource_name = "starting_cutscene"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Player:position")
+tracks/0/path = NodePath("../Interactive/Player:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1408,26 +1408,23 @@ startPos = Vector2(0, -96)
 position = Vector2(31232, 192)
 id = 3
 
-[node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "cutsceneAnimator") instance=ExtResource("27_s5q64")]
+[node name="BreakableWal3" parent="Interactive" instance=ExtResource("22_w7myt")]
+position = Vector2(24384, 1120)
+id = 4
+faceRight = true
+
+[node name="Player" parent="Interactive" node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "cutsceneAnimator") instance=ExtResource("27_s5q64")]
 position = Vector2(1413, 546)
 floor_snap_length = 12.0
-AbilityOverride = {
-"Cape": false,
-"Ring": true,
-"crown": false,
-"ringThroughWalls": false,
-"upgradedCape": false,
-"upgradedStick": false
-}
-GUI = NodePath("../UI/gui")
-deathAnimator = NodePath("../UI/DeathAnimator")
-musicPlayer = NodePath("../Music")
-cutsceneAnimator = NodePath("../UI/CutsceneAnimator")
+GUI = NodePath("../../UI/gui")
+deathAnimator = NodePath("../../UI/DeathAnimator")
+musicPlayer = NodePath("../../Music")
+cutsceneAnimator = NodePath("../../UI/CutsceneAnimator")
 
-[node name="cape" parent="Player/playerSprite" index="1"]
+[node name="cape" parent="Interactive/Player/playerSprite" index="1"]
 animation = &"falling"
 
-[node name="camera_carrot_on_stick" parent="Player" index="3"]
+[node name="camera_carrot_on_stick" parent="Interactive/Player" index="3"]
 position = Vector2(256, 2)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
@@ -1520,7 +1517,7 @@ bus = &"Sounds"
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("Fader", "player") instance=ExtResource("33_vpuow")]
 Fader = NodePath("../Fader")
-player = NodePath("../Player")
+player = NodePath("../Interactive/Player")
 
 [node name="Fader" parent="." instance=ExtResource("34_h1rs1")]
 
@@ -1611,4 +1608,4 @@ position = Vector2(-30708, 3288)
 [editable path="upgrades/AbilityCape"]
 [editable path="Interactive/torchy"]
 [editable path="Interactive/torchy2"]
-[editable path="Player"]
+[editable path="Interactive/Player"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://5l3dw2l58ex2"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/projectile.gd" id="1_l281a"]
-[ext_resource type="Texture2D" uid="uid://drkvchpct4u27" path="res://Art/Enemies/temp_projectile.png" id="2_aecrl"]
+[ext_resource type="Texture2D" uid="uid://dcrogyuuhr3ex" path="res://Art/Sprites/Abilities/fireball.png" id="2_pc0om"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="3_56mh3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsnlq"]
@@ -117,7 +117,7 @@ shape = SubResource("CircleShape2D_wsnlq")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(0, 4, 4, 1)
-texture = ExtResource("2_aecrl")
+texture = ExtResource("2_pc0om")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 3

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dysppjh16i01u"
-path="res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"
+uid="uid://cdgluiovs6vlq"
+path="res://.godot/imported/imagetobetter_ring.png-0485fb8a85a3df1645e39c153c13d7ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Pause/Return.png"
-dest_files=["res://.godot/imported/Return.png-ac9b20aed765a390ac07ae437a4a820e.ctex"]
+source_file="res://Art/UI/Pause/upgrades/items/imagetobetter_ring.png"
+dest_files=["res://.godot/imported/imagetobetter_ring.png-0485fb8a85a3df1645e39c153c13d7ff.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=65 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -45,13 +45,17 @@
 [ext_resource type="Texture2D" uid="uid://bilgy5nihpkq7" path="res://Art/UI/Pause/upgrades/capebutton_selected.png" id="34_4vn75"]
 [ext_resource type="Texture2D" uid="uid://cdlpjfnqibfkc" path="res://Art/UI/Pause/upgrades/capebutton_locked.png" id="34_r03wg"]
 [ext_resource type="Texture2D" uid="uid://cfxtdi101kdok" path="res://Art/UI/Pause/upgrades/items/ring1.png" id="36_7dg8q"]
+[ext_resource type="Texture2D" uid="uid://b6kvxk5yhgvf6" path="res://Art/UI/Pause/upgrades/items/ring2.png" id="36_mleyd"]
 [ext_resource type="Texture2D" uid="uid://dnjhef1lwglyc" path="res://Art/UI/Pause/upgrades/crownbutton_selected.png" id="37_t7me0"]
 [ext_resource type="Texture2D" uid="uid://ld34qhxjgkie" path="res://Art/UI/Pause/upgrades/crownbutton_locked.png" id="40_5yady"]
 [ext_resource type="Texture2D" uid="uid://beofb7jxa7gl1" path="res://Art/UI/Pause/upgrades/items/cape1.png" id="41_dmobc"]
+[ext_resource type="Texture2D" uid="uid://df8ii03s1e2lv" path="res://Art/UI/Pause/upgrades/items/cape2.png" id="42_8umsm"]
 [ext_resource type="Texture2D" uid="uid://b11p041r66isi" path="res://Art/UI/Pause/upgrades/upgrade_button.png" id="42_r844g"]
 [ext_resource type="Texture2D" uid="uid://v5b1iglh5g11" path="res://Art/UI/Pause/upgrades/upgrade_button_hover.png" id="43_iwaiv"]
 [ext_resource type="Texture2D" uid="uid://qnmycxb2w46p" path="res://Art/UI/Pause/upgrades/items/crown1.png" id="45_cf6lj"]
 [ext_resource type="Texture2D" uid="uid://bpe2on0dr1eth" path="res://Art/fx/light.png" id="48_l71v5"]
+[ext_resource type="Texture2D" uid="uid://dg4nqhr33c254" path="res://Art/UI/Pause/upgrades/items/crown2.png" id="48_ruqc3"]
+[ext_resource type="Texture2D" uid="uid://d2nmwi7h1u2wm" path="res://Art/UI/Pause/upgrades/items/imagetobetter_stick.png" id="50_wllsk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfa4r"]
 atlas = ExtResource("3_o3frg")
@@ -100,7 +104,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("31_eou02")
+"texture": ExtResource("36_mleyd")
 }],
 "loop": false,
 "name": &"2",
@@ -119,7 +123,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("31_eou02")
+"texture": ExtResource("42_8umsm")
 }],
 "loop": false,
 "name": &"2",
@@ -138,7 +142,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("31_eou02")
+"texture": ExtResource("48_ruqc3")
 }],
 "loop": false,
 "name": &"2",
@@ -620,7 +624,7 @@ texture_hover = ExtResource("8_btxw5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Upgrades" type="TextureRect" parent="BackColor" node_paths=PackedStringArray("buttonSounds", "description", "buttons", "upgradeButton")]
+[node name="Upgrades" type="TextureRect" parent="BackColor" node_paths=PackedStringArray("buttonSounds", "description", "upgradePreview", "buttons", "upgradeButton")]
 visible = false
 modulate = Color(0.803325, 0.803325, 0.803325, 1)
 layout_mode = 0
@@ -632,6 +636,7 @@ texture = ExtResource("21_ihhd4")
 script = ExtResource("25_6dnu0")
 buttonSounds = NodePath("../../ButtonSound")
 description = NodePath("UpgradeSelectors/RichTextLabel")
+upgradePreview = NodePath("UpgradeSelectors/what_does")
 buttons = [NodePath("UpgradeSelectors/Stick"), NodePath("UpgradeSelectors/Ring"), NodePath("UpgradeSelectors/Cape"), NodePath("UpgradeSelectors/Crown")]
 upgradeButton = NodePath("upgrade")
 
@@ -717,7 +722,7 @@ texture_disabled = ExtResource("34_r03wg")
 [node name="CapeIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Cape"]
 position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_onysl")
-animation = &"1"
+animation = &"2"
 
 [node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Cape"]
 z_index = -1
@@ -744,7 +749,7 @@ texture_disabled = ExtResource("40_5yady")
 [node name="CrownIcon" type="AnimatedSprite2D" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
 position = Vector2(27, 17)
 sprite_frames = SubResource("SpriteFrames_s135d")
-animation = &"1"
+animation = &"2"
 
 [node name="selectedOutline" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/Crown"]
 z_index = -1
@@ -764,10 +769,32 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_r07rn")
 text = "i remember last time i saw this ere ring. just left home. on me own. ran to the ports of (name). the frost started. thought i wouldn make it when the light showed up. a great big bonfire started by a smol ring. course the (name) family took it back. then they fell and the (current_house_name) took it."
 
-[node name="TextureRect" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors"]
+[node name="what_does" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 408.0
+offset_top = 172.0
+offset_right = 600.0
+offset_bottom = 200.0
+scale = Vector2(4, 4)
+texture = ExtResource("50_wllsk")
+
+[node name="display_gems" type="TextureRect" parent="BackColor/Upgrades/UpgradeSelectors/what_does"]
+texture_filter = 1
+offset_left = 50.0
+offset_top = 8.25
+offset_right = 68.0
+offset_bottom = 20.25
+texture = ExtResource("21_kwxeu")
+
+[node name="gems_num" type="Label" parent="BackColor/Upgrades/UpgradeSelectors/what_does/display_gems"]
+layout_mode = 0
+offset_left = 18.75
+offset_top = -5.0
+offset_right = 25.75
+offset_bottom = 13.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_r07rn")
+text = "2"
 
 [node name="upgrade" type="TextureButton" parent="BackColor/Upgrades"]
 layout_mode = 0

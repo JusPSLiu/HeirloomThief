@@ -1,7 +1,7 @@
 extends Node
 
 var current_health = 2
-var current_gems = 4 ## TODO set back to zero
+var current_gems = 0
 var max_health = 4
 var current_room = 0
 var visited_rooms : PackedByteArray = [false,false,false,false,false,false,false,false,false,false]
@@ -72,6 +72,7 @@ func load_game(file):
 		powerstatus = data["powerstatus"] if data.has("powerstatus") else [1, 0, 0, 0, 0]
 		respawn_point = data['respawn_point'] if (data.has("respawn_point")) else Vector2.ZERO
 		sceneNumber = data['sceneNumber'] if data.has("sceneNumber") else 0
+		nextScene = -1
 		visited_rooms = data['visited_rooms'] if (data.has("visited_rooms")) else [false]
 		
 		# Health and Gems in Inventory

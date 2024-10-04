@@ -3,19 +3,19 @@ extends Sprite2D
 @export var activateyThing : Node2D
 @export var id : int = 0
 @export var sound : AudioStreamPlayer2D
+@export var faceRight : bool
 
 var lit = false
 var otherTorches : Array[AnimatedSprite2D]
 var particles = preload("res://Scenes/Interactable/breakable_particles.tscn")
 
 func _ready() -> void:
-	print_debug("NOT ALREADY INTERACTED WITH "+str(id))
 	if (SaveManager.already_interacted(id)):
-		print_debug("ALREADY INTERACTED WITH "+str(id))
 		lit = true
 		$StaticBody2D.set_collision_layer_value(1, false)
 		$breakySprite.visible = false
 		activateyThing.skipToActivated()
+	$breakySprite.flip_h = faceRight
 
 func alight() -> bool:
 	if (lit): return false
