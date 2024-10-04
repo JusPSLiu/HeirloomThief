@@ -4,7 +4,6 @@ var frames := 0
 
 func enter() -> void:
 	super.enter()
-	print_debug("ENTERED_AGAIN")
 	
 	frames = 0
 

@@ -37,7 +37,7 @@ func die_me():
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("enemy")):
-		body.damage(1)
+		body.damage(2)
 		hitSomething = true
 		die_me()
 	elif (body.is_in_group("torch")):

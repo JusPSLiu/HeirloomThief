@@ -5,6 +5,7 @@ extends StaticBody2D
 @export var healthBar2 : ColorRect
 @export var soundGetHit : AudioStreamPlayer2D
 @export var bossAnimator : AnimationPlayer
+@export var bossAnimatorController : AnimationPlayer
 
 @export var head : AnimatedSprite2D
 @export var mask : AnimatedSprite2D
@@ -36,6 +37,7 @@ func respawn():
 	current_health = 64
 	healthBar2.scale.y = 63
 	healthBar.scale.y = 64
+	update_sprites()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -50,6 +52,8 @@ func damage(damage_val):
 			die()
 		elif (soundGetHit):
 			soundGetHit.play()
+		# i wish i couldve called this elsewhere...
+		update_sprites()
 
 func look_vulnerable(able=true):
 	vulnerable = able
@@ -58,7 +62,7 @@ func look_vulnerable(able=true):
 func shoot_fireball():
 	var fiery = fireball.instantiate()
 	fiery.global_position = firebreath_spawner.global_position
-	fiery.movement_direction = Vector2(cos(global_rotation+PI), sin(global_rotation))
+	fiery.movement_direction = Vector2(cos(global_rotation+PI), sin(global_rotation)*-1)
 	fiery.speed = 200*4
 	fiery.scale = Vector2(4, 4)
 	rootNode.add_child.call_deferred(fiery)
@@ -74,8 +78,12 @@ func update_sprites():
 	if (current_health <= 32):
 		head.play("breaking")
 		mask.play("breaking")
+	else:
+		head.play("returned")
+		mask.play("returned")
+		
 
 
 func die():
-	pass
-	# bossAnimator.play("die")
+	bossAnimatorController.stop()
+	bossAnimator.play("die")

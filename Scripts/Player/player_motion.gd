@@ -20,6 +20,7 @@ extends CharacterBody2D
 @export var collectsound : AudioStreamPlayer2D
 @export var dashsound : AudioStreamPlayer2D
 @export var cutsceneAnimator : AnimationPlayer
+@export var fader : AnimationPlayer
 @export var sceneNumber : int = 0
 
 # constant variables
@@ -87,6 +88,11 @@ func _ready() -> void:
 		camera.position_smoothing_enabled = false
 		just_respawned = true
 
+func to_credits():
+	if (fader):
+		fader.play("FadeOut")
+		await fader.animation_finished
+	get_tree().change_scene_to_file("res://Scenes/Screens/credits.tscn")
 
 func _physics_process(delta: float) -> void:
 	if (just_respawned):
@@ -222,6 +228,7 @@ func _input(event: InputEvent) -> void:
 					if (doorLocation == Vector2.ZERO):
 						SaveManager.sceneNumber = SaveManager.nextScene
 						get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
+						return
 					#if in doorway, the jump button opens the door
 					if (abs(position.x-doorLocation.x) > 640 || abs(position.y-doorLocation.y) > 360):
 						camera.position_smoothing_enabled = false

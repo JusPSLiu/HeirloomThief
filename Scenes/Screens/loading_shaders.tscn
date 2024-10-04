@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ddk6mm3bemrvb"]
+[gd_scene load_steps=26 format=3 uid="uid://ddk6mm3bemrvb"]
 
 [ext_resource type="Script" path="res://Scripts/shaders/loading_shaders.gd" id="1_2551s"]
 [ext_resource type="PackedScene" uid="uid://b1h7imdk8728g" path="res://Scenes/Player/death.tscn" id="2_a5107"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="8_5gly0"]
 [ext_resource type="PackedScene" uid="uid://bdml046nkqkqj" path="res://Scenes/Interactable/health_upgrade.tscn" id="8_rtfxj"]
 [ext_resource type="Material" uid="uid://defsjj06x13q5" path="res://Scenes/ScreenFx/map_shader.tres" id="10_k7u5f"]
+[ext_resource type="PackedScene" uid="uid://bmnncqovarje6" path="res://Scenes/Interactable/ability_ring.tscn" id="11_uucjy"]
+[ext_resource type="PackedScene" uid="uid://d2epnw0o1n2hw" path="res://Scenes/Interactable/breakable_particles.tscn" id="12_vfn8k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7iex"]
 shader = ExtResource("6_s5lt1")
@@ -200,3 +202,9 @@ offset_left = -5.0
 offset_top = -161.0
 offset_right = 421.0
 offset_bottom = -40.0
+
+[node name="AbilityRing" parent="behind" instance=ExtResource("11_uucjy")]
+position = Vector2(-273, -76)
+
+[node name="breakable_particles" parent="behind" instance=ExtResource("12_vfn8k")]
+position = Vector2(646, 640)
