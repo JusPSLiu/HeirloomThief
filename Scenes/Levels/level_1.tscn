@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://5mh5a16onjsl"]
+[gd_scene load_steps=33 format=4 uid="uid://ccq7y5ofdily8"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_u2637"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_mwi1b"]
@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cpeiygtm7tob1" path="res://Art/Tilesets/wood_normal.png" id="6_0ksnx"]
 [ext_resource type="Texture2D" uid="uid://cg3umhljbpw80" path="res://Art/Tilesets/stonebricks_light.png" id="7_tt554"]
 [ext_resource type="Texture2D" uid="uid://r05n73bgi5xj" path="res://Art/Tilesets/stonebricks_normal.png" id="8_qb23l"]
-[ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="9_4fnlm"]
+[ext_resource type="PackedScene" path="res://Scenes/Enemies/damage_component.tscn" id="9_4fnlm"]
 [ext_resource type="PackedScene" uid="uid://c5e2eqcdwdgbq" path="res://Scenes/Interactable/checkpoint.tscn" id="10_lwid4"]
 [ext_resource type="PackedScene" uid="uid://dtkq8v8c1chlp" path="res://Scenes/Levels/room.tscn" id="12_3tiw4"]
 [ext_resource type="PackedScene" uid="uid://dqsatwfb0ss2q" path="res://Scenes/Interactable/torchy.tscn" id="12_fgxpn"]
-[ext_resource type="PackedScene" uid="uid://c38pbh87vnpec" path="res://Scenes/Interactable/bigdoor.tscn" id="12_smbr6"]
+[ext_resource type="PackedScene" path="res://Scenes/Interactable/bigdoor.tscn" id="12_smbr6"]
 [ext_resource type="PackedScene" uid="uid://7x0y123vgrm6" path="res://Scenes/Player/Player.tscn" id="13_pvgl5"]
 [ext_resource type="AudioStream" uid="uid://b28p8ar6ic22n" path="res://Sounds/Music/fierylevel.mp3" id="14_b313r"]
 [ext_resource type="Script" path="res://Scripts/music.gd" id="15_u8vea"]
@@ -226,7 +226,7 @@ id = 20
 position = Vector2(-1, -136)
 
 [node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer") instance=ExtResource("13_pvgl5")]
-position = Vector2(4040, -5756)
+position = Vector2(969, 508)
 floor_snap_length = 12.0
 AbilityOverride = {
 "Cape": true,

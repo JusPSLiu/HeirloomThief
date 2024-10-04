@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ckdsdu8f71hrp" path="res://Art/UI/PlayClick.png" id="6_6mgjc"]
 [ext_resource type="Texture2D" uid="uid://doua04qcaxxcr" path="res://Art/UI/PlayHover.png" id="7_50pjy"]
 [ext_resource type="AudioStream" uid="uid://b550nam8j715c" path="res://Sounds/Music/title.mp3" id="11_uqgl8"]
-[ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/Return.png" id="12_n2kjl"]
+[ext_resource type="Texture2D" uid="uid://dysppjh16i01u" path="res://Art/UI/Pause/return.png" id="12_n2kjl"]
 [ext_resource type="Texture2D" uid="uid://b7qypqr60oxst" path="res://Art/UI/TitleButtons/new_game.png" id="14_ooiab"]
 [ext_resource type="Texture2D" uid="uid://daf3i861esjg7" path="res://Art/UI/TitleButtons/new_game_selected.png" id="15_4iku0"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="15_mudgg"]
@@ -755,9 +755,9 @@ confirmDeleteFilename = NodePath("DeletionConfirmation/fileName")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = -200.0
+offset_top = -133.333
 offset_right = 1280.0
-offset_bottom = 536.0
+offset_bottom = 602.667
 texture = ExtResource("1_euucd")
 stretch_mode = 2
 
