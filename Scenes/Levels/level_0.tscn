@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=4 uid="uid://qftgyw8gw8il"]
+[gd_scene load_steps=104 format=4 uid="uid://qftgyw8gw8il"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_w0dft"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_t38j1"]
@@ -891,11 +891,137 @@ tracks/0/keys = {
 "values": [Vector2(1413, 546), Vector2(1925, 546)]
 }
 
+[sub_resource type="Animation" id="Animation_smlnd"]
+resource_name = "abili3"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneAnimator/NEW/Desc:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["CROWN; does nothing. looks cool."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneAnimator/NEW:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneAnimator/NEW:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.266667, 4.96667, 6.93333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneAnimator/NEW:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 1.1, 4.96667, 6.96667),
+"transitions": PackedFloat32Array(0.2, 1, 4, 1),
+"update": 0,
+"values": [200.0, 300.0, 300.0, 400.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Music:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.133333, 6.73333, 6.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -80.0, -80.0, 0.0]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Music")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/5/use_blend = true
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CutsceneAnimator/collect_music")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("30_l7sgl")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/6/use_blend = true
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../PauseMenu")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.0999999, 6.93333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [false],
+"method": &"set_pausability"
+}, {
+"args": [],
+"method": &"update_gui"
+}, {
+"args": [true],
+"method": &"set_pausability"
+}]
+}
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CutsceneAnimator/collect_sound")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("31_m1mpp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/8/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7paqa"]
 _data = {
 "RESET": SubResource("Animation_qfslk"),
 "abili1": SubResource("Animation_arvx4"),
 "abili2": SubResource("Animation_hsd4p"),
+"abili3": SubResource("Animation_smlnd"),
 "starting_cutscene": SubResource("Animation_okimv")
 }
 
@@ -1945,9 +2071,6 @@ musicPlayer = NodePath("../Music")
 cutsceneAnimator = NodePath("../UI/CutsceneAnimator")
 fader = NodePath("../Fader")
 
-[node name="cape" parent="Player/playerSprite" index="1"]
-animation = &"falling"
-
 [node name="camera_carrot_on_stick" parent="Player" index="3"]
 position = Vector2(256, 2)
 
@@ -2036,7 +2159,7 @@ volume_db = 2.0
 bus = &"Music"
 
 [node name="collect_sound" type="AudioStreamPlayer" parent="UI/CutsceneAnimator"]
-volume_db = -15.0
+volume_db = -40.0
 bus = &"Sounds"
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("Fader", "player") instance=ExtResource("33_vpuow")]

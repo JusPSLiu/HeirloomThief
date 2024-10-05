@@ -134,7 +134,8 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction and !DO_NOT_MOVE:
 		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
-		cape.play('running')
+		if (is_on_floor()):
+			cape.play('running')
 		if (direction > 0):
 			currentDirection = true
 			if (is_on_floor()):
@@ -246,7 +247,11 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("Dash"):
 				if currentAbilities[ability.cape] and boostimer < 0 and int(velocity.x) != 0:
 					dashsound.play()
-					$player_fx/dashanimation.play("dash")
+					$player_fx/dashanimation.stop()
+					if (currentAbilities[ability.cape] > 1):
+						$player_fx/dashanimation.play("dash_2")
+					else:
+						$player_fx/dashanimation.play("dash")
 					cape.play("falling")
 					Input.start_joy_vibration(0, 1.0, 1.0, 0.1)
 					velocity.x += BOOST_SPEED if currentDirection else -1*BOOST_SPEED
@@ -317,7 +322,7 @@ func flipStickTo(right : bool):
 
 ## INJURY CONTROL
 func get_hit(dmg : int, vec : Vector2) -> bool:
-	if $player_fx.is_playing():
+	if $player_fx.is_playing() and dmg < 999:
 		return false
 	elif (!deathAnimator.is_playing()):
 		$player_fx.play("player_injured")

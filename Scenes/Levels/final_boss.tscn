@@ -1412,10 +1412,10 @@ tracks/15/path = NodePath("BossBody/DamageComponent:active")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.4616, 0.577, 0.9232, 1.0386, 1.3848, 1.5002),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true, false, true, false, true, false]
+"values": [false]
 }
 tracks/16/type = "animation"
 tracks/16/imported = false
@@ -1617,10 +1617,10 @@ tracks/15/path = NodePath("BossBody/DamageComponent:active")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.4616, 0.577, 0.9232, 1.0386, 1.3848, 1.5002),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true, false, true, false, true, false]
+"values": [false]
 }
 tracks/16/type = "animation"
 tracks/16/imported = false
@@ -3092,7 +3092,7 @@ shape = SubResource("RectangleShape2D_kjg1t")
 [node name="Room0" parent="borders" instance=ExtResource("14_xhats")]
 position = Vector2(0, -128)
 scale = Vector2(1664, 848)
-room_number = 29
+room_number = 32
 music = ""
 
 [node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "fader") instance=ExtResource("15_n7ldk")]

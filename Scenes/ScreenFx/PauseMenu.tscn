@@ -286,7 +286,7 @@ script = ExtResource("16_r3vwa")
 maxPos = Vector2(-1.426, 0.738)
 minPos = Vector2(0.09, -0.615)
 healthLocations = [NodePath("Room1/health0"), NodePath("Room6/health1"), NodePath("Room22/health2"), NodePath("Room11/health3")]
-gemLocations = [NodePath("Room1/gem0"), NodePath("Room1/gem1"), NodePath("Room5/gem2")]
+gemLocations = [NodePath("Room1/gem0"), NodePath("Room1/gem1"), NodePath("Room5/gem2"), NodePath("Room17/gem3"), NodePath("Room22/gem4"), NodePath("Room12/gem5"), NodePath("Room25/gem6"), NodePath("Room28/gem7")]
 
 [node name="Room0" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")
@@ -419,6 +419,7 @@ offset_bottom = 12.0
 
 [node name="health3" type="ColorRect" parent="BackColor/MainMenu/Map/Room11"]
 material = ExtResource("14_kilgh")
+layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(1, 0.8, 0.168627, 1)
@@ -429,6 +430,13 @@ offset_left = -8.0
 offset_top = 9.0
 offset_right = -2.0
 offset_bottom = 12.0
+
+[node name="gem5" type="ColorRect" parent="BackColor/MainMenu/Map/Room12"]
+material = ExtResource("14_kilgh")
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 3.0
+color = Color(1, 0.8, 0.168627, 1)
 
 [node name="Room13" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")
@@ -546,6 +554,12 @@ offset_top = 1.0
 offset_right = 34.0
 offset_bottom = 5.0
 
+[node name="gem6" type="ColorRect" parent="BackColor/MainMenu/Map/Room25"]
+material = ExtResource("14_kilgh")
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.168627, 1)
+
 [node name="Room26" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")
 offset_left = 35.0
@@ -566,6 +580,36 @@ offset_left = 35.0
 offset_top = -5.0
 offset_right = 37.0
 offset_bottom = -2.0
+
+[node name="gem7" type="ColorRect" parent="BackColor/MainMenu/Map/Room28"]
+material = ExtResource("14_kilgh")
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.168627, 1)
+
+[node name="Room30" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 38.0
+offset_top = -5.0
+offset_right = 44.0
+offset_bottom = -4.0
+mouse_filter = 2
+
+[node name="Room31" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 45.0
+offset_top = -5.0
+offset_right = 47.0
+offset_bottom = -4.0
+mouse_filter = 2
+
+[node name="Room32" type="ColorRect" parent="BackColor/MainMenu/Map"]
+material = ExtResource("14_kilgh")
+offset_left = 48.0
+offset_top = -5.0
+offset_right = 51.0
+offset_bottom = -3.0
+mouse_filter = 2
 
 [node name="Room29" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")
@@ -951,8 +995,8 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
@@ -960,8 +1004,8 @@ bus = &"Sounds"
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]

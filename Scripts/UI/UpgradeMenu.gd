@@ -3,7 +3,8 @@ extends TextureRect
 const upgradePreviews = [
 	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_stick.png"),
 	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_ring.png"),
-	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_cape.png")
+	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_cape.png"),
+	preload("res://Art/UI/Pause/upgrades/items/imagetobetter_crown.png")
 ]
 const MAX_LVL = 2
 

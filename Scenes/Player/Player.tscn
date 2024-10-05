@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=59 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://brsv643qk1jhm" path="res://Sounds/player/dash.wav" id="10_eyubb"]
 [ext_resource type="AudioStream" uid="uid://cgrsmkemgss4n" path="res://Sounds/player/collect.wav" id="10_k4ark"]
 [ext_resource type="AudioStream" uid="uid://cosy82urnq38n" path="res://Sounds/player/get_healed.wav" id="11_h14xb"]
+[ext_resource type="Script" path="res://Scripts/Player/attackbox.gd" id="13_3no8p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wi3qs"]
 shader = ExtResource("2_rs5m2")
@@ -370,11 +371,29 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(5, 0.5, 0.5, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_jnypc"]
+resource_name = "player_dashy"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tb5uq"]
 _data = {
 "RESET": SubResource("Animation_tjupa"),
 "cam_shake": SubResource("Animation_lbir1"),
 "cam_shake_lite": SubResource("Animation_rpsn7"),
+"player_dashy": SubResource("Animation_jnypc"),
 "player_injured": SubResource("Animation_qg8hs")
 }
 
@@ -453,15 +472,84 @@ tracks/1/keys = {
 "method": &"remove_from_group"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"player_dashy", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../dashattackbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../playerSprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(0.5, 0.1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(3, 3, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n3oxk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../dashattackbox:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../playerSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6bum"]
 _data = {
+"RESET": SubResource("Animation_n3oxk"),
 "dash": SubResource("Animation_o0d5a"),
 "dash_2": SubResource("Animation_nn8pq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hr2v"]
 size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owiof"]
+size = Vector2(33.3333, 29.3333)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jumpsound", "hitsound", "slashsound", "shootsound", "healedsound", "collectsound", "dashsound") groups=["Player"]]
 material = SubResource("ShaderMaterial_wi3qs")
@@ -570,4 +658,16 @@ bus = &"Sounds"
 [node name="collider" type="CollisionShape2D" parent="roomDetector"]
 shape = SubResource("RectangleShape2D_2hr2v")
 
+[node name="dashattackbox" type="Area2D" parent="."]
+process_mode = 4
+position = Vector2(1, 12)
+scale = Vector2(1.5, 1.5)
+collision_layer = 0
+script = ExtResource("13_3no8p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dashattackbox"]
+position = Vector2(0, -2.66666)
+shape = SubResource("RectangleShape2D_owiof")
+
 [connection signal="area_entered" from="roomDetector" to="." method="_on_room_detector_area_entered"]
+[connection signal="body_entered" from="dashattackbox" to="dashattackbox" method="_on_body_entered"]
