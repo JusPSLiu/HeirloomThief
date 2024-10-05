@@ -1,0 +1,49 @@
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://sksr8k1c2do7"]
+
+[ext_resource type="Texture2D" uid="uid://b3d7ydg2n18so" path="res://Art/Tilesets/decorate/pipes.png" id="1_xmnmx"]
+[ext_resource type="Texture2D" uid="uid://bx5hh0otwyc6w" path="res://Art/Tilesets/decorate/torch.png" id="2_iuy1q"]
+[ext_resource type="Texture2D" uid="uid://vjuj2cbajsmv" path="res://Art/Tilesets/decorate/torch_wall.png" id="3_aocr6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ly6c"]
+texture = ExtResource("1_xmnmx")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+1:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhbgy"]
+texture = ExtResource("2_iuy1q")
+texture_region_size = Vector2i(8, 14)
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/0 = 0
+0:1/animation_frame_0/duration = 0.1
+0:1/animation_frame_1/duration = 0.1
+0:1/animation_frame_2/duration = 0.1
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7dd5s"]
+texture = ExtResource("3_aocr6")
+texture_region_size = Vector2i(8, 11)
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_4ly6c")
+sources/1 = SubResource("TileSetAtlasSource_dhbgy")
+sources/2 = SubResource("TileSetAtlasSource_7dd5s")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=4 uid="uid://qftgyw8gw8il"]
+[gd_scene load_steps=100 format=4 uid="uid://qftgyw8gw8il"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_w0dft"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_t38j1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3d7ydg2n18so" path="res://Art/Tilesets/decorate/pipes.png" id="5_tv4q8"]
 [ext_resource type="Texture2D" uid="uid://cm43xyhrm45u0" path="res://Art/Tilesets/stonebricks_red.png" id="6_4kerg"]
 [ext_resource type="Texture2D" uid="uid://bx5hh0otwyc6w" path="res://Art/Tilesets/decorate/torch.png" id="7_7hn1d"]
+[ext_resource type="TileSet" uid="uid://sksr8k1c2do7" path="res://Art/Tilesets/decorate/decorative.tres" id="7_h8kws"]
 [ext_resource type="TileSet" uid="uid://cw74evm60x0ej" path="res://Art/Tilesets/all_tiles.tres" id="7_rmrt6"]
 [ext_resource type="PackedScene" uid="uid://n3s8ne2dn485" path="res://Scenes/Enemies/damage_component.tscn" id="8_47l37"]
 [ext_resource type="Texture2D" uid="uid://vjuj2cbajsmv" path="res://Art/Tilesets/decorate/torch_wall.png" id="8_ljmdo"]
@@ -33,7 +34,6 @@
 [ext_resource type="AudioStream" uid="uid://c37pmqktiyce8" path="res://Sounds/player/pickupgrade.wav" id="31_m1mpp"]
 [ext_resource type="PackedScene" uid="uid://bxwgbrspdq7if" path="res://Scenes/Interactable/secondary_torch.tscn" id="31_r357s"]
 [ext_resource type="Script" path="res://Scripts/Interactable/activated_door.gd" id="31_x54dk"]
-[ext_resource type="AudioStream" uid="uid://djr7db2t6dj32" path="res://Sounds/enemy/cutscene_rumbling.mp3" id="32_kcqtl"]
 [ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="32_nlo1k"]
 [ext_resource type="Texture2D" uid="uid://3qc62r2lj0ou" path="res://Art/Sprites/SpriteSheets/door_normal.png" id="33_50wlc"]
 [ext_resource type="PackedScene" uid="uid://cqx28sd66x8xf" path="res://Scenes/ScreenFx/PauseMenu.tscn" id="33_vpuow"]
@@ -91,50 +91,6 @@ sources/1 = SubResource("TileSetAtlasSource_ka6ge")
 sources/2 = SubResource("TileSetAtlasSource_q086l")
 sources/3 = SubResource("TileSetAtlasSource_o70nr")
 sources/4 = SubResource("TileSetAtlasSource_3m3er")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ly6c"]
-texture = ExtResource("5_tv4q8")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-0:3/0 = 0
-1:2/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-3:2/0 = 0
-2:2/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhbgy"]
-texture = ExtResource("7_7hn1d")
-texture_region_size = Vector2i(8, 14)
-0:0/animation_frame_0/duration = 0.1
-0:0/animation_frame_1/duration = 0.1
-0:0/animation_frame_2/duration = 0.1
-0:0/0 = 0
-0:1/animation_frame_0/duration = 0.1
-0:1/animation_frame_1/duration = 0.1
-0:1/animation_frame_2/duration = 0.1
-0:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7dd5s"]
-texture = ExtResource("8_ljmdo")
-texture_region_size = Vector2i(8, 11)
-0:0/animation_frame_0/duration = 0.1
-0:0/animation_frame_1/duration = 0.1
-0:0/animation_frame_2/duration = 0.1
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_p050l"]
-sources/0 = SubResource("TileSetAtlasSource_4ly6c")
-sources/1 = SubResource("TileSetAtlasSource_dhbgy")
-sources/2 = SubResource("TileSetAtlasSource_7dd5s")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pome2"]
 diffuse_texture = ExtResource("2_t38j1")
@@ -679,21 +635,20 @@ tracks/7/keys = {
 "method": &"set_pausability"
 }]
 }
-tracks/8/type = "audio"
+tracks/8/type = "method"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CutsceneAnimator/collect_sound")
+tracks/8/path = NodePath("../Player/sounds/collectSound")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("31_m1mpp")
-}],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
-tracks/8/use_blend = true
 
 [sub_resource type="Animation" id="Animation_hsd4p"]
 resource_name = "abili2"
@@ -806,44 +761,25 @@ tracks/7/keys = {
 "method": &"set_pausability"
 }]
 }
-tracks/8/type = "audio"
+tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CutsceneAnimator/collect_sound")
+tracks/8/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:y")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("31_m1mpp")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("32_kcqtl")
-}],
-"times": PackedFloat32Array(0, 7.45)
-}
-tracks/8/use_blend = true
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:y")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(7.55, 7.6, 7.65, 7.7, 7.75, 7.8, 7.85, 7.9, 7.95),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 16.0, 8.0, 0.0, 32.0, -16.0, 8.0, 0.0, -4.0]
 }
-tracks/10/type = "method"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("../Interactive/BreakableWal/FallingBlock/FallingBlock2")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Interactive/BreakableWal/FallingBlock/FallingBlock2")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(7.9),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -851,44 +787,43 @@ tracks/10/keys = {
 "method": &"activate"
 }]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:x")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Player/camera_carrot_on_stick/Camera2D:offset:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
 "times": PackedFloat32Array(0, 7, 7.5, 8, 9.75, 10.25, 10.75),
 "transitions": PackedFloat32Array(2, 2, 0.5, 1, 2, 0.5, 1),
 "update": 0,
 "values": [0.0, 0.0, 384.0, 768.0, 768.0, 384.0, 0.0]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("../Tips/tips:modulate")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../Tips/tips:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(8.9, 11),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_okimv"]
-resource_name = "starting_cutscene"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Player:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1413, 546), Vector2(1925, 546)]
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../Player/sounds/collectSound")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_smlnd"]
@@ -1000,21 +935,35 @@ tracks/7/keys = {
 "method": &"set_pausability"
 }]
 }
-tracks/8/type = "audio"
+tracks/8/type = "method"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CutsceneAnimator/collect_sound")
+tracks/8/path = NodePath("../Player/sounds/collectSound")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("31_m1mpp")
-}],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
-tracks/8/use_blend = true
+
+[sub_resource type="Animation" id="Animation_okimv"]
+resource_name = "starting_cutscene"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1413, 546), Vector2(1925, 546)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7paqa"]
 _data = {
@@ -1046,7 +995,7 @@ tile_set = SubResource("TileSet_swjii")
 modulate = Color(0.674815, 0.674815, 0.674815, 1)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAC0AAcAAAACAAAAAAC0AAgAAAACAAAAAAC0AAkAAAACAAAAAAC0AAoAAAACAAAAAAC0AAsAAAACAAAAAAC0AAwAAAACAAAAAAC0AA0AAAACAAAAAAC0AA4AAAACAAEAAAC6AA4AAAADAAEAAGC1AA4AAAACAAAAAGC2AA4AAAACAAAAAGC3AA4AAAACAAAAAGC4AA4AAAACAAAAAGC5AA4AAAACAAAAAGC6AA8AAAACAAAAAAC6ABAAAAACAAAAAAC6ABEAAAACAAAAAAC6ABIAAAACAAAAAAC6ABMAAAACAAAAAAC6ABQAAAACAAAAAAC6ABUAAAACAAAAAAC6ABYAAAACAAAAAAC6ABcAAAACAAAAAADdAAAAAAAAAAIAAADdAAEAAAAAAAIAAADdAAIAAAAAAAIAAADdAAMAAAAAAAIAAADdAAQAAAAAAAIAAADdAAUAAAAAAAIAAADdAAYAAAAAAAIAAADdAAcAAAAAAAMAAACsABAAAAABAAEAAFCqABAAAAAAAAEAAFCqABEAAAABAAAAAACqABIAAAABAAAAAACqABMAAAAAAAAAAACqABQAAAAAAAAAAACqABUAAAABAAAAAACqABYAAAAAAAAAAACqABcAAAAAAAAAAACrABAAAAAAAAAAAFCsAAcAAAABAAAAAACsAAgAAAABAAAAAACsAAkAAAAAAAAAAACsAAoAAAAAAAAAAACsAAsAAAABAAAAAACsAAwAAAABAAAAAACsAA0AAAABAAAAAACsAA4AAAAAAAAAAACsAA8AAAABAAAAAACwAAcAAAABAAAAAACwAAgAAAABAAAAAACwAAkAAAAAAAAAAACwAAoAAAAAAAAAAACwAAsAAAABAAAAAACwAAwAAAAAAAAAAACwAA0AAAAAAAAAAACwAA4AAAAAAAAAAACwAA8AAAAAAAAAAACwABAAAAABAAAAAACwABEAAAAAAAAAAACwABIAAAAAAAAAAACwABMAAAABAAAAAACwABQAAAABAAAAAACwABUAAAABAAAAAACwABYAAAABAAAAAACwABcAAAABAAAAAADFAA0AAAACAAMAAFDFAA4AAAACAAIAAADFAA8AAAACAAIAAADFABAAAAACAAIAAADFABEAAAACAAMAAADGAAAAAAACAAIAAADGAAEAAAACAAIAAADGAAIAAAACAAIAAADGAAMAAAACAAIAAADGAAQAAAACAAIAAADGAAUAAAACAAIAAADGAAYAAAACAAIAAADGAAcAAAACAAIAAADGAAgAAAACAAIAAADGAAkAAAACAAIAAADGAAoAAAACAAIAAADGAAsAAAACAAIAAADGAAwAAAACAAIAAADGAA0AAAADAAMAAADcAAAAAAABAAAAAADcAAEAAAABAAAAAADcAAIAAAABAAAAAADcAAMAAAAAAAAAAADcAAQAAAAAAAAAAADcAAUAAAAAAAAAAADcAAYAAAABAAAAAADcAAcAAAAAAAAAAADcAAgAAAABAAAAAADcAAkAAAAAAAAAAADcAAoAAAAAAAAAAADcAAsAAAABAAAAAADcAAwAAAAAAAAAAADcAA0AAAABAAAAAADhAAAAAAAAAAAAAADhAAEAAAABAAAAAADhAAIAAAABAAAAAADhAAMAAAABAAAAAADhAAQAAAAAAAAAAADhAAUAAAABAAAAAADhAAYAAAAAAAAAAADhAAcAAAABAAAAAADhAAgAAAABAAAAAADhAAkAAAAAAAAAAADhAAoAAAABAAAAAADhAAsAAAAAAAAAAADhAAwAAAABAAAAAADhAA0AAAAAAAAAAADUAAgAAAAAAAEAAADUAAcAAAABAAAAAADUAAYAAAAAAAAAAADUAAUAAAAAAAAAAADUAAQAAAAAAAAAAADUAAMAAAAAAAAAAADUAAIAAAABAAAAAADUAAEAAAAAAAAAAADUAAAAAAAAAAAAAADXAAgAAAABAAEAAADXAAoAAAABAAEAAFDWAAoAAAAAAAEAAFDXAAkAAAAAAAAAAADVAAgAAAABAAAAAGDWAAgAAAABAAAAAGDWAAsAAAAAAAAAAADWAAwAAAAAAAAAAADWAA0AAAABAAAAAADeAAcAAAAAAAMAAEDeAAgAAAAAAAIAAADeAAkAAAAAAAIAAADeAAoAAAAAAAIAAADeAAsAAAAAAAIAAADeAAwAAAAAAAIAAADeAA0AAAAAAAIAAADGABEAAAACAAIAAGDHABEAAAACAAIAAGDIABEAAAADAAMAAGDIABIAAAACAAIAAADIABMAAAACAAIAAADIABQAAAACAAIAAADIABUAAAACAAIAAADIABYAAAACAAIAAADIABcAAAACAAIAAAA=")
-tile_set = SubResource("TileSet_p050l")
+tile_set = ExtResource("7_h8kws")
 
 [node name="level_tiles" type="TileMapLayer" parent="."]
 scale = Vector2(4, 4)
@@ -1149,7 +1098,7 @@ tile_set = SubResource("TileSet_eegcr")
 
 [node name="Decorations" type="TileMapLayer" parent="level_tiles"]
 z_index = -2
-tile_map_data = PackedByteArray("AAALAAEAAgAAAAAAAADW/wQAAQAAAAEAAAC2//D/AQAAAAEAAACc/wEAAgAAAAAAAAB3/wIAAQAAAAEAAADu/jEAAgAAAAAAAAC3/jEAAgAAAAAAAABz/jIAAgAAAAAAAAA5/kAAAgAAAAAAAAD4/T8AAQAAAAEAABCp/TsAAQAAAAEAAAAW/TkAAQAAAAEAAAAI/VUAAQAAAAEAABC0/FYAAQAAAAEAABBe/E8AAQAAAAEAAAB+/FYAAQAAAAEAAAAt/FEAAQAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAALAAEAAgAAAAAAAADW/wQAAQAAAAEAAAC2//D/AQAAAAEAAACc/wEAAgAAAAAAAAB3/wIAAQAAAAEAAADu/jEAAgAAAAAAAAC3/jEAAgAAAAAAAABz/jIAAgAAAAAAAAA5/kAAAgAAAAAAAAD4/T8AAQAAAAEAABCp/TsAAQAAAAEAAAAW/TkAAQAAAAEAAAAI/VUAAQAAAAEAABC0/FYAAQAAAAEAABBe/E8AAQAAAAEAAAB+/FYAAQAAAAEAAAAt/FEAAQAAAAEAAADFAAYAAQAAAAEAAAAAAQUAAQAAAAEAAABTARMAAQAAAAEAABClAT8AAQAAAAEAABA5AUQAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_sgwgq")
 
 [node name="PointLight2D" type="PointLight2D" parent="level_tiles/Decorations"]
@@ -1288,6 +1237,46 @@ shadow_enabled = true
 shadow_filter_smooth = 4.0
 texture = ExtResource("12_0xydg")
 
+[node name="PointLight2D18" type="PointLight2D" parent="level_tiles/Decorations"]
+position = Vector2(1579.75, 52.5)
+scale = Vector2(7.5, 7.5)
+color = Color(1, 0.69, 0.23, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("12_0xydg")
+
+[node name="PointLight2D19" type="PointLight2D" parent="level_tiles/Decorations"]
+position = Vector2(2052, 44.5)
+scale = Vector2(7.5, 7.5)
+color = Color(1, 0.69, 0.23, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("12_0xydg")
+
+[node name="PointLight2D20" type="PointLight2D" parent="level_tiles/Decorations"]
+position = Vector2(2717.75, 155.75)
+scale = Vector2(7.5, 7.5)
+color = Color(1, 0.69, 0.23, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("12_0xydg")
+
+[node name="PointLight2D21" type="PointLight2D" parent="level_tiles/Decorations"]
+position = Vector2(3373.25, 505.5)
+scale = Vector2(7.5, 7.5)
+color = Color(1, 0.69, 0.23, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("12_0xydg")
+
+[node name="PointLight2D22" type="PointLight2D" parent="level_tiles/Decorations"]
+position = Vector2(2507.25, 547.25)
+scale = Vector2(7.5, 7.5)
+color = Color(1, 0.69, 0.23, 1)
+shadow_enabled = true
+shadow_filter_smooth = 4.0
+texture = ExtResource("12_0xydg")
+
 [node name="Lavalight" parent="level_tiles/Decorations" instance=ExtResource("13_pbhxl")]
 position = Vector2(4672, 555.25)
 scale = Vector2(7.5, 7.5)
@@ -1363,13 +1352,6 @@ scale = Vector2(7.5, 7.5)
 [node name="Lavalight19" parent="level_tiles/Decorations" instance=ExtResource("13_pbhxl")]
 position = Vector2(8708.75, 222.75)
 scale = Vector2(7.5, 7.5)
-
-[node name="backgroundTiles2" type="TileMapLayer" parent="."]
-visible = false
-modulate = Color(0.582376, 0.582376, 0.582375, 1)
-texture_filter = 1
-scale = Vector2(4, 4)
-tile_set = SubResource("TileSet_swjii")
 
 [node name="Tips" type="Node2D" parent="."]
 scale = Vector2(4, 4)
@@ -1548,6 +1530,10 @@ id = 2
 position = Vector2(-30190, 2322)
 id = 3
 
+[node name="health_upgrade5" parent="upgrades" instance=ExtResource("17_4lg21")]
+position = Vector2(9226, -14)
+id = 4
+
 [node name="AbilityRing" parent="upgrades" instance=ExtResource("18_i4plj")]
 position = Vector2(-36035, 2318)
 
@@ -1725,7 +1711,7 @@ script = ExtResource("1_w0dft")
 
 [node name="GuardGun2" parent="LevelTemplate" instance=ExtResource("38_epctk")]
 position = Vector2(-532, -206)
-scale = Vector2(3.42, 3.42)
+scale = Vector2(4, 4)
 
 [node name="GuardGun3" parent="LevelTemplate" instance=ExtResource("38_epctk")]
 position = Vector2(-1138, -577)
@@ -1733,83 +1719,63 @@ scale = Vector2(3.42, 3.42)
 
 [node name="GuardGun4" parent="LevelTemplate" instance=ExtResource("38_epctk")]
 position = Vector2(-1138, -577)
-scale = Vector2(3.42, 3.42)
+scale = Vector2(4, 4)
 
 [node name="StrongGuard3" parent="LevelTemplate" instance=ExtResource("36_2yl3h")]
 position = Vector2(-1140, -193)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(309, 10)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard9" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(613, 273)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard2" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-686, -217)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard3" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-1143, -379)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard4" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-1216, -374)
-scale = Vector2(3, 3)
-
-[node name="Guard6" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-3910, -423)
-scale = Vector2(3, 3)
-
-[node name="Guard10" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-4068, -483)
-scale = Vector2(3, 3)
-
-[node name="Guard12" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-4311, -401)
-scale = Vector2(3, 3)
-
-[node name="Guard13" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-3986, -400)
-scale = Vector2(3, 3)
-
-[node name="Guard11" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-4370, -531)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard5" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-2004, -187)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard7" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-1923, -186)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Guard8" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-1894, -756)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="GuardFlying" parent="LevelTemplate" instance=ExtResource("37_l5l1r")]
 position = Vector2(281, -295)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="GuardFlying2" parent="LevelTemplate" instance=ExtResource("37_l5l1r")]
 position = Vector2(543, -157)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="GuardFlying3" parent="LevelTemplate" instance=ExtResource("37_l5l1r")]
 position = Vector2(-1179, -821)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="GuardFlying4" parent="LevelTemplate" instance=ExtResource("37_l5l1r")]
 position = Vector2(-1263, -52)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="GuardFlying5" parent="LevelTemplate" instance=ExtResource("37_l5l1r")]
 position = Vector2(-1465, 475)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Interactive" type="Node2D" parent="."]
 
@@ -2124,9 +2090,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -318.0
-offset_top = -60.0
+offset_top = -160.0
 offset_right = -159.0
-offset_bottom = -37.0
+offset_bottom = -137.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
@@ -2159,7 +2125,8 @@ volume_db = 2.0
 bus = &"Music"
 
 [node name="collect_sound" type="AudioStreamPlayer" parent="UI/CutsceneAnimator"]
-volume_db = -40.0
+stream = ExtResource("31_m1mpp")
+volume_db = -20.0
 bus = &"Sounds"
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("Fader", "player") instance=ExtResource("33_vpuow")]

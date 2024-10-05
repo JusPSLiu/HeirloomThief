@@ -701,6 +701,20 @@ filename = NodePath("nameFile/LineEdit")
 saveListContainer = NodePath("FileMenu/ScrollContainer/VBoxContainer")
 confirmDeleteFilename = NodePath("DeletionConfirmation/fileName")
 
+[node name="dummy" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -89.0
+offset_top = 19.0
+offset_right = -49.0
+offset_bottom = 59.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+focus_mode = 1
+
 [node name="Fader" parent="." instance=ExtResource("1_6rpfu")]
 
 [node name="Background" type="TextureRect" parent="."]
@@ -765,11 +779,11 @@ stretch_mode = 2
 
 [node name="PlayButton" type="TextureButton" parent="maintitle"]
 layout_mode = 0
-offset_left = 204.0
-offset_top = 309.0
-offset_right = 421.0
-offset_bottom = 377.0
-scale = Vector2(4, 4)
+offset_left = 399.0
+offset_top = 353.0
+offset_right = 616.0
+offset_bottom = 421.0
+scale = Vector2(2, 2)
 focus_neighbor_left = NodePath("../SettingsButton")
 focus_neighbor_bottom = NodePath("../SettingsButton")
 texture_normal = ExtResource("5_qdvgj")

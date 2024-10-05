@@ -25,6 +25,7 @@ var vulnerable = false
 func _ready() -> void:
 	current_health = 64
 	head.material.set_shader_parameter("outline_visible", false)
+	soundGetHit.set_stream(load("res://Sounds/enemy/bossfight/bossdamage.wav"))
 
 # runs when player first enters, or when dies
 func enable():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=59 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=60 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
 [ext_resource type="Shader" path="res://Scripts/shaders/normal.gdshader" id="2_rs5m2"]
 [ext_resource type="Texture2D" uid="uid://dtjgiy24s3w05" path="res://Art/Sprites/SpriteSheets/cape_normal.png" id="4_avwh5"]
 [ext_resource type="Texture2D" uid="uid://cjdwdbenwdbd6" path="res://Art/Sprites/SpriteSheets/cape.png" id="4_pdxkm"]
+[ext_resource type="Texture2D" uid="uid://blkaaeld48cc" path="res://Art/Sprites/Abilities/crown.png" id="6_3gbco"]
 [ext_resource type="AudioStream" uid="uid://djgwmulqbi6kh" path="res://Sounds/player/jump.wav" id="6_3xbed"]
 [ext_resource type="AudioStream" uid="uid://dnhvvfl6ejvq" path="res://Sounds/player/beenhit.wav" id="7_68r47"]
 [ext_resource type="AudioStream" uid="uid://dej2jkgj0xdw3" path="res://Sounds/player/slice.wav" id="8_yny8k"]
@@ -354,23 +355,6 @@ tracks/0/keys = {
 "values": [Vector2(16, 8), Vector2(-8, -4), Vector2(0, 0), Vector2(-8, -16), Vector2(4, 8), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_qg8hs"]
-resource_name = "player_injured"
-length = 0.7
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("playerSprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(5, 0.5, 0.5, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_jnypc"]
 resource_name = "player_dashy"
 length = 0.9
@@ -388,6 +372,23 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_qg8hs"]
+resource_name = "player_injured"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playerSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(5, 0.5, 0.5, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(5, 0.6, 0.6, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tb5uq"]
 _data = {
 "RESET": SubResource("Animation_tjupa"),
@@ -395,6 +396,33 @@ _data = {
 "cam_shake_lite": SubResource("Animation_rpsn7"),
 "player_dashy": SubResource("Animation_jnypc"),
 "player_injured": SubResource("Animation_qg8hs")
+}
+
+[sub_resource type="Animation" id="Animation_n3oxk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../dashattackbox:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../playerSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_o0d5a"]
@@ -511,33 +539,6 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 1), Color(3, 3, 1, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_n3oxk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../dashattackbox:process_mode")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../playerSprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6bum"]
 _data = {
 "RESET": SubResource("Animation_n3oxk"),
@@ -593,6 +594,11 @@ position = Vector2(6, 4)
 sprite_frames = SubResource("SpriteFrames_jws3n")
 animation = &"not_here"
 autoplay = "not_here"
+
+[node name="crown" type="Sprite2D" parent="playerSprite"]
+visible = false
+position = Vector2(0.5, -5.5)
+texture = ExtResource("6_3gbco")
 
 [node name="player_fx" type="AnimationPlayer" parent="."]
 libraries = {

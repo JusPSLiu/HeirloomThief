@@ -285,8 +285,8 @@ centered = false
 script = ExtResource("16_r3vwa")
 maxPos = Vector2(-1.426, 0.738)
 minPos = Vector2(0.09, -0.615)
-healthLocations = [NodePath("Room1/health0"), NodePath("Room6/health1"), NodePath("Room22/health2"), NodePath("Room11/health3")]
-gemLocations = [NodePath("Room1/gem0"), NodePath("Room1/gem1"), NodePath("Room5/gem2"), NodePath("Room17/gem3"), NodePath("Room22/gem4"), NodePath("Room12/gem5"), NodePath("Room25/gem6"), NodePath("Room28/gem7")]
+healthLocations = [NodePath("Room1/health0"), NodePath("Room6/health1"), NodePath("Room22/health2"), NodePath("Room11/health3"), NodePath("Room13/health4"), NodePath("Room32/health5")]
+gemLocations = [NodePath("Room1/gem0"), NodePath("Room1/gem1"), NodePath("Room5/gem2"), NodePath("Room22/gem3"), NodePath("Room17/gem4"), NodePath("Room12/gem5"), NodePath("Room25/gem6"), NodePath("Room28/gem7")]
 
 [node name="Room0" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")
@@ -433,6 +433,7 @@ offset_bottom = 12.0
 
 [node name="gem5" type="ColorRect" parent="BackColor/MainMenu/Map/Room12"]
 material = ExtResource("14_kilgh")
+layout_mode = 0
 offset_top = 2.0
 offset_right = 1.0
 offset_bottom = 3.0
@@ -444,6 +445,14 @@ offset_left = 37.0
 offset_top = 7.0
 offset_right = 40.0
 offset_bottom = 9.0
+
+[node name="health4" type="ColorRect" parent="BackColor/MainMenu/Map/Room13"]
+material = ExtResource("14_kilgh")
+layout_mode = 0
+offset_left = 2.0
+offset_right = 3.0
+offset_bottom = 1.0
+color = Color(1, 0.8, 0.168627, 1)
 
 [node name="Room14" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")
@@ -473,7 +482,7 @@ offset_top = 9.0
 offset_right = 55.0
 offset_bottom = 11.0
 
-[node name="gem3" type="ColorRect" parent="BackColor/MainMenu/Map/Room17"]
+[node name="gem4" type="ColorRect" parent="BackColor/MainMenu/Map/Room17"]
 material = ExtResource("14_kilgh")
 layout_mode = 0
 offset_left = 3.0
@@ -525,7 +534,7 @@ offset_right = 4.0
 offset_bottom = 4.0
 color = Color(1, 0.8, 0.17, 1)
 
-[node name="gem4" type="ColorRect" parent="BackColor/MainMenu/Map/Room22"]
+[node name="gem3" type="ColorRect" parent="BackColor/MainMenu/Map/Room22"]
 material = ExtResource("14_kilgh")
 layout_mode = 0
 offset_left = 3.0
@@ -556,6 +565,7 @@ offset_bottom = 5.0
 
 [node name="gem6" type="ColorRect" parent="BackColor/MainMenu/Map/Room25"]
 material = ExtResource("14_kilgh")
+layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(1, 0.8, 0.168627, 1)
@@ -583,6 +593,7 @@ offset_bottom = -2.0
 
 [node name="gem7" type="ColorRect" parent="BackColor/MainMenu/Map/Room28"]
 material = ExtResource("14_kilgh")
+layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(1, 0.8, 0.168627, 1)
@@ -610,6 +621,14 @@ offset_top = -5.0
 offset_right = 51.0
 offset_bottom = -3.0
 mouse_filter = 2
+
+[node name="health5" type="ColorRect" parent="BackColor/MainMenu/Map/Room32"]
+material = ExtResource("14_kilgh")
+layout_mode = 0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 2.0
+color = Color(1, 0.8, 0.168627, 1)
 
 [node name="Room29" type="ColorRect" parent="BackColor/MainMenu/Map"]
 material = ExtResource("14_kilgh")

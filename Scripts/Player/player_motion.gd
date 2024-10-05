@@ -36,6 +36,7 @@ const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
 @onready var projectile = preload("res://Scenes/Player/items/projectile1.tscn")
 @onready var deathparticle = preload("res://Scenes/Player/death.tscn")
 @onready var cape = $playerSprite/cape
+@onready var crown = $playerSprite/crown
 
 # regular variables
 var coyoteTime = 0.14
@@ -134,6 +135,7 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction and !DO_NOT_MOVE:
 		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
+		crown.position.y = -6.5
 		if (is_on_floor()):
 			cape.play('running')
 		if (direction > 0):
@@ -142,16 +144,21 @@ func _physics_process(delta: float) -> void:
 				$playerSprite.play('runR')
 			else:
 				$playerSprite.play('jumpR')
+			crown.position.x = -0.5
+			crown.flip_h = true
 		else:
 			currentDirection = false
 			if (is_on_floor()):
 				$playerSprite.play('runL')
 			else:
 				$playerSprite.play('jumpL')
+			crown.position.x = 0.5
+			crown.flip_h = false
 		set_cape_direction()
 			
 	else:
 		velocity.x = expDecay(velocity.x, 0, LERP_DECAY_RATE, delta)
+		crown.position.y = -5.5
 		if (is_on_floor()):
 			if (currentDirection): $playerSprite.play('defaultR')
 			else: $playerSprite.play("defaultL")
@@ -355,7 +362,9 @@ func respawn():
 	
 	self.set_physics_process(true)
 	set_collision_layer_value(1, true)
-	SaveManager.current_health = 4
+	SaveManager.current_health = 2
+	if SaveManager.sceneNumber == 2:
+		SaveManager.current_health = SaveManager.max_health
 	velocity = Vector2(0, 0)
 	show()
 	if (GUI):
@@ -405,6 +414,8 @@ func update_powerstatus(currMode):
 		stick.position = Vector2.ZERO
 	elif (currMode == ability.cape):
 		cape.show()
+	elif (currMode == ability.crown):
+		crown.show()
 
 func set_powerstatus():
 	# update ring if must
@@ -425,6 +436,12 @@ func set_powerstatus():
 	
 	if (currentAbilities[ability.cape] || SaveManager.powerstatus[ability.cape]):
 		cape.show()
+	
+	if (SaveManager.powerstatus[ability.crown]):
+		crown.show()
+		if (SaveManager.powerstatus[ability.crown] == 1):
+			crown.texture = load("res://Art/Sprites/Abilities/crown.png")
+		else: crown.texture = load("res://Art/Sprites/Abilities/crown2.png")
 	
 	currentAbilities = SaveManager.powerstatus
 

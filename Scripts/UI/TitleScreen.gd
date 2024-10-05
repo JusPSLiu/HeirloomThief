@@ -9,6 +9,8 @@ extends ColorRect
 @export var saveListContainer : VBoxContainer
 @export var confirmDeleteFilename : Label
 
+@onready var focusDummy = $dummy
+
 var waiting : bool = false
 var save_data = preload("res://Scenes/Screens/UIElements/game_1.tscn")
 var deleteData = {}
@@ -52,6 +54,7 @@ func _input(event: InputEvent) -> void:
 
 func playButtonPressed():
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		TitleAnimator.play("select")
@@ -63,6 +66,7 @@ func playButtonPressed():
 
 func _on_files_return_pressed():
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		currentMenu = menu.main
@@ -74,6 +78,7 @@ func _on_files_return_pressed():
 # loading a prior file
 func _on_files_pressed(arg):
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		musicFader.play("fadeMusicOut")
@@ -90,6 +95,7 @@ func resumeGame():
 # creating a new file
 func _on_new_game_pressed() -> void:
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		currentMenu = menu.namefile
@@ -102,6 +108,7 @@ func _on_new_game_pressed() -> void:
 
 func _on_newgame_return_pressed():
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		currentMenu = menu.file
@@ -111,8 +118,8 @@ func _on_newgame_return_pressed():
 		waiting = false
 
 func make_new_file(_e=''):
-	print_debug("MAKING")
 	if !waiting:
+		focusDummy.grab_focus()
 		if (filename.text != ""):
 			waiting = true
 			buttonSound.play()
@@ -125,6 +132,7 @@ func make_new_file(_e=''):
 # save file deletion
 func delete_file(data):
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		currentMenu = menu.delete
@@ -138,6 +146,7 @@ func delete_file(data):
 
 func dont_delete_file():
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		buttonSound.play()
 		currentMenu = menu.file
@@ -149,6 +158,7 @@ func dont_delete_file():
 
 func YES_delete_file() -> void:
 	if !waiting:
+		focusDummy.grab_focus()
 		waiting = true
 		if (SaveManager.delete_file(deleteData['file_name'])):
 			for button in saveListContainer.get_children():
@@ -164,6 +174,7 @@ func YES_delete_file() -> void:
 
 
 func _toggle_settings():
+	focusDummy.grab_focus()
 	unfocused = true
 	buttonSound.play()
 	$maintitle.visible = !$maintitle.visible

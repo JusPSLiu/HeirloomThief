@@ -65,6 +65,7 @@ func _select(item: int) -> void:
 		3:
 			description.text = "this right ere crown wot wif the fansy joowuls was wot i came ere for. "
 	show_preview()
+	update_upgrade_button()
 
 
 func upgrade() -> void:
@@ -80,6 +81,7 @@ func upgrade() -> void:
 				get_parent().get_parent().update_gui()
 				update_upgrade_button()
 				show_preview()
+				buttons[currMode].grab_focus()
 
 func show_preview():
 	if (SaveManager.powerstatus[currMode] < MAX_LVL):
