@@ -146,6 +146,8 @@ func make_new_file(newname):
 	max_health = 4
 	current_room = 0
 	visited_rooms = [false, false, false]
+	sceneNumber = 0
+	nextScene = 0
 	powerstatus = [1, 0, 0, 0, 0]
 	collectedGems = {}
 	collectedHealth = {}
