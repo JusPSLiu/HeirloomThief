@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cqx28sd66x8xf"]
+[gd_scene load_steps=64 format=3 uid="uid://cqx28sd66x8xf"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_6x0n8"]
 [ext_resource type="FontFile" uid="uid://blvljxujr15rm" path="res://Art/Fonts/born2bsporty-fs.regular.otf" id="2_r07rn"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://b1ogy1scrgwfh" path="res://Art/UI/Pause/main/exit.png" id="15_04q0r"]
 [ext_resource type="Script" path="res://Scripts/UI/MapScript.gd" id="16_r3vwa"]
 [ext_resource type="Texture2D" uid="uid://bjwqdw4oscb4g" path="res://Art/UI/Pause/main/exitSelected.png" id="16_vbiiw"]
+[ext_resource type="StyleBox" uid="uid://dsm17v8ctdjux" path="res://Scenes/ScreenFx/slider_style.tres" id="19_crru0"]
 [ext_resource type="AudioStream" uid="uid://u1dcvopbll0h" path="res://Sounds/UI/button.wav" id="20_06nsv"]
 [ext_resource type="Texture2D" uid="uid://u6fb78t0gx7c" path="res://Art/UI/Pause/main/hearts.png" id="20_d6s1q"]
 [ext_resource type="Texture2D" uid="uid://no83po41ri1f" path="res://Art/Backgrounds/upgrades.png" id="21_ihhd4"]
@@ -196,6 +197,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.607)
 
 [node name="MainMenu" type="Control" parent="BackColor"]
+visible = false
 anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
@@ -639,7 +641,6 @@ offset_bottom = 11.0
 mouse_filter = 2
 
 [node name="Settings" type="Label" parent="BackColor"]
-visible = false
 layout_mode = 0
 offset_top = 48.0
 offset_right = 1280.0
@@ -650,24 +651,23 @@ text = "Settings"
 horizontal_alignment = 1
 
 [node name="MenuContainer" type="VBoxContainer" parent="BackColor/Settings"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 367.0
-offset_top = 158.0
-offset_right = -231.0
-offset_bottom = 399.0
+offset_left = 300.0
+offset_top = 129.0
+offset_right = -810.0
+offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-theme_override_constants/separation = 20
+scale = Vector2(4, 4)
 
 [node name="MusicLabel" type="Label" parent="BackColor/Settings/MenuContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_r07rn")
-theme_override_font_sizes/font_size = 64
 text = "Music Volume"
 horizontal_alignment = 1
 
@@ -677,6 +677,7 @@ focus_neighbor_bottom = NodePath("../SoundSlider")
 focus_next = NodePath("../SoundSlider")
 theme_override_icons/grabber = ExtResource("3_852t1")
 theme_override_icons/grabber_highlight = ExtResource("4_dfe2y")
+theme_override_styles/slider = ExtResource("19_crru0")
 max_value = 1.0
 step = 0.01
 
@@ -692,16 +693,17 @@ layout_mode = 2
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_r07rn")
-theme_override_font_sizes/font_size = 64
 text = "Sound Volume"
 horizontal_alignment = 1
 
 [node name="SoundSlider" type="HSlider" parent="BackColor/Settings/MenuContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_bottom = NodePath("../fullscreenButton")
 focus_previous = NodePath("../MusicSlider")
 theme_override_icons/grabber = ExtResource("3_852t1")
 theme_override_icons/grabber_highlight = ExtResource("4_dfe2y")
+theme_override_styles/slider = ExtResource("19_crru0")
 max_value = 1.0
 step = 0.01
 
@@ -709,9 +711,22 @@ step = 0.01
 modulate = Color(0, 0, 0, 0)
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="BackColor/Settings/MenuContainer"]
-modulate = Color(0, 0, 0, 0)
+[node name="fullscreenButton" type="CheckBox" parent="BackColor/Settings/MenuContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../Return")
+focus_neighbor_top = NodePath("../SoundSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Return")
+theme_override_fonts/font = ExtResource("2_r07rn")
+text = "  Full Screen"
+
+[node name="ColorRect" type="ColorRect" parent="BackColor/Settings/MenuContainer/fullscreenButton"]
+z_index = -1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
 
 [node name="Return" type="TextureButton" parent="BackColor/Settings"]
 texture_filter = 1
@@ -1014,17 +1029,18 @@ volume_db = -2.0
 pitch_scale = 1.4
 bus = &"Sounds"
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="togglePause"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Resume" to="." method="togglePause"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Upgrades" to="." method="_to_upgrade_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Settings" to="." method="_to_settings_menu"]
 [connection signal="pressed" from="BackColor/MainMenu/VBoxContainer/Exit" to="." method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="BackColor/Settings/MenuContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="toggled" from="BackColor/Settings/MenuContainer/fullscreenButton" to="." method="full_screen"]
 [connection signal="pressed" from="BackColor/Settings/Return" to="." method="_to_main_pause_menu"]
-[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="BackColor/PlayButton" to="." method="togglePause"]
+[connection signal="pressed" from="BackColor/PlayButton" to="." method="_on_pause_button_pressed"]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Stick" to="BackColor/Upgrades" method="_select" binds= [0]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Ring" to="BackColor/Upgrades" method="_select" binds= [1]]
 [connection signal="focus_entered" from="BackColor/Upgrades/UpgradeSelectors/Cape" to="BackColor/Upgrades" method="_select" binds= [2]]

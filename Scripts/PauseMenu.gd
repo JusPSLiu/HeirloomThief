@@ -1,14 +1,15 @@
 extends CanvasLayer
 
 #@onready var optionsMenu : Control = get_parent().get_node("OptionsMenu")
-@onready var sound : AudioStreamPlayer = get_node("ButtonSound")
-@onready var main_menu : Control = get_node("BackColor/MainMenu")
-@onready var settings_menu : Label = get_node("BackColor/Settings")
-@onready var upgrade_menu : TextureRect = get_node("BackColor/Upgrades")
-@onready var gem_number : Label = get_node("BackColor/heart_gem_display/display_gems/gems_num")
-@onready var heart_number : Label = get_node("BackColor/heart_gem_display/display_hearts/hearts_num")
-@onready var upgrade_available : TextureRect = get_node("BackColor/MainMenu/UpgradeAvailable")
-@onready var map : Sprite2D = get_node("BackColor/MainMenu/Map")
+@onready var sound : AudioStreamPlayer = $ButtonSound
+@onready var main_menu : Control = $BackColor/MainMenu
+@onready var settings_menu : Label = $BackColor/Settings
+@onready var upgrade_menu : TextureRect = $BackColor/Upgrades
+@onready var gem_number : Label = $BackColor/heart_gem_display/display_gems/gems_num
+@onready var heart_number : Label = $BackColor/heart_gem_display/display_hearts/hearts_num
+@onready var upgrade_available : TextureRect = $BackColor/MainMenu/UpgradeAvailable
+@onready var map = $BackColor/MainMenu/Map
+@onready var fullScreenButton = $BackColor/Settings/MenuContainer/fullscreenButton
 
 @export var musicPlayer : AudioStreamPlayer
 @export var Fader : AnimationPlayer
@@ -42,6 +43,14 @@ func _ready():
 	pausable = true
 	# make sure pause menu isnt visible
 	$BackColor.visible = false
+	#update all gui elements
+	update_gui()
+	
+	# remove fullscreen button from web export
+	if (OS.get_name() == "Web"):
+		fullScreenButton.hide()
+	else:
+		fullScreenButton.set_pressed_no_signal(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _process(delta: float) -> void:
 	if pauseReload > 0:
@@ -107,7 +116,7 @@ func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(2, linear_to_db(value))
 
 func _on_sound_slider_value_changed(value):
-	if (!sound.playing and value < (db_to_linear(AudioServer.get_bus_volume_db(1)))):
+	if (!sound.playing and value != (db_to_linear(AudioServer.get_bus_volume_db(1)))):
 		sound.play()
 	AudioServer.set_bus_volume_db(1, linear_to_db(value))
 
@@ -147,3 +156,9 @@ func player_update_powerstatus(currMode):
 		player.update_powerstatus(currMode)
 		return true
 	return false
+
+func full_screen(on):
+	if (on):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

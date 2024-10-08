@@ -5,6 +5,7 @@ shader_type canvas_item;
 uniform sampler2D normal_map : filter_nearest;
 uniform float intensity : hint_range(0, 2) = 2.0f;
 uniform bool outline_visible = false;
+uniform float whiten : hint_range(1, 5) = 1.0f;
 
 const vec2 OFFSETS[4] = {
 	vec2(-1, 0), vec2(0, -1), vec2(0, 1), vec2(1, 0)
@@ -19,6 +20,7 @@ void fragment() {
 		}
 		outline = min(outline, 1.0);
 		vec4 color = texture(TEXTURE, UV);
+		color *= vec4(whiten, whiten, whiten, 1);
 		COLOR = mix(color, vec4(1,1,1,1), outline - color.a);
 	}
 	// set normal

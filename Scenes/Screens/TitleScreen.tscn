@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bawhbhakk6q0"]
+[gd_scene load_steps=41 format=3 uid="uid://bawhbhakk6q0"]
 
 [ext_resource type="PackedScene" uid="uid://bm67c4ebptsl8" path="res://Scenes/ScreenFx/Fader.tscn" id="1_6rpfu"]
 [ext_resource type="Script" path="res://Scripts/UI/TitleScreen.gd" id="1_68eqn"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cu1x6hvu0mh3x" path="res://Art/UI/Pause/slidBarClic.png" id="16_g40ql"]
 [ext_resource type="Script" path="res://Scripts/UI/settings.gd" id="16_mp6dt"]
 [ext_resource type="Texture2D" uid="uid://bfa3ila75qrsc" path="res://Art/UI/Pause/gear.png" id="18_jmguy"]
+[ext_resource type="StyleBox" uid="uid://dsm17v8ctdjux" path="res://Scenes/ScreenFx/slider_style.tres" id="20_6tu67"]
 [ext_resource type="Texture2D" uid="uid://bmmiiqigag568" path="res://Art/UI/Pause/gearHov.png" id="20_xte7y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jxu18"]
@@ -719,8 +720,9 @@ focus_mode = 1
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
+offset_top = -133.333
 offset_right = 1280.0
-offset_bottom = 736.0
+offset_bottom = 602.667
 texture = ExtResource("1_euucd")
 stretch_mode = 2
 
@@ -1073,77 +1075,6 @@ sound = NodePath("../ButtonSound")
 soundSlider = NodePath("MenuContainer/SoundSlider")
 musicSlider = NodePath("MenuContainer/MusicSlider")
 
-[node name="MenuContainer" type="VBoxContainer" parent="Settings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 367.0
-offset_top = 158.0
-offset_right = -231.0
-offset_bottom = 399.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-theme_override_constants/separation = 20
-
-[node name="MusicLabel" type="Label" parent="Settings/MenuContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("15_mudgg")
-theme_override_font_sizes/font_size = 64
-text = "Music Volume"
-horizontal_alignment = 1
-
-[node name="MusicSlider" type="HSlider" parent="Settings/MenuContainer"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../../Return")
-focus_neighbor_top = NodePath(".")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../SoundSlider")
-focus_next = NodePath("../SoundSlider")
-theme_override_icons/grabber = ExtResource("15_oij1a")
-theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
-max_value = 1.0
-step = 0.01
-
-[node name="HSeparator" type="HSeparator" parent="Settings/MenuContainer"]
-modulate = Color(0, 0, 0, 0)
-layout_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="Settings/MenuContainer"]
-modulate = Color(0, 0, 0, 0)
-layout_mode = 2
-
-[node name="SoundLabel" type="Label" parent="Settings/MenuContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_fonts/font = ExtResource("15_mudgg")
-theme_override_font_sizes/font_size = 64
-text = "Sound Volume"
-horizontal_alignment = 1
-
-[node name="SoundSlider" type="HSlider" parent="Settings/MenuContainer"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../../Return")
-focus_neighbor_top = NodePath("../MusicSlider")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../Return")
-focus_next = NodePath(".")
-focus_previous = NodePath("../MusicSlider")
-theme_override_icons/grabber = ExtResource("15_oij1a")
-theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
-max_value = 1.0
-step = 0.01
-
-[node name="HSeparator3" type="HSeparator" parent="Settings/MenuContainer"]
-modulate = Color(0, 0, 0, 0)
-layout_mode = 2
-
-[node name="HSeparator4" type="HSeparator" parent="Settings/MenuContainer"]
-modulate = Color(0, 0, 0, 0)
-layout_mode = 2
-
 [node name="Return" type="TextureButton" parent="Settings"]
 texture_filter = 1
 layout_mode = 1
@@ -1161,6 +1092,84 @@ texture_pressed = SubResource("AtlasTexture_utrmd")
 texture_hover = SubResource("AtlasTexture_ir3w2")
 texture_focused = SubResource("AtlasTexture_ir3w2")
 
+[node name="MenuContainer" type="VBoxContainer" parent="Settings"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 129.0
+offset_right = -810.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+
+[node name="MusicLabel" type="Label" parent="Settings/MenuContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_mudgg")
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Settings/MenuContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../SoundSlider")
+focus_next = NodePath("../SoundSlider")
+theme_override_icons/grabber = ExtResource("15_oij1a")
+theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
+theme_override_styles/slider = ExtResource("20_6tu67")
+max_value = 1.0
+step = 0.01
+
+[node name="HSeparator" type="HSeparator" parent="Settings/MenuContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Settings/MenuContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="SoundLabel" type="Label" parent="Settings/MenuContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_mudgg")
+text = "Sound Volume"
+horizontal_alignment = 1
+
+[node name="SoundSlider" type="HSlider" parent="Settings/MenuContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MusicSlider")
+focus_neighbor_bottom = NodePath("../fullscreenButton")
+focus_previous = NodePath("../MusicSlider")
+theme_override_icons/grabber = ExtResource("15_oij1a")
+theme_override_icons/grabber_highlight = ExtResource("16_g40ql")
+theme_override_styles/slider = ExtResource("20_6tu67")
+max_value = 1.0
+step = 0.01
+
+[node name="HSeparator3" type="HSeparator" parent="Settings/MenuContainer"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 2
+
+[node name="fullscreenButton" type="CheckBox" parent="Settings/MenuContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../Return")
+focus_neighbor_top = NodePath("../SoundSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Return")
+theme_override_fonts/font = ExtResource("15_mudgg")
+text = "  Full Screen"
+
+[node name="ColorRect" type="ColorRect" parent="Settings/MenuContainer/fullscreenButton"]
+z_index = -1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
 [connection signal="pressed" from="maintitle/PlayButton" to="." method="playButtonPressed"]
 [connection signal="pressed" from="maintitle/SettingsButton" to="." method="_toggle_settings"]
 [connection signal="pressed" from="FileMenu/game1" to="." method="_on_new_game_pressed"]
@@ -1170,6 +1179,7 @@ texture_focused = SubResource("AtlasTexture_ir3w2")
 [connection signal="text_submitted" from="nameFile/LineEdit" to="." method="make_new_file"]
 [connection signal="pressed" from="nameFile/confirmation_button" to="." method="make_new_file"]
 [connection signal="pressed" from="nameFile/Return" to="." method="_on_newgame_return_pressed"]
+[connection signal="pressed" from="Settings/Return" to="." method="_toggle_settings"]
 [connection signal="value_changed" from="Settings/MenuContainer/MusicSlider" to="Settings" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Settings/MenuContainer/SoundSlider" to="Settings" method="_on_sound_slider_value_changed"]
-[connection signal="pressed" from="Settings/Return" to="." method="_toggle_settings"]
+[connection signal="toggled" from="Settings/MenuContainer/fullscreenButton" to="Settings" method="full_screen"]

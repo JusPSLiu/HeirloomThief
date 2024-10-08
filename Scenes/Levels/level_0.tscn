@@ -1475,6 +1475,12 @@ scale = Vector2(1.84384, 3.61489)
 position = Vector2(-31881, 2458)
 scale = Vector2(1.84384, 3.61489)
 
+[node name="Checkpoint36" parent="Checkpoints" instance=ExtResource("15_ql72u")]
+position = Vector2(-32683, 2496)
+
+[node name="Checkpoint37" parent="Checkpoints" instance=ExtResource("15_ql72u")]
+position = Vector2(33096, 1632)
+
 [node name="Checkpoint30" parent="Checkpoints" instance=ExtResource("15_ql72u")]
 position = Vector2(-29861, 2879)
 
@@ -1713,14 +1719,6 @@ script = ExtResource("1_w0dft")
 position = Vector2(-532, -206)
 scale = Vector2(4, 4)
 
-[node name="GuardGun3" parent="LevelTemplate" instance=ExtResource("38_epctk")]
-position = Vector2(-1138, -577)
-scale = Vector2(3.42, 3.42)
-
-[node name="GuardGun4" parent="LevelTemplate" instance=ExtResource("38_epctk")]
-position = Vector2(-1138, -577)
-scale = Vector2(4, 4)
-
 [node name="StrongGuard3" parent="LevelTemplate" instance=ExtResource("36_2yl3h")]
 position = Vector2(-1140, -193)
 scale = Vector2(4, 4)
@@ -1743,14 +1741,6 @@ scale = Vector2(4, 4)
 
 [node name="Guard4" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
 position = Vector2(-1216, -374)
-scale = Vector2(4, 4)
-
-[node name="Guard5" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-2004, -187)
-scale = Vector2(4, 4)
-
-[node name="Guard7" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
-position = Vector2(-1923, -186)
 scale = Vector2(4, 4)
 
 [node name="Guard8" parent="LevelTemplate" instance=ExtResource("35_yyh84")]
@@ -2028,7 +2018,7 @@ id = 12
 [node name="Door2" parent="Interactive/torchy10/Door" index="3"]
 position = Vector2(6444.75, -312)
 
-[node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "cutsceneAnimator", "fader") instance=ExtResource("27_s5q64")]
+[node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "cutsceneAnimator", "fader", "PauseMenu") instance=ExtResource("27_s5q64")]
 position = Vector2(1413, 546)
 floor_snap_length = 12.0
 GUI = NodePath("../UI/gui")
@@ -2036,6 +2026,7 @@ deathAnimator = NodePath("../UI/DeathAnimator")
 musicPlayer = NodePath("../Music")
 cutsceneAnimator = NodePath("../UI/CutsceneAnimator")
 fader = NodePath("../Fader")
+PauseMenu = NodePath("../PauseMenu")
 
 [node name="camera_carrot_on_stick" parent="Player" index="3"]
 position = Vector2(256, 2)
@@ -2090,9 +2081,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -318.0
-offset_top = -160.0
+offset_top = -60.0
 offset_right = -159.0
-offset_bottom = -137.0
+offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
@@ -2192,12 +2183,8 @@ scale = Vector2(4, 4)
 position = Vector2(-21153, 1490)
 scale = Vector2(4, 4)
 
-[node name="GuardFlying4" parent="Enemies" instance=ExtResource("37_l5l1r")]
-position = Vector2(-29519, 2532)
-scale = Vector2(4, 4)
-
 [node name="GuardFlying6" parent="Enemies" instance=ExtResource("37_l5l1r")]
-position = Vector2(-28576, 2784)
+position = Vector2(-28880, 2564)
 scale = Vector2(4, 4)
 
 [node name="GuardGun" parent="Enemies" instance=ExtResource("38_epctk")]

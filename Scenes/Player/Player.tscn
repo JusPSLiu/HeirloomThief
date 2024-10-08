@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://7x0y123vgrm6"]
+[gd_scene load_steps=62 format=3 uid="uid://7x0y123vgrm6"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_motion.gd" id="1_cvqb3"]
 [ext_resource type="Texture2D" uid="uid://chnmlsep35brt" path="res://Art/Sprites/SpriteSheets/player.png" id="2_lmbdo"]
@@ -546,6 +546,14 @@ _data = {
 "dash_2": SubResource("Animation_nn8pq")
 }
 
+[sub_resource type="Animation" id="Animation_glgtk"]
+resource_name = "shoot"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rv0t2"]
+_data = {
+"shoot": SubResource("Animation_glgtk")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hr2v"]
 size = Vector2(0, 0)
 
@@ -614,6 +622,11 @@ libraries = {
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_tb5uq")
+}
+
+[node name="shooter" type="AnimationPlayer" parent="player_fx"]
+libraries = {
+"": SubResource("AnimationLibrary_rv0t2")
 }
 
 [node name="camera_carrot_on_stick" type="Node2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://cfelypbqxhysj"]
+[gd_scene load_steps=110 format=4 uid="uid://cfelypbqxhysj"]
 
 [ext_resource type="Script" path="res://Scripts/level_script.gd" id="1_xgknk"]
 [ext_resource type="Texture2D" uid="uid://bpey8esk27ikk" path="res://Art/Tilesets/wood.png" id="2_sgh5g"]
@@ -248,6 +248,14 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1, 0.533748, 3.36915e-06, 0.34459
 gradient = SubResource("Gradient_shb16")
 width = 4
 
+[sub_resource type="Gradient" id="Gradient_oa5lt"]
+offsets = PackedFloat32Array(0.155172, 1)
+colors = PackedColorArray(0.329158, 0.329158, 0.329158, 1, 0.617455, 0.617455, 0.617455, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c14r7"]
+gradient = SubResource("Gradient_oa5lt")
+width = 4
+
 [sub_resource type="Animation" id="Animation_7wcv3"]
 resource_name = "die"
 tracks/0/type = "method"
@@ -274,7 +282,7 @@ _data = {
 resource_name = "main_loop"
 length = 92.3075
 loop_mode = 1
-step = 3.6923
+step = 0.1
 tracks/0/type = "animation"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -282,8 +290,28 @@ tracks/0/path = NodePath("BossAnimator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"clips": PackedStringArray("attack", "attack", "attack", "attack", "shoot", "shoot_down", "long_shoot", "long_shoot_up", "shoot", "long_shoot", "long_shoot_up", "long_shoot", "attack", "attack", "attack", "attack", "shoot", "shoot_down", "long_shoot", "long_shoot_up", "shoot", "long_shoot", "long_shoot_up", "long_shoot", "long_shoot_up"),
+"clips": PackedStringArray("attack", "attack", "attack", "attack", "shoot", "shoot_down", "long_shoot", "long_shoot_up", "long_bullet_hell", "long_shoot", "long_shoot_up", "long_shoot", "attack", "attack", "attack", "attack", "shoot", "shoot_down", "long_shoot", "long_shoot_up", "long_bullet_hell", "long_shoot", "long_shoot_up", "long_shoot", "long_shoot_up"),
 "times": PackedFloat32Array(0, 3.6923, 7.3846, 11.0769, 14.7692, 18.4615, 22.1538, 25.8461, 29.5384, 33.2307, 36.923, 40.6153, 44.3076, 47.9999, 51.6922, 55.3845, 59.0768, 62.7691, 66.4614, 70.1537, 73.846, 77.5383, 81.2306, 84.9229, 88.6152)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossBody/neckonnection/Head/BossHitbox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(17.9, 43.5, 62.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"realign_animator"
+}, {
+"args": [],
+"method": &"realign_animator"
+}, {
+"args": [],
+"method": &"realign_animator"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eow3f"]
@@ -1327,6 +1355,211 @@ tracks/12/keys = {
 "values": []
 }
 
+[sub_resource type="Animation" id="Animation_5il6i"]
+resource_name = "long_bullet_hell"
+length = 2.7692
+step = 0.0145
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossBody/neckonnection/Head:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-212, 0, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossBody/neckonnection/Head:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-380, 0, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossBody/neckonnection/Body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossBody/neckonnection/Body:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossBody/ArmR:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-172, -232), Vector2(-172, -232)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossBody/ArmL:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-140, -246), Vector2(-140, -246)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BossBody/ArmR:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BossBody/ArmL:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BossBody:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.8464),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1023, 673), Vector2(1023, 673)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BossBody:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2.7692),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("BossBody/neckonnection:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.222222, 0.444444, 0.888889, 1.33333, 2.25, 2.75),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 1.2, 0.9, 0.5),
+"update": 0,
+"values": [0.0, 0.0872665, 0.174533, -0.134321, -0.349066, -0.0523599, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BossBody/neckonnection/Head:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.888889, 2, 2.5),
+"transitions": PackedFloat32Array(0.5, 0.3, 0.5, 1),
+"update": 0,
+"values": [0.0, -1.36136, 0.872665, 0.0]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("BossBody/neckonnection/Head")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../Player")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("BossBody/neckonnection/Head/BossHitbox")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"look_vulnerable"
+}]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("BossBody/DamageComponent:active")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/16/type = "animation"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("BossAnimator/FireballShooterAnimation")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"clips": PackedStringArray("fireball_bunch"),
+"times": PackedFloat32Array(0.362319)
+}
+
 [sub_resource type="Animation" id="Animation_w752r"]
 resource_name = "long_shoot"
 length = 2.7692
@@ -1676,7 +1909,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0, 0.5, 2, 2.5),
 "transitions": PackedFloat32Array(0.5, 0.3, 0.5, 1),
 "update": 0,
-"values": [0.0, -1.39626, -0.0872665, 0.0]
+"values": [0.0, -1.22173, -0.0872665, 0.0]
 }
 tracks/12/type = "method"
 tracks/12/imported = false
@@ -2709,6 +2942,7 @@ _data = {
 "attack": SubResource("Animation_44536"),
 "die": SubResource("Animation_67rgr"),
 "fight": SubResource("Animation_0okpv"),
+"long_bullet_hell": SubResource("Animation_5il6i"),
 "long_shoot": SubResource("Animation_w752r"),
 "long_shoot_up": SubResource("Animation_7h3a1"),
 "shoot": SubResource("Animation_vlya8"),
@@ -3003,7 +3237,8 @@ specular_shininess = 0.25
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cpigh"]
 shader = ExtResource("29_k01xh")
 shader_parameter/intensity = 2.0
-shader_parameter/outline_visible = false
+shader_parameter/outline_visible = true
+shader_parameter/whiten = 1.0
 shader_parameter/normal_map = ExtResource("22_n5w4c")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8s0l0"]
@@ -3134,6 +3369,37 @@ animations = [{
 offsets = PackedFloat32Array(0, 0.356522, 1)
 colors = PackedColorArray(0.846952, 0.276148, 0, 1, 0.174157, 0.180759, 0.170893, 1, 0.125911, 0.125911, 0.125911, 0.424)
 
+[sub_resource type="Animation" id="Animation_m17ra"]
+resource_name = "hit"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [2.0],
+"method": &"flashy_boss"
+}, {
+"args": [1.0],
+"method": &"flashy_boss"
+}, {
+"args": [2.0],
+"method": &"flashy_boss"
+}, {
+"args": [1.0],
+"method": &"flashy_boss"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48pph"]
+_data = {
+"hit": SubResource("Animation_m17ra")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hinpp"]
 size = Vector2(180, 161)
 
@@ -3182,7 +3448,7 @@ offset_bottom = 139.5
 texture = SubResource("CanvasTexture_22npw")
 
 [node name="level_tiles" type="TileMapLayer" parent="."]
-self_modulate = Color(0.372549, 0.372549, 0.372549, 1)
+self_modulate = Color(0.466181, 0.466181, 0.466181, 1)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("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AAD//w0AAgAGAAEAAAD//wwAAgAGAAEAAAD//wsAAgAHAAAAAAD//woAAgABAAIAAAD//wkAAgAHAAAAAAD//wgAAgAGAAAAAAD//wcAAgAHAAAAAAD//wYAAgAHAAEAAAD//wUAAgAHAAEAAAD//wQAAgAGAAAAAAD//wMAAgAGAAAAAAD//wIAAgABAAIAAAD//wEAAgAHAAEAAAD//wAAAgAGAAEAAAD/////AgAGAAAAAAD///7/AgAGAAAAAAD///3/AgAFAAQAAAD///z/AgAHAAEAAAD///v/AgAGAAAAAAD///r/AgAGAAAAAAD///n/AgAFAAQAAAD///j/AgABAAEAAAD+/xcAAgAEAAQAAAD+/xYAAgAAAAIAAAD+/xUAAgAAAAIAAAD+/xQAAgAEAAQAAAD+/xMAAgAAAAIAAAD+/xIAAgAEAAQAAAD+/xEAAgAEAAQAAAD+/xAAAgAAAAIAAAD+/w8AAgAEAAQAAAD+/w4AAgAEAAQAAAD+/w0AAgAEAAQAAAD+/wwAAgAEAAQAAAD+/wsAAgAEAAQAAAD+/woAAgAEAAQAAAD+/wkAAgAAAAIAAAD+/wgAAgAAAAIAAAD+/wcAAgAEAAQAAAD+/wYAAgAEAAQAAAD+/wUAAgAAAAIAAAD+/wQAAgAAAAIAAAD+/wMAAgAAAAIAAAD+/wIAAgAAAAIAAAD+/wEAAgAAAAIAAAD+/wAAAgAAAAIAAAD+////AgAEAAQAAAD+//7/AgAAAAIAAAD+//3/AgAAAAIAAAD+//z/AgAEAAQAAAD+//v/AgAAAAIAAAD+//r/AgAAAAIAAAD+//n/AgAEAAQAAAD+//j/AgAAAAEAAAA2ABgAAgACAAMAAAA2ABcAAgAGAAQAAAA2ABYAAgACAAIAAAA1ABgAAgAFAAUAAAA1ABcAAgAHAAEAAAA1ABYAAgAHAAAAAAA0ABgAAgAFAAUAAAA0ABcAAgAHAAAAAAA0ABYAAgAGAAEAAAAzABgAAgAFAAUAAAAzABcAAgABAAIAAAAyABgAAgAFAAUAAAAyABcAAgAGAAAAAAAxABgAAgAFAAUAAAAxABcAAgAGAAEAAAAwABgAAgAFAAUAAAAwABcAAgABAAIAAAAvABgAAgABAAMAAAAvABcAAgAGAAEAAAAuABgAAgABAAMAAAAuABcAAgABAAIAAAAtABgAAgAFAAUAAAAtABcAAgAHAAEAAAAsABgAAgABAAMAAAAsABcAAgAGAAAAAAArABgAAgABAAMAAAArABcAAgAGAAEAAAAqABgAAgAFAAUAAAAqABcAAgAHAAEAAAApABgAAgAFAAUAAAApABcAAgAGAAAAAAAoABgAAgAFAAUAAAAoABcAAgABAAIAAAAnABgAAgABAAMAAAAnABcAAgAGAAAAAAAmABgAAgABAAMAAAAmABcAAgABAAIAAAAlABgAAgAFAAUAAAAlABcAAgAGAAAAAAAkABgAAgAFAAUAAAAkABcAAgABAAIAAAAjABgAAgAFAAUAAAAjABcAAgAHAAAAAAAiABgAAgABAAMAAAAiABcAAgAGAAAAAAAhABgAAgAFAAUAAAAhABcAAgAFAAQAAAAgABgAAgAFAAUAAAAgABcAAgAFAAQAAAAfABgAAgAFAAUAAAAfABcAAgAFAAQAAAAeABgAAgAFAAUAAAAeABcAAgABAAIAAAAdABgAAgABAAMAAAAdABcAAgAHAAEAAAAcABgAAgAFAAUAAAAcABcAAgAGAAAAAAAbABgAAgABAAMAAAAbABcAAgABAAIAAAAaABgAAgAFAAUAAAAaABcAAgAHAAAAAAAZABgAAgAFAAUAAAAZABcAAgAHAAEAAAAYABgAAgAFAAUAAAAYABcAAgAHAAAAAAAXABgAAgABAAMAAAAXABcAAgAGAAAAAAAWABgAAgAFAAUAAAAWABcAAgAFAAQAAAAVABgAAgAFAAUAAAAVABcAAgAHAAAAAAAUABgAAgAFAAUAAAAUABcAAgAGAAEAAAATABgAAgABAAMAAAATABcAAgAGAAEAAAASABgAAgAFAAUAAAASABcAAgAHAAEAAAARABgAAgABAAMAAAARABcAAgABAAIAAAAQABgAAgABAAMAAAAQABcAAgAHAAEAAAAPABgAAgAFAAUAAAAPABcAAgAHAAEAAAAOABgAAgAFAAUAAAAOABcAAgAGAAEAAAANABgAAgABAAMAAAANABcAAgAHAAEAAAAMABgAAgABAAMAAAAMABcAAgAHAAEAAAALABgAAgABAAMAAAALABcAAgAHAAAAAAAKABgAAgAFAAUAAAAKABcAAgAFAAQAAAAJABgAAgABAAMAAAAJABcAAgAFAAQAAAAIABgAAgABAAMAAAAIABcAAgAHAAEAAAAHABgAAgAFAAUAAAAHABcAAgAFAAQAAAAGABgAAgAFAAUAAAAGABcAAgABAAIAAAAFABgAAgAFAAUAAAAFABcAAgAFAAQAAAAEABgAAgABAAMAAAAEABcAAgABAAIAAAADABgAAgABAAMAAAADABcAAgAGAAEAAAACABgAAgABAAMAAAACABcAAgAHAAAAAAABABgAAgAFAAUAAAABABcAAgAGAAEAAAAAABgAAgAFAAUAAAD//xgAAgABAAMAAAD+/xgAAgAAAAMAAAA2ABUAAgAGAAQAAAA2ABQAAgACAAIAAAA2ABMAAgACAAIAAAA2ABIAAgAGAAQAAAA2ABEAAgACAAIAAAA2ABAAAgACAAIAAAA2AA8AAgACAAIAAAA2AA4AAgACAAIAAAA2AA0AAgACAAIAAAA2AAwAAgACAAIAAAA2AAsAAgAGAAQAAAA2AAoAAgAGAAQAAAA2AAkAAgAGAAQAAAA2AAgAAgACAAIAAAA2AAcAAgACAAIAAAA2AAYAAgACAAIAAAA2AAUAAgAGAAQAAAA2AAQAAgAGAAQAAAA2AAMAAgACAAIAAAA2AAIAAgAGAAQAAAA2AAEAAgACAAIAAAA2AAAAAgACAAIAAAA2AP//AgAGAAQAAAA2AP7/AgAGAAQAAAA2AP3/AgAGAAQAAAA2APz/AgAGAAQAAAA2APv/AgACAAIAAAA2APr/AgACAAIAAAA2APn/AgACAAIAAAA2APj/AgACAAUAAAA1ABUAAgABAAIAAAA1ABQAAgABAAIAAAA1ABMAAgAFAAQAAAA1ABIAAgAHAAAAAAA1ABEAAgAGAAEAAAA1ABAAAgAGAAAAAAA1AA8AAgAGAAAAAAA1AA4AAgABAAIAAAA1AA0AAgAGAAEAAAA1AAwAAgAGAAEAAAA1AAsAAgAGAAEAAAA1AAoAAgAFAAQAAAA1AAkAAgAHAAAAAAA1AAgAAgAHAAEAAAA1AAcAAgAGAAEAAAA1AAYAAgAHAAEAAAA1AAUAAgABAAIAAAA1AAQAAgAGAAEAAAA1AAMAAgAHAAAAAAA1AAIAAgAHAAEAAAA1AAEAAgAGAAEAAAA1AAAAAgAHAAAAAAA1AP//AgAFAAQAAAA1AP7/AgAGAAAAAAA1AP3/AgAHAAAAAAA1APz/AgAGAAEAAAA1APv/AgAGAAAAAAA1APr/AgAGAAAAAAA1APn/AgAGAAAAAAA1APj/AgABAAUAAAA0ABUAAgAGAAAAAAA0ABQAAgAHAAEAAAA0ABMAAgABAAIAAAA0ABIAAgAHAAAAAAA0ABEAAgAGAAAAAAA0ABAAAgAGAAAAAAA0AA8AAgAGAAEAAAA0AA4AAgAHAAAAAAA0AA0AAgAHAAEAAAA0AAwAAgAFAAQAAAA0AAsAAgABAAIAAAA0AAoAAgAGAAAAAAA0AAkAAgAGAAEAAAA0AAgAAgAHAAEAAAA0AAcAAgAHAAAAAAA0AAYAAgAHAAEAAAA0AAUAAgAHAAEAAAA0AAQAAgABAAIAAAA0AAMAAgAGAAEAAAA0AAIAAgAHAAAAAAA0AAEAAgAGAAEAAAA0AAAAAgAHAAAAAAA0AP//AgAGAAAAAAA0AP7/AgAGAAAAAAA0AP3/AgAGAAAAAAA0APz/AgAHAAEAAAA0APv/AgAFAAQAAAA0APr/AgAGAAAAAAA0APn/AgABAAIAAAA0APj/AgABAAUAAAAzAPv/AgAHAAEAAAAzAPr/AgAFAAQAAAAzAPn/AgAGAAAAAAAzAPj/AgABAAUAAAAyAPv/AgAHAAAAAAAyAPr/AgAHAAEAAAAyAPn/AgAFAAQAAAAyAPj/AgABAAUAAAAxAPv/AgABAAIAAAAxAPr/AgAGAAAAAAAxAPn/AgAGAAAAAAAxAPj/AgABAAEAAAAwAPv/AgAFAAQAAAAwAPr/AgAGAAEAAAAwAPn/AgAHAAAAAAAwAPj/AgABAAEAAAAvAPv/AgAFAAQAAAAvAPr/AgAHAAAAAAAvAPn/AgAHAAAAAAAvAPj/AgABAAEAAAAuAPv/AgAHAAAAAAAuAPr/AgAFAAQAAAAuAPn/AgAFAAQAAAAuAPj/AgABAAUAAAAtAPv/AgAFAAQAAAAtAPr/AgAFAAQAAAAtAPn/AgAFAAQAAAAtAPj/AgABAAEAAAAsAPv/AgAHAAEAAAAsAPr/AgABAAIAAAAsAPn/AgABAAIAAAAsAPj/AgABAAEAAAArAPv/AgABAAIAAAArAPr/AgAGAAAAAAArAPn/AgAHAAEAAAArAPj/AgABAAUAAAAqAPv/AgAHAAEAAAAqAPr/AgAGAAAAAAAqAPn/AgABAAIAAAAqAPj/AgABAAUAAAApAPv/AgAGAAEAAAApAPr/AgAGAAAAAAApAPn/AgABAAIAAAApAPj/AgABAAUAAAAoAPv/AgAHAAEAAAAoAPr/AgAGAAEAAAAoAPn/AgAGAAEAAAAoAPj/AgABAAUAAAAnAPv/AgABAAIAAAAnAPr/AgABAAIAAAAnAPn/AgAHAAEAAAAnAPj/AgABAAEAAAAmAPv/AgAHAAAAAAAmAPr/AgAHAAAAAAAmAPn/AgABAAIAAAAmAPj/AgABAAUAAAAlAPv/AgAGAAAAAAAlAPr/AgAHAAEAAAAlAPn/AgAGAAAAAAAlAPj/AgABAAUAAAAkAPv/AgABAAIAAAAkAPr/AgAGAAEAAAAkAPn/AgAFAAQAAAAkAPj/AgABAAEAAAAjAPv/AgAHAAAAAAAjAPr/AgABAAIAAAAjAPn/AgAGAAEAAAAjAPj/AgABAAUAAAAiAPv/AgAGAAAAAAAiAPr/AgAHAAAAAAAiAPn/AgAFAAQAAAAiAPj/AgABAAUAAAAhAPv/AgABAAIAAAAhAPr/AgABAAIAAAAhAPn/AgAGAAEAAAAhAPj/AgABAAEAAAAgAPv/AgAHAAEAAAAgAPr/AgABAAIAAAAgAPn/AgAHAAAAAAAgAPj/AgABAAEAAAAfAPv/AgABAAIAAAAfAPr/AgAGAAEAAAAfAPn/AgAHAAEAAAAfAPj/AgABAAEAAAAeAPv/AgABAAIAAAAeAPr/AgAHAAAAAAAeAPn/AgABAAIAAAAeAPj/AgABAAEAAAAdAPv/AgAHAAEAAAAdAPr/AgABAAIAAAAdAPn/AgABAAIAAAAdAPj/AgABAAEAAAAcAPv/AgABAAIAAAAcAPr/AgAGAAAAAAAcAPn/AgAGAAAAAAAcAPj/AgABAAEAAAAbAPv/AgAGAAEAAAAbAPr/AgAFAAQAAAAbAPn/AgAGAAAAAAAbAPj/AgABAAEAAAAaAPv/AgAHAAEAAAAaAPr/AgAHAAAAAAAaAPn/AgAFAAQAAAAaAPj/AgABAAEAAAAZAPv/AgAGAAAAAAAZAPr/AgAHAAAAAAAZAPn/AgAHAAAAAAAZAPj/AgABAAUAAAAYAPv/AgAGAAAAAAAYAPr/AgAFAAQAAAAYAPn/AgAHAAAAAAAYAPj/AgABAAUAAAAXAPv/AgAGAAAAAAAXAPr/AgAHAAEAAAAXAPn/AgAHAAAAAAAXAPj/AgABAAUAAAAWAPv/AgAFAAQAAAAWAPr/AgABAAIAAAAWAPn/AgAFAAQAAAAWAPj/AgABAAEAAAAVAPv/AgAHAAAAAAAVAPr/AgAHAAEAAAAVAPn/AgAHAAAAAAAVAPj/AgABAAEAAAAUAPv/AgAGAAAAAAAUAPr/AgAFAAQAAAAUAPn/AgAGAAEAAAAUAPj/AgABAAUAAAATAPv/AgAHAAAAAAATAPr/AgAFAAQAAAATAPn/AgABAAIAAAATAPj/AgABAAUAAAASAPv/AgAFAAQAAAASAPr/AgAFAAQAAAASAPn/AgAGAAAAAAASAPj/AgABAAEAAAARAPv/AgAGAAAAAAARAPr/AgAHAAAAAAARAPn/AgAFAAQAAAARAPj/AgABAAEAAAAQAPv/AgAHAAAAAAAQAPr/AgABAAIAAAAQAPn/AgAFAAQAAAAQAPj/AgABAAUAAAAPAPv/AgAHAAEAAAAPAPr/AgABAAIAAAAPAPn/AgAHAAEAAAAPAPj/AgABAAEAAAAOAPv/AgAGAAEAAAAOAPr/AgABAAIAAAAOAPn/AgABAAIAAAAOAPj/AgABAAEAAAANAPv/AgAHAAEAAAANAPr/AgAGAAEAAAANAPn/AgAHAAEAAAANAPj/AgABAAUAAAAMAPv/AgAGAAAAAAAMAPr/AgABAAIAAAAMAPn/AgAFAAQAAAAMAPj/AgABAAUAAAALAPv/AgAGAAAAAAALAPr/AgAHAAEAAAALAPn/AgAGAAEAAAALAPj/AgABAAEAAAAKAPv/AgAFAAQAAAAKAPr/AgAFAAQAAAAKAPn/AgAHAAEAAAAKAPj/AgABAAEAAAAJAPv/AgAFAAQAAAAJAPr/AgAGAAEAAAAJAPn/AgAGAAAAAAAJAPj/AgABAAEAAAAIAPv/AgAGAAAAAAAIAPr/AgAGAAEAAAAIAPn/AgAHAAEAAAAIAPj/AgABAAUAAAAHAPv/AgAHAAAAAAAHAPr/AgAGAAEAAAAHAPn/AgAHAAEAAAAHAPj/AgABAAEAAAAGAPv/AgAHAAEAAAAGAPr/AgAHAAAAAAAGAPn/AgAHAAEAAAAGAPj/AgABAAEAAAAFAPv/AgAGAAAAAAAFAPr/AgAFAAQAAAAFAPn/AgAFAAQAAAAFAPj/AgABAAUAAAAEAPv/AgAGAAAAAAAEAPr/AgABAAIAAAAEAPn/AgABAAIAAAAEAPj/AgABAAEAAAADAPv/AgABAAIAAAADAPr/AgAGAAAAAAADAPn/AgAGAAAAAAADAPj/AgABAAEAAAACAPv/AgAHAAEAAAACAPr/AgABAAIAAAACAPn/AgABAAIAAAACAPj/AgABAAUAAAABAPv/AgAHAAAAAAABAPr/AgAHAAAAAAABAPn/AgAHAAAAAAABAPj/AgABAAEAAAAZABYAAgABAAEAAAAaABYAAgABAAEAAAAbABYAAgABAAUAAAAcABYAAgABAAEAAAAdABYAAgABAAIAAAAeABYAAgAHAAEAAAAfABYAAgABAAIAAAAgABYAAgAGAAEAAAAkABYAAgAFAAQAAAAlABYAAgABAAIAAAAmABYAAgAGAAAAAAAnABYAAgAGAAAAAAAoABYAAgAHAAEAAAApABYAAgABAAUAAAAqABYAAgABAAEAAAArABYAAgABAAUAAAAjABYAAgAGAAAAAAAhABYAAgAHAAAAAAAiABYAAgAGAAAAAAAdABUAAgAEAAIAAAAeABUAAgAFAAIAAAAfABUAAgABAAUAAAAgABUAAgABAAEAAAAhABUAAgABAAEAAAAiABUAAgABAAEAAAAjABUAAgABAAEAAAAkABUAAgABAAEAAAAlABUAAgABAAUAAAAmABUAAgABAAEAAAAnABUAAgAGAAIAAAAoABUAAgAHAAIAAAA=")
 tile_set = ExtResource("6_ywdgg")
@@ -3199,7 +3465,7 @@ tile_set = ExtResource("12_jgi0e")
 position = Vector2(151.25, 71.75)
 scale = Vector2(30, 30)
 color = Color(1, 0.69, 0.23, 1)
-energy = 0.25
+energy = 0.5
 shadow_enabled = true
 shadow_filter_smooth = 4.0
 texture = ExtResource("10_vmyri")
@@ -3226,7 +3492,7 @@ scale = Vector2(1664, 848)
 room_number = 32
 music = ""
 
-[node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "fader") instance=ExtResource("15_n7ldk")]
+[node name="Player" parent="." node_paths=PackedStringArray("GUI", "deathAnimator", "musicPlayer", "fader", "PauseMenu") instance=ExtResource("15_n7ldk")]
 position = Vector2(274, 674)
 floor_snap_length = 12.0
 GUI = NodePath("../UI/gui")
@@ -3234,9 +3500,9 @@ deathAnimator = NodePath("../UI/DeathAnimator")
 musicPlayer = NodePath("../Music")
 fader = NodePath("../Fader")
 sceneNumber = 2
+PauseMenu = NodePath("../PauseMenu")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-process_mode = 3
 stream = ExtResource("15_wku0d")
 bus = &"Music"
 script = ExtResource("16_eartm")
@@ -3247,7 +3513,6 @@ libraries = {
 }
 
 [node name="bossMusic" type="AudioStreamPlayer" parent="Music"]
-process_mode = 3
 stream = ExtResource("18_btvgr")
 autoplay = true
 bus = &"dummy_bus"
@@ -3313,9 +3578,9 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 17.0
 offset_right = 22.0
-offset_bottom = 27.0
+offset_bottom = 22.0
 rotation = -1.5708
-scale = Vector2(1, 60)
+scale = Vector2(1, 120)
 color = Color(0.533333, 0, 0.341176, 1)
 
 [node name="HealthGradient" type="TextureRect" parent="UI/gui/BossBar"]
@@ -3325,10 +3590,18 @@ layout_mode = 0
 offset_left = 3.0
 offset_top = 17.0
 offset_right = 17.0
-offset_bottom = 27.0
+offset_bottom = 22.0
 rotation = -1.5708
-scale = Vector2(1, 64)
+scale = Vector2(1, 128)
 texture = SubResource("GradientTexture1D_hf1w0")
+
+[node name="gradCoverer" type="TextureRect" parent="UI/gui/BossBar/HealthGradient"]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_right = 14.0
+offset_bottom = 5.0
+texture = SubResource("GradientTexture1D_c14r7")
 
 [node name="DeathAnimator" type="AnimationPlayer" parent="UI"]
 libraries = {
@@ -3453,7 +3726,7 @@ scale_amount_min = 16.0
 scale_amount_max = 32.0
 color_ramp = SubResource("Gradient_cp5xb")
 
-[node name="BossHitbox" type="StaticBody2D" parent="Boss/BossBody/neckonnection/Head" node_paths=PackedStringArray("healthBar", "healthBar2", "soundGetHit", "bossAnimator", "bossAnimatorController", "head", "mask") groups=["enemy"]]
+[node name="BossHitbox" type="StaticBody2D" parent="Boss/BossBody/neckonnection/Head" node_paths=PackedStringArray("healthBar", "healthBar2", "soundGetHit", "bossAnimator", "bossAnimatorController", "musicPlayer", "head", "mask", "motley_bossbar_cover", "motley_bossbar_outline") groups=["enemy"]]
 position = Vector2(-4, 3.5)
 scale = Vector2(0.25, 0.25)
 script = ExtResource("21_0eowi")
@@ -3462,8 +3735,16 @@ healthBar2 = NodePath("../../../../../UI/gui/BossBar/GradientEdge")
 soundGetHit = NodePath("bosshit")
 bossAnimator = NodePath("../../../../BossAnimator")
 bossAnimatorController = NodePath("../../../../BossAnimatorController")
+musicPlayer = NodePath("../../../../../Music/bossMusic")
 head = NodePath("..")
 mask = NodePath("../Mask")
+motley_bossbar_cover = NodePath("../../../../../UI/gui/BossBar/HealthGradient/gradCoverer")
+motley_bossbar_outline = NodePath("../../../../../UI/gui/BossBar")
+
+[node name="flashy_animator" type="AnimationPlayer" parent="Boss/BossBody/neckonnection/Head/BossHitbox"]
+libraries = {
+"": SubResource("AnimationLibrary_48pph")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boss/BossBody/neckonnection/Head/BossHitbox"]
 position = Vector2(20, 0.5)

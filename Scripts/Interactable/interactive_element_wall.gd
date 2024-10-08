@@ -14,7 +14,8 @@ func _ready() -> void:
 		lit = true
 		$StaticBody2D.set_collision_layer_value(1, false)
 		$breakySprite.visible = false
-		activateyThing.skipToActivated()
+		if (activateyThing):
+			activateyThing.skipToActivated()
 	$breakySprite.flip_h = faceRight
 
 func alight() -> bool:

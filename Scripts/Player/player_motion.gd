@@ -22,6 +22,7 @@ extends CharacterBody2D
 @export var cutsceneAnimator : AnimationPlayer
 @export var fader : AnimationPlayer
 @export var sceneNumber : int = 0
+@export var PauseMenu : CanvasLayer
 
 # constant variables
 const SPEED = 500.0 # player movement speed
@@ -32,9 +33,10 @@ const COYOTE_MAX = 0.1 # player jump coyote time cooldown
 const LERP_DECAY_RATE = 12 # player acceleration/deceleration rate
 
 # automatically initialized variables
-@onready var camera : Camera2D = get_node("camera_carrot_on_stick/Camera2D")
 @onready var projectile = preload("res://Scenes/Player/items/projectile1.tscn")
 @onready var deathparticle = preload("res://Scenes/Player/death.tscn")
+@onready var camera : Camera2D = $camera_carrot_on_stick/Camera2D
+@onready var shooterAnimator = $player_fx/shooter
 @onready var cape = $playerSprite/cape
 @onready var crown = $playerSprite/crown
 
@@ -134,11 +136,11 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction and !DO_NOT_MOVE:
-		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
-		crown.position.y = -6.5
+		# assign the proper animation
 		if (is_on_floor()):
 			cape.play('running')
 		if (direction > 0):
+			direction = 1
 			currentDirection = true
 			if (is_on_floor()):
 				$playerSprite.play('runR')
@@ -147,6 +149,7 @@ func _physics_process(delta: float) -> void:
 			crown.position.x = -0.5
 			crown.flip_h = true
 		else:
+			direction = -1
 			currentDirection = false
 			if (is_on_floor()):
 				$playerSprite.play('runL')
@@ -154,7 +157,10 @@ func _physics_process(delta: float) -> void:
 				$playerSprite.play('jumpL')
 			crown.position.x = 0.5
 			crown.flip_h = false
+		# actually move
+		velocity.x = expDecay(velocity.x, direction * SPEED, LERP_DECAY_RATE, delta)
 		set_cape_direction()
+		crown.position.y = -6.5
 			
 	else:
 		velocity.x = expDecay(velocity.x, 0, LERP_DECAY_RATE, delta)
@@ -173,6 +179,7 @@ func _physics_process(delta: float) -> void:
 		$camera_carrot_on_stick.position.x = velocity.x * 0.6
 	else:
 		$camera_carrot_on_stick.position.x = expDecay($camera_carrot_on_stick.position.x, 0, 2, delta)
+	
 	
 	camera_transitions(delta)
 
@@ -211,10 +218,10 @@ func _input(event: InputEvent) -> void:
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 			
-			elif (event.is_action_pressed("Shoot") and !stick.get_child(0).is_playing()):
+			elif (event.is_action_pressed("Shoot") and !shooterAnimator.is_playing()):
 				if (currentAbilities[ability.ring]):
 					if (shootsound): shootsound.play()
-					stick.get_child(0).play("shoot")
+					shooterAnimator.play("shoot")
 					#make the projectile; possibly replace with special player projectile later
 					var newprojectile = projectile.instantiate()
 					newprojectile.position = position
@@ -229,27 +236,37 @@ func _input(event: InputEvent) -> void:
 						doublejumped = true
 		# if keyboard / button event
 		else:
+			# Handle door
+			if (event.is_action_pressed("OpenDoor") and doorLocation != null):
+				# if doorlocation is LITERALLY VECTOR2.ZERO, then go to next level
+				if (doorLocation == Vector2.ZERO):
+					DO_NOT_MOVE = true
+					fader.play("FadeOut")
+					await fader.animation_finished
+					SaveManager.sceneNumber = SaveManager.nextScene
+					get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
+					return
+				DO_NOT_MOVE = true
+				fader.play("FadeOut")
+				var doorLocationBuffer = doorLocation
+				await fader.animation_finished
+				#if in doorway, the jump button opens the door
+				if (abs(position.x-doorLocationBuffer.x) > 640 || abs(position.y-doorLocationBuffer.y) > 360):
+					position = doorLocationBuffer
+					camera.position_smoothing_enabled = false
+					just_respawned = true
+				position = doorLocationBuffer
+				dashsound.play()
+				fader.play("FadeIn")
+				DO_NOT_MOVE = false
 			# Handle jump.
-			if event.is_action_pressed("Jump"):
-				if (doorLocation != null):
-					# if doorlocation is LITERALLY VECTOR2.ZERO, then go to next level
-					if (doorLocation == Vector2.ZERO):
-						SaveManager.sceneNumber = SaveManager.nextScene
-						get_tree().change_scene_to_file("res://Scenes/Screens/loading_shaders.tscn")
-						return
-					#if in doorway, the jump button opens the door
-					if (abs(position.x-doorLocation.x) > 640 || abs(position.y-doorLocation.y) > 360):
-						camera.position_smoothing_enabled = false
-						just_respawned = true
-					position = doorLocation
-					dashsound.play()
-				elif coyoteTime > 0:
-					velocity.y = JUMP_VELOCITY
-					coyoteTime = 0
-					if (currentDirection): $playerSprite.play('jumpR')
-					else: $playerSprite.play('jumpL')
-					if (jumpsound): jumpsound.play()
-					doublejumped = false
+			elif event.is_action_pressed("Jump") and coyoteTime > 0:
+				velocity.y = JUMP_VELOCITY
+				coyoteTime = 0
+				if (currentDirection): $playerSprite.play('jumpR')
+				else: $playerSprite.play('jumpL')
+				if (jumpsound): jumpsound.play()
+				doublejumped = false
 			# dash / boost
 			if event.is_action_pressed("Dash"):
 				if currentAbilities[ability.cape] and boostimer < 0 and int(velocity.x) != 0:
@@ -286,10 +303,10 @@ func _input(event: InputEvent) -> void:
 					velocity.y = JUMP_VELOCITY*0.2
 					doublejumped = true
 			# shooting attack
-			elif (event.is_action_pressed("Shoot") and !stick.get_child(0).is_playing()):
+			elif (event.is_action_pressed("Shoot") and !shooterAnimator.is_playing()):
 				if (currentAbilities[ability.ring]):
 					if (shootsound): shootsound.play()
-					stick.get_child(0).play("shoot")
+					shooterAnimator.play("shoot")
 					#make the projectile; possibly replace with special player projectile later
 					var newprojectile = projectile.instantiate()
 					newprojectile.position = position
@@ -362,7 +379,7 @@ func respawn():
 	
 	self.set_physics_process(true)
 	set_collision_layer_value(1, true)
-	SaveManager.current_health = 2
+	SaveManager.current_health = 4
 	if SaveManager.sceneNumber == 2:
 		SaveManager.current_health = SaveManager.max_health
 	velocity = Vector2(0, 0)
@@ -396,6 +413,8 @@ func get_gem_upgrade(id:int):
 		SaveManager.current_gems += 1
 		SaveManager.collect_item(SaveManager.Item.gem, id)
 		if (collectsound): collectsound.play()
+		if (PauseMenu):
+			PauseMenu.update_gui()
 
 ## Powerups
 func update_powerstatus(currMode):
@@ -434,7 +453,7 @@ func set_powerstatus():
 		add_child(stick)
 		stick.position = Vector2.ZERO
 	
-	if (currentAbilities[ability.cape] || SaveManager.powerstatus[ability.cape]):
+	if (currentAbilities[ability.cape] != SaveManager.powerstatus[ability.cape]):
 		cape.show()
 	
 	if (SaveManager.powerstatus[ability.crown]):
@@ -443,13 +462,13 @@ func set_powerstatus():
 			crown.texture = load("res://Art/Sprites/Abilities/crown.png")
 		else: crown.texture = load("res://Art/Sprites/Abilities/crown2.png")
 	
-	currentAbilities = SaveManager.powerstatus
+	currentAbilities = SaveManager.powerstatus.duplicate(true)
 
 func get_ability(abilID : int) -> void:
 	abilID = clamp(abilID, 1, 3)
-	if (currentAbilities[abilID]):
+	if (SaveManager.powerstatus[abilID]):
 		return
-	currentAbilities[abilID] = 1
+	SaveManager.powerstatus[abilID] = 1
 	set_powerstatus()
 	if (cutsceneAnimator):
 		cutsceneAnimator.play("abili"+str(abilID))
@@ -460,7 +479,26 @@ func get_ability(abilID : int) -> void:
 ## Rooms
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Room"):
-		if (just_respawned):
+		# set the current room, and tell the manager youve visited it
+		SaveManager.current_room = area.room_number
+		if (SaveManager.visited_rooms.size() <= area.room_number):
+			var sizeToGet = area.room_number - SaveManager.visited_rooms.size()
+			var newArr : PackedByteArray = [0]
+			while (newArr.size() <= sizeToGet):
+				newArr.append_array([0, 0, 0, 0, 0])
+			SaveManager.visited_rooms.append_array(newArr)
+		SaveManager.visited_rooms[area.room_number] = true
+		
+		#finally, play the music
+		if (area.music != '_'):
+			musicPlayer.transition_to_track(area.music)
+		
+		# fancy camera stuff
+		var minDist = max(min(abs(camera.limit_top-(area.global_position.y+area.scale.y)),
+						abs(camera.limit_bottom-area.global_position.y)),
+						min(abs(camera.limit_left-(area.global_position.x+area.scale.x)),
+						abs(camera.limit_right-area.global_position.x)))
+		if (just_respawned or minDist > 2000):
 			# if you just respawned then NO FANCY TRANSITION 4 U >:(
 			camera.limit_top = int(area.global_position.y)
 			camera.limit_left = int(area.global_position.x)
@@ -489,20 +527,6 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 			camera.limit_bottom =  int(currCamPositionY+360)
 		if (currCamPositionX+640 > camera_target_right and camera.limit_right != camera_target_right):
 			camera.limit_right =  int(currCamPositionX+(640))
-		
-		# set the current room, and tell the manager youve visited it
-		SaveManager.current_room = area.room_number
-		if (SaveManager.visited_rooms.size() <= area.room_number):
-			var sizeToGet = area.room_number - SaveManager.visited_rooms.size()
-			var newArr : PackedByteArray = [0]
-			while (newArr.size() <= sizeToGet):
-				newArr.append_array([0, 0, 0, 0, 0])
-			SaveManager.visited_rooms.append_array(newArr)
-		SaveManager.visited_rooms[area.room_number] = true
-		
-		#finally, play the music
-		if (area.music != '_'):
-			musicPlayer.transition_to_track(area.music)
 
 func camera_transitions(delta):
 	if (transitioning):

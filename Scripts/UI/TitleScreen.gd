@@ -182,3 +182,9 @@ func _toggle_settings():
 	if ($Settings.visible):
 		currentMenu = menu.settings
 	else: currentMenu = menu.main
+
+func full_screen(on):
+	if (on):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

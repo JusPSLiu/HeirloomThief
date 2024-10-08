@@ -14,6 +14,7 @@ var interactedElements : Dictionary = {}
 var respawn_point : Vector2 = Vector2(0,0)
 var sceneNumber : int = 0
 var nextScene : int = 0
+var beatGame = false
 
 enum Item {
 	health = 0,
@@ -48,13 +49,16 @@ func interact(id):
 func save_game():
 	if (currfile != ""):
 		var save_file = FileAccess.open("user://saves/"+currfile, FileAccess.WRITE)
+		var tempPowerStatus = powerstatus.duplicate(true)
+		if (beatGame):
+			tempPowerStatus[3] = max(1, tempPowerStatus[3])
 		save_file.store_var({
 			"savename" : currsavename,
 			"respawn_point" : respawn_point,
 			"current_health" : current_health,
 			"current_gems" : current_gems,
 			"max_health" : max_health,
-			"powerstatus" : powerstatus,
+			"powerstatus" : tempPowerStatus,
 			"collectedHealth" : collectedHealth,
 			"collectedGems" : collectedGems,
 			"interactedElements" : interactedElements,
@@ -84,6 +88,15 @@ func load_game(file):
 		collectedHealth = data["collectedHealth"] if (data.has("collectedHealth")) else {}
 		collectedGems = data["collectedGems"] if (data.has("collectedGems")) else {}
 		interactedElements = data["interactedElements"] if (data.has("interactedElements")) else {}
+		
+		# RESET THE CROWN
+		if (powerstatus[3]):
+			if (powerstatus[3] == 2):
+				current_gems += 2
+			powerstatus[3] = 0
+			current_health = max_health
+			beatGame = true
+		else: beatGame = false
 
 func menu_load_file_details() -> Array[Dictionary]:
 	var deer = DirAccess.open("user://saves/")
@@ -149,6 +162,7 @@ func make_new_file(newname):
 	sceneNumber = 0
 	nextScene = 0
 	powerstatus = [1, 0, 0, 0, 0]
+	beatGame = false
 	collectedGems = {}
 	collectedHealth = {}
 	interactedElements = {}
@@ -171,3 +185,17 @@ func delete_file(deleteName):
 		DirAccess.remove_absolute("user://saves/"+deleteName)
 		return true
 	return false
+
+
+
+# save when beat game
+func save_when_beat_game():
+	# reload EVERYTHING except powerstatus
+	var curr_powerstatus = powerstatus
+	var currGemCount = current_gems
+	load_game(currfile)
+	powerstatus = curr_powerstatus
+	current_gems = currGemCount 
+	current_health = max_health
+	# save
+	save_game()
